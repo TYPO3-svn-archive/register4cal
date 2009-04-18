@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Templates for TYPO3 extenstion "register4cal"</title>
+</head>
+<body>
+	<h1>Template for the registration form</h1>
+	<p>This part defines the form to register for an event</p>
+
+		<!-- ###REGISTRATION_FORM### begin -->
+		<h2>###HEADING###</h2>
+		###TEXT_TOP###
+		<form action="###LINK###" method="post">
+			<table width=100%>
+				###ADDITIONAL_FIELDS###
+				<tr><td colspan=2 align=center><input type="submit" value="###LABEL_SUBMIT###"></td></tr>
+			</table>
+		</form>
+		###TEXT_BOTTOM###
+		<!-- ###REGISTRATION_FORM### end -->
+
+	<h1>Template for a processed registration</h1>
+	<p>This template is displayed once the registration has been performed sucessfuly. It should inform the user
+	   that his registration has been processed and he will receive an email
+	</p>
+
+		<!-- ###REGISTRATION_DONE### begin -->
+		<h2>###HEADING###</h2>
+		###TEXT_TOP###
+		<table width=100%>###ADDITIONAL_FIELDS###</table>		
+		###TEXT_BOTTOM###
+		<!-- ###REGISTRATION_DONE### end -->
+
+	<h1>Template to display a registration</h1>
+	<p>This template defines how a registration should be displayed. It's being used when the plugin is used and the user
+	   is alredy registered.
+	</p>
+	
+		<!-- ###REGISTRATION_SHOW### begin -->
+		<h2>###HEADING###</h2>
+		###TEXT_TOP###
+		<h3>###REGISTRATION_HEADING###</h3>
+		<table width=100%>
+		###ADDITIONAL_FIELDS###
+		</table>	
+		###TEXT_BOTTOM###
+		<!-- ###REGISTRATION_SHOW### end -->
+
+	<h1>Template to display an event</h1>
+	<p>This template defines how an event should be displayed. It's being used when sending emails</p>
+	
+		<!-- ###EVENT_SHOW### begin -->
+		<h3>###EVENT_HEADING###</h3>
+		<table width=100%><tr>
+			<td style="width:10px;vertical-align:top;"><b>###LABEL_TITLE###:</b></td><td>###TITLE###</td>
+		</tr><tr>
+			<td style="width:10px;vertical-align:top;"><b>###LABEL_START###:</b></td><td>###START###</td>
+		</tr><tr>
+			<td style="width:10px;vertical-align:top;"><b>###LABEL_END###:</b></td><td>###END###</td>
+		</tr><tr>
+			<td style="width:10px;vertical-align:top;"><b>###LABEL_ORGANIZER###:</b></td><td>###ORGANIZER###</td>
+		</tr>###ADDITIONAL_FIELDS###</table>
+		<!-- ######EVENT_SHOW### end -->
+
+	<h1>Template to display an event list</h1>
+	<p>This template defines how an event list should be displayed.</p>
+	
+		<!-- ###EVENT_LIST### begin -->
+		<table width=100% class="Blue">
+			<tr>
+				<th><b>###LABEL_TITLE###</b></th>
+				<th><b>###LABEL_START###</b></th>
+				<th><b>###LABEL_END###</b></th>
+				<th><b>###LABEL_ORGANIZER###</b></th>
+			</tr>
+			<!-- ###EVENT_ITEM### begin -->
+			<tr>
+				<td><a href="###LINK###">###TITLE###</a></td>
+				<td>###START###</td>
+				<td>###END###</td>
+				<td>###ORGANIZER###</td>
+			</tr>
+			<!-- ###EVENT_ITEM### end -->
+			<!-- ###EVENT_NOITEMS### begin -->
+			<tr>
+				<td COLSPAN=4>###NOITEMS###</td>
+			</tr>
+			<!-- ###EVENT_NOITEMS### end -->
+		</table>
+		<!-- ###EVENT_LIST### end -->
+
+	<h1>Template to display an participants list</h1>
+	<p>This template defines how a participants list should be displayed.</p>
+	
+		<!-- ###PARTICIPANT_LIST### begin -->
+		<table width=100%>
+			<tr><th colspan = 2>
+				<table width=100%><tr>
+				<td colspan = 2><h2>###TITLE###</h2></td></tr><tr>
+				<td>###LABEL_START###: ###START###<br>###LABEL_END###: ###END###</td>
+				<td>###LABEL_ORGANIZER###: ###ORGANIZER###<br><a href="###LINK###">###LINK_TEXT###</a></td>
+				</tr></table>
+			</th></tr><tr>
+				<th><b>###LABEL_NAME###</b></th>
+				<th><b>###LABEL_EMAIL###</b></th>
+			</tr>
+			<!-- ###PARTICIPANT_ITEM### begin -->
+			<tr>
+				<td>###NAME###</td>
+				<td>###EMAIL###</td>
+			</tr>
+			<!-- ###PARTICIPANT_ITEM### end -->
+			<!-- ###PARTICIPANT_NOITEMS### begin -->
+			<tr>
+				<td COLSPAN=2>###NOITEMS###</td>
+			</tr>
+			<!-- ###PARTICIPANT_NOITEMS### end -->
+		</table>
+		<!-- ###PARTICIPANT_LIST### end -->
+
+	<h1>Template for the notification email to the user</h1>
+	<p>This template defines the email sent to the user, notifying him about his registration</p>
+	
+		<!-- ###EMAIL_USER### begin -->
+		<h1>###HEADING###</h1>
+		<p>###TEXT_TOP###<p>
+		###EVENTDETAILS###
+		<p>###TEXT_BOTTOM###</p>
+		<!-- ###EMAIL_USER### end -->
+
+	<h1>Template for the notification email to the organizer</h1>
+	<p>This template defines the email sent to the organizer, notifying him about a new registration</p>
+	
+		<!-- ###EMAIL_ORGANIZER### begin -->
+		<h1>###HEADING###</h1>
+		###TEXT_TOP###
+		<h3>###USER_HEADING###</h3>
+		<table width=100%><tr>
+			<td><b>###LABEL_USERNAME###:</b></td><td>###USERNAME###</td>
+		</tr><tr>
+			<td><b>###LABEL_USEREMAIL###:</b></td><td>###USEREMAIL###</td>
+		</tr></table>
+		###EVENTDETAILS###
+		###TEXT_BOTTOM###
+		<!-- ###EMAIL_ORGANIZER### end -->
+
+	<h1>Several subtemplates für additional fields</h1>
+	<p>You can define additional fields of several types. For each fieldtype you need two subtemplates:
+		<ul>	<li>"INPUT_[FIELDTYPE]" --> Layout of field in registration form
+			<li>"SHOW_[FIELDTYPE]" --> Layout when data from the field is being displayed
+		</ul>
+		Within this part you can use the following placeholders:
+		<ul>	<li>###CAPTION### --> Caption of the field as set in TS
+			<li>###SIZE### --> Size of the field as set in TS
+			<li>###NAME### --> Name of field as set in TS
+			<li>###VALUE### --> Previously entered Value or default value as set in TS
+		</ul>
+	</p>
+
+		<h2>Simple Textfield</h2>
+		<p> type = text </p>
+			<!-- ###INPUT_TEXT### begin -->
+				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><input type="text" size="###SIZE###" name="###NAME###" value="###VALUE###"></td></tr>
+			<!-- ###INPUT_TEXT### end -->
+			<!-- ###SHOW_TEXT### begin -->
+				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>###VALUE###</td></tr>
+			<!-- ###SHOW_TEXT### end -->
+
+		<h2>Textarea </h2>
+		<p> type = textarea </p>
+			<!-- ###INPUT_TEXTAREA### begin -->
+				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea name="###NAME###">###VALUE###</textarea></td></tr>
+			<!-- ###INPUT_TEXTAREA### end -->
+			<!-- ###SHOW_TEXTAREA### begin -->
+				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><pre>###VALUE###</pre></td></tr>
+			<!-- ###SHOW_TEXTAREA### end -->
+</body>
+</html>

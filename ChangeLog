@@ -1,0 +1,46 @@
+2009-04-10 Thomas Ernst <typo3@thernst.de>
+	* Correction of warning "Call-time pass-by-reference has been deprecated"
+	* published version 0.2.5
+
+2009-04-10 Thomas Ernst <typo3@thernst.de>
+	* Setting of values event-values now possible via frontend editing.
+	* published version 0.2.4
+
+2009-04-08 Thomas Ernst <typo3@thernst.de>
+	* List of participants was always empty unless displayed in admin mode
+	* Registrations will be deleted when the related event is being deleted in the backend
+	* published version 0.2.3
+
+2009-03-19 Thomas Ernst <typo3@thernst.de>
+	* Timezone conversion must not be performed for all-day events
+	* Status is now "Beta" as extension runs well on my site
+	* published version 0.2.2
+
+2009-03-04 Thomas Ernst <typo3@thernst.de>
+	* revised default template
+	* updated english manual
+	* published version 0.2.1
+
+2009-03-01 Thomas Ernst  <typo3@thernst.de> 
+	* registration form now displayed via hook
+	* displayed end date for recuring events now calculated based on start date of single event and length of event
+	* published version 0.2.0
+
+2009-02-22 Thomas Ernst  <typo3@thernst.de> 
+	* extension must not be cached
+	* error in sql statement to create table tx_register4cal_registrations
+
+2009-02-21 Thomas Ernst  <typo3@thernst.de> 
+	* initial development
+	* Version 0.0.0, Status Alpha
+
+
+
+
+
+
+
+
+
+
+
