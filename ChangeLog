@@ -1,3 +1,6 @@
+2009-05-25 Thomas Ernst <typo3@thernst.de>
+	* Subversion repository available at forge.typo3.org
+
 2009-04-10 Thomas Ernst <typo3@thernst.de>
 	* Correction of warning "Call-time pass-by-reference has been deprecated"
 	* published version 0.2.5
