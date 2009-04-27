@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin &quot;tx_register4cal_pi2&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="registrationform_heading">Register for this event</label>
+			<label index="registrationform_label_submit">Register for this event</label>
+			<label index="registrationform_text_top"></label>
+			<label index="registrationform_text_bottom"></label>
+			<label index="event_heading">Event details</label>
+			<label index="event_label_title">Event</label>
+			<label index="event_label_start">Start</label>
+			<label index="event_label_end">End</label>
+			<label index="event_label_organizer">Organizer</label>
+			<label index="event_allday">all day</label>
+			<label index="user_heading">User details</label>
+			<label index="user_label_name">User name</label>
+			<label index="user_label_email">Email</label>
+			<label index="registration_heading">Registration details</label>
+			<label index="notification_heading">Registration Notification</label>
+			<label index="notification_text_top">An user has registered for an event where you are listed as organizer:</label>
+			<label index="notification_text_bottom"></label>
+			<label index="confirmation_heading">Registration Confirmation</label>
+			<label index="confirmation_text_top">Thank you for your registration for an event on our website. We recorded the following data:</label>
+			<label index="confirmation_text_bottom">You can contact the organizer of the event if you require further information.</label>
+			<label index="alreadyregistered_heading">Already registered</label>
+			<label index="alreadyregistered_text_top">You have already registered for this event. We have recorded the following data:</label>
+			<label index="alreadyregistered_text_bottom">You can contact the organizer of the event if you require further information.</label>
+			<label index="notificationmail_subject">Someone registered for your event</label>
+			<label index="confirmationmail_subject">Registration Confirmation</label>
+			<label index="noevents">Currently, no registrations for you where found</label>
+			<label index="noparticipants">Nobody has registered yet</label>
+			<label index="event_link_text">Show event</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="registrationform_heading">Für diesen Termin anmelden</label>
+			<label index="registrationform_label_submit">Anmeldung abschicken</label>
+			<label index="registrationform_text_top"></label>
+			<label index="registrationform_text_bottom"></label>
+			<label index="event_heading">Termindetails</label>
+			<label index="event_label_title">Termin</label>
+			<label index="event_label_start">Start</label>
+			<label index="event_label_end">Ende</label>
+			<label index="event_label_organizer">Organisator</label>
+			<label index="event_allday">ganztätig</label>
+			<label index="user_heading">Benutzerdetails</label>
+			<label index="user_label_name">Name</label>
+			<label index="user_label_email">Email</label>
+			<label index="registration_heading">Anmeldedetails</label>
+			<label index="notification_heading">Anmeldeinformation</label>
+			<label index="notification_text_top">Ein Benutzer hat sich zu einem Termin angemeldet, bei dem Sie als Organisator eingetragen sind:</label>
+			<label index="notification_text_bottom"></label>
+			<label index="confirmation_heading">Anmeldebestätigung</label>
+			<label index="confirmation_text_top">Vielen Dank, dass sie sich auf unserer Webseite für einen Termin angemeldet haben. Wir haben folgende Daten vermerkt:</label>
+			<label index="confirmation_text_bottom">Bitte kontaktieren Sie den Organisator des Termins bei Fragen.</label>
+			<label index="alreadyregistered_heading">Bereits angemeldet</label>
+			<label index="alreadyregistered_text_top">Sie sind für diesen Termin bereits angemeldet. Wir haben folgende Daten vermerkt:</label>
+			<label index="alreadyregistered_text_bottom">Bitte kontaktieren Sie den Organisator des Termins bei Fragen.</label>
+			<label index="notificationmail_subject">Jemand hat sich für einen Termin angemeldet</label>
+			<label index="confirmationmail_subject">Anmeldebestätigung</label>
+			<label index="noevents">Im Moment wurden keine Anmeldungen von Ihnen gefunden.</label>
+			<label index="noparticipants">Bisher hat sich niemand angemeldet.</label>
+			<label index="event_link_text">Termin anzeigen</label>
+		</languageKey>
+	</data>
+</T3locallang>
