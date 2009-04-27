@@ -1,0 +1,142 @@
+#Setup
+plugin.tx_register4cal_pi1{
+	template = EXT:register4cal/templates/register.tmpl 
+	dateformat = %d.%m.%Y
+	timeformat = %H:%M
+	registration {
+		userConfirmationMail {
+			sendit = 1
+			senderName = Email Sender
+			senderAddress = Some@email.address
+		}
+		organizerNotificationMail {
+			sendit = 1
+			senderName = Email sender
+			senderAddress = Some@email.address
+			adminEmail =
+		}
+		additional_fields {
+			0 {
+				name=participants
+				type=text
+				caption.default=No of participants
+				caption.de=Anzahl Teilnehmer
+				default = 1
+			}
+			1 {
+				name=Comments
+				type=textarea
+				caption.default=Comments
+				caption.de=Kommentar
+				default = 
+			}
+		}	
+	}
+	edit {
+		useDateSelector = 1
+		calConf {
+			dateTimeFormat =
+			toolTipDateTimeFormat =
+			inputFieldDateTimeFormat = %y-%m-%d
+			weekStartsMonday = 0
+			weekend = 6,0
+			allowedYearMin = 1900
+			allowedYearMax = 2070
+			displayWeekNumbers = 1
+			showMethod = element
+			showPositionAbsolute = 0,0
+			stylesheet = EXT:rlmp_dateselectlib/calendar-system.css
+			inputFieldLabel = ...
+		}
+	}
+	view {
+		eventViewPid = 0
+		adminUsers = 0
+	}
+}
+
+#Settings to enable the additional fields for the frontend editing feature of the cal extension
+plugin.tx_cal_controller.view {
+	create_event {
+		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
+		tx_register4cal_activate_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}</option>
+		tx_register4cal_activate_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label><span class="tx_register4cal_activate"><select name="tx_cal_controller[tx_register4cal_activate]" size=1>|</select></span></p>
+		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/>###REGSTART_SELECTOR###</span></p>
+		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" />###REGEND_SELECTOR###</span></p>
+	}
+	edit_event {
+		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
+		tx_register4cal_activate_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}</option>
+		tx_register4cal_activate_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label><span class="tx_register4cal_activate"><select name="tx_cal_controller[tx_register4cal_activate]" size=1>|</select></span></p>
+		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/>###REGSTART_SELECTOR###</span></p>
+		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" />###REGEND_SELECTOR###</span></p>
+	}
+	confirm_event {
+		tx_register4cal_activate_on_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_activate]"/>
+		tx_register4cal_activate_off_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_activate]"/>
+		tx_register4cal_activate_stdWrap.dataWrap = <div><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label>|</div>
+		tx_register4cal_regstart_stdWrap.dataWrap = <div><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_REGSTART_VALUE###" name="tx_cal_controller[tx_register4cal_regstart]"/></div>
+		tx_register4cal_regend_stdWrap.dataWrap = <div><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_REGEND_VALUE###" name="tx_cal_controller[tx_register4cal_regend]"/></div>
+	}
+	save_event {
+		additional_fields.tx_register4cal_regstart_stdWrap.postUserFunc = tx_register4cal_user1->convertToTimestamp
+		additional_fields.tx_register4cal_regend_stdWrap.postUserFunc = tx_register4cal_user1->convertToTimestamp
+	}
+}
+
+plugin.tx_cal_controller.rights {
+	create.event {
+		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend
+		fields.tx_register4cal_activate {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regstart {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regend {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+	}
+
+	edit.event {
+		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend
+		fields.tx_register4cal_activate {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regstart {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regend {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+	}
+
+}
+
+
+
+
