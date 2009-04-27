@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'register4cal'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_register4cal_registrations">Registrations</label>
+			<label index="tx_register4cal_registrations.recordlabel">Registration</label>
+			<label index="tx_register4cal_registrations.cal_event_uid">Event</label>
+			<label index="tx_register4cal_registrations.feuser_uid">FE-User</label>
+			<label index="tx_register4cal_registrations.additional_data">Additional data</label>
+			<label index="tx_cal_event.tx_register4cal_activate">Activate registration</label>
+			<label index="tx_cal_event.tx_register4cal_activate_on">active</label>
+			<label index="tx_cal_event.tx_register4cal_activate_off">inactive</label>
+			<label index="tx_cal_event.tx_register4cal_regstart">Registration start</label>
+			<label index="tx_cal_event.tx_register4cal_regend">Registration end</label>
+			<label index="tx_cal_organizer.tx_register4cal_feUserId">Users who are allowed to see the registrations for events of this organizer</label>
+			<label index="tt_content.list_type_pi1">Registrations for TYPO3-Calendar</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_register4cal_registrations">Anmeldungen</label>
+			<label index="tx_register4cal_registrations.recordlabel">Anmeldung</label>
+			<label index="tx_register4cal_registrations.cal_event_uid">Termin</label>
+			<label index="tx_register4cal_registrations.feuser_uid">FE-Benutzer</label>
+			<label index="tx_register4cal_registrations.additional_data">Zusätzliche Daten</label>
+			<label index="tx_cal_event.tx_register4cal_activate">Anmeldung aktivieren</label>
+			<label index="tx_cal_event.tx_register4cal_activate_on">aktiv</label>
+			<label index="tx_cal_event.tx_register4cal_activate_off">inaktiv</label>
+			<label index="tx_cal_event.tx_register4cal_regstart">Anmeldung ab</label>
+			<label index="tx_cal_event.tx_register4cal_regend">Anmeldung bis</label>
+			<label index="tx_cal_organizer.tx_register4cal_feUserId">Web-Site-Benutzer die Anmeldungen zu Terminen dieses Organisators sehen dürfen</label>
+			<label index="tt_content.list_type_pi1">Anmeldungen für den TYPO3-Kalender</label>
+		</languageKey>
+	</data>
+</T3locallang>
