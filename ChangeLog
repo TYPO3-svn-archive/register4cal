@@ -1,5 +1,7 @@
 2009-04-27 Thomas Ernst <typo3@thernst.de>
-	* Bug 3165 solved: Removed everything after closing ?> tag in php files
+	* rlmp_dateselectlib can be used for fields "Start/End of registration period (Feature 3167)
+	* FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
+	* Removed everything after closing ?> tag in php files (Bug 3165)
 
 2009-04-25 Thomas Ernst <typo3@thernst.de>
 	* Subversion repository available at forge.typo3.org

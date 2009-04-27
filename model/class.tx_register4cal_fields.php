@@ -31,6 +31,7 @@
  * Modifications
  * ThEr230209	0.2.4	Initial development of class
  * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
+ *			rlmp_dateselectlib can be used for fields "Start/End of registration period"
  */ 
 
 /**
@@ -69,8 +70,12 @@ class tx_register4cal_activate extends tx_cal_base_view {
 
 class tx_register4cal_regstart extends tx_cal_base_view {	
 	function start(&$moduleCaller){
+		//Get some configuration
 		$dateformat = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['dateformat'];	
-	
+		$useDateSelector = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.']['useDateSelector'];
+		$dateSelectorConf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.'];
+
+		//get value for field
 		$regstart = $moduleCaller->object->row['tx_register4cal_regstart'];
 		if (empty ( $regstart )) {
 			//regstart is empty --> keep it empty
@@ -83,18 +88,34 @@ class tx_register4cal_regstart extends tx_cal_base_view {
 			$regstart = tx_register4cal_user1::getTimestamp($regstart);
 			$regstart = $regstart==0 ? '' : tx_register4cal_user1::formatDate(date('Ymd',$regstart),0,$dateformat);
 		}
-		
-		//determine display value
+				
+		//get display value
 		$content = $moduleCaller->cObj->stdWrap($regstart, $moduleCaller->conf['view.'][$moduleCaller->conf['view'].'.']['tx_register4cal_regstart_stdWrap.']);
 		$content = str_replace('###TX_REGISTER4CAL_REGSTART_VALUE###',$regstart,$content);
+		
+		//include dateselector if activated and extension rlmp_dateselectlib is available
+		$selector = '';
+		if ($useDateSelector == 1) {
+			if (t3lib_extMgm::isLoaded('rlmp_dateselectlib')) {
+				tx_rlmpdateselectlib::includeLib();
+				$selector = tx_rlmpdateselectlib::getInputButton('tx_register4cal_regstart',$dateSelectorConf);
+				
+			} 
+		}
+		$content = str_replace('###REGSTART_SELECTOR###',$selector,$content);
+		
 		return $content;
 	}	
 }
 
 class tx_register4cal_regend extends tx_cal_base_view {	
 	function start(&$moduleCaller){
+		//Get some configuration
 		$dateformat = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['dateformat'];	
-	
+		$useDateSelector = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.']['useDateSelector'];
+		$dateSelectorConf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.']['calConf.'];
+		
+		//get value for field
 		$regend = $moduleCaller->object->row['tx_register4cal_regend'];
 		if (empty($regend)) {
 			//regend is empty --> keep it empty
@@ -108,9 +129,21 @@ class tx_register4cal_regend extends tx_cal_base_view {
 			$regend = $regend==0 ? '' : tx_register4cal_user1::formatDate(date('Ymd',$regend),0,$dateformat);
 		}
 		
-		//determine display value
+		//get display value
 		$content = $moduleCaller->cObj->stdWrap($regend, $moduleCaller->conf['view.'][$moduleCaller->conf['view'].'.']['tx_register4cal_regend_stdWrap.']);
 		$content = str_replace('###TX_REGISTER4CAL_REGEND_VALUE###',$regend,$content);
+		
+		//include dateselector if activated and extension rlmp_dateselectlib is available
+		$selector = '';
+		if ($useDateSelector == 1) {
+			if (t3lib_extMgm::isLoaded('rlmp_dateselectlib')) {
+				tx_rlmpdateselectlib::includeLib();
+				$selector = tx_rlmpdateselectlib::getInputButton('tx_register4cal_regend',$dateSelectorConf);
+				
+			} 
+		}
+		$content = str_replace('###REGEND_SELECTOR###',$selector,$content);
+		
 		return $content;
 	}	
 }

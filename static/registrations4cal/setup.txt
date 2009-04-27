@@ -32,6 +32,23 @@ plugin.tx_register4cal_pi1{
 			}
 		}	
 	}
+	edit {
+		useDateSelector = 1
+		calConf {
+			dateTimeFormat =
+			toolTipDateTimeFormat =
+			inputFieldDateTimeFormat = %y-%m-%d
+			weekStartsMonday = 0
+			weekend = 6,0
+			allowedYearMin = 1900
+			allowedYearMax = 2070
+			displayWeekNumbers = 1
+			showMethod = element
+			showPositionAbsolute = 0,0
+			stylesheet = EXT:rlmp_dateselectlib/calendar-system.css
+			inputFieldLabel = ...
+		}
+	}
 	view {
 		eventViewPid = 0
 		adminUsers = 0
@@ -44,15 +61,15 @@ plugin.tx_cal_controller.view {
 		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
 		tx_register4cal_activate_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}</option>
 		tx_register4cal_activate_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label><span class="tx_register4cal_activate"><select name="tx_cal_controller[tx_register4cal_activate]" size=1>|</select></span></p>
-		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/></span></p>
-		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" /></span></p>
+		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/>###REGSTART_SELECTOR###</span></p>
+		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" />###REGEND_SELECTOR###</span></p>
 	}
 	edit_event {
 		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
 		tx_register4cal_activate_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}</option>
 		tx_register4cal_activate_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label><span class="tx_register4cal_activate"><select name="tx_cal_controller[tx_register4cal_activate]" size=1>|</select></span></p>
-		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/></span></p>
-		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" /></span></p>
+		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/>###REGSTART_SELECTOR###</span></p>
+		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" />###REGEND_SELECTOR###</span></p>
 	}
 	confirm_event {
 		tx_register4cal_activate_on_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_activate]"/>
