@@ -33,6 +33,8 @@
  * ThEr010309   0.2.0   Added several general functions from tx_register4cal_pi1 for general use
  * ThEr190309	0.2.2	FormatDateTime: Timezone conversion must not be performed for allday-events
  * ThEr100409	0.2.4	Added helper functions for frontend editing
+ * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
+
  */ 
 
 /**
@@ -64,7 +66,9 @@ class tx_register4cal_user1 {
          * @return 	new value for the content element
          */	
 	function convertToTimestamp($content, $conf) {
-		$timestamp = $this->getTimestamp($content);
+		if (!empty($content)){
+			$timestamp = $this->getTimestamp($content);
+		}
 		return($timestamp);
 	}
 

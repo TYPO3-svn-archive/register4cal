@@ -30,6 +30,7 @@
 /**
  * Modifications
  * ThEr230209	0.2.4	Initial development of class
+ * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
  */ 
 
 /**
@@ -71,7 +72,10 @@ class tx_register4cal_regstart extends tx_cal_base_view {
 		$dateformat = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['dateformat'];	
 	
 		$regstart = $moduleCaller->object->row['tx_register4cal_regstart'];
-		if (is_numeric($regstart)) {
+		if (empty ( $regstart )) {
+			//regstart is empty --> keep it empty
+			$regstart = '';
+		} elseif (is_numeric ( $regstart )) {
 			//regstart is numeric --> timestamp: Convert to date
 			$regstart = $regstart==0 ? '' : tx_register4cal_user1::formatDate(date('Ymd',$regstart),0,$dateformat);
 		} else {
@@ -92,7 +96,10 @@ class tx_register4cal_regend extends tx_cal_base_view {
 		$dateformat = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['dateformat'];	
 	
 		$regend = $moduleCaller->object->row['tx_register4cal_regend'];
-		if (is_numeric($regend)) {
+		if (empty($regend)) {
+			//regend is empty --> keep it empty
+			$regend = '';
+		} elseif (is_numeric($regend)) {
 			//regend is numeric --> timestamp: Convert to date
 			$regend = $regend==0 ? '' : tx_register4cal_user1::formatDate(date('Ymd',$regend),0,$dateformat);
 		} else {
