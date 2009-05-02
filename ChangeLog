@@ -1,4 +1,7 @@
 2009-04-27 Thomas Ernst <typo3@thernst.de>
+	* DateSelector-Configuration for field "regend" was not read correctly (Bug 3191)
+	
+2009-04-27 Thomas Ernst <typo3@thernst.de>
 	* rlmp_dateselectlib can be used for fields "Start/End of registration period (Feature 3167)
 	* FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
 	* Removed everything after closing ?> tag in php files (Bug 3165)

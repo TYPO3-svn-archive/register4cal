@@ -44,7 +44,7 @@
  * @subpackage	tx_register4cal
  */
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');require_once(t3lib_extMgm::extPath('register4cal').'user/class.tx_register4cal_user1.php'); 
+require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_base_view.php');require_once(t3lib_extMgm::extPath('register4cal').'user/class.tx_register4cal_user1.php'); 
 
 class tx_register4cal_fields{}	//This is to suppress the code warning in the extension manager
 
@@ -113,7 +113,7 @@ class tx_register4cal_regend extends tx_cal_base_view {
 		//Get some configuration
 		$dateformat = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['dateformat'];	
 		$useDateSelector = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.']['useDateSelector'];
-		$dateSelectorConf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.']['calConf.'];
+		$dateSelectorConf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['edit.'];
 		
 		//get value for field
 		$regend = $moduleCaller->object->row['tx_register4cal_regend'];
