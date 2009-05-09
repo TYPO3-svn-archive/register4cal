@@ -1,178 +1,213 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Templates for TYPO3 extenstion "register4cal"</title>
 </head>
 <body>
+	<h1>Markers</h1>
+	<p>Since version 0.3.0 this extension allows nearly unlimited markers, configurable via typo-script. The following list describes the basic set of markers, #
+	containing data of event, user and registration. See the manual for further information</p>
+	<table width="100%" border="1" style="border-collapse:collapse">
+		<tr><th>Table</th>			<th>Field</th>		<th>Marker (Label)</th>				<th>Marker (Content)</th>			<th>TS-Wrap (Label)</th>	<th>TS-Wrap (Content)</th></tr>
+		<tr><td>fe_users</td>			<td>uid</td>			<td>###LABEL_user-uid###</td>		<td>###USER_uid###</td>		<td>user_uid</td>			<td>label_user-uid</td></tr>
+		<tr><td>fe_users</td>			<td>name</td>		<td>###LABEL_user-name###</td>		<td>###USER_name###</td>		<td>user_name</td>		<td>label_user-name</td></tr>
+		<tr><td>fe_users</td>			<td>first_name</td>	<td>###LABEL_user-first_name###</td>	<td>###USER_first_name###</td>	<td>user_first_name</td>	<td>label_user-first_name</td></tr>
+		<tr><td>fe_users</td>			<td>last_name</td>	<td>###LABEL_user-last_name###</td>	<td>###USER_last_name###</td>	<td>user_last_name</td>	<td>label_user-last_name</td></tr>
+		<tr><td>fe_users</td>			<td>title</td>			<td>###LABEL_user-title###</td>		<td>###USER_title###</td>		<td>user_title</td>			<td>label_user-title</td></tr>
+		<tr><td colspan="6">An extendet list of fields will be contained in the final 0.3.0 version</td></tr>
+		
+<!--		<tr><td>fe_users</td>			<td>uid</td>			<td>###LABEL_user-uid###</td>		<td>###USER_uid###</td>		<td>user_uid</td>			<td>label_user-uid</td></tr>
+		<tr><td>fe_users</td>			<td>uid</td>			<td>###LABEL_user-uid###</td>		<td>###USER_uid###</td>		<td>user_uid</td>			<td>label_user-uid</td></tr>
+		<tr><td>fe_users</td>			<td>uid</td>			<td>###LABEL_user-uid###</td>		<td>###USER_uid###</td>		<td>user_uid</td>			<td>label_user-uid</td></tr>
+		<tr><td>fe_users</td>			<td>uid</td>			<td>###LABEL_user-uid###</td>		<td>###USER_uid###</td>		<td>user_uid</td>			<td>label_user-uid</td></tr>
+		<tr><td>fe_users</td>			<td>uid</td>			<td>###LABEL_user-uid###</td>		<td>###USER_uid###</td>		<td>user_uid</td>			<td>label_user-uid</td></tr>
+		
+		
+		<tr><td>fe_users</td>			<td>name</td>			<td>Marker (Label)</td>			<td>Marker (Content)</td>		<td>TS-Wrap (Label)</th>		<td>TS-Wrap (Content)</td></tr>
+		<tr><td>fe_users</td>			<td>first_name</td>		<td>Marker (Label)</td>			<td>Marker (Content)</td>		<td>TS-Wrap (Label)</th>		<td>TS-Wrap (Content)</td></tr>
+		<tr><td>fe_users</td>			<td>last_name</td>		<td>Marker (Label)</td>			<td>Marker (Content)</td>		<td>TS-Wrap (Label)</th>		<td>TS-Wrap (Content)</td></tr>
+		<tr><td>fe_users</td>			<td>title</td>				<td>Marker (Label)</td>			<td>Marker (Content)</td>		<td>TS-Wrap (Label)</th>		<td>TS-Wrap (Content)</td></tr>
+		
+		
+		
+		
+		
+		<tr><td>Table</td>			<td>Field</td>			<td>Marker (Label)</td>			<td>Marker (Content)</td>		<td>TS-Wrap</th></tr>
+-->
+	</table>
+
+
+
+
+
+
+
 	<h1>Template for the registration form</h1>
 	<p>This part defines the form to register for an event</p>
-
-		<!-- ###REGISTRATION_FORM### begin -->
-		<h2>###HEADING###</h2>
-		###TEXT_TOP###
-		<form action="###LINK###" method="post">
-			<table width=100%>
-				###ADDITIONAL_FIELDS###
-				<tr><td colspan=2 align=center><input type="submit" value="###LABEL_SUBMIT###"></td></tr>
-			</table>
-		</form>
-		###TEXT_BOTTOM###
-		<!-- ###REGISTRATION_FORM### end -->
+	<!-- ###REGISTRATION_FORM### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###FORM### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###FORM### end -->
+	###TEXTBOTTOM###
+	<!-- ###REGISTRATION_FORM### end -->
 
 	<h1>Template for a processed registration</h1>
 	<p>This template is displayed once the registration has been performed sucessfuly. It should inform the user
 	   that his registration has been processed and he will receive an email
 	</p>
-
-		<!-- ###REGISTRATION_DONE### begin -->
-		<h2>###HEADING###</h2>
-		###TEXT_TOP###
-		<table width=100%>###ADDITIONAL_FIELDS###</table>		
-		###TEXT_BOTTOM###
-		<!-- ###REGISTRATION_DONE### end -->
+	<!-- ###CONFIRMATION_FORM### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###CONFIRMATION_FORM### end -->
 
 	<h1>Template to display a registration</h1>
 	<p>This template defines how a registration should be displayed. It's being used when the plugin is used and the user
 	   is alredy registered.
 	</p>
-	
-		<!-- ###REGISTRATION_SHOW### begin -->
-		<h2>###HEADING###</h2>
-		###TEXT_TOP###
-		<h3>###REGISTRATION_HEADING###</h3>
-		<table width=100%>
-		###ADDITIONAL_FIELDS###
-		</table>	
-		###TEXT_BOTTOM###
-		<!-- ###REGISTRATION_SHOW### end -->
-
-	<h1>Template to display an event</h1>
-	<p>This template defines how an event should be displayed. It's being used when sending emails</p>
-	
-		<!-- ###EVENT_SHOW### begin -->
-		<h3>###EVENT_HEADING###</h3>
-		<table width=100%><tr>
-			<td style="width:10px;vertical-align:top;"><b>###LABEL_TITLE###:</b></td><td>###TITLE###</td>
-		</tr><tr>
-			<td style="width:10px;vertical-align:top;"><b>###LABEL_START###:</b></td><td>###START###</td>
-		</tr><tr>
-			<td style="width:10px;vertical-align:top;"><b>###LABEL_END###:</b></td><td>###END###</td>
-		</tr><tr>
-			<td style="width:10px;vertical-align:top;"><b>###LABEL_ORGANIZER###:</b></td><td>###ORGANIZER###</td>
-		</tr>###ADDITIONAL_FIELDS###</table>
-		<!-- ######EVENT_SHOW### end -->
-
-	<h1>Template to display an event list</h1>
-	<p>This template defines how an event list should be displayed.</p>
-	
-		<!-- ###EVENT_LIST### begin -->
-		<table width=100% class="Blue">
-			<tr>
-				<th><b>###LABEL_TITLE###</b></th>
-				<th><b>###LABEL_START###</b></th>
-				<th><b>###LABEL_END###</b></th>
-				<th><b>###LABEL_ORGANIZER###</b></th>
-			</tr>
-			<!-- ###EVENT_ITEM### begin -->
-			<tr>
-				<td><a href="###LINK###">###TITLE###</a></td>
-				<td>###START###</td>
-				<td>###END###</td>
-				<td>###ORGANIZER###</td>
-			</tr>
-			<!-- ###EVENT_ITEM### end -->
-			<!-- ###EVENT_NOITEMS### begin -->
-			<tr>
-				<td COLSPAN=4>###NOITEMS###</td>
-			</tr>
-			<!-- ###EVENT_NOITEMS### end -->
-		</table>
-		<!-- ###EVENT_LIST### end -->
-
-	<h1>Template to display an participants list</h1>
-	<p>This template defines how a participants list should be displayed.</p>
-	
-		<!-- ###PARTICIPANT_LIST### begin -->
-		<table width=100%>
-			<tr><th colspan = 2>
-				<table width=100%><tr>
-				<td colspan = 2><h2>###TITLE###</h2></td></tr><tr>
-				<td>###LABEL_START###: ###START###<br>###LABEL_END###: ###END###</td>
-				<td>###LABEL_ORGANIZER###: ###ORGANIZER###<br><a href="###LINK###">###LINK_TEXT###</a></td>
-				</tr></table>
-			</th></tr><tr>
-				<th><b>###LABEL_NAME###</b></th>
-				<th><b>###LABEL_EMAIL###</b></th>
-			</tr>
-			<!-- ###PARTICIPANT_ITEM### begin -->
-			<tr>
-				<td>###NAME###</td>
-				<td>###EMAIL###</td>
-			</tr>
-			<!-- ###PARTICIPANT_ITEM### end -->
-			<!-- ###PARTICIPANT_NOITEMS### begin -->
-			<tr>
-				<td COLSPAN=2>###NOITEMS###</td>
-			</tr>
-			<!-- ###PARTICIPANT_NOITEMS### end -->
-		</table>
-		<!-- ###PARTICIPANT_LIST### end -->
+	<!-- ###ALREADY_REGISTERED### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###USER###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-uid### ###USER_uid###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-first_name### ###USER_first_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-last_name### ###USER_last_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-title### ###USER_title###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city### ###USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-country### ###USER_country###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-company### ###USER_company###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-telephone### ###USER_telephone###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-fax### ###USER_fax###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-www### ###USER_www###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-image### ###USER_image###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-date_of_birth### ###USER_date_of_birth###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###EVENT###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-formated_start### ###EVENT_formated_start###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-formated_end### ###EVENT_formated_end###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-start_date### ###EVENT_start_date###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-end_date### ###EVENT_end_date###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-start_time### ###EVENT_start_time###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-end_time### ###EVENT_end_time###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-allday### ###EVENT_allday###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-title### ###EVENT_title###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-organizer### ###EVENT_organizer###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-location### ###EVENT_location###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-teaser### ###EVENT_teaser###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_event-description### ###EVENT_description###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###USERFIELDS###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###FIELDS###<!-- ###TABLINE### end -->
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###ALREADY_REGISTERED### end -->
 
 	<h1>Template for the notification email to the user</h1>
-	<p>This template defines the email sent to the user, notifying him about his registration</p>
-	
-		<!-- ###EMAIL_USER### begin -->
-		<h1>###HEADING###</h1>
-		<p>###TEXT_TOP###<p>
-		###EVENTDETAILS###
-		<p>###TEXT_BOTTOM###</p>
-		<!-- ###EMAIL_USER### end -->
+	<p>This template defines the email sent to the user, notifying him about his registration</p>	
+	<!-- ###CONFIRMATION_MAIL### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###CONFIRMATION_MAIL### end -->
 
 	<h1>Template for the notification email to the organizer</h1>
 	<p>This template defines the email sent to the organizer, notifying him about a new registration</p>
-	
-		<!-- ###EMAIL_ORGANIZER### begin -->
-		<h1>###HEADING###</h1>
-		###TEXT_TOP###
-		<h3>###USER_HEADING###</h3>
-		<table width=100%><tr>
-			<td><b>###LABEL_USERNAME###:</b></td><td>###USERNAME###</td>
-		</tr><tr>
-			<td><b>###LABEL_USEREMAIL###:</b></td><td>###USEREMAIL###</td>
-		</tr></table>
-		###EVENTDETAILS###
-		###TEXT_BOTTOM###
-		<!-- ###EMAIL_ORGANIZER### end -->
+	<!-- ###NOTIFICATION_MAIL### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###NOTIFICATION_MAIL### end -->>
 
-	<h1>Several subtemplates für additional fields</h1>
-	<p>You can define additional fields of several types. For each fieldtype you need two subtemplates:
-		<ul>	<li>"INPUT_[FIELDTYPE]" --> Layout of field in registration form
-			<li>"SHOW_[FIELDTYPE]" --> Layout when data from the field is being displayed
-		</ul>
-		Within this part you can use the following placeholders:
-		<ul>	<li>###CAPTION### --> Caption of the field as set in TS
-			<li>###SIZE### --> Size of the field as set in TS
-			<li>###NAME### --> Name of field as set in TS
-			<li>###VALUE### --> Previously entered Value or default value as set in TS
-		</ul>
-	</p>
+	<h1>Template to display an event list</h1>
+	<p>This template defines how an event list should be displayed.</p>
+	<!-- ###EVENT_LIST### begin -->
+	<!-- ###TABLE### begin -->
+		<!-- ###TABLINE### begin -->
+		###LABEL_event-title###
+		###LABEL_event-formated_start###
+		###LABEL_event-formated_end###
+		###LABEL_event-organizer_name###
+		<!-- ###TABLINE### end -->
+		<!-- ###ITEMS### begin -->
+		<!-- ###TABLINE### begin -->
+			###EVENT_title###
+			###EVENT_formated_start###
+			###EVENT_formated_end###
+			###EVENT_organizer_name###
+		<!-- ###TABLINE### end -->
+		<!-- ###ITEMS### end -->
+		<!-- ###NOITEMS### begin -->
+		<!-- ###TABLINE###begin -->
+			###LABEL_event-noitems###
+		<!-- ###TABLINE### end -->
+		<!-- ###NOITEMS### end -->
+	<!-- ###TABLE### end -->
+	<!-- ###EVENT_LIST### end -->
 
-		<h2>Simple Textfield</h2>
-		<p> type = text </p>
-			<!-- ###INPUT_TEXT### begin -->
-				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><input type="text" size="###SIZE###" name="###NAME###" value="###VALUE###"></td></tr>
-			<!-- ###INPUT_TEXT### end -->
-			<!-- ###SHOW_TEXT### begin -->
-				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>###VALUE###</td></tr>
-			<!-- ###SHOW_TEXT### end -->
-
-		<h2>Textarea </h2>
-		<p> type = textarea </p>
-			<!-- ###INPUT_TEXTAREA### begin -->
-				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea name="###NAME###">###VALUE###</textarea></td></tr>
-			<!-- ###INPUT_TEXTAREA### end -->
-			<!-- ###SHOW_TEXTAREA### begin -->
-				<tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><pre>###VALUE###</pre></td></tr>
-			<!-- ###SHOW_TEXTAREA### end -->
+	<h1>Template to display an participants list</h1>
+	<p>This template defines how a participants list should be displayed.</p>
+	<!-- ###PARTICIPANT_LIST### begin -->
+	<!-- ###TABLE### begin -->
+		<!-- ###EVENTENTRY### begin -->
+		<!-- ###TABLINE### begin -->
+		###LABEL_event-title### ###EVENT_title###
+		###LABEL_event-organizer_name### ###EVENT_organizer_name###
+		<!-- ###TABLINE### end -->
+		<!-- ###TABLINE### begin -->
+		###LABEL_event-formated_start### ###EVENT_formated_start### 
+		###LABEL_event-formated_end### ###EVENT_formated_end###
+		<!-- ###TABLINE### end -->
+		<!-- ###TABLINE### begin -->
+		###LABEL_user-name###
+		###LABEL_user-address###
+		###LABEL_user-zip###/###LABEL_user-city###
+		###LABEL_user-email###
+		<!-- ###TABLINE### end -->
+		<!-- ###EVENTENTRY### end -->
+		<!-- ###ITEMS### begin -->
+		<!-- ###TABLINE### begin -->
+			###USER_name###
+			###USER_address###
+			###USER_zip### ###USER_city###
+			###USER_email###
+		<!-- ###TABLINE### end -->
+		<!-- ###ITEMS### end -->
+		<!-- ###NOITEMS### begin -->
+		<!-- ###TABLINE###begin -->
+			###LABEL_registration-noitems###
+		<!-- ###TABLINE### end -->
+		<!-- ###NOITEMS### end -->
+	<!-- ###TABLE### end -->
+	<!-- ###PARTICIPANT_LIST### end -->
 </body>
 </html>

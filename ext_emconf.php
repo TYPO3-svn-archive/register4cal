@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Registrations for calender events',
-	'description' => 'Provides a registration form so that users can register for the events',
+	'description' => 'Enables a registration functionality which can be used in connection with the CAL extension. Registration form can be displayed with the CAL event display, list of registrations for user and organizer are displayable via plugins',
 	'category' => 'plugin',
 	'author' => 'Thomas Ernst',
 	'author_email' => 'typo3@thernst.de',

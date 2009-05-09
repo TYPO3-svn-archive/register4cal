@@ -3,35 +3,334 @@ plugin.tx_register4cal_pi1{
 	template = EXT:register4cal/templates/register.tmpl 
 	dateformat = %d.%m.%Y
 	timeformat = %H:%M
-	registration {
-		userConfirmationMail {
-			sendit = 1
-			senderName = Email Sender
-			senderAddress = Some@email.address
-		}
-		organizerNotificationMail {
-			sendit = 1
-			senderName = Email sender
-			senderAddress = Some@email.address
-			adminEmail =
-		}
-		additional_fields {
-			0 {
-				name=participants
-				type=text
-				caption.default=No of participants
-				caption.de=Anzahl Teilnehmer
-				default = 1
-			}
-			1 {
-				name=Comments
-				type=textarea
-				caption.default=Comments
-				caption.de=Kommentar
-				default = 
-			}
-		}	
+	
+	emails {
+		sendConfirmationMail = 1
+		sendNotificationMail = 1
+		senderName = Email Sender
+		senderAddress = Some@email.address
+		adminAddress = 
 	}
+
+	forms {
+		default {
+			form {
+				edit < stdWrap
+				edit.dataWrap = <form action="###LINK###" method="post"><table width="100%">|</table></form>
+			}
+			submitbutton {
+				edit < stdWrap
+				edit.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.labelsubmit}" /></td>
+			}
+			link < stdWrap
+			link.dataWrap = |
+			
+			table < stdWrap
+			table.dataWrap = <table width="100%">|</table>
+			
+			tabline < stdWrap
+			tabline.dataWrap = <tr>|</tr>
+			
+			user < stdWrap
+			user.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/pi1/locallang.xml:label.user}</h3></td>
+
+			label_user-uid < stdWrap
+			label_user-uid.dataWrap = <td><b>|</b></td>
+			
+			user_uid < stdWrap
+			user_uid.dataWrap = <td>|</td>
+
+			label_user-name < stdWrap
+			label_user-name.dataWrap = <td><b>|</b></td>
+
+			user_name < stdWrap
+			user_name.dataWrap = <td>|</td>
+
+			label_user-first_name < stdWrap
+			label_user-first_name.dataWrap = <td><b>|</b></td>
+
+			user_first_name < stdWrap
+			user_first_name.dataWrap = <td>|</td>
+
+			label_user-last_name < stdWrap
+			label_user-last_name.dataWrap = <td><b>|</b></td>
+
+			user_last_name < stdWrap
+			user_last_name.dataWrap = <td>|</td>
+			
+			label_user-title < stdWrap
+			label_user-title.dataWrap = <td><b>|</b></td>
+			
+			user_title < stdWrap
+			user_title.dataWrap = <td>|</td>
+	
+			label_user-address < stdWrap
+			label_user-address.dataWrap = <td><b>|</b></td>
+
+			user_address < stdWrap
+			user_address.dataWrap = <td>|</td>
+
+			label_user-zip < stdWrap
+			label_user-zip.dataWrap = <td><b>|
+
+			user_zip < stdWrap
+			user_zip.dataWrap = <td>|
+
+			label_user-city < stdWrap
+			label_user-city.dataWrap = |</b></td>
+
+			user_city < stdWrap
+			user_city.dataWrap = &nbsp;|</td>
+
+			label_user-country < stdWrap
+			label_user-country.dataWrap = <td><b>|</b></td>
+
+			user_country < stdWrap
+			user_country.dataWrap = <td>|</td>
+
+			label_user-company < stdWrap
+			label_user-company.dataWrap = <td><b>|</b></td>
+
+			user_company < stdWrap
+			user_company.dataWrap = <td>|</td>
+
+			label_user-telephone < stdWrap
+			label_user-telephone.dataWrap = <td><b>|</b></td>
+
+			user_telephone < stdWrap
+			user_telephone.dataWrap = <td>|</td>
+
+			label_user-fax < stdWrap
+			label_user-fax.dataWrap = <td><b>|</b></td>
+
+			user_fax < stdWrap
+			user_fax.dataWrap = <td>|</td>
+
+			label_user-email < stdWrap
+			label_user-email.dataWrap = <td><b>|</b></td>
+
+			user_email < stdWrap
+			user_email.dataWrap = <td>|</td>
+
+			label_user-www < stdWrap
+			label_user-www.dataWrap = <td><b>|</b></td>
+
+			user_www < stdWrap
+			user_www.dataWrap = <td>|</td>
+
+			label_user-image < stdWrap
+			label_user-image.dataWrap = <td><b>|</b></td>
+
+			user_image < stdWrap
+			user_image.dataWrap = <td>|</td>
+
+			label_user-date_of_birth < stdWrap
+			label_user-date_of_birth.dataWrap = <td><b>|</b></td>
+
+			user_date_of_birth < stdWrap
+			user_date_of_birth.dataWrap = <td>|</td>
+
+			event < stdWrap
+			event.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/pi1/locallang.xml:label.event}</h3></td>
+
+			label_event-formated_start < stdWrap
+			label_event-formated_start.dataWrap = <td><b>|</b></td>
+
+			event_formated_start < stdWrap
+			event_formated_start.dataWrap = <td>|</td>
+
+			label_event-formated_end < stdWrap
+			label_event-formated_end.dataWrap = <td><b>|</b></td>
+		
+			event_formated_end < stdWrap
+			event_formated_end.dataWrap = <td>|</td>
+
+			label_event-start_date < stdWrap
+			label_event-start_date.dataWrap = <td><b>|</b></td>
+
+			event_start_date < stdWrap
+			event_start_date.dataWrap = <td>|</td>
+
+			label_event-end_date < stdWrap
+			label_event-end_date.dataWrap = <td><b>|</b></td>
+
+			event_end_date < stdWrap
+			event_end_date.dataWrap = <td>|</td>
+
+			label_event-start_time < stdWrap
+			label_event-start_time.dataWrap = <td><b>|</b></td>
+
+			event_start_time < stdWrap
+			event_start_time.dataWrap = <td>|</td>
+
+			label_event-end_time < stdWrap
+			label_event-end_time.dataWrap = <td><b>|</b></td>
+
+			event_end_time < stdWrap
+			event_end_time.dataWrap = <td>|</td>
+				
+			label_event-allday < stdWrap
+			label_event-allday.dataWrap = <td><b>|</b></td>
+
+			event_allday < stdWrap
+			event_allday.dataWrap = <td>|</td>
+				
+			label_event-title < stdWrap
+			label_event-title.dataWrap = <td><b>|</b></td>
+
+			event_title < stdWrap
+			event_title.dataWrap = <td>|</td>
+
+			label_event-organizer < stdWrap
+			label_event-organizer.dataWrap = <td><b>|</b></td>
+
+			event_organizer < stdWrap
+			event_organizer.dataWrap = <td>|</td>
+
+			label_event-location < stdWrap
+			label_event-location.dataWrap = <td><b>|</b></td>
+
+			event_location < stdWrap
+			event_location.dataWrap = <td>|</td>
+
+			label_event-teaser < stdWrap
+			label_event-teaser.dataWrap = <td><b>|</b></td>
+
+			event_teaser < stdWrap
+			event_teaser.dataWrap = <td>|</td>
+
+			label_event-description < stdWrap
+			label_event-description.dataWrap = <td><b>|</b></td>
+
+			event_description < stdWrap
+			event_description.dataWrap = <td>|</td>
+
+			label_event-organizer_name < stdWrap
+			label_event-organizer_name.dataWrap = <td><b>|</b></td>
+
+			event_organizer_name < stdWrap
+			event_organizer_name.dataWrap = <td>|</td>
+
+			label_event-organizer_email < stdWrap
+			label_event-organizer_email.dataWrap = <td><b>|</b></td>
+
+			event_organizer_email < stdWrap
+			event_organizer_email.dataWrap = <td>|</td>
+			
+			userfields < stdWrap
+			userfields.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/pi1/locallang.xml:label.userfields}</h3></td>
+			
+			label_registration-noitems < stdWrap
+			label_registration-noitems.dataWrap = <td colspan="4">|</td>
+			
+			label_event-noitems < stdWrap
+			label_event-noitems.dataWrap = <td colspan="4">|</td>			
+		}
+		registrationForm {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+		}
+		confirmationForm {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+		}
+		alreadyRegistered {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:alreadyRegistered.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:alreadyRegistered.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:alreadyRegistered.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+
+		}		
+		confirmationMail {
+			subject < stdWrap
+			subject.dataWrap = {LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.subject}
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+		}
+		notificationMail {
+			subject < stdWrap
+			subject.dataWrap = {LLL:EXT:register4cal/pi1/locallang.xml:notificationMail.subject}
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:notificationMail.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:notificationMail.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:cnotificationnMail.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+		}
+		eventList {
+					
+			table < stdWrap
+			table.dataWrap = <table width="100%" border="1">|</table>
+			
+			event_link < stdWrap
+			event_link.dataWrap = |
+			
+			event_title < stdWrap
+			event_title.dataWrap = <td><a href="###EVENT_link###">|</a></td>
+		}
+		participantList {
+					
+			table < stdWrap
+			table.dataWrap = <table width="100%" border="0" style="margin-bottom:1em;">|</table>
+			
+			event_link < stdWrap
+			event_link.dataWrap = |
+			
+			event_title < stdWrap
+			event_title.dataWrap = <td><a href="###EVENT_link###">|</a></td>
+		}
+	}
+	userfields {
+		0 {
+			name=participants
+			caption.default=No of participants
+			caption.de=Anzahl Teilnehmer
+			default = 1
+			layout {
+				edit = stdWrap
+				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><input type="text" size="20" name="###NAME###" value="|" /></td></tr>
+				show = stdWrap
+				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+			}
+		}
+		1 {
+			name=Comments
+			caption.default=Comments
+			caption.de=Kommentar
+			default = 
+			layout {
+				edit = stdWrap
+				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" name="###NAME###">|</textarea></td></tr>
+				show = stdWrap
+				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
+			}				
+		}
+	}	
+
 	edit {
 		useDateSelector = 1
 		calConf {

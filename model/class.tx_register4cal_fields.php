@@ -28,20 +28,19 @@
  */
 
 /**
- * Modifications
- * ThEr230209	0.2.4	Initial development of class
- * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
- *			rlmp_dateselectlib can be used for fields "Start/End of registration period"
- */ 
-
-/**
- * Classes to extend the cal model. One class for each field
- * Each class defines the way, the field is being displayed in the
- * frontend editing forms
+ * Classes to extend the cal model for frontend editing. 
+ * For each field, one class is contained here, which defines the way, the field is being displayed in the frontend editing forms.
+ * These clases are named like the fields
  *
  * @author	Thomas Ernst <typo3@thernst.de>
  * @package	TYPO3
  * @subpackage	tx_register4cal
+ *
+ * Modifications
+ * ThEr230209	0.2.4	Initial development of class
+ * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
+ *			rlmp_dateselectlib can be used for fields "Start/End of registration period"
+ * ThEr020509	0.3.0	Complete revision of extension. Substantial changes in templates, TypoScript, etc.
  */
 
 require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_base_view.php');require_once(t3lib_extMgm::extPath('register4cal').'user/class.tx_register4cal_user1.php'); 
@@ -88,7 +87,6 @@ class tx_register4cal_regstart extends tx_cal_base_view {
 			$regstart = tx_register4cal_user1::getTimestamp($regstart);
 			$regstart = $regstart==0 ? '' : tx_register4cal_user1::formatDate(date('Ymd',$regstart),0,$dateformat);
 		}
-				
 		//get display value
 		$content = $moduleCaller->cObj->stdWrap($regstart, $moduleCaller->conf['view.'][$moduleCaller->conf['view'].'.']['tx_register4cal_regstart_stdWrap.']);
 		$content = str_replace('###TX_REGISTER4CAL_REGSTART_VALUE###',$regstart,$content);

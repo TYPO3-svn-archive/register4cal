@@ -1,3 +1,9 @@
+2009-05-09 Thomas Ernst <typo3@thernst.de>
+	* Complete revision of extension. Substantial changes in templates, TypoScript, etc. (Feature 3190)
+		* All fields from user, registration and event tables can be used as markers
+		* Nearly unlimited markers can be configured via TypoScript
+		* Marker layout now defined via TypoScript
+
 2009-04-27 Thomas Ernst <typo3@thernst.de>
 	* DateSelector-Configuration for field "regend" was not read correctly (Bug 3191)
 	
