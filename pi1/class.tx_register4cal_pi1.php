@@ -130,6 +130,8 @@ class tx_register4cal_pi1 extends tslib_pibase {
 					$table = 'tx_cal_event, tx_cal_organizer';
 					$where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND'.			/* Join event and organizer */
 						 ' tx_cal_event.uid='.$row_registration['cal_event_uid'].' AND'.		/* Select event */ 
+						 ' (tx_cal_event.start_data='.$row_registration['cal_event_getdate'].' OR'	/* Either registration for the event directly */
+						 '  tx_cal_event.freq <> ''none'') AND'.					/* or recurring event */
 						 ' tx_cal_event.tx_register4cal_activate = 1'.					/* Registration activated */
 						 $this->cObj->enableFields('tx_cal_event');					/* Take sysfields into account */
 					$res_event = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
@@ -170,6 +172,7 @@ class tx_register4cal_pi1 extends tslib_pibase {
 		$table = 'tx_cal_event, tx_cal_organizer';
 		$where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND'.			/* Join event and organizer */
 			 ' tx_cal_event.uid NOT IN ('.$processed_events_list.') AND'.			/* Select events */ 
+			 ' tx_cal_event.start_date>='.date('Ymd').' AND'.				/* Event in the future */
 			 ' tx_cal_event.tx_register4cal_activate = 1'.					/* Registration activated */
 			 $this->cObj->enableFields('tx_cal_event');					/* Take sysfields into account */
 		$orderBy = 'start_date ASC';
