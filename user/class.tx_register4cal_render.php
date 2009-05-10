@@ -335,7 +335,7 @@ class tx_register4cal_render {
 			if (is_array($fieldsarray)) {
 				foreach ($fieldsarray as $name => $field) {
 					if (isset($field['type'])) {
-						$fields.=$this->rengerOldUserField($field);
+						$fields.=$this->renderOldUserField($field);
 					} else {
 						//"new" version
 						$fields.= $this->renderUserField($field['conf'],$mode,$field['value']);
@@ -356,6 +356,7 @@ class tx_register4cal_render {
 				$hiddenfields.='<input type="hidden" name="tx_cal_controller['.htmlspecialchars($name).']" value="'.htmlspecialchars($value).'" />';
 			}
 			$hiddenfields.='<input type="hidden" name="'.$this->pi_base->prefixId.'[cmd]" value="register" />';
+			$hiddenfields.='<input type="hidden" name="no_cache" value="1" />';
 			$fields.=$this->applyWrap($hiddenfields, $conf, 'submitbutton',$mode);
 		}
 		return $fields;
@@ -380,6 +381,7 @@ class tx_register4cal_render {
 		case 'LINK' :
 			//Marker for the registration form
 			$marker = $this->applyWrap(htmlspecialchars($this->pi_base->pi_linkTP_keepPIvars_url()),$conf, 'link',$mode);
+			break;
 		default :
 			if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
 				//Insert an event field. We have some special replacements here ...
