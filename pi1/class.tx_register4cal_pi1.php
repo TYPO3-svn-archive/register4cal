@@ -230,7 +230,10 @@ class tx_register4cal_pi1 extends tslib_pibase {
 				//get the event and render ist
 				$select = 'tx_cal_event.*';
 				$table = 'tx_cal_event';
-				$where = 'tx_cal_event.uid = '.$row_registration['cal_event_uid'].$this->cObj->enableFields('tx_cal_event');
+				$where = 'tx_cal_event.uid = '.$row_registration['cal_event_uid'].
+					 ' (tx_cal_event.start_date='.$row_registration['cal_event_getdate'].' OR'.     /* Either registration for the event */
+					 '  tx_cal_event.freq <> \'none\')'.                                    	/* or recurring event */
+					 $this->cObj->enableFields('tx_cal_event');
 				$orderBy = '';
 				$res_event = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where,$groupBy ,$orderBy,$limit);
 				if ($GLOBALS['TYPO3_DB']->sql_num_rows($res_event) != 0) {
