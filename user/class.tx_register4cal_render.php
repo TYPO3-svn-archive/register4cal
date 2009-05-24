@@ -46,6 +46,8 @@ class tx_register4cal_render {
 	private $userfields = Array();		
 	private $event;
 	private $event_obj;
+	private $location_obj;
+	private $organizer_obj;
 	private $event_fStart;
 	private $event_fEnd;
 	private $event_orgName;
@@ -136,6 +138,8 @@ class tx_register4cal_render {
 	public function unsetEvent() {
 		unset($this->event);
 		unset($this->event_obj);
+		unset($this->location_obj);
+		unset($this->organizer_obj);
 		unset($this->event_fStart);
 		unset($this->event_fEnd);
 		unset($this->event_orgName);
@@ -424,6 +428,16 @@ class tx_register4cal_render {
 					$value = isset($this->event[$fieldname]) ? $value = $this->event[$fieldname] : '';
 					break;
 				}
+			} else if (preg_match('/LOCATION_([A-Z0-9_-])*/', $singleMarker)) {
+				//Insert a field from the location record
+				$fieldname = substr($singleMarker,9);
+				if (!isset($this->location_obj)) $this->setLocationObj();
+				$value = isset($this->location_obj[$fieldname]) ? $value =$this->location_obj[$fieldname] : '';
+			} else if (preg_match('/ORGANIZER_([A-Z0-9_-])*/', $singleMarker)) {
+				//Insert a field from the organizer record
+				$fieldname = substr($singleMarker,10);
+				if (!isset($this->organizer_obj)) $this->setOrganizerObj();
+				$value = isset($this->organizer_obj[$fieldname]) ? $value =$this->organizer_obj[$fieldname] : '';
 			} else if (preg_match('/USER_([A-Z0-9_-])*/', $singleMarker)) {
 				//Insert an user field
 				$fieldname = substr($singleMarker,5);
@@ -432,7 +446,6 @@ class tx_register4cal_render {
 				//Insert a label field
 				$fieldname = 'label.'.str_replace('-','.',substr($singleMarker,6));
 				$value = $this->pi_base->pi_getLL($fieldname);
-			
 			} else {
 				$value='';
 			}
@@ -495,6 +508,25 @@ class tx_register4cal_render {
 				$this->event_fStart.=' '.$this->pi_base->pi_getLL('event_allday');
 				$this->event_fEnd='';
 			}
+		}
+	}
+
+	function setOrganizerObj() {
+		if (isset($this->event['organizer_id'])) {
+			$select = '*';
+			$table = 'tx_cal_organizer';
+			$where = 'uid='.intval($this->event['organizer_id']).$this->cObj->enableFields('tx_cal_organizer');
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
+			$this->organizer_obj = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
+		}
+	}
+	function setLocationObj() {
+		if (isset($this->event['location_id'])) {
+			$select = '*';
+			$table = 'tx_cal_location';
+			$where = 'uid='.intval($this->event['location_id']).$this->cObj->enableFields('tx_cal_location');
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
+			$this->location_obj = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
 		}
 	}
 

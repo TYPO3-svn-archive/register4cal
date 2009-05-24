@@ -1,3 +1,12 @@
+2009-05-24 Thomas Ernst <typo3@thernst.de>
+	* Markers for location and organizer fields added (Feature 3439)
+
+2009-05-23 Thomas Ernst <typo3@thernst.de>
+	* Errors occured if no events where found for the participants list (Bug 3438, Part 1)
+
+2009-05-15 Thomas Ernst <typo3@thernst.de>
+	* published version 0.3.0
+
 2009-05-09 Thomas Ernst <typo3@thernst.de>
 	* Complete revision of extension. Substantial changes in templates, TypoScript, etc. (Feature 3190)
 		* All fields from user, registration and event tables can be used as markers

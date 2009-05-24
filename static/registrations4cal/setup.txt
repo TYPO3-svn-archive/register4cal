@@ -205,6 +205,156 @@ plugin.tx_register4cal_pi1{
 			event_description < stdWrap
 			event_description.dataWrap = <td>|</td>
 
+			label_organizer-name <stdWrap
+			label_organizer-name.dataWrap = <td><b>|</b></td>
+
+			organizer_name < stdWrap
+			organizer_name.dataWrap = <td>|<td>
+			
+			label_organizer-description <stdWrap
+			label_organizer-description.dataWrap = <td><b>|</b></td>
+
+			organizer_description < stdWrap
+			organizer_description.dataWrap = <td>|<td>
+
+			label_organizer-zip <stdWrap
+			label_organizer-zip.dataWrap = <td><b>|</b></td>
+
+			organizer_zip < stdWrap
+			organizer_zip.dataWrap = <td>|<td>
+
+			label_organizer-city <stdWrap
+			label_organizer-city.dataWrap = <td><b>|</b></td>
+
+			organizer_city < stdWrap
+			organizer_city.dataWrap = <td>|<td>
+
+			label_organizer-country_zone <stdWrap
+			label_organizer-country_zone.dataWrap = <td><b>|</b></td>
+
+			organizer_country_zone < stdWrap
+			organizer_country_zone.dataWrap = <td>|<td>
+
+			label_organizer-country <stdWrap
+			label_organizer-country.dataWrap = <td><b>|</b></td>
+
+			organizer_country < stdWrap
+			organizer_country.dataWrap = <td>|<td>
+
+			label_organizer-phone <stdWrap
+			label_organizer-phone.dataWrap = <td><b>|</b></td>
+
+			organizer_phone < stdWrap
+			organizer_phone.dataWrap = <td>|<td>
+
+			label_organizer-email <stdWrap
+			label_organizer-email.dataWrap = <td><b>|</b></td>
+
+			organizer_email < stdWrap
+			organizer_email.dataWrap = <td>|<td>
+
+			label_organizer-image <stdWrap
+			label_organizer-image.dataWrap = <td><b>|</b></td>
+
+			organizer_image < stdWrap
+			organizer_image.dataWrap = <td>|<td>
+
+			label_organizer-imagecaption <stdWrap
+			label_organizer-imagecaption.dataWrap = <td><b>|</b></td>
+
+			organizer_imagecaption < stdWrap
+			organizer_imagecaption.dataWrap = <td>|<td>
+
+			label_organizer-imagealttext <stdWrap
+			label_organizer-imagealttext.dataWrap = <td><b>|</b></td>
+
+			organizer_imagealttext < stdWrap
+			organizer_imagealttext.dataWrap = <td>|<td>
+
+			label_organizer-link <stdWrap
+			label_organizer-link.dataWrap = <td><b>|</b></td>
+
+			organizer_link < stdWrap
+			organizer_link.dataWrap = <td>|<td>
+
+			label_location-name <stdWrap
+			label_location-name.dataWrap = <td><b>|</b></td>
+
+			location_name < stdWrap
+			location_name.dataWrap = <td>|<td>
+
+			label_location-description <stdWrap
+			label_location-description.dataWrap = <td><b>|</b></td>
+
+			location_description < stdWrap
+			location_description.dataWrap = <td>|<td>
+			
+			label_location-street <stdWrap
+			label_location-street.dataWrap = <td><b>|</b></td>
+
+			location_street < stdWrap
+			location_street.dataWrap = <td>|<td>
+			
+			label_location-zip <stdWrap
+			label_location-zip.dataWrap = <td><b>|</b></td>
+
+			location_zip < stdWrap
+			location_zip.dataWrap = <td>|<td>		
+
+			label_location-city <stdWrap
+			label_location-city.dataWrap = <td><b>|</b></td>
+
+			location_city < stdWrap
+			location_city.dataWrap = <td>|<td>
+
+			label_location-country_zone <stdWrap
+			label_location-country_zone.dataWrap = <td><b>|</b></td>
+
+			location_country_zone < stdWrap
+			location_country_zone.dataWrap = <td>|<td>
+
+			label_location-country <stdWrap
+			label_location-country.dataWrap = <td><b>|</b></td>
+
+			location_country < stdWrap
+			location_country.dataWrap = <td>|<td>
+
+			label_location-phone <stdWrap
+			label_location-phone.dataWrap = <td><b>|</b></td>
+
+			location_phone < stdWrap
+			location_phone.dataWrap = <td>|<td>
+
+			label_location-email <stdWrap
+			label_location-email.dataWrap = <td><b>|</b></td>
+
+			location_email < stdWrap
+			location_email.dataWrap = <td>|<td>
+
+			label_location-image <stdWrap
+			label_location-image.dataWrap = <td><b>|</b></td>
+
+			location_image < stdWrap
+			location_image.dataWrap = <td>|<td>
+
+			label_location-imagecaption <stdWrap
+			label_location-imagecaption.dataWrap = <td><b>|</b></td>
+
+			location_imagecaption < stdWrap
+			location_imagecaption.dataWrap = <td>|<td>
+
+			label_location-imagealttext <stdWrap
+			label_location-imagealttext.dataWrap = <td><b>|</b></td>
+
+			location_imagealttext < stdWrap
+			location_imagealttext.dataWrap = <td>|<td>
+
+			label_location-link <stdWrap
+			label_location-link.dataWrap = <td><b>|</b></td>
+
+			location_link < stdWrap
+			location_link.dataWrap = <td>|<td>
+			
 			label_event-organizer_name < stdWrap
 			label_event-organizer_name.dataWrap = <td><b>|</b></td>
 
