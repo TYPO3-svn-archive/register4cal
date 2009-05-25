@@ -3,6 +3,11 @@ plugin.tx_register4cal_pi1{
 	template = EXT:register4cal/templates/register.tmpl 
 	dateformat = %d.%m.%Y
 	timeformat = %H:%M
+	disableNeedLoginForm = 1
+	onetimepid = 0
+	onetimereturnparam = redirect_url
+	loginpid = 0
+	loginreturnparam = redirect_url
 	
 	emails {
 		sendConfirmationMail = 1
@@ -22,9 +27,22 @@ plugin.tx_register4cal_pi1{
 				edit < stdWrap
 				edit.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.labelsubmit}" /></td>
 			}
+
+			onetimeaccountbutton < stdWrap
+			onetimeaccountbutton.dataWrap = <form action="###ONETIMEACCOUNTLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.onetimeaccountButton}" /></form>
+			
+			loginbutton < stdWrap
+			loginbutton.dataWrap = <form action="###LOGINLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.loginButton}" /></form>
+			
 			link < stdWrap
 			link.dataWrap = |
 			
+			onetimeaccountlink < stdWrap
+			onetimeaccountlink.dataWrap = |
+
+			loginlink < stdWrao
+			loginlink.dataWrap = |
+
 			table < stdWrap
 			table.dataWrap = <table width="100%">|</table>
 			
@@ -373,8 +391,17 @@ plugin.tx_register4cal_pi1{
 			label_registration-noitems < stdWrap
 			label_registration-noitems.dataWrap = <td colspan="4">|</td>
 			
+			label_registration-nologin < stdWrap
+			label_registration-nologin.dataWrap = |
+
+			label_registration-noevents < stdWrap
+			label_registration-noevents.dataWrap = |
+
 			label_event-noitems < stdWrap
-			label_event-noitems.dataWrap = <td colspan="4">|</td>			
+			label_event-noitems.dataWrap = <td colspan="4">|</td>	
+
+			label_event-nologin < stdWrap
+			label_event-nologin.dataWrap = <td colspan="4">|</td>
 		}
 		registrationForm {
 			heading < stdWrap
@@ -386,6 +413,16 @@ plugin.tx_register4cal_pi1{
 			fields < stdWrap
 			fields.dataWrap = |
 		}
+		
+		needloginForm {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.textbottom}</p>
+		}
+		
 		confirmationForm {
 			heading < stdWrap
 			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.heading}</h2>

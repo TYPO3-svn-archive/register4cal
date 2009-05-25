@@ -10,6 +10,11 @@
 			<label index="registrationForm.texttop"></label>
 			<label index="registrationForm.textbottom"></label>
 			<label index="registrationForm.labelsubmit">Register for this event</label>
+			<label index="needloginForm.heading">Register for this event</label>
+			<label index="needloginForm.texttop">Registering for an event is only possible for users who have an account with our website.</label>
+			<label index="needloginForm.textbottom"></label>
+			<label index="needloginForm.onetimeaccountButton">Create an one-time account</label>
+			<label index="needloginForm.loginButton">Login using an existing account</label>
 			<label index="confirmationForm.heading">Registration Confirmation</label>
 			<label index="confirmationForm.texttop">Thank you for your registration for an event on our website. We recorded the following data:</label>
 			<label index="confirmationForm.textbottom">You can contact the organizer of the event if you require further information.</label>
@@ -82,12 +87,20 @@
 			<label index="label.event.link">Link to event</label>
 			<label index="label.registration.noitems">Currently, no registrations for this event were found</label>
 			<label index="label.event.noitems">Currently, no registrations for you were found</label>
+			<label index="label.registration.nologin">Registrations can only be displayed for registered users</label>
+			<label index="label.event.nologin">Events can only be displayed for registered users</label>
+			<label index="label.registration.noevents">Currenty, no events with the possibility to register are recorded where you are the organizer.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="registrationForm.heading">Für diesen Termin anmelden</label>
 			<label index="registrationForm.texttop"></label>
 			<label index="registrationForm.textbottom"></label>
 			<label index="registrationForm.labelsubmit">Für diesen Termin anmelden</label>
+			<label index="needloginForm.heading">Fur diesen Termin anmelden</label>
+			<label index="needloginForm.texttop">Anmeldungen sind nur für Benutzer möglich, die einen Account auf unserer Webseite haben.</label>
+			<label index="needloginForm.textbottom"></label>
+			<label index="needloginForm.onetimeaccountButton">Einmal-Account anlegen</label>
+			<label index="needloginForm.loginButton">Mit bestehenden Account anmelden</label>
 			<label index="confirmationForm.heading">Anmeldebestätigung</label>
 			<label index="confirmationForm.texttop">Vielen Dank für die Anmeldung für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="confirmationForm.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
@@ -159,7 +172,10 @@
 			<label index="label.userfields">Bei der Anmeldung angegebene Daten</label>
 			<label index="label.event.link">Link zum Termin</label>
 			<label index="label.registration.noitems">Aktuell liegen keine Anmeldung für diesen Termin vor.</label>
-			<label index="label.event.noitems">Aktuell liegen keine Anmeldungen von Ihnen vor</label>
+			<label index="label.event.noitems">Aktuell liegen keine Anmeldungen von Ihnen vor.</label>
+			<label index="label.registration.nologin">Anmeldungen können nur für registrierte Benutzer angezeigt werden.</label>
+			<label index="label.event.nologin">Termine können nur für registrierte Benutzer angezeigt werden.</label>
+			<label index="label.registration.noevents">Aktuell sind keine Veranstaltungen mit Anmeldemöglichkeit hinterlegt, bei denen Sie als Veranstalter eingetragen sind.</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -1,3 +1,9 @@
+2009-05-25 Thomas Ernst <typo3@thernst.de>
+	* The participant list and the event list displayed data even if no user has logged in (Bug 3459)
+	* If no events where found for the participants- or the event list, an according message is being displayed (Bug 3438, Part 2)
+	* If the frontend user did not have the rights to see registrations, he got empty event boxes in the participants list.
+	* register4cal can now use extension onetimeaccount to create one-time accounts for registering to events (Feature 3168)
+
 2009-05-24 Thomas Ernst <typo3@thernst.de>
 	* Markers for location and organizer fields added (Feature 3439)
 

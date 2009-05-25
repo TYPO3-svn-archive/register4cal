@@ -72,46 +72,61 @@ class tx_register4cal_hook1 extends tslib_pibase {
 
 		//Conditions to display the registration form (first step)
 		if ($this->data['cal_piVars']['view']=='event' 					/* This is the single view of an event                          */
-		    && $this->data['cal_piVars']['uid']!=0 					/* An event is being displayed					*/
-		    && $GLOBALS['TSFE']->fe_user->user['uid'] != 0) {				/* An frontend user is logged in 				*/
-						
-			//Now read event record
-			$select = 'tx_cal_event.*';
-			$table = 'tx_cal_event';
-			$where = 'tx_cal_event.uid='.intval($this->data['cal_piVars']['uid']);
-			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where);
-			$event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
-			$GLOBALS['TYPO3_DB']->sql_free_result($result);;
+		    && $this->data['cal_piVars']['uid']!=0)  {					/* An event is being displayed					*/
+			if ($GLOBALS['TSFE']->fe_user->user['uid'] != 0) {				/* An frontend user is logged in 				*/
+				//Now read event record
+				$select = 'tx_cal_event.*';
+				$table = 'tx_cal_event';
+				$where = 'tx_cal_event.uid='.intval($this->data['cal_piVars']['uid']);
+				$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where);
+				$event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
+				$GLOBALS['TYPO3_DB']->sql_free_result($result);;
 
-			//Check if registration is enabled and if we are in the registration period
-			if ($event['tx_register4cal_activate']==1) {
-				$start = $event['tx_register4cal_regstart'];
-				$ende  = $event['tx_register4cal_regende'];
-				$now   = time();
-				$start = isset($start) ? $start : $now;
-				$ende  = isset($ende) ? $ende : strtotime($this->data['cal_piVars']['getdate']);
-				$regEnabled =  ($start<=$now && $ende>=$now);
+				//Check if registration is enabled and if we are in the registration period
+				if ($event['tx_register4cal_activate']==1) {
+					$start = $event['tx_register4cal_regstart'];
+					$ende  = $event['tx_register4cal_regende'];
+					$now   = time();
+					$start = isset($start) ? $start : $now;
+					$ende  = isset($ende) ? $ende : strtotime($this->data['cal_piVars']['getdate']);
+					$regEnabled =  ($start<=$now && $ende>=$now);
+				} else {
+					$regEnabled = FALSE;
+				}		    
+			    
+				if ($regEnabled) {
+					//Init pibase functons
+					$this->cObj = $otherThis->cObj;
+					$this->pi_setPiVarDefaults();
+					$this->pi_loadLL();
+									
+					//Instanciate rendering class
+					$tx_register4cal_render = &t3lib_div::makeInstanceClassName('tx_register4cal_render');
+					$this->rendering = &new $tx_register4cal_render($this);
+					$this->rendering->setEvent($event);
+					$this->rendering->setUser( $GLOBALS['TSFE']->fe_user->user);
+
+					$this->data['event_title'] = $event['title'];
+					$this->data['event_pid'] = $event['pid'];
+
+					//render registration and add it to the content
+					$content .= $this->RegistrationForm();
+				}
 			} else {
-				$regEnabled = FALSE;
-			}		    
-		    
-			if ($regEnabled) {
-				//Init pibase functons
-				$this->cObj = $otherThis->cObj;
-				$this->pi_setPiVarDefaults();
-				$this->pi_loadLL();
-								
-				//Instanciate rendering class
-				$tx_register4cal_render = &t3lib_div::makeInstanceClassName('tx_register4cal_render');
-				$this->rendering = &new $tx_register4cal_render($this);
-				$this->rendering->setEvent($event);
-				$this->rendering->setUser( $GLOBALS['TSFE']->fe_user->user);
-
-				$this->data['event_title'] = $event['title'];
-				$this->data['event_pid'] = $event['pid'];
-
-				//render registration and add it to the content
-				$content .= $this->RegistrationForm();
+				//Check if a onetimepid is given. If this is the case, offer link for creating a onetimeaccount using onetimeaccount
+				$disableNeedLoginForm = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['disableNeedLoginForm'];
+				if ($disableNeedLoginForm == 0) {
+					//Init pibase functons
+					$this->cObj = $otherThis->cObj;
+					$this->pi_setPiVarDefaults();
+					$this->pi_loadLL();			
+					
+					//Instanciate rendering class
+					$tx_register4cal_render = &t3lib_div::makeInstanceClassName('tx_register4cal_render');
+					$this->rendering = &new $tx_register4cal_render($this);
+					
+					$content .= $this->rendering->renderForm('###NEEDLOGIN_FORM###', 'needloginForm', 'show');				
+				}
 			}
 		}
 	}	

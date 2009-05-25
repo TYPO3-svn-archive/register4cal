@@ -76,22 +76,27 @@ class tx_register4cal_render {
 		$this->settings['template_file'] = $tsconf['template'];
 		$this->settings['date_format'] = $tsconf['dateformat'];
 		$this->settings['time_format'] = $tsconf['timeformat'];
+		$this->settings['onetimepid'] = $tsconf['onetimepid'];
+		$this->settings['onetimereturnparam'] = $tsconf['onetimereturnparam'];
+		$this->settings['loginpid'] = $tsconf['loginpid'];
+		$this->settings['loginreturnparam'] = $tsconf['loginreturnparam'];
 		$this->settings['eventpid'] = $tsconf['view.']['eventViewPid'];
 		$this->settings['adminusers'] = explode(',',$tsconf['view.']['adminUsers']);
 		$this->settings['language'] = $GLOBALS['TSFE']->tmpl->setup['config.']['language'];
 		$this->settings['mailconf'] = $tsconf['emails.'];
 		$this->settings['default'] = $tsconf['forms.']['default.'];
-		$this->settings['registrationForm'] = $tsconf['forms.']['registrationForm.'];			
-		$this->settings['confirmationForm'] = $tsconf['forms.']['confirmationForm.'];
-		$this->settings['alreadyRegistered'] = $tsconf['forms.']['alreadyRegistered.'];
-		$this->settings['confirmationMail'] = $tsconf['forms.']['confirmationMail.'];	
-		$this->settings['notificationMail'] = $tsconf['forms.']['notificationMail.'];	
-		$this->settings['eventList'] = $tsconf['forms.']['eventList.'];
-		$this->settings['participantList'] = $tsconf['forms.']['participantList.'];
-		
+		$this->settings['forms'] = $tsconf['forms.'];
+		//$this->settings['registrationForm'] = $tsconf['forms.']['registrationForm.'];
+		//$this->settings['needloginForm'] = $tsconf['forms.']['needloginForm.'];			
+		//$this->settings['confirmationForm'] = $tsconf['forms.']['confirmationForm.'];
+		//$this->settings['alreadyRegistered'] = $tsconf['forms.']['alreadyRegistered.'];
+		//$this->settings['confirmationMail'] = $tsconf['forms.']['confirmationMail.'];	
+		//$this->settings['notificationMail'] = $tsconf['forms.']['notificationMail.'];	
+		//$this->settings['eventList'] = $tsconf['forms.']['eventList.'];
+		//$this->settings['participantList'] = $tsconf['forms.']['participantList.'];
+
 		//init userfields
 		$this->settings['userfields'] = $tsconf['userfields.'];	
-		
 		//read the template file
 		$this->settings['template'] = $this->cObj->fileResource($this->settings['template_file']);
 		
@@ -213,10 +218,10 @@ class tx_register4cal_render {
 		//get requested template subpart
 		$template = $this->cObj->getSubpart($this->settings['template'],$templateSubpart);
 		if ($templateSubpartSubpart !='') $template = $this->cObj->getSubpart($template, $templateSubpartSubpart);
-
-		//get requested configuration
-		$conf = $this->settings[$confName];
 		
+		//get requested configuration
+		$conf = $this->settings['forms'][$confName.'.'];
+		t3lib_div::debug($conf);
 		//Replace subparts in the template
 		foreach ($PresetSubpartMarker as $marker => $content) {
 			$template = $this->cObj->substituteSubpart($template,$marker,$content);
@@ -386,6 +391,31 @@ class tx_register4cal_render {
 			//Marker for the registration form
 			$marker = $this->applyWrap(htmlspecialchars($this->pi_base->pi_linkTP_keepPIvars_url()),$conf, 'link',$mode);
 			break;
+		case 'ONETIMEACCOUNTLINK' :
+			//Link to the onetime account display
+			$sourceParams = Array();
+			$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+			foreach ($calPiVars as $name => $value) {
+				$sourceParams['tx_cal_controller['.htmlspecialchars($name).']'] = htmlspecialchars($value);
+			}
+			$params = Array();
+			$params[$this->settings['onetimereturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
+			$value = $this->pi_base->pi_getPageLink($this->settings['onetimepid'], '', $params);
+			$marker = $this->applyWrap($value,$conf, 'onetimeaccountlink',$mode);
+			break;
+		case 'LOGINLINK' :
+			//Link to the onetime account display
+			$sourceParams = Array();
+			$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+			foreach ($calPiVars as $name => $value) {
+				$sourceParams['tx_cal_controller['.htmlspecialchars($name).']'] = htmlspecialchars($value);
+			}
+			$params = Array();
+			$params[$this->settings['loginreturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
+			$value = $this->pi_base->pi_getPageLink($this->settings['loginpid'], '', $params);
+			$marker = $this->applyWrap($value,$conf, 'loginlink',$mode);
+			break;
+			
 		default :
 			if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
 				//Insert an event field. We have some special replacements here ...
