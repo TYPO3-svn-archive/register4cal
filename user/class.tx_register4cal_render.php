@@ -221,7 +221,6 @@ class tx_register4cal_render {
 		
 		//get requested configuration
 		$conf = $this->settings['forms'][$confName.'.'];
-		t3lib_div::debug($conf);
 		//Replace subparts in the template
 		foreach ($PresetSubpartMarker as $marker => $content) {
 			$template = $this->cObj->substituteSubpart($template,$marker,$content);
