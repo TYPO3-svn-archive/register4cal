@@ -47,6 +47,27 @@ require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php');
  
 class tx_register4cal_user1 {
 	
+	/*
+	 * Return an instance of the register4cal main class
+	 *
+	 * @return	instance	register4cal main class instance
+	 */
+	public static function getReg4CalMainClass() {
+		require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_main.php');
+		$tx_register4cal_main = &t3lib_div::makeInstanceClassName('tx_register4cal_main');
+		return new $tx_register4cal_main();
+	}	
+	
+	public static function errormessage($title,$text) {
+		$title = htmlspecialchars($title);
+		$text = htmlspecialchars($text);
+		$content = 	'<div style="border:2px solid red;width:100%;background-color:yellow;padding:10px;">'.
+				'<div style="font-size:16px;font-weight:bold;color:red">register4cal error: '.$title.'</div>'.
+				'<div style="font-size:12px;font-weight:normal;color:black;margin-top: 1em;martin-bottomg:1em;">'.$text.'</div>'.
+				'</div>';
+		return $content;
+	}
+	
 /***********************************************************************************************************************************************************************
  *
  * Frontend editing
@@ -164,8 +185,8 @@ class tx_register4cal_user1 {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/user/class.tx_register4cal_user1.php'])      {
-        include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/user/class.tx_register4cal_user1.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_user1.php'])      {
+        include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_user1.php']);
 }
         
 ?>

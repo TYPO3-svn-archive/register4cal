@@ -41,12 +41,58 @@
  * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
  *			rlmp_dateselectlib can be used for fields "Start/End of registration period"
  * ThEr020509	0.3.0	Complete revision of extension. Substantial changes in templates, TypoScript, etc.
+ * ThEr160909	0.4.0	Class for marker ###MODULE__tx_register4cal_listreg### added
  */
 
-require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_base_view.php');require_once(t3lib_extMgm::extPath('register4cal').'user/class.tx_register4cal_user1.php'); 
+require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_base_view.php');require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_user1.php'); 
 
-class tx_register4cal_fields{}	//This is to suppress the code warning in the extension manager
+class tx_register4cal_services{}	//This is to suppress the code warning in the extension manager
 
+/***********************************************************************************************************************************************************************
+*
+* Handle marker ###MODULE__tx_register4cal_submit###
+*
+* Registration form in list view: Submit-Button
+*
+**********************************************************************************************************************************************************************/
+class tx_register4cal_submit extends tx_cal_base_view {		
+	private $main;				//Instance of register4cal main class
+		
+	function start(&$moduleCaller){	
+		if ($GLOBALS['TSFE']->fe_user->user['uid'] != 0) {			// A frontend user is logged in
+			if (!isset($this->main)) $this->main = tx_register4cal_user1::getReg4CalMainClass();
+			$content = $this->main->ListViewRegistrationSubmit($moduleCaller->row);
+		}
+		return $content;
+	}
+}
+
+/***********************************************************************************************************************************************************************
+*
+* Handle marker ###MODULE__tx_register4cal_listreg###
+*
+* Registration form in list view: Fields for single event
+*
+**********************************************************************************************************************************************************************/
+class tx_register4cal_listreg extends tx_cal_base_view {	
+	private $main;				//Instance of register4cal main class
+		
+	function start(&$moduleCaller){	
+		if ($GLOBALS['TSFE']->fe_user->user['uid'] != 0) {			// A frontend user is logged in
+			if (!isset($this->main)) $this->main = tx_register4cal_user1::getReg4CalMainClass();
+			$content = $this->main->ListViewRegistrationEvent($moduleCaller->row);
+		}
+		return $content;
+	}
+}
+
+/***********************************************************************************************************************************************************************
+*
+* Handle marker ###MODULE__tx_register4cal_avtivate###
+*
+* Field "Registration active" for frontend editing
+*
+**********************************************************************************************************************************************************************/
 class tx_register4cal_activate extends tx_cal_base_view {	
 	function start(&$moduleCaller){	
 		//determine display value depending on display mode
@@ -67,6 +113,13 @@ class tx_register4cal_activate extends tx_cal_base_view {
 	}
 }
 
+/***********************************************************************************************************************************************************************
+*
+* Handle marker ###MODULE__tx_register4cal_regstart###
+*
+* Field "Start of registration period" for frontend editing
+*
+**********************************************************************************************************************************************************************/
 class tx_register4cal_regstart extends tx_cal_base_view {	
 	function start(&$moduleCaller){
 		//Get some configuration
@@ -106,6 +159,13 @@ class tx_register4cal_regstart extends tx_cal_base_view {
 	}	
 }
 
+/***********************************************************************************************************************************************************************
+*
+* Handle marker ###MODULE__tx_register4cal_regend###
+*
+* Field "End of registration period" for frontend editing
+*
+**********************************************************************************************************************************************************************/
 class tx_register4cal_regend extends tx_cal_base_view {	
 	function start(&$moduleCaller){
 		//Get some configuration
@@ -146,7 +206,7 @@ class tx_register4cal_regend extends tx_cal_base_view {
 	}	
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/model/class.tx_register4cal_fields.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/model/class.tx_register4cal_fields.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_services.php']) {
+	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_services.php']);
 }
 ?>

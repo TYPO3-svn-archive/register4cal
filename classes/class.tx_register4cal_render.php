@@ -36,13 +36,14 @@
  *
  * Modifications
  * ThEr020509	0.3.0	Initial development of class (complete revision of extension. Substantial changes in templates, TypoScript, etc.)
+ * ThEr160909	0.4.0	Support for fields having "options" (Select boxes, option lists, ...)
  */
  
 require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
 require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_phpicalendar_model.php');
 
 class tx_register4cal_render {
-	public $settings = Array();
+	private $settings = Array();
 	private $userfields = Array();		
 	private $event;
 	private $event_obj;
@@ -58,6 +59,7 @@ class tx_register4cal_render {
 	private $pi_base;
 	private $cObj;
 	private $user;
+	private $view;
 	
 	/*
          * Constructor for class tx_register4cal_render
@@ -66,39 +68,11 @@ class tx_register4cal_render {
 	 *
          * @return	nothing
          */	
-	public function tx_register4cal_render($referring_pi_base) {
+	public function tx_register4cal_render($referring_pi_base, $settings) {
 		//instance of pi_base referring to this class
 		$this->pi_base = $referring_pi_base;
 		$this->cObj = $referring_pi_base->cObj;
-		
-		//init settings
-		$tsconf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.'];
-		$this->settings['template_file'] = $tsconf['template'];
-		$this->settings['date_format'] = $tsconf['dateformat'];
-		$this->settings['time_format'] = $tsconf['timeformat'];
-		$this->settings['onetimepid'] = $tsconf['onetimepid'];
-		$this->settings['onetimereturnparam'] = $tsconf['onetimereturnparam'];
-		$this->settings['loginpid'] = $tsconf['loginpid'];
-		$this->settings['loginreturnparam'] = $tsconf['loginreturnparam'];
-		$this->settings['eventpid'] = $tsconf['view.']['eventViewPid'];
-		$this->settings['adminusers'] = explode(',',$tsconf['view.']['adminUsers']);
-		$this->settings['language'] = $GLOBALS['TSFE']->tmpl->setup['config.']['language'];
-		$this->settings['mailconf'] = $tsconf['emails.'];
-		$this->settings['default'] = $tsconf['forms.']['default.'];
-		$this->settings['forms'] = $tsconf['forms.'];
-		//$this->settings['registrationForm'] = $tsconf['forms.']['registrationForm.'];
-		//$this->settings['needloginForm'] = $tsconf['forms.']['needloginForm.'];			
-		//$this->settings['confirmationForm'] = $tsconf['forms.']['confirmationForm.'];
-		//$this->settings['alreadyRegistered'] = $tsconf['forms.']['alreadyRegistered.'];
-		//$this->settings['confirmationMail'] = $tsconf['forms.']['confirmationMail.'];	
-		//$this->settings['notificationMail'] = $tsconf['forms.']['notificationMail.'];	
-		//$this->settings['eventList'] = $tsconf['forms.']['eventList.'];
-		//$this->settings['participantList'] = $tsconf['forms.']['participantList.'];
-
-		//init userfields
-		$this->settings['userfields'] = $tsconf['userfields.'];	
-		//read the template file
-		$this->settings['template'] = $this->cObj->fileResource($this->settings['template_file']);
+		$this->settings = $settings;
 		
 		//clear event and registration
 		unset($this->event);
@@ -114,6 +88,21 @@ class tx_register4cal_render {
  * Getter and Setter Methods 
  *
  **********************************************************************************************************************************************************************/
+	/*
+	 * Sets the view (single event or event list)
+	 *
+	 * @param	string	$view: View ("single" or "list")
+	 */
+	public function setView($view) {
+		switch($view) {
+			case 'single':
+			case 'list':
+				$this->view = $view;
+				break;
+			default:
+				die('Unknown view "'.$view.'" in tx_register4cal_render->setView. Notify developer!');
+		}
+	}
 	
 	/*
          * Sets the event
@@ -218,7 +207,6 @@ class tx_register4cal_render {
 		//get requested template subpart
 		$template = $this->cObj->getSubpart($this->settings['template'],$templateSubpart);
 		if ($templateSubpartSubpart !='') $template = $this->cObj->getSubpart($template, $templateSubpartSubpart);
-		
 		//get requested configuration
 		$conf = $this->settings['forms'][$confName.'.'];
 		//Replace subparts in the template
@@ -238,16 +226,17 @@ class tx_register4cal_render {
 		
 		//Replace markers in template
 		unset($fields);
+		$marker = $PresetMarker;
 		$count = preg_match_all('!\###([A-Z0-9-_-|]*)\###!is', $template, $match);
 		while ($count > 0) {
-			$marker = $PresetMarker;
 			$AllMarkers = array_unique($match[1]);
 			foreach ($AllMarkers as $SingleMarker) {
-				$marker['###'.$SingleMarker.'###'] = $this->renderSingleMarker($SingleMarker, $conf, $mode);
+				if (!isset($marker['###'.$SingleMarker.'###']))	$marker['###'.$SingleMarker.'###'] = $this->renderSingleMarker($SingleMarker, $conf, $mode);
 			}
 			$template = $this->cObj->substituteMarkerArray($template,$marker);
 			$count = preg_match_all('!\###([A-Z0-9-_-|]*)\###!is', $template, $match);
 		}
+		
 		return $template;
 	}	
 	
@@ -299,9 +288,29 @@ class tx_register4cal_render {
 		$value = ($mode=='edit') ? htmlspecialchars(isset($this->pi_base->piVars[$fieldname]) ? $this->pi_base->piVars[$fieldname] : $conf['default']) : htmlspecialchars($value);
 		$caption = $conf['caption.'][$this->settings['language']] != '' ? $conf['caption.'][$this->settings['language']] : $conf['caption.']['default'];
 		$field  = $this->cObj->stdWrap($value, $conf['layout.'][$mode.'.']);
+		$options = '';
+		if (isset($conf['options.'])) {
+			foreach($conf['options.'] as $option_array) {
+				if (!is_array($option_array)) {
+					$option = $option_array;
+				} else {
+					$option = $option_array[$this->settings['language']] != '' ? $option_array[$this->settings['language']] : $option_array['default'];
+				}
+				$selected = $option == $value ? ' selected' : '';
+				$options.='<option'. $selected.'>'.htmlspecialchars($option).'</option>';
+			}
+		}
+		
+		if ($this->view == 'single') {
+			$fieldname = htmlspecialchars($this->pi_base->prefixId.'[FIELD_'.$conf['name'].']');
+		} elseif ($this->view == 'list') {
+			$fieldname = htmlspecialchars($this->pi_base->prefixId.'['.$this->event['uid'].']['.$this->event['start_date'].'][FIELD_'.$conf['name'].']');
+		}
+		
 		$marker = Array();
-		$marker['###NAME###'] = htmlspecialchars($this->pi_base->prefixId.'['.'FIELD_'.$conf['name'].']');
+		$marker['###NAME###'] = $fieldname;
 		$marker['###CAPTION###'] = htmlspecialchars($caption);
+		$marker['###OPTIONS###'] = $options;
 		$field = $this->cObj->substituteMarkerArray($field,$marker);	
 		return $field;
 	}	
@@ -359,13 +368,15 @@ class tx_register4cal_render {
 			}
 			
 			$hiddenfields = '';
-			$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
-			foreach ($calPiVars as $name => $value) {
-				$hiddenfields.='<input type="hidden" name="tx_cal_controller['.htmlspecialchars($name).']" value="'.htmlspecialchars($value).'" />';
+			if ($this->view == 'single') {
+				$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+				foreach ($calPiVars as $name => $value) {
+					$hiddenfields.='<input type="hidden" name="tx_cal_controller['.htmlspecialchars($name).']" value="'.htmlspecialchars($value).'" />';
+				}
+				$hiddenfields.='<input type="hidden" name="'.$this->pi_base->prefixId.'[cmd]" value="register" />';
+				$hiddenfields.='<input type="hidden" name="no_cache" value="1" />';
+				$fields.=$this->applyWrap($hiddenfields, $conf, 'submitbutton',$mode);
 			}
-			$hiddenfields.='<input type="hidden" name="'.$this->pi_base->prefixId.'[cmd]" value="register" />';
-			$hiddenfields.='<input type="hidden" name="no_cache" value="1" />';
-			$fields.=$this->applyWrap($hiddenfields, $conf, 'submitbutton',$mode);
 		}
 		return $fields;
 	}
@@ -436,6 +447,9 @@ class tx_register4cal_render {
 				case 'formated_end' :
 					if (!isset($this->event_fStart)) $this->prepareFormatedDateTime();
 					$value = $this->event_fEnd;
+					break;
+				case 'get_date' :
+					$value = $this->event['start_date'];
 					break;
 				case 'start_date' :
 					$value = $this->event_rStart->format($this->settings['date_format']);
@@ -583,8 +597,8 @@ class tx_register4cal_render {
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/user/class.tx_register4cal_render.php'])      {
-        include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/user/class.tx_register4cal_render.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_render.php'])      {
+        include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_render.php']);
 }
         
 ?>
