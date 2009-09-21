@@ -25,14 +25,14 @@ plugin.tx_register4cal_pi1{
 			}
 			submitbutton {
 				edit < stdWrap
-				edit.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.labelsubmit}" /></td>
+				edit.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.labelsubmit}" /></td>
 			}
 
 			onetimeaccountbutton < stdWrap
-			onetimeaccountbutton.dataWrap = <form action="###ONETIMEACCOUNTLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.onetimeaccountButton}" /></form>
+			onetimeaccountbutton.dataWrap = <form action="###ONETIMEACCOUNTLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.onetimeaccountButton}" /></form>
 			
 			loginbutton < stdWrap
-			loginbutton.dataWrap = <form action="###LOGINLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.loginButton}" /></form>
+			loginbutton.dataWrap = <form action="###LOGINLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.loginButton}" /></form>
 			
 			link < stdWrap
 			link.dataWrap = |
@@ -50,7 +50,7 @@ plugin.tx_register4cal_pi1{
 			tabline.dataWrap = <tr>|</tr>
 			
 			user < stdWrap
-			user.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/pi1/locallang.xml:label.user}</h3></td>
+			user.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/classes/locallang.xml:label.user}</h3></td>
 
 			label_user-uid < stdWrap
 			label_user-uid.dataWrap = <td><b>|</b></td>
@@ -149,7 +149,7 @@ plugin.tx_register4cal_pi1{
 			user_date_of_birth.dataWrap = <td>|</td>
 
 			event < stdWrap
-			event.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/pi1/locallang.xml:label.event}</h3></td>
+			event.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/classes/locallang.xml:label.event}</h3></td>
 
 			label_event-formated_start < stdWrap
 			label_event-formated_start.dataWrap = <td><b>|</b></td>
@@ -386,7 +386,7 @@ plugin.tx_register4cal_pi1{
 			event_organizer_email.dataWrap = <td>|</td>
 			
 			userfields < stdWrap
-			userfields.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/pi1/locallang.xml:label.userfields}</h3></td>
+			userfields.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/classes/locallang.xml:label.userfields}</h3></td>
 			
 			label_registration-noitems < stdWrap
 			label_registration-noitems.dataWrap = <td colspan="4">|</td>
@@ -405,66 +405,91 @@ plugin.tx_register4cal_pi1{
 		}
 		registrationForm {
 			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.heading}</h2>
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.heading}</h2>
 			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.texttop}</p>			
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.texttop}</p>			
 			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:registrationForm.textbottom}</p>
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.textbottom}</p>
 			fields < stdWrap
 			fields.dataWrap = |
 		}
 		
+		listRegistrationEvent {
+			fieldset {
+				edit < stdWrap
+				edit.dataWrap = <fieldset><legend>###CHECKBOX_REGISTER_THIS###{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.labelsubmit}</legend>|</fieldset>
+			}
+			
+			checkbox_register_this {
+				edit < stdWrap
+				edit.dataWrap = <input type="checkbox" name="tx_register4cal_main[###EVENT_uid###][###EVENT_get_date###][register]" value="1" />
+			}
+		}
+
+		listRegistrationSubmit {	
+			submitbutton < stdWrap
+			submitbutton.dataWrap = <input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.labelsubmitmultiple}" />
+		}
+
+		listAlreadyRegistered {
+			fieldset {
+				show < stdWrap
+				show.dataWrap = <fieldset><legend>{LLL:EXT:register4cal/classes/locallang.xml:listAlreadyRegistered.heading}</legend>|</fieldset>
+			}
+			
+		}
+
 		needloginForm {
 			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.heading}</h2>
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.heading}</h2>
 			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.texttop}</p>			
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.texttop}</p>			
 			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:needloginForm.textbottom}</p>
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.textbottom}</p>
 		}
 		
 		confirmationForm {
 			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.heading}</h2>
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:confirmationForm.heading}</h2>
 			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.texttop}</p>			
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationForm.texttop}</p>			
 			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationForm.textbottom}</p>
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationForm.textbottom}</p>
 			fields < stdWrap
 			fields.dataWrap = |
 		}
 		alreadyRegistered {
 			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:alreadyRegistered.heading}</h2>
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.heading}</h2>
 			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:alreadyRegistered.texttop}</p>			
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.texttop}</p>			
 			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:alreadyRegistered.textbottom}</p>
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.textbottom}</p>
 			fields < stdWrap
 			fields.dataWrap = |
 
 		}		
 		confirmationMail {
 			subject < stdWrap
-			subject.dataWrap = {LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.subject}
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.subject}
 			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.heading}</h2>
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.heading}</h2>
 			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.texttop}</p>			
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.texttop}</p>			
 			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:confirmationMail.textbottom}</p>
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.textbottom}</p>
 			fields < stdWrap
 			fields.dataWrap = |
 		}
 		notificationMail {
 			subject < stdWrap
-			subject.dataWrap = {LLL:EXT:register4cal/pi1/locallang.xml:notificationMail.subject}
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:notificationMail.subject}
 			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/pi1/locallang.xml:notificationMail.heading}</h2>
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:notificationMail.heading}</h2>
 			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:notificationMail.texttop}</p>			
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:notificationMail.texttop}</p>			
 			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/pi1/locallang.xml:cnotificationnMail.textbottom}</p>
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:cnotificationnMail.textbottom}</p>
 			fields < stdWrap
 			fields.dataWrap = |
 		}
@@ -492,6 +517,7 @@ plugin.tx_register4cal_pi1{
 		}
 	}
 	userfields {
+		# Example for simple input fields
 		0 {
 			name=participants
 			caption.default=No of participants
@@ -504,6 +530,8 @@ plugin.tx_register4cal_pi1{
 				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
 			}
 		}
+		
+		# Example for text area
 		1 {
 			name=Comments
 			caption.default=Comments
@@ -515,6 +543,29 @@ plugin.tx_register4cal_pi1{
 				show = stdWrap
 				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
 			}				
+		}
+		1 >
+		
+		# Example for selection
+		1 {
+			name=Selection
+			caption.default=I attend the event
+			caption.de=Ich nehme teil
+			default =
+			options {
+				1.default = Yes
+				1.de = Ja
+				2.default = No
+				2.de = Nein
+				3.default = Yes, but I'll be late
+				3.de = Ja, aber ich komme später
+			}
+			layout {
+				edit = stdWrap
+				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><SELECT SIZE=1 name="###NAME###">###OPTIONS###</SELECT></td></tr>
+				show = stdWrap
+				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+			}
 		}
 	}	
 

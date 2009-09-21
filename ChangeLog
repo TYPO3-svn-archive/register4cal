@@ -1,4 +1,18 @@
-2009-06-31 Thomas Ernst <typo3@thernst.de>
+2009-09-21 Thomas Ernst <typo3@thernst.de>
+	* [Feature 4097] Registration from cal listview
+	* Additional code cleanup and testing
+	* Updated documentation (english and german)
+	* Published version 0.4.0
+
+2009-09-16 Thomas Ernst <typo3@thernst.de>
+	* Simplifying coding
+	* [Feature 4643] Support for selection box/option list form fields
+
+2009-06-07 Thomas Ernst <typo3@thernst.de>
+	* There where some debugging messages left in the coding
+	* published version 0.3.2
+	
+2009-05-31 Thomas Ernst <typo3@thernst.de>
 	* published version 0.3.1
 
 2009-05-25 Thomas Ernst <typo3@thernst.de>
