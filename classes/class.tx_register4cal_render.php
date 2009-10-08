@@ -22,10 +22,21 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
+ * class.tx_register4cal_fehooks.php
+ *
+ * Provide rendering functions for extension register4cal 
+ *
+ * $Id$
+ *
+ * @author	Thomas Ernst <typo3@thernst.de>
+ *
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  * Hint: use extdeveval to insert/update function index above.
- */ 
+ */
+
+require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
+require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_phpicalendar_model.php');
 
 /**
  * Main rendering functions for extension 'register4cal' 
@@ -33,54 +44,35 @@
  * @author	Thomas Ernst <typo3@thernst.de>
  * @package	TYPO3
  * @subpackage	tx_register4cal
- *
- * Modifications
- * ThEr020509	0.3.0	Initial development of class (complete revision of extension. Substantial changes in templates, TypoScript, etc.)
- * ThEr160909	0.4.0	Support for fields having "options" (Select boxes, option lists, ...)
  */
- 
-require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
-require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_phpicalendar_model.php');
-
 class tx_register4cal_render {
-	private $settings = Array();
-	private $userfields = Array();		
-	private $event;
-	private $event_obj;
-	private $location_obj;
-	private $organizer_obj;
-	private $event_fStart;
-	private $event_fEnd;
-	private $event_orgName;
-	private $event_orgEmail;
-	private $event_rStart;
-	private $event_rEnd;
-	private $registration;
-	private $pi_base;
-	private $cObj;
-	private $user;
-	private $view;
+	private $pi_base;			//Instance of pi_base object
+	private $cObj;				//Instance of cObj object
+	private $settings = Array();		//Array containing TypoScript settings
+	private $event;				//Array containing event data
+	private $registration;			//Array containing registration record
+	private $user;				//Array containing user record
+	private $view;				//view mode ('single' or 'list')
 	
 	/*
          * Constructor for class tx_register4cal_render
          *
 	 * @param	instance	$referring_pi_base: instance of class, implementing pi_base, which is using this class
+	 * @param	array		$settings: Array containing the settings
 	 *
-         * @return	nothing
+         * @return	void
          */	
 	public function tx_register4cal_render($referring_pi_base, $settings) {
-		//instance of pi_base referring to this class
+			// instance of pi_base referring to this class
 		$this->pi_base = $referring_pi_base;
 		$this->cObj = $referring_pi_base->cObj;
 		$this->settings = $settings;
 		
-		//clear event and registration
+			// clear variables
 		unset($this->event);
 		unset($this->registration);
-		unset($this->event_obj);
-		unset($this->event_fStart);
-		unset($this->event_fEnd);
 		unset($this->user);
+		unset($this->view);
 	}
 
 /***********************************************************************************************************************************************************************
@@ -92,10 +84,13 @@ class tx_register4cal_render {
 	 * Sets the view (single event or event list)
 	 *
 	 * @param	string	$view: View ("single" or "list")
+	 *
+	 * @return	void
 	 */
 	public function setView($view) {
 		switch($view) {
 			case 'single':
+				//Fall trough
 			case 'list':
 				$this->view = $view;
 				break;
@@ -113,13 +108,14 @@ class tx_register4cal_render {
          */	
 	public function setEvent($event) {
 		$this->unsetEvent();
-		$this->event = $event;
+		$this->event = Array();
+		$this->event['data'] = $event;
 		
-		//Get event object
+			// instanciate event object
 		$tx_cal_phpicalendar_model = &t3lib_div::makeInstanceClassName('tx_cal_phpicalendar_model');
-		$this->event_obj = &new $tx_cal_phpicalendar_model($event, FALSE, 'tx_cal_phpicalendar');
+		$this->event['object'] = &new $tx_cal_phpicalendar_model($event, FALSE, 'tx_cal_phpicalendar');
 
-		//Prepare other event information
+			// prepare other event information
 		$this->prepareFormatedDateTime();
 		$this->getOrganizerData();
 	}
@@ -127,17 +123,10 @@ class tx_register4cal_render {
 	/*
          * Unsets the event
          *
-         * @return 	nothing
+         * @return 	void
          */
 	public function unsetEvent() {
 		unset($this->event);
-		unset($this->event_obj);
-		unset($this->location_obj);
-		unset($this->organizer_obj);
-		unset($this->event_fStart);
-		unset($this->event_fEnd);
-		unset($this->event_orgName);
-		unset($this->event_orgEmail);
 	}
 
 	/*
@@ -145,7 +134,7 @@ class tx_register4cal_render {
          *
 	 * @param	array		$registration: Array with the registration data
 	 *
-         * @return 	nothing
+         * @return 	void
          */	
 	public function setRegistration($registration) {
 		$this->unsetRegistration();
@@ -156,12 +145,12 @@ class tx_register4cal_render {
 	/*
          * Unsets the registration
          *
-         * @return 	nothing
+         * @return 	void
          */
 	public function unsetRegistration() {
 		unset($this->registration);
-		unset($this->event_fStart);
-		unset($this->event_fEnd);
+		unset($this->event['formatedStart']);
+		unset($this->event['formatedEnd']);
 	}
 	
 	/*
@@ -169,18 +158,17 @@ class tx_register4cal_render {
          *
 	 * @param	array		$user: Array with the user data
 	 *
-         * @return 	nothing
+         * @return 	void
          */	
 	public function setUser($user) {
 		$this->unsetUser();
 		$this->user = $user;
 	}
 
-
 	/*
          * Unsets the user
          *
-         * @return 	nothing
+         * @return 	void
          */
 	public function unsetUser() {
 		unset($this->user);
@@ -198,40 +186,42 @@ class tx_register4cal_render {
 	 * @param	array		@confName: Name of TS config for the form to render
 	 * @param	string		@mode: View-Mode to render (edit or show)
 	 * @param	string		@templateSubpartSubpart: Subpart of the template subpart to use
-	 * @param	array		@PresetSubpartMarker: Array containing preset subpart markers to use
-	 * @param	array		@PresetMarker: Array containting preset markers to use
+	 * @param	array		@presetSubpartMarker: Array containing preset subpart markers to use
+	 * @param	array		@presetMarker: Array containting preset markers to use
 	 *
          * @return 	string		Rendered fields
          */	
-	public function renderForm($templateSubpart, $confName, $mode, $templateSubpartSubpart='',$PresetSubpartMarker=Array(),$PresetMarker=Array()) {
-		//get requested template subpart
+	public function renderForm($templateSubpart, $confName, $mode, $templateSubpartSubpart='',$presetSubpartMarker=Array(),$presetMarker=Array()) {
+			// get requested template subpart
 		$template = $this->cObj->getSubpart($this->settings['template'],$templateSubpart);
-		if ($templateSubpartSubpart !='') $template = $this->cObj->getSubpart($template, $templateSubpartSubpart);
-		//get requested configuration
-		$conf = $this->settings['forms'][$confName.'.'];
-		//Replace subparts in the template
-		foreach ($PresetSubpartMarker as $marker => $content) {
+		if ($templateSubpartSubpart != '') $template = $this->cObj->getSubpart($template, $templateSubpartSubpart);
+		
+			// get requested configuration
+		$conf = $this->settings['forms'][$confName . '.'];
+		
+			// replace preset subparts in the template
+		foreach ($presetSubpartMarker as $marker => $content) {
 			$template = $this->cObj->substituteSubpart($template,$marker,$content);
 		}
+			// replace remaining subparts
 		$count = preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		while ($count > 0) {
-			$AllSubparts = array_unique($match[1]);
-			foreach ($AllSubparts as $SingleSubpart) {
-				$SubpartContent = $this->cObj->getSubpart($template, '###'.$SingleSubpart.'###');
-				$SubpartContent = $this->applyWrap($SubpartContent, $conf, strtolower($SingleSubpart), $mode);
-				$template = $this->cObj->substituteSubpart($template,'###'.$SingleSubpart.'###',$SubpartContent,0);
+			$allSubparts = array_unique($match[1]);
+			foreach ($allSubparts as $singleSubpart) {
+				$subpartContent = $this->cObj->getSubpart($template, '###' . $singleSubpart . '###');
+				$subpartContent = $this->applyWrap($subpartContent, $conf, strtolower($singleSubpart), $mode);
+				$template = $this->cObj->substituteSubpart($template,'###' . $singleSubpart . '###',$subpartContent,0);
 			}
 			$count = preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		}
 		
-		//Replace markers in template
-		unset($fields);
-		$marker = $PresetMarker;
+			// replace markers in template
+		$marker = $presetMarker;
 		$count = preg_match_all('!\###([A-Z0-9-_-|]*)\###!is', $template, $match);
 		while ($count > 0) {
-			$AllMarkers = array_unique($match[1]);
-			foreach ($AllMarkers as $SingleMarker) {
-				if (!isset($marker['###'.$SingleMarker.'###']))	$marker['###'.$SingleMarker.'###'] = $this->renderSingleMarker($SingleMarker, $conf, $mode);
+			$allMarkers = array_unique($match[1]);
+			foreach ($allMarkers as $singleMarker) {
+				if (!isset($marker['###'.$singleMarker.'###']))	$marker['###'.$singleMarker.'###'] = $this->renderSingleMarker($singleMarker, $conf, $mode);
 			}
 			$template = $this->cObj->substituteMarkerArray($template,$marker);
 			$count = preg_match_all('!\###([A-Z0-9-_-|]*)\###!is', $template, $match);
@@ -240,6 +230,14 @@ class tx_register4cal_render {
 		return $template;
 	}	
 	
+	
+	/*
+         * Renders a subject for an email
+	 *      
+	 * @param	array		@confName: Name of TS config for the form to render
+	 *
+         * @return 	string		Rendered fields
+         */	
 	public function renderSubject($confName) {
 		return $this->applyWrap('', $this->settings[$confName],'subject','show');
 	}
@@ -269,9 +267,9 @@ class tx_register4cal_render {
          */	
 	private function applyWrap($value, $conf, $field, $mode) {
 		$field = strtolower($field);
-		$config = $conf[$field.'.'];
-		if (!isset($config)) $config = $this->settings['default'][$field.'.'];
-		$config = isset($config['show.']) || isset($config['edit.']) ? $config[$mode.'.'] : $config;
+		$config = $conf[$field . '.'];
+		if (!isset($config)) $config = $this->settings['default'][$field . '.'];
+		$config = isset($config['show.']) || isset($config['edit.']) ? $config[$mode . '.'] : $config;
 		return $this->cObj->stdWrap($value, $config);
 	}	
 	
@@ -287,7 +285,7 @@ class tx_register4cal_render {
 	private function renderUserField($conf, $mode,  $value='') {
 		$value = ($mode=='edit') ? htmlspecialchars(isset($this->pi_base->piVars[$fieldname]) ? $this->pi_base->piVars[$fieldname] : $conf['default']) : htmlspecialchars($value);
 		$caption = $conf['caption.'][$this->settings['language']] != '' ? $conf['caption.'][$this->settings['language']] : $conf['caption.']['default'];
-		$field  = $this->cObj->stdWrap($value, $conf['layout.'][$mode.'.']);
+		$field  = $this->cObj->stdWrap($value, $conf['layout.'][$mode . '.']);
 		$options = '';
 		if (isset($conf['options.'])) {
 			foreach($conf['options.'] as $option_array) {
@@ -297,14 +295,14 @@ class tx_register4cal_render {
 					$option = $option_array[$this->settings['language']] != '' ? $option_array[$this->settings['language']] : $option_array['default'];
 				}
 				$selected = $option == $value ? ' selected' : '';
-				$options.='<option'. $selected.'>'.htmlspecialchars($option).'</option>';
+				$options.='<option'. $selected . '>' . htmlspecialchars($option) . '</option>';
 			}
 		}
 		
 		if ($this->view == 'single') {
-			$fieldname = htmlspecialchars($this->pi_base->prefixId.'[FIELD_'.$conf['name'].']');
+			$fieldname = htmlspecialchars($this->pi_base->prefixId . '[FIELD_' . $conf['name'] . ']');
 		} elseif ($this->view == 'list') {
-			$fieldname = htmlspecialchars($this->pi_base->prefixId.'['.$this->event['uid'].']['.$this->event['start_date'].'][FIELD_'.$conf['name'].']');
+			$fieldname = htmlspecialchars($this->pi_base->prefixId . '[' . $this->event['data']['uid'] . '][' . $this->event['data']['start_date'] . '][FIELD_' . $conf['name'] . ']');
 		}
 		
 		$marker = Array();
@@ -327,7 +325,7 @@ class tx_register4cal_render {
          */
 	private function renderOldUserField($field) {
 		$caption = $field['caption'][$this->settings['language']] != '' ? $field['caption'][$this->settings['language']] : $field['caption']['default'];
-		$template = $this->cObj->getSubpart($this->settings['template'],'###SHOW_'.strtoupper($field['type']).'###');
+		$template = $this->cObj->getSubpart($this->settings['template'],'###SHOW_' . strtoupper($field['type']) . '###');
 		$marker = array();
 		$marker['###SIZE###'] = htmlspecialchars($field['size']);
 		$marker['###NAME###'] = htmlspecialchars($field['name']);
@@ -360,22 +358,22 @@ class tx_register4cal_render {
 				}
 			}
 		} else if ($mode=='edit' && isset($this->settings['userfields'])){
-			//Mode = Edit: Render fields based on userfields in TypoScript
+				//Mode = Edit: Render fields based on userfields in TypoScript
 			if (is_array($this->settings['userfields'])) {
 				foreach ($this->settings['userfields'] as $field) {
-					$fields.=$this->renderUserField($field,$mode);
+					$fields .= $this->renderUserField($field,$mode);
 				}
 			}
 			
-			$hiddenfields = '';
+			$hiddenFields = '';
 			if ($this->view == 'single') {
 				$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
 				foreach ($calPiVars as $name => $value) {
-					$hiddenfields.='<input type="hidden" name="tx_cal_controller['.htmlspecialchars($name).']" value="'.htmlspecialchars($value).'" />';
+					$hiddenFields .= '<input type="hidden" name="tx_cal_controller[' . htmlspecialchars($name) . ']" value="' . htmlspecialchars($value) . '" />';
 				}
-				$hiddenfields.='<input type="hidden" name="'.$this->pi_base->prefixId.'[cmd]" value="register" />';
-				$hiddenfields.='<input type="hidden" name="no_cache" value="1" />';
-				$fields.=$this->applyWrap($hiddenfields, $conf, 'submitbutton',$mode);
+				$hiddenFields .= '<input type="hidden" name="' . $this->pi_base->prefixId . '[cmd]" value="register" />';
+				$hiddenFields .= '<input type="hidden" name="no_cache" value="1" />';
+				$fields .= $this->applyWrap($hiddenFields, $conf, 'submitbutton',$mode);
 			}
 		}
 		return $fields;
@@ -392,108 +390,109 @@ class tx_register4cal_render {
          */
 	private function renderSingleMarker($singleMarker, $conf, $mode) {
 		switch ($singleMarker) {
-		case 'FIELDS' :
-			//Render the userfields
-			$fields = $this->renderUserFields($conf, $mode);
-			$marker = $this->applyWrap($fields, $conf, 'fields',$mode);
-			break;
-		case 'LINK' :
-			//Marker for the registration form
-			$marker = $this->applyWrap(htmlspecialchars($this->pi_base->pi_linkTP_keepPIvars_url()),$conf, 'link',$mode);
-			break;
-		case 'ONETIMEACCOUNTLINK' :
-			//Link to the onetime account display
-			$sourceParams = Array();
-			$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
-			foreach ($calPiVars as $name => $value) {
-				$sourceParams['tx_cal_controller['.htmlspecialchars($name).']'] = htmlspecialchars($value);
-			}
-			$params = Array();
-			$params[$this->settings['onetimereturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
-			$value = $this->pi_base->pi_getPageLink($this->settings['onetimepid'], '', $params);
-			$marker = $this->applyWrap($value,$conf, 'onetimeaccountlink',$mode);
-			break;
-		case 'LOGINLINK' :
-			//Link to the onetime account display
-			$sourceParams = Array();
-			$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
-			foreach ($calPiVars as $name => $value) {
-				$sourceParams['tx_cal_controller['.htmlspecialchars($name).']'] = htmlspecialchars($value);
-			}
-			$params = Array();
-			$params[$this->settings['loginreturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
-			$value = $this->pi_base->pi_getPageLink($this->settings['loginpid'], '', $params);
-			$marker = $this->applyWrap($value,$conf, 'loginlink',$mode);
-			break;
-			
-		default :
-			if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
-				//Insert an event field. We have some special replacements here ...
-				$fieldname = substr($singleMarker,6);
-				switch ($fieldname) {
-				case 'link' :
-					$value = $this->getEventLink();
-					break;
-				case 'organizer_name' :
-					$value = $this->event_orgName;
-					break;
-				case 'organizer_email' :
-					$value = $this->event_orgEmail;
-					break;
-				case 'formated_start' :
-					if (!isset($this->event_fStart)) $this->prepareFormatedDateTime();
-					$value = $this->event_fStart;
-					break;
-				case 'formated_end' :
-					if (!isset($this->event_fStart)) $this->prepareFormatedDateTime();
-					$value = $this->event_fEnd;
-					break;
-				case 'get_date' :
-					$value = $this->event['start_date'];
-					break;
-				case 'start_date' :
-					$value = $this->event_rStart->format($this->settings['date_format']);
-					break;
-				case 'end_date' :
-					$value = $this->event_rEnd->format($this->settings['date_format']);
-					break;
-				case 'start_time' :
-					$value = $this->event_obj->getStart()->format($this->settings['time_format']);
-					break;
-				case 'end_time' :
-					$value = $this->event_obj->getEnd()->format($this->settings['time_format']);
-					break;
-				case 'teaser' :
-				case 'description' :
-					$value = isset($this->event[$fieldname]) ? $value = $this->event[$fieldname] : '';
-					$value = $this->pi_base->pi_RTEcssText($value);
-				default :
-					$value = isset($this->event[$fieldname]) ? $value = $this->event[$fieldname] : '';
-					break;
+			case 'FIELDS' :
+					// Render the userfields
+				$fields = $this->renderUserFields($conf, $mode);
+				$marker = $this->applyWrap($fields, $conf, 'fields',$mode);
+				break;
+			case 'LINK' :
+					// Marker for the registration form
+				$marker = $this->applyWrap(htmlspecialchars($this->pi_base->pi_linkTP_keepPIvars_url()),$conf, 'link',$mode);
+				break;
+			case 'ONETIMEACCOUNTLINK' :
+					// Link to the onetime account display
+				$sourceParams = Array();
+				$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+				foreach ($calPiVars as $name => $value) {
+					$sourceParams['tx_cal_controller[' . htmlspecialchars($name) . ']'] = htmlspecialchars($value);
 				}
-			} else if (preg_match('/LOCATION_([A-Z0-9_-])*/', $singleMarker)) {
-				//Insert a field from the location record
-				$fieldname = substr($singleMarker,9);
-				if (!isset($this->location_obj)) $this->setLocationObj();
-				$value = isset($this->location_obj[$fieldname]) ? $value =$this->location_obj[$fieldname] : '';
-			} else if (preg_match('/ORGANIZER_([A-Z0-9_-])*/', $singleMarker)) {
-				//Insert a field from the organizer record
-				$fieldname = substr($singleMarker,10);
-				if (!isset($this->organizer_obj)) $this->setOrganizerObj();
-				$value = isset($this->organizer_obj[$fieldname]) ? $value =$this->organizer_obj[$fieldname] : '';
-			} else if (preg_match('/USER_([A-Z0-9_-])*/', $singleMarker)) {
-				//Insert an user field
-				$fieldname = substr($singleMarker,5);
-				$value = isset($this->user[$fieldname]) ? $value =$this->user[$fieldname] : '';
-			} else if (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
-				//Insert a label field
-				$fieldname = 'label.'.str_replace('-','.',substr($singleMarker,6));
-				$value = $this->pi_base->pi_getLL($fieldname);
-			} else {
-				$value='';
-			}
-			$marker =  $this->applyWrap($value, $conf, $singleMarker,$mode);
-			break;
+				$params = Array();
+				$params[$this->settings['onetimereturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
+				$value = $this->pi_base->pi_getPageLink($this->settings['onetimepid'], '', $params);
+				$marker = $this->applyWrap($value,$conf, 'onetimeaccountlink',$mode);
+				break;
+			case 'LOGINLINK' :
+					// Link to the onetime account display
+				$sourceParams = Array();
+				$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+				foreach ($calPiVars as $name => $value) {
+					$sourceParams['tx_cal_controller[' . htmlspecialchars($name) . ']'] = htmlspecialchars($value);
+				}
+				$params = Array();
+				$params[$this->settings['loginreturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
+				$value = $this->pi_base->pi_getPageLink($this->settings['loginpid'], '', $params);
+				$marker = $this->applyWrap($value,$conf, 'loginlink',$mode);
+				break;
+				
+			default :
+				if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
+						// Insert an event field. We have some special replacements here ...
+					$fieldname = substr($singleMarker,6);
+					switch ($fieldname) {
+						case 'link' :
+							$value = $this->getEventLink();
+							break;
+						case 'organizer_name' :
+							$value = $this->event['organizerName'];
+							break;
+						case 'organizer_email' :
+							$value = $this->event['organizerEmail'];
+							break;
+						case 'formated_start' :
+							if (!isset($this->event['formatedStart'])) $this->prepareFormatedDateTime();
+							$value = $this->event['formatedStart'];
+							break;
+						case 'formated_end' :
+							if (!isset($this->event['formatedStart'])) $this->prepareFormatedDateTime();
+							$value = $this->event['formatedEnd'];
+							break;
+						case 'get_date' :
+							$value = $this->event['data']['start_date'];
+							break;
+						case 'start_date' :
+							$value = $this->event['start']->format($this->settings['date_format']);
+							break;
+						case 'end_date' :
+							$value = $this->event['end']->format($this->settings['date_format']);
+							break;
+						case 'start_time' :
+							$value = $this->event['object']->getStart()->format($this->settings['time_format']);
+							break;
+						case 'end_time' :
+							$value = $this->event['object']->getEnd()->format($this->settings['time_format']);
+							break;
+						case 'teaser' :
+							// Fall trough
+						case 'description' :
+							$value = isset($this->event['data'][$fieldname]) ? $value = $this->event['data'][$fieldname] : '';
+							$value = $this->pi_base->pi_RTEcssText($value);
+						default :
+							$value = isset($this->event['data'][$fieldname]) ? $value = $this->event['data'][$fieldname] : '';
+							break;
+					}
+				} else if (preg_match('/LOCATION_([A-Z0-9_-])*/', $singleMarker)) {
+						// Insert a field from the location record
+					$fieldname = substr($singleMarker,9);
+					if (!isset($this->event['location'])) $this->setLocationObj();
+					$value = isset($this->event['location'][$fieldname]) ? $value =$this->event['location'][$fieldname] : '';
+				} else if (preg_match('/ORGANIZER_([A-Z0-9_-])*/', $singleMarker)) {
+						// Insert a field from the organizer record
+					$fieldname = substr($singleMarker,10);
+					if (!isset($this->event['organizer'])) $this->setOrganizerObj();
+					$value = isset($this->event['organizer'][$fieldname]) ? $value =$this->event['organizer'][$fieldname] : '';
+				} else if (preg_match('/USER_([A-Z0-9_-])*/', $singleMarker)) {
+						// Insert an user field
+					$fieldname = substr($singleMarker,5);
+					$value = isset($this->user[$fieldname]) ? $value =$this->user[$fieldname] : '';
+				} else if (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
+						// Insert a label field
+					$fieldname = 'label.'.str_replace('-','.',substr($singleMarker,6));
+					$value = $this->pi_base->pi_getLL($fieldname);
+				} else {
+					$value='';
+				}
+				$marker =  $this->applyWrap($value, $conf, $singleMarker,$mode);
+				break;
 		}
 		return $marker;
 	}
@@ -516,8 +515,8 @@ class tx_register4cal_render {
 		$vars['tx_cal_controller[type]']='tx_cal_phpicalendar';
 
 		if (empty($this->registration)) {
-			$vars['tx_cal_controller[getdate]']=intval($this->event['start_date']);
-			$vars['tx_cal_controller[uid]']=intval($this->event['uid']);
+			$vars['tx_cal_controller[getdate]']=intval($this->event['data']['start_date']);
+			$vars['tx_cal_controller[uid]']=intval($this->event['data']['uid']);
 		} else {
 			$vars['tx_cal_controller[getdate]']=intval($this->registration['cal_event_getdate']);
 			$vars['tx_cal_controller[uid]']=intval($this->registration['cal_event_uid']);
@@ -533,43 +532,43 @@ class tx_register4cal_render {
          * @return 	nothing
          */	
 	private function prepareFormatedDateTime() {
-		if (isset($this->event)  && !isset($this->event_fStart)) {
-			//format date and time
-			$this->event_rStart = new tx_cal_date();
-			$this->event_rStart->copy($this->event_obj->getStart());
-			$this->event_rEnd = new tx_cal_date();
-			$this->event_rEnd->copy($this->event_obj->getEnd());
-			if ($this->event['freq'] != 'none' && !empty($this->registration)) {;
-				$delta = (strtotime($this->registration['cal_event_getdate'])- strtotime($this->event['start_date']));
-				$this->event_rStart->addSeconds($delta);
-				$this->event_rEnd->addSeconds($delta);
+		if (isset($this->event['data'])  && !isset($this->event['formatedStart'])) {
+				// format date and time
+			$this->event['start'] = new tx_cal_date();
+			$this->event['start']->copy($this->event['object']->getStart());
+			$this->event['end'] = new tx_cal_date();
+			$this->event['end']->copy($this->event['object']->getEnd());
+			if ($this->event['data']['freq'] != 'none' && !empty($this->registration)) {;
+				$delta = (strtotime($this->registration['cal_event_getdate']) - strtotime($this->event['data']['start_date']));
+				$this->event['start']->addSeconds($delta);
+				$this->event['end']->addSeconds($delta);
 			}
-			$format = $this->event['allday'] == 0 ? $this->settings['date_format'].' '.$this->settings['time_format'] : $this->settings['date_format'];
-			$this->event_fStart = $this->event_rStart->format($format);
-			$this->event_fEnd =$this->event_rEnd->format($format);			
-			if ($this->event['allday'] != 0 && $allday_string != '' and $formatedStart != $formatedEnd) {
-				$this->event_fStart.=' '.$this->pi_base->pi_getLL('event_allday');
-				$this->event_fEnd='';
+			$format = $this->event['data']['allday'] == 0 ? $this->settings['date_format'].' '.$this->settings['time_format'] : $this->settings['date_format'];
+			$this->event['formatedStart'] = $this->event['start']->format($format);
+			$this->event['formatedEnd'] =$this->event['end']->format($format);			
+			if ($this->event['allday'] != 0) { //&& $this->event['formatedStart'] != $this->event['formatedEnd']) {
+				$this->event['formatedStart'] .= ' ' . $this->pi_base->pi_getLL('event_allday');
+				$this->event['formatedEnd'] = '';
 			}
 		}
 	}
 
 	function setOrganizerObj() {
-		if (isset($this->event['organizer_id'])) {
+		if (isset($this->event['data']['organizer_id'])) {
 			$select = '*';
 			$table = 'tx_cal_organizer';
-			$where = 'uid='.intval($this->event['organizer_id']).$this->cObj->enableFields('tx_cal_organizer');
+			$where = 'uid='.intval($this->event['data']['organizer_id']) . $this->cObj->enableFields('tx_cal_organizer');
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
-			$this->organizer_obj = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
+			$this->event['organizer'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
 		}
 	}
 	function setLocationObj() {
-		if (isset($this->event['location_id'])) {
+		if (isset($this->event['data']['location_id'])) {
 			$select = '*';
 			$table = 'tx_cal_location';
-			$where = 'uid='.intval($this->event['location_id']).$this->cObj->enableFields('tx_cal_location');
+			$where = 'uid='.intval($this->event['data']['location_id']) . $this->cObj->enableFields('tx_cal_location');
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
-			$this->location_obj = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
+			$this->event['location'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
 		}
 	}
 
@@ -579,19 +578,20 @@ class tx_register4cal_render {
          * @return 	nothing
          */	
 	function getOrganizerData() {
-		if ($this->event['organizer_id']==0) {
-			//Organizer in event record, email not available
-			$name = $this->event['organizer'];
-			$email ='';
+		if ($this->event['data']['organizer_id']==0) {
+				// Organizer in event record, email not available
+			$this->event['organizerName'] = $this->event['data']['organizer'];
+			$this->event['organizerEmail'] ='';
 		} else {
-			//Organizer and email in separate organizer record
-			$select = 'name, email';
+				// Organizer and email in separate organizer record
+			$select = '*';
 			$table = 'tx_cal_organizer';
-			$where = 'uid='.intval($this->event['organizer_id']);
+			$where = 'uid=' . intval($this->event['data']['organizer_id']);
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
-			$this->event_orgName = $row['name'];
-			$this->event_orgEmail = $row['email'];
+			$this->event['organizerName'] = $row['name'];
+			$this->event['organizerEmail'] = $row['email'];
+			$this->event['organizer'] = $row;
 			$this->settings['organizer_email'] = $row['email'];
 		}
 	}

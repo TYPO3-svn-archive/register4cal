@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext: "register4cal"
 #
-# Auto generated 24-09-2009 16:27
+# Auto generated 24-09-2009 16:28
 #
 # Manual updates:
 # Only the data in the array - anything else is removed by next write.
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.4.0',
+	'version' => '0.4.1',
 	'constraints' => array(
 		'depends' => array(
 			'cal' => '',

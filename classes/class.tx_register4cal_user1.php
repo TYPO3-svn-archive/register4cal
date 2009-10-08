@@ -22,10 +22,20 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
+ * class.tx_register4cal_user1.php
+ *
+ * Provide user functions and some static functions  
+ *
+ * $Id$
+ *
+ * @author	Thomas Ernst <typo3@thernst.de>
+ *
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  * Hint: use extdeveval to insert/update function index above.
  */
+
+require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
 
 /**
  * Functions for backend display and frontend editing
@@ -33,18 +43,7 @@
  * @author	Thomas Ernst <typo3@thernst.de>
  * @package	TYPO3
  * @subpackage	tx_register4cal
- *
- * Modifications
- * ThEr230209	0.1.0	Initial development of class
- * ThEr010309   0.2.0   Added several general functions from tx_register4cal_pi1 for general use
- * ThEr190309	0.2.2	FormatDateTime: Timezone conversion must not be performed for allday-events
- * ThEr100409	0.2.4	Added helper functions for frontend editing
- * ThEr270409 	0.2.6	FE-Editing: Fields "Start/End of registration period" should remain empty, if nothing has been entered. (Bug 3166)
- * ThEr020509	0.3.0	Complete revision of extension. Substantial changes in templates, TypoScript, etc.
  */
-
-require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
- 
 class tx_register4cal_user1 {
 	
 	/*
@@ -58,12 +57,20 @@ class tx_register4cal_user1 {
 		return new $tx_register4cal_main();
 	}	
 	
+	/*
+	 * Render an error message
+	 *
+	 * @param	string		$title: Title of the error message
+	 * @param	string		$text: Text of error message
+	 *
+	 * @return	string		rendered error message
+	 */	
 	public static function errormessage($title,$text) {
 		$title = htmlspecialchars($title);
 		$text = htmlspecialchars($text);
-		$content = 	'<div style="border:2px solid red;width:100%;background-color:yellow;padding:10px;">'.
-				'<div style="font-size:16px;font-weight:bold;color:red">register4cal error: '.$title.'</div>'.
-				'<div style="font-size:12px;font-weight:normal;color:black;margin-top: 1em;martin-bottomg:1em;">'.$text.'</div>'.
+		$content = 	'<div style="border:2px solid red;width:100%;background-color:yellow;padding:10px;">' .
+				'<div style="font-size:16px;font-weight:bold;color:red">register4cal error: ' . $title . '</div>' .
+				'<div style="font-size:12px;font-weight:normal;color:black;margin-top: 1em;martin-bottomg:1em;">' . $text . '</div>' .
 				'</div>';
 		return $content;
 	}
@@ -166,22 +173,25 @@ class tx_register4cal_user1 {
          */
 	public function additionalDataForBackend($PA, $fobj) {
 		$fieldsarray = unserialize($PA['itemFormElValue']);
-		$additional_fields = '';
+		$additionalFields = '';
+		$lang = $this->data['language'];
 		if (is_array($fieldsarray)) {
 			foreach ($fieldsarray as $name => $field) {
 				if (isset($field['type'])) {
 					//"old" version
-					$caption = $field['caption'][$this->data['language']] != '' ? $field['caption'][$this->data['language']] : $field['caption']['default'];
-					$additional_fields .= '<tr><td width= 100px;><b>'. htmlspecialchars($caption).'</b></td><td>'.htmlspecialchars($field['value']).'</td></tr>';
+					$caption = $field['caption'][$lang] != '' ? $field['caption'][$lang] : $field['caption']['default'];
+					$additionalFields .= '<tr><td width= 100px;><b>' . htmlspecialchars($caption) . '</b></td>' . 
+							     '<td>' . htmlspecialchars($field['value']) . '</td></tr>';
 				} else {
 					//"new" version
-					$caption = $field['conf']['caption.'][$this->data['language']] != '' ? $field['conf']['caption.'][$this->data['language']] : $field['conf']['caption.']['default'];
-					$additional_fields .= '<tr><td width= 100px;><b>'. htmlspecialchars($caption).'</b></td><td>'.htmlspecialchars($field['value']).'</td></tr>';
+					$caption = $field['conf']['caption.'][$lang] != '' ? $field['conf']['caption.'][$lang] : $field['conf']['caption.']['default'];
+					$additionalFields .= '<tr><td width= 100px;><b>' . htmlspecialchars($caption).'</b></td>' .
+							     '<td>' . htmlspecialchars($field['value']) . '</td></tr>';
 				}				
 			}		
-			$additional_fields = '<table width=100% border = 1 style="border:1px solid black;border-collapse:collapse;">'.$additional_fields.'</table>';
+			$additionalFields = '<table width=100% border = 1 style="border:1px solid black;border-collapse:collapse;">' . $additionalFields . '</table>';
 		}
-		return $additional_fields;
+		return $additionalFields;
 	}
 }
 

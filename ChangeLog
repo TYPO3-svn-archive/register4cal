@@ -1,3 +1,12 @@
+2009-10-08 Thomas Ernst <typo3@thernst.de>
+	* Fixed Bug 4941 (Thanks to Jakob Koller)
+	* Improved compliance to Typo3 Coding Guidelines
+
+2009-09-24 Thomas Ernst <typo3@thernst.de>
+	* Small changes in documentation
+	* Added documentation as pdf
+	* Published version 0.4.1
+
 2009-09-21 Thomas Ernst <typo3@thernst.de>
 	* [Feature 4097] Registration from cal listview
 	* Additional code cleanup and testing

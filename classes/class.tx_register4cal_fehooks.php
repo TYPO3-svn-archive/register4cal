@@ -22,28 +22,28 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
+ * class.tx_register4cal_fehooks.php
+ *
+ * Process hooks from cal extension in event single view and event list view
+ *
+ * $Id$
+ *
+ * @author	Thomas Ernst <typo3@thernst.de>
+ *
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  * Hint: use extdeveval to insert/update function index above.
  */
- 
+
+require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_user1.php'); 
+
 /**
  * Display the registration form in single event view by processing the hook 'preFinishViewRendering'
  *
- * @author Thomas Ernst <typo3@thernst.de>
- * @package TYPO3
- * @subpackage tx_register4cal
- *
- * Modifications
- * ThEr230209 0.1.0 Initial development of class
- * ThEr010309 0.2.0 Registration form now called via hook
- * ThEr130409 0.2.5 got warning "Call-time pass-by-reference has been deprecated"
- * ThEr020509 0.3.0 Complete revision of extension. Substantial changes in templates, TypoScript, etc.
- * ThEr160909 0.4.0 Most coding went to class tx_register4cal_main.php as it is needed for the list view registration as well
+ * @author 	Thomas Ernst <typo3@thernst.de>
+ * @package 	TYPO3
+ * @subpackage 	tx_register4cal
  */
- 
-require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_user1.php'); 
-
 class tx_register4cal_fehooks { 
 	/***********************************************************************************************************************************************************************
 	*
@@ -89,6 +89,11 @@ class tx_register4cal_fehooks {
 		}
 	}	
 	
+	/***********************************************************************************************************************************************************************
+	*
+	* Use hook of cal extension to add form to event list view if required
+	*
+	**********************************************************************************************************************************************************************/
 	function postListRendering(&$content, $events, &$class) {
 		//if there are some tx_register4cal_main parts in the content, surround the whole content with a form for the registration
 		if (strpos($content, 'tx_register4cal_main') != 0) {

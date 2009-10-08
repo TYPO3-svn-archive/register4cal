@@ -22,10 +22,21 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
+ * class.tx_register4cal_fehooks.php
+ *
+ * Provide main functions for extension register4cal
+ *
+ * $Id$
+ *
+ * @author	Thomas Ernst <typo3@thernst.de>
+ *
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  * Hint: use extdeveval to insert/update function index above.
- */ 
+ */
+
+require_once(PATH_tslib.'class.tslib_pibase.php');
+require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_user1.php'); 
 
 /**
  * Main functions for extension 'register4cal' 
@@ -33,14 +44,7 @@
  * @author	Thomas Ernst <typo3@thernst.de>
  * @package	TYPO3
  * @subpackage	tx_register4cal
- *
- * Modifications
- * ThEr160909	0.4.0	Initial development of class, coding comes from several other classes
  */
-
-require_once(PATH_tslib.'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_user1.php'); 
-
 class tx_register4cal_main extends tslib_pibase {	
 	var $prefixId = 'tx_register4cal_main';					// Same as class name
 	var $scriptRelPath = 'classes/class.tx_register4cal_main.php'; 		// Path to this script relative to the extension dir.
@@ -49,7 +53,6 @@ class tx_register4cal_main extends tslib_pibase {
 	
 	private $settings = Array();						//Array containing typoscript settings
 	public $rendering;							//Instance of rendering class
-	var $debug = FALSE;							//Flag: Debugging?
 	
 	/*
          * Constructor for class tx_register4cal_main
@@ -57,13 +60,13 @@ class tx_register4cal_main extends tslib_pibase {
          * @return	nothing
          */	
 	public function tx_register4cal_main() {
-		//Init class
+			// Init class
 		parent::tslib_pibase();
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->cObj = new tslib_cObj();
 		
-		//init settings
+			// Init settings
 		$tsconf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.'];
 		$this->settings['template_file'] = $tsconf['template'];
 		$this->settings['date_format'] = $tsconf['dateformat'];
@@ -79,14 +82,14 @@ class tx_register4cal_main extends tslib_pibase {
 		$this->settings['default'] = $tsconf['forms.']['default.'];
 		$this->settings['forms'] = $tsconf['forms.'];
 
-		//init userfields
+			// Init userfields
 		$this->settings['userfields'] = $tsconf['userfields.'];	
 		
-		//read the template file
+			// Read the template file
 		$this->settings['template'] = $this->cObj->fileResource($this->settings['template_file']);
 
-		//Instanciate rendering class
-		require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_render.php');
+			// Instanciate rendering class
+		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_render.php');
 		$tx_register4cal_render = &t3lib_div::makeInstanceClassName('tx_register4cal_render');
 		$this->rendering = new $tx_register4cal_render($this, $this->settings);
 	}
@@ -97,7 +100,6 @@ class tx_register4cal_main extends tslib_pibase {
 	* Registration form for event list view
 	*
 	**********************************************************************************************************************************************************************/
-	
 	/*
 	 * Handle registration form for event list view (registration form, registration confirmation or
 	 * registration notice, depending on status)
@@ -106,24 +108,25 @@ class tx_register4cal_main extends tslib_pibase {
 	 *
 	 * @return  array  HTML to display
 	 */
-	public function ListViewRegistrationEvent($event) {
+	public function listViewRegistrationEvent($event) {
 		if ($this->isRegistrationEnabled($event, $event['start_date'])) {
+				// Set propper data to rendering class
 			$this->rendering->setView('list');
 			$this->rendering->setEvent($event);
 			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
 			
-			//check if user has already registered
+				// Check if user has already registered
 			if (!$this->isUserAlreadyRegistered($event['uid'],$event['start_date'],$GLOBALS['TSFE']->fe_user->user['uid'],$event['pid'])) {
-				//User has not yet registered for this event. Show the registration form
-				$content = $this->renderListRegistrationEVENT();
-				//Count registration form in session
+					// User has not yet registered for this event. Show the registration form
+				$content = $this->renderListRegistrationEvent();
+					// Count registration form in user's session data
 				$GLOBALS['TSFE']->fe_user->fetchSessionData();
 				$count = $GLOBALS['TSFE']->fe_user->getKey('ses','tx_register4cal_listeventcount');
 				$count = $count + 1;
 				$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount', $count);
 				$GLOBALS['TSFE']->fe_user->storeSessionData();
 			} else {
-				//User has already registered for this event. Show this information.
+					// User has already registered for this event. Show this information.
 				$content = $this->renderListRegistrationDetails();
 			}				
 		}
@@ -137,8 +140,8 @@ class tx_register4cal_main extends tslib_pibase {
 	 *
 	 * @return	String	$content surrounded by simple form
 	 */
-	public function ListViewRegistrationForm($content) {
-		return '<form action="" method="post">'.$content.'</form>';
+	public function listViewRegistrationForm($content) {
+		return '<form action="" method="post">' . $content . '</form>';
 	}
 
 	/*
@@ -147,15 +150,16 @@ class tx_register4cal_main extends tslib_pibase {
 	 * @return	String	Html for submit buton
 	 *
 	 */
-	public function ListViewRegistrationSubmit() {
-		//read listeventcount from sesseion
+	public function listViewRegistrationSubmit() {
+			// Read listeventcount from user'S session data
 		$GLOBALS["TSFE"]->fe_user->fetchSessionData();
 		$count = $GLOBALS['TSFE']->fe_user->getKey('ses','tx_register4cal_listeventcount');
 		$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount', 0);
 		$GLOBALS['TSFE']->fe_user->storeSessionData();
 		
-		//show submit button if at least one event with registration form is being displayed
-		if ($count > 0) return $this->renderListRegistrationSubmit();
+			// Show submit button if at least one event with registration form is being displayed
+		$content =  $count > 0 ? $this->renderListRegistrationSubmit() : '';
+		return $content;
 	}
 
 	/*
@@ -164,7 +168,7 @@ class tx_register4cal_main extends tslib_pibase {
 	 * @param	Array	$data: piVars from list view (tx_register4cal_main)
 	 *
 	 */
-	public function ListViewRegistrationStore($data) {
+	public function listViewRegistrationStore($data) {
 		foreach($data as $uid => $events) {
 			if (is_array($events))	foreach($events as $getdate => $registration) {
 				if ($registration['register'] == 1) {
@@ -175,10 +179,8 @@ class tx_register4cal_main extends tslib_pibase {
 					$registration['getdate'] = $getdate;
 					$this->piVars = $registration;
 					if ($this->storeData($registration,$event['title'] ,$event['pid'] )) {
-						//... storing sucessful -->Send emails and show registration confirmation
-						if ($this->debug) t3lib_div::debug('sendNotificationMail','Action');
+							// ... storing sucessful -->Send emails and show registration confirmation
 						$notificationSent = $this->sendNotificationMail();
-						if ($this->debug) t3lib_div::debug('sendConfirmationMail','Action');
 						$confirmationSent = $this->sendConfirmationMail();
 					}
 					unset($this->registration->piVars);
@@ -205,37 +207,30 @@ class tx_register4cal_main extends tslib_pibase {
 	public function SingleEventRegistration($data) {
 		$event = $this->readEventRecord($data['uid']);
 		if ($this->isRegistrationEnabled($event, $data['getdate'])) {
-
-			if ($this->debug) t3lib_div::debug($data, 'Cal Data');
-			if ($this->debug) t3lib_div::debug($this->piVars,'Reg4Cal Data');
+				// Set propper data in rendering class
 			$this->rendering->setView('single');
 			$this->rendering->setEvent($event);
 			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
+			
+				// Render depending on registration status
 			if (!$this->isUserAlreadyRegistered($data['uid'],$data['getdate'],$GLOBALS['TSFE']->fe_user->user['uid'],$event['pid'])) {
 				if ($this->piVars['cmd'] == 'register') {
-					//User provided registration information. Try to store the stuff ...
-					if ($this->debug) t3lib_div::debug('StoreData','Action');
+						// User provided registration information. Try to store the stuff ...
 					if ($this->storeData($data,$event['title'] ,$event['pid'] )) {
-						//... storing sucessful -->Send emails and show registration confirmation
-						if ($this->debug) t3lib_div::debug('sendNotificationMail','Action');
+							// ... storing sucessful -->Send emails and show registration confirmation
 						$notificationSent = $this->sendNotificationMail();
-						if ($this->debug) t3lib_div::debug('sendConfirmationMail','Action');
 						$confirmationSent = $this->sendConfirmationMail();
-						if ($this->debug) t3lib_div::debug('renderRegistrationConfirmation','Action');
 						$content = $this->renderRegistrationConfirmation();
 					} else {
-						//... storing failed -->Show registration form again
-						if ($this->debug) t3lib_div::debug('renderRegistrationForm','Action');
+							// ... storing failed -->Show registration form again
 						$content = $this->renderRegistrationForm();
 					}
 				} else {
-					//User has not yet registered for this event. Show the registration form
-					if ($this->debug) t3lib_div::debug('renderRegistrationForm','Action');
+						// User has not yet registered for this event. Show the registration form
 					$content = $this->renderRegistrationForm();
 				}
 			} else {
-				//User has already registered for this event. Show this information.
-				if ($this->debug) t3lib_div::debug('renderRegistrationDetails','Action');
+					// User has already registered for this event. Show this information.
 				$content = $this->renderRegistrationDetails();
 			}
 		}
@@ -247,7 +242,7 @@ class tx_register4cal_main extends tslib_pibase {
 	*
 	* @return  array  HTML to display
 	*/
-	public function SingleEventLogin() {
+	public function singleEventLogin() {
 		return $this->renderNeedLoginForm();
 	}
 
@@ -264,104 +259,112 @@ class tx_register4cal_main extends tslib_pibase {
          * @return 	string		HTML for participants list
          */
 	function ParticipantList($pidlist) {
-		$processed_events = Array();
+		$processedEvents = Array();
 		$feUserId = intval($GLOBALS['TSFE']->fe_user->user['uid']);
 		if ($feUserId != 0) {
 			$isAdminUser = in_Array($feUserId, $this->settings['adminusers']);
-			$noitems.=$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','NOITEMS');
+			$noItems .= $this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','NOITEMS');
+			
 			//get all registrations
 			$select = 'tx_register4cal_registrations.*';
 			$table = 'tx_register4cal_registrations';
-			$where = 'tx_register4cal_registrations.cal_event_getdate>='.date('Ymd').' and'.
-				 ' tx_register4cal_registrations.pid IN ('.$pidlist.')'.
+			$where = 'tx_register4cal_registrations.cal_event_getdate>=' . date('Ymd') . ' and' .
+				 ' tx_register4cal_registrations.pid IN (' . $pidlist . ')' .
 				 $this->cObj->enableFields('tx_register4cal_registrations');
 			$orderBy = 'tx_register4cal_registrations.cal_event_getdate ASC, tx_register4cal_registrations.cal_event_uid ASC';
-			$res_registration = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where,'' ,$orderBy);
-			if ($GLOBALS['TYPO3_DB']->sql_num_rows($res_registration) != 0) {
-				while ($row_registration = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res_registration)) {
-					if ($cur_event_uid != $row_registration['cal_event_uid'] || $cur_event_getdate != $row_registration['cal_event_getdate']) {
+			$registrationRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where,'' ,$orderBy);
+			if ($GLOBALS['TYPO3_DB']->sql_num_rows($registrationRes) != 0) {
+				while ($registration = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($registrationRes)) {
+					if ($curEventUid != $registration['cal_event_uid'] || $curEventGetdate != $registration['cal_event_getdate']) {
 						//Huston, we have a new event ...
 						//Render the old event and add it to the event array
-						if ($cur_event_uid != 0) $eventlist[$cur_event_getdate.$cur_event_uid] = $this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','EVENTENTRY'). ($items=='' ? $noitems : $items);
+						if ($curEventUid != 0) 
+							$eventList[$curEventGetdate . $curEventUid] = 
+								$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','EVENTENTRY') .
+								($items=='' ? $noItems : $items);
 						
 						//reset the event
-						unset($cur_event_uid);
-						unset($cur_event_getdate);
+						unset($curEventUid);
+						unset($curEventGetdate);
 						unset($items);
 						
 						//get the new event and check it
 						$select = 'tx_cal_event.*, tx_cal_organizer.tx_register4cal_feUserId';
 						$table = 'tx_cal_event, tx_cal_organizer';
-						$where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND'.			/* Join event and organizer */
-							 ' tx_cal_event.uid='.$row_registration['cal_event_uid'].' AND'.		/* Select event */ 
-							 ' (tx_cal_event.start_date='.$row_registration['cal_event_getdate'].' OR'.	/* Either registration for the event directly */
-							 '  tx_cal_event.freq <> \'none\') AND'.					/* or recurring event */
-							 ' tx_cal_event.tx_register4cal_activate = 1'.					/* Registration activated */
+						$where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND' .			/* Join event and organizer */
+							 ' tx_cal_event.uid=' . $registration['cal_event_uid'] . ' AND' .		/* Select event */ 
+							 ' (tx_cal_event.start_date=' . $registration['cal_event_getdate'] . ' OR' .	/* Either registration for the event directly */
+							 '  tx_cal_event.freq <> \'none\') AND' .					/* or recurring event */
+							 ' tx_cal_event.tx_register4cal_activate = 1' .					/* Registration activated */
 							 $this->cObj->enableFields('tx_cal_event');					/* Take sysfields into account */
-						$res_event = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
-						if ($GLOBALS['TYPO3_DB']->sql_num_rows($res_event) == 0) continue;
-						if (!($row_event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res_event))) continue;
-						if (!$isAdminUser && !in_Array($feUserId,explode(',',$row_event['tx_register4cal_feUserId']))) continue;
-						$this->rendering->setEvent($row_event);
+						$eventRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
+						if ($GLOBALS['TYPO3_DB']->sql_num_rows($eventRes) == 0) continue;
+						if (!($event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($eventRes))) continue;
+						if (!$isAdminUser && !in_Array($feUserId,explode(',',$event['tx_register4cal_feUserId']))) continue;
+						$this->rendering->setEvent($event);
 						
 						//store information on this event
-						$cur_event_uid = $row_registration['cal_event_uid'];
-						$cur_event_getdate = $row_registration['cal_event_getdate'];
-						if (!in_array($cur_event_uid, $processed_events)) $processed_events[] = $cur_event_uid;
+						$curEventUid = $registration['cal_event_uid'];
+						$curEventGetdate = $registration['cal_event_getdate'];
+						if (!in_array($curEventUid, $processedEvents)) $processedEvents[] = $curEventUid;
 					}
-					$this->rendering->setRegistration($row_registration);
+					$this->rendering->setRegistration($registration);
 					
 					//get the user
 					$select = 'fe_users.*';
 					$table = 'fe_users';
-					$where = 'fe_users.uid='.$row_registration['feuser_uid'].$this->cObj->enableFields('fe_users');
+					$where = 'fe_users.uid=' . $registration['feuser_uid'] . $this->cObj->enableFields('fe_users');
 					$orderBy = '';
-					$res_user = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy);
-					if ($GLOBALS['TYPO3_DB']->sql_num_rows($res_user) == 0) continue;
-					if (!($row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res_user))) continue;
-					$this->rendering->setUser($row_user);
+					$userRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy);
+					if ($GLOBALS['TYPO3_DB']->sql_num_rows($userRes) == 0) continue;
+					if (!($user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($userRes))) continue;
+					$this->rendering->setUser($user);
 					
 					//Render the registration entry
-					$items.=$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','ITEMS');
+					$items .= $this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','ITEMS');
 				}
 				
 				//Render the last event and add it to the event array
-				if ($cur_event_uid != 0) $eventlist[$cur_event_getdate.$cur_event_uid] = $this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','EVENTENTRY'). ($items=='' ? $noitems : $items);
-
+				if ($curEventUid != 0)
+					$eventList[$curEventGetdate . $curEventUid] = 
+						$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','EVENTENTRY') . 
+						($items=='' ? $noItems : $items);
 			}
 			
 			//now get the events without registration
-			$processed_events_list = (count($processed_events)==0) ? '0' : implode(', ',$processed_events);
+			$processedEventsList = (count($processedEvents)==0) ? '0' : implode(', ',$processedEvents);
 			$select = 'tx_cal_event.*, tx_cal_organizer.tx_register4cal_feUserId';
 			$table = 'tx_cal_event, tx_cal_organizer';
-			$where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND'.			/* Join event and organizer */
-				 ' tx_cal_event.uid NOT IN ('.$processed_events_list.') AND'.			/* Select events */ 
-				 ' tx_cal_event.start_date>='.date('Ymd').' AND'.				/* Event in the future */
-				 ' tx_cal_event.tx_register4cal_activate = 1'.					/* Registration activated */
+			$where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND' .			/* Join event and organizer */
+				 ' tx_cal_event.uid NOT IN (' . $processedEventsList . ') AND' .		/* Select events */ 
+				 ' tx_cal_event.start_date>=' . date('Ymd') . ' AND' .				/* Event in the future */
+				 ' tx_cal_event.tx_register4cal_activate = 1' .					/* Registration activated */
 				 $this->cObj->enableFields('tx_cal_event');					/* Take sysfields into account */
 			$orderBy = 'start_date ASC';
-			$res_event = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where, '', $orderBy);
-			if ($GLOBALS['TYPO3_DB']->sql_num_rows($res_event) != 0) {
+			$eventRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where, '', $orderBy);
+			if ($GLOBALS['TYPO3_DB']->sql_num_rows($eventRes) != 0) {
 				$this->rendering->unsetUser();
 				$this->rendering->unsetRegistration();
-				while ($row_event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res_event)) {
-					if (!$isAdminUser && !in_Array($feUserId,explode(',',$row_event['tx_register4cal_feUserId']))) continue;
-					$this->rendering->setEvent($row_event);
-					$eventlist[$row_event['start_date'].$row_event['uid']]= $this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','EVENTENTRY').$noitems;
+				while ($event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($eventRes)) {
+					if (!$isAdminUser && !in_Array($feUserId,explode(',',$event['tx_register4cal_feUserId']))) continue;
+					$this->rendering->setEvent($event);
+					$eventList[$event['start_date'] . $event['uid']] = 
+						$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','EVENTENTRY') .
+						$noitems;
 				}
 			}
-			if (!isset($eventlist)) $eventlist=$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','NOEVENTS');
+			if (!isset($eventList)) $eventList=$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','NOEVENTS');
 		} else {
-			$eventlist=$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','NOLOGIN');
+			$eventList=$this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','NOLOGIN');
 		}
 		//Final rendering (sort the items before)
-		if (is_array($eventlist)) ksort($eventlist);
+		if (is_array($eventList)) ksort($eventList);
 		$PresetSubparts = Array();
 		$PresetSubparts['###NOLOGIN###'] = '';
 		$PresetSubparts['###NOEVENTS###'] = '';
 		$PresetSubparts['###ITEMS###'] = '';
 		$PresetSubparts['###NOITEMS###'] = '';
-		$PresetSubparts['###EVENTENTRY###'] = is_array($eventlist) ? implode($eventlist) : $eventlist;
+		$PresetSubparts['###EVENTENTRY###'] = is_array($eventList) ? implode($eventList) : $eventList;
 		$content .= $this->rendering->renderForm('PARTICIPANT_LIST', 'participantList', 'show','',$PresetSubparts);
 		
 		return $content;

@@ -22,10 +22,20 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
+ * class.tx_register4cal_pi1.php
+ *
+ * Provides plugin to display registrations for user and organizer
+ *
+ * $Id$
+ *
+ * @author	Thomas Ernst <typo3@thernst.de>
+ *
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  * Hint: use extdeveval to insert/update function index above.
  */
+
+require_once(PATH_tslib.'class.tslib_pibase.php');
 
 /**
  * Plugin 'Registration for Cal-Events' for the 'register4cal' extension.
@@ -33,18 +43,7 @@
  * @author	Thomas Ernst <typo3@thernst.de>
  * @package	TYPO3
  * @subpackage	tx_register4cal
- *
- * Modifications
- * ThEr230209	0.1.0	Initial development of class
- * ThEr010309   0.2.0	Moved general functions to class tx_register4cal_user1
- * 			Registration form moved to class tx_register4cal_hook1, called now via hook from cal extension
- * ThEr080409	0.2.3	List of participants was always empty unless displayed in admin mode
- * ThEr020509	0.3.0	Complete revision of extension. Substantial changes in templates, TypoScript, etc.
- * ThEr160909	0.4.0	Most coding went to class tx_register4cal_main
  */
-
-require_once(PATH_tslib.'class.tslib_pibase.php');
-
 class tx_register4cal_pi1 extends tslib_pibase {
 	var $prefixId      = 'tx_register4cal_pi1';			// Same as class name
 	var $scriptRelPath = 'pi1/class.tx_register4cal_pi1.php';	// Path to this script relative to the extension dir.
@@ -63,14 +62,21 @@ class tx_register4cal_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_initPIflexForm();
 	
-		$pidlist = $this->pi_getPidList($this->pi_getFFvalue($this->cObj->data['pi_flexform'],'pages'),$this->pi_getFFvalue($this->cObj->data['pi_flexform'],'recursive'));  	
+			// Read flexform variables
+		$pidlist = $this->pi_getPidList($this->pi_getFFvalue($this->cObj->data['pi_flexform'],'pages'),
+			$this->pi_getFFvalue($this->cObj->data['pi_flexform'],'recursive'));  	
 		$displayMode = $this->pi_getFFvalue($this->cObj->data['pi_flexform'],'displayMode');
 		
 		if (!$pidlist) {
-			$content = tx_register4cal_user1::errormessage('No storage folder set','There is no storage folder set for the plugin. Please notify the site administrator!');
+				// No storage folder is set --> Return error message
+			$content = tx_register4cal_user1::errormessage('No storage folder set',
+				'There is no storage folder set for the plugin. Please notify the site administrator!');
 		} elseif (!$displayMode) {
-			$content = tx_register4cal_user1::errormessage('No display mode set','There is no display mode set for the plugin. Please notify the site administrator!');
+				// No display mode is set --> Return error message
+			$content = tx_register4cal_user1::errormessage('No display mode set',
+				'There is no display mode set for the plugin. Please notify the site administrator!');
 		} else {
+				// Call function providing the selected view or return error message for unknown viewmode
 			$main = tx_register4cal_user1::getReg4CalMainClass();
 			switch ($displayMode) {
 				case 2:
@@ -80,7 +86,8 @@ class tx_register4cal_pi1 extends tslib_pibase {
 					$content = $main->ParticipantList($pidlist);
 					break;
 				default:
-					$content = tx_register4cal_user1::errormessage('Display mode invalid','An invalid display mode is set for the plugin. Please notify the site administrator!');
+					$content = tx_register4cal_user1::errormessage('Display mode invalid',
+						'An invalid display mode is set for the plugin. Please notify the site administrator!');
 					break;
 			}
 		}

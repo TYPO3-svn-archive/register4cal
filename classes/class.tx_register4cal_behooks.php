@@ -22,6 +22,14 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 /**
+ * class.tx_register4cal_behooks.php
+ *
+ * Provide the deletion of registrations when the relating event is being deleted.
+ *
+ * $Id$
+ *
+ * @author	Thomas Ernst <typo3@thernst.de>
+ *
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  * Hint: use extdeveval to insert/update function index above.
@@ -30,12 +38,9 @@
 /**
  * Delete registrations when the relating event is being deleted by processing the hook 'processDatamap_afterAllOperations'
  *
- * @author Thomas Ernst <typo3@thernst.de>
- * @package TYPO3
- * @subpackage tx_register4cal
- *
- * Modifications
- * ThEr080409 0.2.3 Initial development of class
+ * @author 	Thomas Ernst <typo3@thernst.de>
+ * @package 	TYPO3
+ * @subpackage 	tx_register4cal
  */
  
 class tx_register4cal_behooks {

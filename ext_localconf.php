@@ -16,7 +16,8 @@ if (TYPO3_MODE == 'FE') {
 	require_once(t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_fehooks.php');
 	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/controller/class.tx_cal_controller.php']['finishViewRendering'][]='EXT:register4cal/classes/class.tx_register4cal_fehooks.php:tx_register4cal_fehooks';
 	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/controller/class.tx_cal_controller.php']['drawlistClass'][]='EXT:register4cal/classes/class.tx_register4cal_fehooks.php:tx_register4cal_fehooks';
-	
+	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/model/class.tx_cal_base_model.php']['searchForObjectMarker'][]='EXT:register4cal/classes/class.tx_register4cal_fehooks.php:tx_register4cal_fehooks';
+
 	//Define services, used by the cal extension when displaying the additional fields in frontend editing
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_activate',
 		array(
