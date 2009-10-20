@@ -1,9 +1,11 @@
+2009-10-20 Thomas Ernst <typo3@thernst.de>
+	* Published version 0.4.2
+
 2009-10-13 Thomas Ernst <typo3@thernst.de>
-	* Fixed Feature xxx: Compliance to Typo3 Coding Guidelines
+	* Fixed Bug 4797: Compliance to Typo3 Coding Guidelines optimized
 
 2009-10-08 Thomas Ernst <typo3@thernst.de>
 	* Fixed Bug 4941: Compatibility to cal 1.2.0 (Thanks to Jakob Koller)
-	* Improved compliance to Typo3 Coding Guidelines
 
 2009-09-24 Thomas Ernst <typo3@thernst.de>
 	* Small changes in documentation
