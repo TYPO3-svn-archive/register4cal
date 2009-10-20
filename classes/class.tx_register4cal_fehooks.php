@@ -35,7 +35,7 @@
  * Hint: use extdeveval to insert/update function index above.
  */
 
-require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_user1.php'); 
+require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_user1.php'); 
 
 /**
  * Display the registration form in single event view by processing the hook 'preFinishViewRendering'
@@ -102,7 +102,7 @@ class tx_register4cal_fehooks {
 		}
 	}
 }
- 
+
  
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_fehooks.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/classes/class.tx_register4cal_fehooks.php']);

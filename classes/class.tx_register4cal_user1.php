@@ -35,7 +35,7 @@
  * Hint: use extdeveval to insert/update function index above.
  */
 
-require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
+require_once(t3lib_extMgm::extPath('cal') . 'res/pearLoader.php'); 
 
 /**
  * Functions for backend display and frontend editing
@@ -52,7 +52,7 @@ class tx_register4cal_user1 {
 	 * @return	instance	register4cal main class instance
 	 */
 	public static function getReg4CalMainClass() {
-		require_once(t3lib_extMgm::extPath('register4cal').'classes/class.tx_register4cal_main.php');
+		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_main.php');
 		$tx_register4cal_main = &t3lib_div::makeInstanceClassName('tx_register4cal_main');
 		return new $tx_register4cal_main();
 	}	
@@ -110,19 +110,19 @@ class tx_register4cal_user1 {
        
 		if (count($dateParts) === 3) { // only if there are three parts like "23.12.2009"
 			if (strlen($dateParts[0]) <= 2 && strlen($dateParts[1]) <= 2 && strlen($dateParts[2]) <= 2) { // xx.xx.xx
-				$string = strtotime($dateParts[2].'-'.$dateParts[1].'-'.$dateParts[0]); // change to timestamp
+				$string = strtotime($dateParts[2] . '-' . $dateParts[1] . '-' . $dateParts[0]); // change to timestamp
 			}
 			elseif (strlen($dateParts[0]) == 4 && strlen($dateParts[1]) <= 2 && strlen($dateParts[2]) <= 2) { // xxxx.xx.xx
-				$string = strtotime($dateParts[0].'-'.$dateParts[1].'-'.$dateParts[2]); // change to timestamp
+				$string = strtotime($dateParts[0] . '-' . $dateParts[1] . '-' . $dateParts[2]); // change to timestamp
 			}
 			elseif (strlen($dateParts[0]) <= 2 && strlen($dateParts[1]) <= 2 && strlen($dateParts[2]) == 4) { // xx.xx.xxxx
-				$string = strtotime($dateParts[2].'-'.$dateParts[1].'-'.$dateParts[0]); // change to timestamp
+				$string = strtotime($dateParts[2] . '-' . $dateParts[1] . '-' . $dateParts[0]); // change to timestamp
 			}
 			else { // error
 				$error = 1; // error
 			}
 		} elseif (count($dateParts) === 5) { // only if there are five parts like "05.00.23.01.2009"
-			$string = strtotime($dateParts[4].'-'.$dateParts[3].'-'.$dateParts[2].' '.$dateParts[0].':'.$dateParts[1].':00'); // change to timestamp
+			$string = strtotime($dateParts[4] . '-' . $dateParts[3] . '-' . $dateParts[2] . ' ' . $dateParts[0] . ':' . $dateParts[1] . ':00'); // change to timestamp
 		} else { // more than 3 parts - so error
 			$error = 1; // error
 		}
@@ -145,9 +145,9 @@ class tx_register4cal_user1 {
          */
 	static function formatDate($date, $time, $format, $timezone='') {
 		$dateObj = new tx_cal_date(intval($date), 'Ymd');
-		$dateObj->setHour(intval(date('H',$time)));
-		$dateObj->setMinute(intval(date('i',$time)));
-		$dateObj->setSecond(intval(date('s',$time)));
+		$dateObj->setHour(intval(date('H', $time)));
+		$dateObj->setMinute(intval(date('i', $time)));
+		$dateObj->setSecond(intval(date('s', $time)));
 		if ($timezone!='') {
 			//A timezone conversion somehow changes the default time zone.
 			//We thus need to determine it before and reset it afterwards ...

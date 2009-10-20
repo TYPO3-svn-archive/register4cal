@@ -21,48 +21,48 @@ if (TYPO3_MODE == 'FE') {
 	//Define services, used by the cal extension when displaying the additional fields in frontend editing
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_activate',
 		array(
-			'title' => 'Extension Model for tx_register4cal fields"', 'description' => '', 'subtype' => 'module',
+			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
 			'os' => '', 'exec' => '',
-			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_services.php',
+			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_activate.php',
 			'className' => 'tx_register4cal_activate',
 		)
 	);
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_regstart',
 		array(
-			'title' => 'Extension Model for tx_register4cal fields"', 'description' => '', 'subtype' => 'module',
+			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
 			'os' => '', 'exec' => '',
-			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_services.php',
+			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_regstart.php',
 			'className' => 'tx_register4cal_regstart',
 		)
 	);
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_regend',
 		array(
-			'title' => 'Extension Model for tx_register4cal fields"', 'description' => '', 'subtype' => 'module',
+			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
 			'os' => '', 'exec' => '',
-			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_services.php',
+			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_regend.php',
 			'className' => 'tx_register4cal_regend',
 		)
 	);
 	
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_listreg',
 		array(
-			'title' => 'Extension Model for tx_register4cal fields"', 'description' => '', 'subtype' => 'module',
+			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
 			'os' => '', 'exec' => '',
-			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_services.php',
+			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_listreg.php',
 			'className' => 'tx_register4cal_listreg',
 		)
 	);	
 
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_submit',
 		array(
-			'title' => 'Extension Model for tx_register4cal fields"', 'description' => '', 'subtype' => 'module',
+			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
 			'os' => '', 'exec' => '',
-			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_services.php',
+			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_submit.php',
 			'className' => 'tx_register4cal_submit',
 		)
 	);

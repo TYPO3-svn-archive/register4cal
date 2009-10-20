@@ -88,7 +88,6 @@ class tx_register4cal_pi1 extends tslib_pibase {
 				default:
 					$content = tx_register4cal_user1::errormessage('Display mode invalid',
 						'An invalid display mode is set for the plugin. Please notify the site administrator!');
-					break;
 			}
 		}
 		

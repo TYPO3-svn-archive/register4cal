@@ -60,13 +60,13 @@ $tempColumns = Array (
 	'tx_register4cal_feUserId' => array (		
 		'exclude' => 1,		
 		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_organizer.tx_register4cal_feUserId',		
-		"config" => Array (
-			"type" => "group",	
-			"internal_type" => "db",	
-			"allowed" => "fe_users",	
-			"size" => 5,	
-			"minitems" => 0,
-			"maxitems" => 5,
+		'config' => Array (
+			'type' => 'group',	
+			'internal_type' => 'db',	
+			'allowed' => 'fe_users',	
+			'size' => 5,	
+			'minitems' => 0,
+			'maxitems' => 5,
 		)
 	),
 );

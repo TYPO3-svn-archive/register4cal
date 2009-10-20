@@ -1,5 +1,8 @@
+2009-10-13 Thomas Ernst <typo3@thernst.de>
+	* Fixed Feature xxx: Compliance to Typo3 Coding Guidelines
+
 2009-10-08 Thomas Ernst <typo3@thernst.de>
-	* Fixed Bug 4941 (Thanks to Jakob Koller)
+	* Fixed Bug 4941: Compatibility to cal 1.2.0 (Thanks to Jakob Koller)
 	* Improved compliance to Typo3 Coding Guidelines
 
 2009-09-24 Thomas Ernst <typo3@thernst.de>

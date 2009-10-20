@@ -35,8 +35,8 @@
  * Hint: use extdeveval to insert/update function index above.
  */
 
-require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php'); 
-require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_phpicalendar_model.php');
+require_once(t3lib_extMgm::extPath('cal') . 'res/pearLoader.php'); 
+require_once (t3lib_extMgm::extPath('cal') . 'model/class.tx_cal_phpicalendar_model.php');
 
 /**
  * Main rendering functions for extension 'register4cal' 
@@ -95,7 +95,7 @@ class tx_register4cal_render {
 				$this->view = $view;
 				break;
 			default:
-				die('Unknown view "'.$view.'" in tx_register4cal_render->setView. Notify developer!');
+				die('Unknown view "' . $view . '" in tx_register4cal_render->setView. Notify developer!');
 		}
 	}
 	
@@ -191,9 +191,9 @@ class tx_register4cal_render {
 	 *
          * @return 	string		Rendered fields
          */	
-	public function renderForm($templateSubpart, $confName, $mode, $templateSubpartSubpart='',$presetSubpartMarker=Array(),$presetMarker=Array()) {
+	public function renderForm($templateSubpart, $confName, $mode, $templateSubpartSubpart = '', $presetSubpartMarker = Array(), $presetMarker = Array()) {
 			// get requested template subpart
-		$template = $this->cObj->getSubpart($this->settings['template'],$templateSubpart);
+		$template = $this->cObj->getSubpart($this->settings['template'], $templateSubpart);
 		if ($templateSubpartSubpart != '') $template = $this->cObj->getSubpart($template, $templateSubpartSubpart);
 		
 			// get requested configuration
@@ -201,7 +201,7 @@ class tx_register4cal_render {
 		
 			// replace preset subparts in the template
 		foreach ($presetSubpartMarker as $marker => $content) {
-			$template = $this->cObj->substituteSubpart($template,$marker,$content);
+			$template = $this->cObj->substituteSubpart($template, $marker, $content);
 		}
 			// replace remaining subparts
 		$count = preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
@@ -210,7 +210,7 @@ class tx_register4cal_render {
 			foreach ($allSubparts as $singleSubpart) {
 				$subpartContent = $this->cObj->getSubpart($template, '###' . $singleSubpart . '###');
 				$subpartContent = $this->applyWrap($subpartContent, $conf, strtolower($singleSubpart), $mode);
-				$template = $this->cObj->substituteSubpart($template,'###' . $singleSubpart . '###',$subpartContent,0);
+				$template = $this->cObj->substituteSubpart($template, '###' . $singleSubpart . '###', $subpartContent,0);
 			}
 			$count = preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		}
@@ -221,9 +221,9 @@ class tx_register4cal_render {
 		while ($count > 0) {
 			$allMarkers = array_unique($match[1]);
 			foreach ($allMarkers as $singleMarker) {
-				if (!isset($marker['###'.$singleMarker.'###']))	$marker['###'.$singleMarker.'###'] = $this->renderSingleMarker($singleMarker, $conf, $mode);
+				if (!isset($marker['###' . $singleMarker . '###'])) $marker['###' . $singleMarker . '###'] = $this->renderSingleMarker($singleMarker, $conf, $mode);
 			}
-			$template = $this->cObj->substituteMarkerArray($template,$marker);
+			$template = $this->cObj->substituteMarkerArray($template, $marker);
 			$count = preg_match_all('!\###([A-Z0-9-_-|]*)\###!is', $template, $match);
 		}
 		
@@ -239,7 +239,7 @@ class tx_register4cal_render {
          * @return 	string		Rendered fields
          */	
 	public function renderSubject($confName) {
-		return $this->applyWrap('', $this->settings[$confName],'subject','show');
+		return $this->applyWrap('', $this->settings[$confName], 'subject', 'show');
 	}
 
 
@@ -283,19 +283,21 @@ class tx_register4cal_render {
          * @return 	string		Rendered field
          */
 	private function renderUserField($conf, $mode,  $value='') {
-		$value = ($mode=='edit') ? htmlspecialchars(isset($this->pi_base->piVars[$fieldname]) ? $this->pi_base->piVars[$fieldname] : $conf['default']) : htmlspecialchars($value);
+		if ($mode == 'edit') $value = isset($this->pi_base->piVars[$fieldname]) ? $this->pi_base->piVars[$fieldname] : $conf['default'];
+		$value = htmlspecialchars($value);
+				
 		$caption = $conf['caption.'][$this->settings['language']] != '' ? $conf['caption.'][$this->settings['language']] : $conf['caption.']['default'];
-		$field  = $this->cObj->stdWrap($value, $conf['layout.'][$mode . '.']);
+		$field = $this->cObj->stdWrap($value, $conf['layout.'][$mode . '.']);
 		$options = '';
 		if (isset($conf['options.'])) {
-			foreach($conf['options.'] as $option_array) {
-				if (!is_array($option_array)) {
-					$option = $option_array;
+			foreach($conf['options.'] as $optionArray) {
+				if (!is_array($optionArray)) {
+					$option = $optionArray;
 				} else {
-					$option = $option_array[$this->settings['language']] != '' ? $option_array[$this->settings['language']] : $option_array['default'];
+					$option = $optionArray[$this->settings['language']] != '' ? $optionArray[$this->settings['language']] : $optionArray['default'];
 				}
 				$selected = $option == $value ? ' selected' : '';
-				$options.='<option'. $selected . '>' . htmlspecialchars($option) . '</option>';
+				$options .= '<option' . $selected . '>' . htmlspecialchars($option) . '</option>';
 			}
 		}
 		
@@ -309,7 +311,7 @@ class tx_register4cal_render {
 		$marker['###NAME###'] = $fieldname;
 		$marker['###CAPTION###'] = htmlspecialchars($caption);
 		$marker['###OPTIONS###'] = $options;
-		$field = $this->cObj->substituteMarkerArray($field,$marker);	
+		$field = $this->cObj->substituteMarkerArray($field, $marker);	
 		return $field;
 	}	
 
@@ -325,7 +327,7 @@ class tx_register4cal_render {
          */
 	private function renderOldUserField($field) {
 		$caption = $field['caption'][$this->settings['language']] != '' ? $field['caption'][$this->settings['language']] : $field['caption']['default'];
-		$template = $this->cObj->getSubpart($this->settings['template'],'###SHOW_' . strtoupper($field['type']) . '###');
+		$template = $this->cObj->getSubpart($this->settings['template'], '###SHOW_' . strtoupper($field['type']) . '###');
 		$marker = array();
 		$marker['###SIZE###'] = htmlspecialchars($field['size']);
 		$marker['###NAME###'] = htmlspecialchars($field['name']);
@@ -344,24 +346,24 @@ class tx_register4cal_render {
          */	
 	private function renderUserFields($conf, $mode) {
 		$fields = '';
-		if ($mode=='show' && isset($this->registration['additional_data'])) {
-			//Mode = Show: Render based on userfields in registration record
+		if ($mode == 'show' && isset($this->registration['additional_data'])) {
+				// Mode = Show: Render based on userfields in registration record
 			$fieldsarray = unserialize($this->registration['additional_data']);
 			if (is_array($fieldsarray)) {
 				foreach ($fieldsarray as $name => $field) {
 					if (isset($field['type'])) {
-						$fields.=$this->renderOldUserField($field);
+						$fields .= $this->renderOldUserField($field);
 					} else {
-						//"new" version
-						$fields.= $this->renderUserField($field['conf'],$mode,$field['value']);
+						// "new" version
+						$fields .= $this->renderUserField($field['conf'], $mode, $field['value']);
 					}				
 				}
 			}
-		} else if ($mode=='edit' && isset($this->settings['userfields'])){
-				//Mode = Edit: Render fields based on userfields in TypoScript
+		} elseif ($mode == 'edit' && isset($this->settings['userfields'])){
+				// Mode = Edit: Render fields based on userfields in TypoScript
 			if (is_array($this->settings['userfields'])) {
 				foreach ($this->settings['userfields'] as $field) {
-					$fields .= $this->renderUserField($field,$mode);
+					$fields .= $this->renderUserField($field, $mode);
 				}
 			}
 			
@@ -373,7 +375,7 @@ class tx_register4cal_render {
 				}
 				$hiddenFields .= '<input type="hidden" name="' . $this->pi_base->prefixId . '[cmd]" value="register" />';
 				$hiddenFields .= '<input type="hidden" name="no_cache" value="1" />';
-				$fields .= $this->applyWrap($hiddenFields, $conf, 'submitbutton',$mode);
+				$fields .= $this->applyWrap($hiddenFields, $conf, 'submitbutton', $mode);
 			}
 		}
 		return $fields;
@@ -393,11 +395,11 @@ class tx_register4cal_render {
 			case 'FIELDS' :
 					// Render the userfields
 				$fields = $this->renderUserFields($conf, $mode);
-				$marker = $this->applyWrap($fields, $conf, 'fields',$mode);
+				$marker = $this->applyWrap($fields, $conf, 'fields', $mode);
 				break;
 			case 'LINK' :
 					// Marker for the registration form
-				$marker = $this->applyWrap(htmlspecialchars($this->pi_base->pi_linkTP_keepPIvars_url()),$conf, 'link',$mode);
+				$marker = $this->applyWrap(htmlspecialchars($this->pi_base->pi_linkTP_keepPIvars_url()), $conf, 'link', $mode);
 				break;
 			case 'ONETIMEACCOUNTLINK' :
 					// Link to the onetime account display
@@ -409,7 +411,7 @@ class tx_register4cal_render {
 				$params = Array();
 				$params[$this->settings['onetimereturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
 				$value = $this->pi_base->pi_getPageLink($this->settings['onetimepid'], '', $params);
-				$marker = $this->applyWrap($value,$conf, 'onetimeaccountlink',$mode);
+				$marker = $this->applyWrap($value, $conf, 'onetimeaccountlink', $mode);
 				break;
 			case 'LOGINLINK' :
 					// Link to the onetime account display
@@ -421,13 +423,12 @@ class tx_register4cal_render {
 				$params = Array();
 				$params[$this->settings['loginreturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
 				$value = $this->pi_base->pi_getPageLink($this->settings['loginpid'], '', $params);
-				$marker = $this->applyWrap($value,$conf, 'loginlink',$mode);
+				$marker = $this->applyWrap($value, $conf, 'loginlink', $mode);
 				break;
-				
 			default :
 				if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert an event field. We have some special replacements here ...
-					$fieldname = substr($singleMarker,6);
+					$fieldname = substr($singleMarker, 6);
 					switch ($fieldname) {
 						case 'link' :
 							$value = $this->getEventLink();
@@ -468,25 +469,24 @@ class tx_register4cal_render {
 							$value = $this->pi_base->pi_RTEcssText($value);
 						default :
 							$value = isset($this->event['data'][$fieldname]) ? $value = $this->event['data'][$fieldname] : '';
-							break;
 					}
-				} else if (preg_match('/LOCATION_([A-Z0-9_-])*/', $singleMarker)) {
+				} elseif (preg_match('/LOCATION_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert a field from the location record
-					$fieldname = substr($singleMarker,9);
+					$fieldname = substr($singleMarker, 9);
 					if (!isset($this->event['location'])) $this->setLocationObj();
 					$value = isset($this->event['location'][$fieldname]) ? $value =$this->event['location'][$fieldname] : '';
-				} else if (preg_match('/ORGANIZER_([A-Z0-9_-])*/', $singleMarker)) {
+				} elseif (preg_match('/ORGANIZER_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert a field from the organizer record
-					$fieldname = substr($singleMarker,10);
+					$fieldname = substr($singleMarker, 10);
 					if (!isset($this->event['organizer'])) $this->setOrganizerObj();
 					$value = isset($this->event['organizer'][$fieldname]) ? $value =$this->event['organizer'][$fieldname] : '';
-				} else if (preg_match('/USER_([A-Z0-9_-])*/', $singleMarker)) {
+				} elseif (preg_match('/USER_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert an user field
-					$fieldname = substr($singleMarker,5);
+					$fieldname = substr($singleMarker, 5);
 					$value = isset($this->user[$fieldname]) ? $value =$this->user[$fieldname] : '';
-				} else if (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
+				} elseif (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert a label field
-					$fieldname = 'label.'.str_replace('-','.',substr($singleMarker,6));
+					$fieldname = 'label.' . str_replace('-', '.', substr($singleMarker, 6));
 					$value = $this->pi_base->pi_getLL($fieldname);
 				} else {
 					$value='';
@@ -511,17 +511,17 @@ class tx_register4cal_render {
          */	
 	function getEventLink() {
 		$vars = array();
-		$vars['tx_cal_controller[view]']='event';
-		$vars['tx_cal_controller[type]']='tx_cal_phpicalendar';
+		$vars['tx_cal_controller[view]'] = 'event';
+		$vars['tx_cal_controller[type]'] = 'tx_cal_phpicalendar';
 
 		if (empty($this->registration)) {
-			$vars['tx_cal_controller[getdate]']=intval($this->event['data']['start_date']);
-			$vars['tx_cal_controller[uid]']=intval($this->event['data']['uid']);
+			$vars['tx_cal_controller[getdate]'] = intval($this->event['data']['start_date']);
+			$vars['tx_cal_controller[uid]'] = intval($this->event['data']['uid']);
 		} else {
-			$vars['tx_cal_controller[getdate]']=intval($this->registration['cal_event_getdate']);
-			$vars['tx_cal_controller[uid]']=intval($this->registration['cal_event_uid']);
+			$vars['tx_cal_controller[getdate]'] = intval($this->registration['cal_event_getdate']);
+			$vars['tx_cal_controller[uid]'] = intval($this->registration['cal_event_uid']);
 		}
-		return $this->pi_base->pi_getPageLink($this->settings['eventpid'],'',$vars);
+		return $this->pi_base->pi_getPageLink($this->settings['eventpid'], '', $vars);
 	}	
 	
 	/*
@@ -529,7 +529,7 @@ class tx_register4cal_render {
 	 * This also calculates the actual start- and enddate for
 	 * recurring events.
 	 *
-         * @return 	nothing
+         * @return 	void
          */	
 	private function prepareFormatedDateTime() {
 		if (isset($this->event['data'])  && !isset($this->event['formatedStart'])) {
@@ -545,28 +545,39 @@ class tx_register4cal_render {
 			}
 			$format = $this->event['data']['allday'] == 0 ? $this->settings['date_format'].' '.$this->settings['time_format'] : $this->settings['date_format'];
 			$this->event['formatedStart'] = $this->event['start']->format($format);
-			$this->event['formatedEnd'] =$this->event['end']->format($format);			
-			if ($this->event['allday'] != 0) { //&& $this->event['formatedStart'] != $this->event['formatedEnd']) {
+			$this->event['formatedEnd'] = $this->event['end']->format($format);			
+			if ($this->event['allday'] != 0) {
 				$this->event['formatedStart'] .= ' ' . $this->pi_base->pi_getLL('event_allday');
 				$this->event['formatedEnd'] = '';
 			}
 		}
 	}
 
+	/*
+         * Read organizer record for current event
+	 *
+         * @return 	void
+         */
 	function setOrganizerObj() {
 		if (isset($this->event['data']['organizer_id'])) {
 			$select = '*';
 			$table = 'tx_cal_organizer';
-			$where = 'uid='.intval($this->event['data']['organizer_id']) . $this->cObj->enableFields('tx_cal_organizer');
+			$where = 'uid=' . intval($this->event['data']['organizer_id']) . $this->cObj->enableFields('tx_cal_organizer');
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			$this->event['organizer'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
 		}
 	}
+	
+	/*
+         * Read location record for current event
+	 *
+         * @return 	void
+         */
 	function setLocationObj() {
 		if (isset($this->event['data']['location_id'])) {
 			$select = '*';
 			$table = 'tx_cal_location';
-			$where = 'uid='.intval($this->event['data']['location_id']) . $this->cObj->enableFields('tx_cal_location');
+			$where = 'uid=' . intval($this->event['data']['location_id']) . $this->cObj->enableFields('tx_cal_location');
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			$this->event['location'] = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
 		}
@@ -575,7 +586,7 @@ class tx_register4cal_render {
 	/*
          * Provide the name of the organizer for an event
 	 *
-         * @return 	nothing
+         * @return 	void
          */	
 	function getOrganizerData() {
 		if ($this->event['data']['organizer_id']==0) {
