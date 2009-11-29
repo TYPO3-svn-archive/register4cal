@@ -76,6 +76,7 @@
 									<td>###LABEL_event_organizer_email###</td>	<td>###EVENT_organizer_email###</td>	<td>event_organizer_email</td>	<td>label_event-organizer_email</td></tr>
 		<tr><td colspan="2">Formated start of event</td>	<td>LABEL_event-formated_start</td>		<td>###EVENT_formated_start###</td>	<td>event_formated_start</td>	<td>label_event-formated_start</td></tr>
 		<tr><td colspan="2">Formated end of event</td>		<td>LABEL_event-formated_end</td>		<td>###EVENT_formated_end###</td>	<td>event_formated_endt</td>	<td>label_event-formated_end</td></tr>
+		<tr><td colspan="2">Registration status</td>		<td>LABEL_status</td>				<td>###STATUS###</td>			<td>status</td>			<td>label_status</td></tr>
 	</table>
 
 
@@ -98,6 +99,35 @@
 	<!-- ###REGISTRATION_FORM### end -->
 	</pre>
 	
+	<h1>Template for the registration form when max number of attendees is reached and waitlist is activated</h1>
+	<p>This part defines the form to register for an event, if the attendee will be put on the waitlist</p>
+	<pre>
+	<!-- ###WAITLIST_FORM### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###FORM### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_location-name### ###LOCATION_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_organizer-name### ###ORGANIZER_name###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###FORM### end -->
+	###TEXTBOTTOM###
+	<!-- ###WAITLIST_FORM### end -->
+	</pre>	
+	
+	<h1>Template for the registration form if no registration is possible</h1>
+	<p>This part defines the information to be shown if the maximum number of attendees has been reached</p>
+	<pre>
+	<!-- ###NOREGISTER_FORM### begin -->
+	###HEADING###
+	###TEXTTOP###
+	###TEXTBOTTOM###
+	<!-- ###NOREGISTER_FORM### end -->
+	</pre>		
+	
 	<h1>Template for the list registration form: Submit button</h1>
 	<p>This part defines the form to register for an event if displayed in list view</p>
 	<pre>
@@ -107,7 +137,13 @@
 	<p>This part defines the fields to register for an event if displayed in list view</p>
 	<pre>
 	<!-- ###LIST_REGISTRATION_EVENT### start --><!--###FIELDSET### begin --><!-- ###TABLE### begin -->###FIELDS###<!-- ###TABLE### end --><!-- ###FIELDSET### end --><!-- ###LIST_REGISTRATION_EVENT### end -->
+	</pre>
 	
+	<h1>Template for the list registration for the waitlist: Fields for each event</h1>
+	<p>This part defines the fields to waitlist for an event if displayed in list view</p>
+	<pre>
+	<!-- ###LIST_WAITLIST_EVENT### start --><!--###FIELDSET### begin --><!-- ###TABLE### begin -->###FIELDS###<!-- ###TABLE### end --><!-- ###FIELDSET### end --><!-- ###LIST_WAITLIST_EVENT### end -->
+	</pre>
 	
 	<!-- ###NEEDLOGIN_FORM### begin-->
 	###HEADING###
@@ -136,6 +172,25 @@
 	<!-- ###CONFIRMATION_FORM### end -->
 	</pre>
 	
+	<h1>Template for a processed enlisting to waitlist</h1>
+	<p>This template is displayed once the enlisting to the waitlist has been performed sucessfuly. It should inform the user
+	   that he is now waitlisted and he will receive an email
+	</p>
+	<pre>
+	<!-- ###CONFIRMATION_WAITLIST_FORM### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###CONFIRMATION_WAITLIST_FORM### end -->
+	</pre>
+	
 	<h1>Template to display a registration</h1>
 	<p>This template defines how a registration should be displayed. It's being used when the plugin is used and the user
 	   is alredy registered.
@@ -144,12 +199,30 @@
 	<!-- ###ALREADY_REGISTERED### begin -->
 	###HEADING###
 	###TEXTTOP###
-	<!-- ###TABLE### begin -->
+	<!-- ###FORM### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_status### ###STATUS###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###FIELDS###<!-- ###TABLINE### end -->
-	<!-- ###TABLE### end -->
+	###UNREGISTER###
+	<!-- ###FORM### end -->
 	###TEXTBOTTOM###
 	<!-- ###ALREADY_REGISTERED### end -->
 	</pre>
+	
+	<h1>Template to display a registration if enlisted to waitlist</h1>
+	<p>This template defines how a registration should be displayed. It's being used when the plugin is used and the user has enlisted to the waitlist.
+	</p>
+	<pre>
+	<!-- ###ALREADY_WAITLIST### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###FORM### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_status### ###STATUS###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###FIELDS###<!-- ###TABLINE### end -->
+	###UNREGISTER###
+	<!-- ###FORM### end -->
+	###TEXTBOTTOM###
+	<!-- ###ALREADY_WAITLIST### end -->
+	</pre>	
 	
 	<h1>Template to display a registration in list view</h1>
 	<p>This template defines how a registration should be displayed. It's being used when the plugin is used and the user
@@ -161,40 +234,16 @@
 	<!-- ###LIST_ALREADY_REGISTERED### end -->
 	</pre>
 	
-	<h1>Template for the notification email to the user</h1>
-	<p>This template defines the email sent to the user, notifying him about his registration</p>	
+	<h1>Template to display a registration in list view if user is on waitlist</h1>
+	<p>This template defines how a registration should be displayed. It's being used when the plugin is used and the user
+	   is enlisted to the waitlist.
+	</p>
 	<pre>
-	<!-- ###CONFIRMATION_MAIL### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###CONFIRMATION_MAIL### end -->
-	</pre>
-	
-	<h1>Template for the notification email to the organizer</h1>
-	<p>This template defines the email sent to the organizer, notifying him about a new registration</p>
-	<pre>
-	<!-- ###NOTIFICATION_MAIL### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###NOTIFICATION_MAIL### end -->
-	</pre>
-	
+	<!-- ###LIST_ALREADY_WAITLIST### begin -->
+	<!--###FIELDSET### begin --><!-- ###TABLE### begin -->###FIELDS###<!-- ###TABLE### end --><!-- ###FIELDSET### end -->
+	<!-- ###LIST_ALREADY_WAITLIST### end -->
+	</pre>	
+
 	<h1>Template to display an event list</h1>
 	<p>This template defines how an event list should be displayed.</p>
 	<pre>
@@ -205,6 +254,7 @@
 		###LABEL_event-formated_start###
 		###LABEL_event-formated_end###
 		###LABEL_event-organizer_name###
+		###LABEL_status###
 		<!-- ###TABLINE### end -->
 		<!-- ###ITEMS### begin -->
 			<!-- ###TABLINE### begin -->
@@ -212,6 +262,7 @@
 				###EVENT_formated_start###
 				###EVENT_formated_end###
 				###EVENT_organizer_name###
+				###STATUS###
 			<!-- ###TABLINE### end -->
 		<!-- ###ITEMS### end -->
 		<!-- ###NOITEMS### begin -->
@@ -250,6 +301,7 @@
 			###LABEL_user-address###
 			###LABEL_user-zip###/###LABEL_user-city###
 			###LABEL_user-email###
+			###LABEL_status###
 			<!-- ###TABLINE### end -->
 		<!-- ###EVENTENTRY### end -->
 		<!-- ###ITEMS### begin -->
@@ -258,6 +310,7 @@
 				###USER_address###
 				###USER_zip### ###USER_city###
 				###USER_email###
+				###STATUS###
 			<!-- ###TABLINE### end -->
 		<!-- ###ITEMS### end -->
 		<!-- ###NOITEMS### begin -->
@@ -273,5 +326,178 @@
 	<!-- ###TABLE### end -->
 	<!-- ###PARTICIPANT_LIST### end -->
 	</pre>
+
+	<hr /><h1>Templates for Emails</h1><hr /><!-- *********************************************************************************************************************** -->
+	
+	<h2>Confirmation email for registering</h2>
+	<p>Sent to the attendee when he registered for an event</p>	
+	<pre>
+	<!-- ###EMAIL_CONFIRMATION_REGISTRATION### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_CONFIRMATION_REGISTRATION### end -->
+	</pre>
+	
+	<h2>Confirmation email for waitlist</h2>
+	<p>Sent to the attendee when he enlisted to the waitlist for an event</p>	
+	<pre>
+	<!-- ###EMAIL_CONFIRMATION_WAITLIST### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_CONFIRMATION_WAITLIST### end -->
+	</pre>	
+	
+	<h2>Confirmation email for unregistering</h2>
+	<p>Sent to the attendee when he unregistered from an event</p>	
+	<pre>
+	<!-- ###EMAIL_CONFIRMATION_REGISTRATION_CANCEL### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_CONFIRMATION_REGISTRATION_CANCEL### end -->
+	</pre>
+	
+	<h2>Confirmation email for discharging from waitlist</h2>
+	<p>Sent to the attendee when he discharged from the waitlist for an event</p>	
+	<pre>
+	<!-- ###EMAIL_CONFIRMATION_WAITLIST_CANCEL### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_CONFIRMATION_WAITLIST_CANCEL### end -->
+	</pre>		
+	
+	<h2>Confirmation email when registration has been upgraded </h2>
+	<p>Sent to the attendee when his registration has been updated from waitlist to attending</p>	
+	<pre>
+	<!-- ###EMAIL_CONFIRMATION_WAITLIST_UPGRADE### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_CONFIRMATION_WAITLIST_UPGRADE### end -->
+	</pre>		
+	
+	<h2>Notification email for registering</h2>
+	<p>Sent to the organizer when someone registered for an event</p>
+	<pre>
+	<!-- ###EMAIL_NOTIFICATION_REGISTRATION### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_NOTIFICATION_REGISTRATION### end -->
+	</pre>
+
+	<h2>Template for the notification email to the organizer if user is waitlisted</h2>
+	<p>Sent to the organizer when someone enlisted to the waitlist for an event</p>
+	<pre>
+	<!-- ###EMAIL_NOTIFICATION_WAITLIST### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_NOTIFICATION_WAITLIST### end -->
+	</pre>
+
+	<h2>Notification email for unregistering</h2>
+	<p>Sent to the organizer when someone unregistered for an event</p>
+	<pre>
+	<!-- ###EMAIL_NOTIFICATION_REGISTRATION_CANCEL### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_NOTIFICATION_REGISTRATION_CANCEL### end -->
+	</pre>
+
+	<h2>Template for the notification email to the organizer if user is dircharged from the waitlist</h2>
+	<p>Sent to the organizer when someone discharged from the waitlist for an event</p>
+	<pre>
+	<!-- ###EMAIL_NOTIFICATION_WAITLIST_CANCEL### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_NOTIFICATION_WAITLIST_CANCEL### end -->
+	</pre>	
+	
+	<h2>Notification email when registration has been upgraded </h2>
+	<p>Sent to the organizer when his registration has been updated from waitlist to attending</p>	
+	<pre>
+	<!-- ###EMAIL_NOTIFICATION_WAITLIST_UPGRADE### begin -->
+	###HEADING###
+	###TEXTTOP###
+	<!-- ###TABLE### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_user-email### ###USER_email###<!-- ###TABLINE### end -->
+	###FIELDS###
+	<!-- ###TABLE### end -->
+	###TEXTBOTTOM###
+	<!-- ###EMAIL_NOTIFICATION_WAITLIST_UPGRADE### end -->
+	</pre>	
+
 </body>
 </html>

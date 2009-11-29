@@ -13,7 +13,7 @@ CREATE TABLE tx_register4cal_registrations (
 	cal_event_getdate int(11) DEFAULT '0' NOT NULL,
 	feuser_uid tinytext,
 	additional_data text,
-	
+	status tinyint(3) DEFAULT '1' NOT NULL,
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
@@ -27,6 +27,8 @@ CREATE TABLE tx_cal_event (
 	tx_register4cal_activate tinyint(3) DEFAULT '0' NOT NULL,
 	tx_register4cal_regstart int(11) DEFAULT '0' NOT NULL,
 	tx_register4cal_regend int(11) DEFAULT '0' NOT NULL,
+	tx_register4cal_maxattendees int(11) DEFAULT '0' NOT NULL,
+	tx_register4cal_waitlist tinyint(3) DEFAULT '0' NOT NULL,
 );
 
 #

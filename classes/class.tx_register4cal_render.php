@@ -226,7 +226,6 @@ class tx_register4cal_render {
 			$template = $this->cObj->substituteMarkerArray($template, $marker);
 			$count = preg_match_all('!\###([A-Z0-9-_-|]*)\###!is', $template, $match);
 		}
-		
 		return $template;
 	}	
 	
@@ -239,7 +238,7 @@ class tx_register4cal_render {
          * @return 	string		Rendered fields
          */	
 	public function renderSubject($confName) {
-		return $this->applyWrap('', $this->settings[$confName], 'subject', 'show');
+		return $this->applyWrap('', $this->settings['forms'][$confName.'.'], 'subject', 'show');
 	}
 
 
@@ -366,7 +365,9 @@ class tx_register4cal_render {
 					$fields .= $this->renderUserField($field, $mode);
 				}
 			}
-			
+		}
+		
+		if ($mode == 'edit') {	
 			$hiddenFields = '';
 			if ($this->view == 'single') {
 				$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
@@ -376,7 +377,7 @@ class tx_register4cal_render {
 				$hiddenFields .= '<input type="hidden" name="' . $this->pi_base->prefixId . '[cmd]" value="register" />';
 				$hiddenFields .= '<input type="hidden" name="no_cache" value="1" />';
 				$fields .= $this->applyWrap($hiddenFields, $conf, 'submitbutton', $mode);
-			}
+			}		
 		}
 		return $fields;
 	}
@@ -424,6 +425,23 @@ class tx_register4cal_render {
 				$params[$this->settings['loginreturnparam']] = $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id, '', $sourceParams);
 				$value = $this->pi_base->pi_getPageLink($this->settings['loginpid'], '', $params);
 				$marker = $this->applyWrap($value, $conf, 'loginlink', $mode);
+				break;
+			case 'STATUS' :
+				$value = $this->pi_base->pi_getLL('label.status.'.intval($this->registration['status']));
+				$marker = $this->applyWrap($value, $conf, 'status', $mode);
+				break;
+			case 'UNREGISTER':
+				$hiddenFields = '';
+				if ($this->view == 'single') {
+					$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+					foreach ($calPiVars as $name => $value) {
+						$hiddenFields .= '<input type="hidden" name="tx_cal_controller[' . htmlspecialchars($name) . ']" value="' . htmlspecialchars($value) . '" />';
+					}
+					$hiddenFields .= '<input type="hidden" name="' . $this->pi_base->prefixId . '[cmd]" value="unregister" />';
+					$hiddenFields .= '<input type="hidden" name="no_cache" value="1" />';
+					$marker = $this->applyWrap($hiddenFields, $conf, 'unregister', $mode);
+					
+				}	
 				break;
 			default :
 				if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
@@ -486,7 +504,7 @@ class tx_register4cal_render {
 					$value = isset($this->user[$fieldname]) ? $value =$this->user[$fieldname] : '';
 				} elseif (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert a label field
-					$fieldname = 'label.' . str_replace('-', '.', substr($singleMarker, 6));
+					$fieldname = 'label.' . str_replace('-', '.', substr($singleMarker, 6));;
 					$value = $this->pi_base->pi_getLL($fieldname);
 				} else {
 					$value='';

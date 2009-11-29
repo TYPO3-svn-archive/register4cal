@@ -92,6 +92,66 @@
 			<label index="label.registration.nologin">Registrations can only be displayed for registered users</label>
 			<label index="label.event.nologin">Events can only be displayed for registered users</label>
 			<label index="label.registration.noevents">Currenty, no events with the possibility to register are recorded where you are the organizer.</label>
+			<label index="waitlistForm.heading">Register for this event- Waitlist</label>
+			<label index="waitlistForm.texttop">Unfortunately, this event is fully booked. Although a waitlist is available. Enlist to the waitlist here</label>
+			<label index="waitlistForm.textbottom">If an user cancels his registration and you can get his place, you will be notified.</label>
+			<label index="waitlistForm.labelsubmit">Enlist to waitlist</label>
+			<label index="noregisterForm.heading">Event fully booked</label>
+			<label index="noregisterForm.texttop">Unfortunately, this event is fully booked. As there is no waitlist available, no registration is possible at the moment.</label>
+			<label index="noregisterForm.textbottom">If an user cancels his registration, enlisting might be possible later again.</label>
+			<label index="label.status">Status of registration</label>
+			<label index="label.status.1">Registered</label>
+			<label index="label.status.2">Waitlist</label>
+			<label index="label.status.3">Cancelled</label>			
+			<label index="alreadyWaitlist.heading">Already on waitlist</label>
+			<label index="alreadyWaitlist.texttop">You are already on the waitlist for this event. We have recorded the following data:</label>
+			<label index="alreadyWaitlist.textbottom">You can contact the organizer of the event if you require further information.</label>		
+			<label index="listAlreadyWaitlist.heading">You are on the waitlist for this event</label>
+			<label index="confirmationWaitlistForm.heading">Waitlisting Confirmation</label>
+			<label index="confirmationWaitlistForm.texttop">Thank you for enlisting to the waitlist for an event on our website. We recorded the following data:</label>
+			<label index="confirmationWaitlistForm.textbottom">You can contact the organizer of the event if you require further information.</label>
+			<label index="confirmationWaitlistMail.subject">Registration Confirmation - Waitlist</label>
+			<label index="confirmationWaitlistMail.heading">Registration Confirmation - Waitlist</label>
+			<label index="confirmationWaitlistMail.texttop">Thank you for your enlisting on the waitlist for an event on our website. We recorded the following data:</label>
+			<label index="confirmationWaitlistMail.textbottom">You can contact the organizer of the event if you require further information.</label>
+			<label index="notificationWaitlistMail.subject">Someone enlisted on the waitlist for your event</label>
+			<label index="notificationWaitlistMail.heading">Registration Notification - Waitlist</label>
+			<label index="notificationWaitlistMail.texttop">An user has enlisted on the waitlist for an event where you are listed as organizer:</label>
+			<label index="notificationWaitlistMail.textbottom"></label>			
+			<label index="alreadyRegistered.labelsubmit">Unregister from this event</label>
+			<label index="confirmationForm.labelsubmit">Unregister from this event</label>
+			<label index="alreadyWaitlist.labelsubmit">Unregister from this event</label>
+			<label index="confirmationWaitlistForm.labelsubmit">Unregister from this event</label>
+			
+			<label index="emailConfirmationRegistrationCancel.subject"></label>
+			<label index="emailConfirmationRegistrationCancel.heading"></label>
+			<label index="emailConfirmationRegistrationCancel.texttop"></label>
+			<label index="emailConfirmationRegistrationCancel.textbottom"></label>
+			
+			<label index="emailNotificationRegistrationCancel.subject"></label>
+			<label index="emailNotificationRegistrationCancel.heading"></label>
+			<label index="emailNotificationRegistrationCancel.texttop"></label>
+			<label index="emailNotificationRegistrationCancel.textbottom"></label>
+			
+			<label index="emailConfirmationWaitlistCancel.subject"></label>
+			<label index="emailConfirmationWaitlistCancel.heading"></label>
+			<label index="emailConfirmationWaitlistCancel.texttop"></label>
+			<label index="emailConfirmationWaitlistCancel.textbottom"></label>
+			
+			<label index="emailNotificationWaitlistCancel.subject"></label>
+			<label index="emailNotificationWaitlistCancel.heading"></label>
+			<label index="emailNotificationWaitlistCancel.texttop"></label>
+			<label index="emailNotificationWaitlistCancel.textbottom"></label>
+			
+			<label index="emailConfirmationWaitlistUpgrade.subject"></label>
+			<label index="emailConfirmationWaitlistUpgrade.heading"></label>
+			<label index="emailConfirmationWaitlistUpgrade.texttop"></label>
+			<label index="emailConfirmationWaitlistUpgrade.textbottom"></label>
+			
+			<label index="emailNotificationWaitlistUpgrade.subject"></label>
+			<label index="emailNotificationWaitlistUpgrade.heading"></label>
+			<label index="emailNotificationWaitlistUpgrade.texttop"></label>
+			<label index="emailNotificationWaitlistUpgrade.textbottom"></label>			
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="registrationForm.heading">Für diesen Termin anmelden</label>
@@ -111,14 +171,7 @@
 			<label index="alreadyRegistered.texttop">Sie sind für diesen Termin bereits angemeldet. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="alreadyRegistered.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>			
 			<label index="listAlreadyRegistered.heading">Sie haben sich für diesen Termin angemeldet:</label>
-			<label index="confirmationMail.subject">Anmeldebestätigung</label>
-			<label index="confirmationMail.heading">Anmeldebestätigung</label>
-			<label index="confirmationMail.texttop">Vielen Dank für die Anmeldung für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
-			<label index="confirmationMail.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
-			<label index="notificationMail.subject">Anmeldeinformation</label>
-			<label index="notificationMail.heading">Anmeldeinformation</label>
-			<label index="notificationMail.texttop">Ein Benutzer hat sich für einen Termin angemeldet, zu dem Sie als Organisator eingetragen sind:</label>
-			<label index="notificationMail.textbottom"></label>
+			
 			<label index="label.user">Benutzerdaten</label>
 			<label index="label.user.uid">Nr.</label>
 			<label index="label.user.name">Name</label>
@@ -180,6 +233,72 @@
 			<label index="label.registration.nologin">Anmeldungen können nur für registrierte Benutzer angezeigt werden.</label>
 			<label index="label.event.nologin">Termine können nur für registrierte Benutzer angezeigt werden.</label>
 			<label index="label.registration.noevents">Aktuell sind keine Veranstaltungen mit Anmeldemöglichkeit hinterlegt, bei denen Sie als Veranstalter eingetragen sind.</label>
+			<label index="waitlistForm.heading">Für diesen Termin anmelden - Warteliste</label>
+			<label index="waitlistForm.texttop">Leider ist die Veranstaltung derzeit ausgebucht. Es ist jedoch eine Warteliste verfügbar. Tragen Sie sich hier für die Warteliste ein</label>
+			<label index="waitlistForm.textbottom">Wenn ein Teilnehmer seine Anmeldung storniert und ein Platz für Sie frei wird, werden Sie benachtichtigt.</label>
+			<label index="waitlistForm.labelsubmit">In die Warteliste eintragen</label>
+			<label index="noregisterForm.heading">Termin ausgebucht</label>
+			<label index="noregisterForm.texttop">Leider ist die Veranstaltung derzeit ausgebucht. Da es keine Warteliste gibt ist derzeit keine Anmeldung möglich.</label>
+			<label index="noregisterForm.textbottom">Wenn ein Teilnehmer seine Anmeldung storniert wird die Anmeldung später möglicherweise erneut möglich sein.</label>
+			<label index="label.status">Anmeldestatus</label>
+			<label index="label.status.1">Angemeldet</label>
+			<label index="label.status.2">Warteliste</label>
+			<label index="label.status.3">Zurückgezogen</label>
+			<label index="alreadyWaitlist.heading">Bereits auf der Warteliste</label>
+			<label index="alreadyWaitlist.texttop">Sie sind für diesen Termin bereits auf der Warteliste eingetragen. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="alreadyWaitlist.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>	
+			<label index="listAlreadyWaitlist.heading">Sie haben sich für diesen Termin auf der Warteliste eingetragen:</label>
+			<label index="confirmationWaitlistForm.heading">Warteliste</label>
+			<label index="confirmationWaitlistForm.texttop">Vielen Dank für das Eintragen auf die Warteliste für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="confirmationWaitlistForm.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+			<label index="alreadyRegistered.labelsubmit">Von diesem Termin abmelden</label>
+			<label index="confirmationForm.labelsubmit">Von diesem Termin wieder abmelden</label>
+			<label index="alreadyWaitlist.labelsubmit">Von der Warteliste austragen</label>
+			<label index="confirmationWaitlistForm.labelsubmit">Von der Warteliste wieder austragen</label>
+			
+			
+			<label index="emailConfirmationRegistration.subject">Anmeldebestätigung</label>
+			<label index="emailConfirmationRegistration.heading">Anmeldebestätigung</label>
+			<label index="emailConfirmationRegistration.texttop">Vielen Dank für die Anmeldung für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="emailConfirmationRegistration.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+			<label index="emailNotificationRegistration.subject">Anmeldeinformation</label>
+			<label index="emailNotificationRegistration.heading">Anmeldeinformation</label>
+			<label index="emailNotificationRegistration.texttop">Ein Benutzer hat sich zu einer Veranstaltung von Ihnen angemeldet:</label>
+			<label index="emailNotificationRegistration.textbottom"></label>			
+			<label index="emailConfirmationWaitlist.subject">Anmeldebestätigung - Warteliste</label>
+			<label index="emailConfirmationWaitlist.heading">Anmeldebestätigung - Warteliste</label>
+			<label index="emailConfirmationWaitlist.texttop">Vielen Dank für das Eintragen auf die Warteliste für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="emailConfirmationWaitlist.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+			<label index="notificationWaitlistMail.subject">Anmeldeinformation - Warteliste</label>
+			<label index="notificationWaitlistMail.heading">Anmeldeinformation - Warteliste</label>
+			<label index="notificationWaitlistMail.texttop">Ein Benutzer hat sich bei einer Veranstaltung von Ihnen in die Warteliste eingetragen:</label>
+			<label index="notificationWaitlistMail.textbottom"></label>
+			<label index="emailConfirmationRegistrationCancel.subject">Abmeldebestätigung</label>
+			<label index="emailConfirmationRegistrationCancel.heading">Abmeldebestätigung</label>
+			<label index="emailConfirmationRegistrationCancel.texttop">Sie haben sich von folgender Veranstaltung abgemeldet:</label>
+			<label index="emailConfirmationRegistrationCancel.textbottom"></label>
+			<label index="emailNotificationRegistrationCancel.subject">Abmeldeinformation</label>
+			<label index="emailNotificationRegistrationCancel.heading">Abmeldeinformation</label>
+			<label index="emailNotificationRegistrationCancel.texttop">Ein Benutzer hat sich von einer Veranstaltung von Ihnen abgemeldet:</label>
+			<label index="emailNotificationRegistrationCancel.textbottom"></label>
+			<label index="emailConfirmationWaitlistCancel.subject">Abmeldebestätigung - Warteliste</label>
+			<label index="emailConfirmationWaitlistCancel.heading">Abmeldebestätigung - Warteliste</label>
+			<label index="emailConfirmationWaitlistCancel.texttop">Sie haben sich aus der Warteliste zu folgender Veranstaltung ausgetragen:</label>
+			<label index="emailConfirmationWaitlistCancel.textbottom"></label>
+			<label index="emailNotificationWaitlistCancel.subject">Abmeldeinformation - Warteliste</label>
+			<label index="emailNotificationWaitlistCancel.heading">Abmeldeinformation - Warteliste</label>
+			<label index="emailNotificationWaitlistCancel.texttop">Ein Benutzer hat sich bei einer Veranstaltung von Ihnen aus der Warteliste ausgetragen:</label>
+			<label index="emailNotificationWaitlistCancel.textbottom"></label>
+			
+			<label index="emailConfirmationWaitlistUpgrade.subject">Anmeldebestätigung Warteliste --> Teilnehmend</label>
+			<label index="emailConfirmationWaitlistUpgrade.heading">Anmeldebestätigung Warteliste --> Teilnehmend</label>
+			<label index="emailConfirmationWaitlistUpgrade.texttop">Sie waren zu folgender Veranstaltung auf die Warteliste eingetragen. Da nun Plätze frei geworden sind, können Sie nun teilnehmen:</label>
+			<label index="emailConfirmationWaitlistUpgrade.textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+			
+			<label index="emailNotificationWaitlistUpgrade.subject">Anmeldeinformation Warteliste --> Teilnehmend</label>
+			<label index="emailNotificationWaitlistUpgrade.heading">Anmeldeinformation Warteliste --> Teilnehmend</label>
+			<label index="emailNotificationWaitlistUpgrade.texttop">Ein Benutzer von der Warteliste wurde auf die Teilnehmerliste übernommen, da freie Plätze verfügbar sind:</label>
+			<label index="emailNotificationWaitlistUpgrade.textbottom"></label>
 		</languageKey>
 	</data>
 </T3locallang>

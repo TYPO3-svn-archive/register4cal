@@ -4,6 +4,9 @@ plugin.tx_register4cal_pi1{
 	dateformat = %d.%m.%Y
 	timeformat = %H:%M
 	disableNeedLoginForm = 1
+	disableWaitlist = 0
+	disableUnregister = 0
+	keepUnregistered = 1
 	onetimepid = 0
 	onetimereturnparam = redirect_url
 	loginpid = 0
@@ -19,14 +22,11 @@ plugin.tx_register4cal_pi1{
 
 	forms {
 		default {
-			form {
-				edit < stdWrap
-				edit.dataWrap = <form action="###LINK###" method="post"><table width="100%">|</table></form>
-			}
-			submitbutton {
-				edit < stdWrap
-				edit.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.labelsubmit}" /></td>
-			}
+			form < stdWrap
+			form.dataWrap = <form action="###LINK###" method="post"><table width="100%">|</table></form>
+				
+			submitbutton < stdWrap
+			submitbutton.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.labelsubmit}" /></td>
 
 			onetimeaccountbutton < stdWrap
 			onetimeaccountbutton.dataWrap = <form action="###ONETIMEACCOUNTLINK###" method="post">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.onetimeaccountButton}" /></form>
@@ -40,8 +40,14 @@ plugin.tx_register4cal_pi1{
 			onetimeaccountlink < stdWrap
 			onetimeaccountlink.dataWrap = |
 
-			loginlink < stdWrao
+			loginlink < stdWrap
 			loginlink.dataWrap = |
+
+			status < stdWrap
+			status.dataWrap = <td>|</td>
+
+			label_status < stdWrap
+			label_status.dataWrap = <td><b>|</b></td>
 
 			table < stdWrap
 			table.dataWrap = <table width="100%">|</table>
@@ -414,10 +420,48 @@ plugin.tx_register4cal_pi1{
 			fields.dataWrap = |
 		}
 		
+		waitlistForm {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:waitlistForm.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:waitlistForm.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:waitlistForm.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+			submitbutton {
+				edit < stdWrap
+				edit.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:waitlistForm.labelsubmit}" /></td>
+			}			
+		}
+
+		noregisterForm {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:noregisterForm.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:noregisterForm.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:noregisterForm.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+		}
+		
 		listRegistrationEvent {
 			fieldset {
 				edit < stdWrap
 				edit.dataWrap = <fieldset><legend>###CHECKBOX_REGISTER_THIS###{LLL:EXT:register4cal/classes/locallang.xml:registrationForm.labelsubmit}</legend>|</fieldset>
+			}
+			
+			checkbox_register_this {
+				edit < stdWrap
+				edit.dataWrap = <input type="checkbox" name="tx_register4cal_main[###EVENT_uid###][###EVENT_get_date###][register]" value="1" />
+			}
+		}
+
+		listWaitlistEvent {
+			fieldset {
+				edit < stdWrap
+				edit.dataWrap = <fieldset><legend>###CHECKBOX_REGISTER_THIS###{LLL:EXT:register4cal/classes/locallang.xml:waitlistForm.labelsubmit}</legend>|</fieldset>
 			}
 			
 			checkbox_register_this {
@@ -439,6 +483,14 @@ plugin.tx_register4cal_pi1{
 			
 		}
 
+		listAlreadyWaitlist {
+			fieldset {
+				show < stdWrap
+				show.dataWrap = <fieldset><legend>{LLL:EXT:register4cal/classes/locallang.xml:listAlreadyWaitlist.heading}</legend>|</fieldset>
+			}
+			
+		}
+		
 		needloginForm {
 			heading < stdWrap
 			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:needloginForm.heading}</h2>
@@ -457,42 +509,124 @@ plugin.tx_register4cal_pi1{
 			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationForm.textbottom}</p>
 			fields < stdWrap
 			fields.dataWrap = |
+			#submitbutton < stdWrap
+			#submitbutton.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:confirmationForm.labelsubmit}" /></td>
 		}
-		alreadyRegistered {
-			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.heading}</h2>
-			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.texttop}</p>			
-			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.textbottom}</p>
-			fields < stdWrap
-			fields.dataWrap = |
 
+		confirmationWaitlistForm {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:confirmationWaitlistForm.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationWaitlistForm.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationWaitlistForm.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+			#submitbutton < stdWrap
+			#submitbutton.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:confirmationWaitlistForm.labelsubmit}" /></td>
+		}
+		
+		alreadyRegistered {
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.textbottom}</p>
+			fields.dataWrap = |
+			unregister.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:alreadyRegistered.labelsubmit}" onClick="return confirm('Wollen Sie sich wirklich von dieser Veranstaltung abmelden?')" /></td>
+		}
+		alreadyWaitlist {
+			heading < stdWrap
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:alreadyWaitlist.heading}</h2>
+			texttop < stdWrap
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyWaitlist.texttop}</p>			
+			textbottom < stdWrap
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:alreadyWaitlist.textbottom}</p>
+			fields < stdWrap
+			fields.dataWrap = |
+			unregister.dataWrap = <tr><td colspan="2" align="center">|<input type="submit" value="{LLL:EXT:register4cal/classes/locallang.xml:alreadyWaitlist.labelsubmit}" onClick="return confirm('Wollen Sie sich wirklich von der Warteliste austragen?')"/></td>
 		}		
-		confirmationMail {
-			subject < stdWrap
-			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.subject}
-			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.heading}</h2>
-			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.texttop}</p>			
-			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:confirmationMail.textbottom}</p>
-			fields < stdWrap
+
+		# Emails ##############################################################################################################################################
+
+		emailConfirmationRegistration {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistration.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistration.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistration.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistration.textbottom}</p>
 			fields.dataWrap = |
 		}
-		notificationMail {
-			subject < stdWrap
-			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:notificationMail.subject}
-			heading < stdWrap
-			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:notificationMail.heading}</h2>
-			texttop < stdWrap
-			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:notificationMail.texttop}</p>			
-			textbottom < stdWrap
-			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:cnotificationnMail.textbottom}</p>
-			fields < stdWrap
+		
+		emailNotificationRegistration {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistration.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistration.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistration.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistration.textbottom}</p>
 			fields.dataWrap = |
 		}
+		
+		emailConfirmationWaitlist {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlist.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlist.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlist.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlist.textbottom}</p>
+			fields.dataWrap = |
+		}
+		
+		emailNotificationWaitlist {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:notificationWaitlistMail.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:notificationWaitlistMail.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:notificationWaitlistMail.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:cnotificationnWaitlistMail.textbottom}</p>
+			fields.dataWrap = |
+		}
+
+		emailConfirmationRegistrationCancel {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistrationCancel.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistrationCancel.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistrationCancel.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationRegistrationCancel.textbottom}</p>
+			fields.dataWrap = |
+		}
+		
+		emailNotificationRegistrationCancel {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistrationCancel.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistrationCancel.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistrationCancel.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationRegistrationCancel.textbottom}</p>
+			fields.dataWrap = |
+		}
+		
+		emailConfirmationWaitlistCancel {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistCancel.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistCancel.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistCancel.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistCancel.textbottom}</p>
+			fields.dataWrap = |
+		}
+		
+		emailNotificationWaitlistCancel {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistCancel.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistCancel.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistCancel.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistCancel.textbottom}</p>
+			fields.dataWrap = |
+		}
+
+		emailConfirmationWaitlistUpgrade {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistUpgrade.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistUpgrade.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistUpgrade.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailConfirmationWaitlistUpgrade.textbottom}</p>
+			fields.dataWrap = |
+		}
+		
+		emailNotificationWaitlistUpgrade {
+			subject.dataWrap = {LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistUpgrade.subject}
+			heading.dataWrap = <h2>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistUpgrade.heading}</h2>
+			texttop.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistUpgrade.texttop}</p>			
+			textbottom.dataWrap = <p>{LLL:EXT:register4cal/classes/locallang.xml:emailNotificationWaitlistUpgrade.textbottom}</p>
+			fields.dataWrap = |
+		}
+
 		eventList {
 					
 			table < stdWrap

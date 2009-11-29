@@ -81,6 +81,8 @@ class tx_register4cal_main extends tslib_pibase {
 		$this->settings['mailconf'] = $tsconf['emails.'];
 		$this->settings['default'] = $tsconf['forms.']['default.'];
 		$this->settings['forms'] = $tsconf['forms.'];
+		$this->settings['disableUnregister'] = $tsconf['disableUnregister'];
+		$this->settings['keepUnregistered'] = $tsconf['keepUnregistered'];
 
 			// Init userfields
 		$this->settings['userfields'] = $tsconf['userfields.'];	
@@ -116,9 +118,9 @@ class tx_register4cal_main extends tslib_pibase {
 			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
 			
 				// Check if user has already registered
-			if (!$this->isUserAlreadyRegistered($event['uid'], $event['start_date'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'])) {
+			if (!$this->isUserAlreadyRegistered($event['uid'], $event['start_date'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'], $status)) {
 					// User has not yet registered for this event. Show the registration form
-				$content = $this->renderListRegistrationEvent();
+				$content = $this->renderListRegistrationEvent($event);
 					// Count registration form in user's session data
 				$GLOBALS['TSFE']->fe_user->fetchSessionData();
 				$count = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount');
@@ -127,7 +129,7 @@ class tx_register4cal_main extends tslib_pibase {
 				$GLOBALS['TSFE']->fe_user->storeSessionData();
 			} else {
 					// User has already registered for this event. Show this information.
-				$content = $this->renderListRegistrationDetails();
+				$content = $this->renderListRegistrationDetails($status);
 			}				
 		}
 		return $content;
@@ -178,10 +180,10 @@ class tx_register4cal_main extends tslib_pibase {
 					$registration['uid'] = $uid;
 					$registration['getdate'] = $getdate;
 					$this->piVars = $registration;
-					if ($this->storeData($registration, $event['title'], $event['pid'] )) {
+					if ($this->storeData($registration, $event, $status)) {
 							// ... storing sucessful -->Send emails and show registration confirmation
-						$notificationSent = $this->sendNotificationMail();
-						$confirmationSent = $this->sendConfirmationMail();
+						$notificationSent = $this->sendNotificationMail($status);
+						$confirmationSent = $this->sendConfirmationMail($status);
 					}
 					unset($this->registration->piVars);
 				}
@@ -211,27 +213,40 @@ class tx_register4cal_main extends tslib_pibase {
 			$this->rendering->setView('single');
 			$this->rendering->setEvent($event);
 			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
-			
 				// Render depending on registration status
-			if (!$this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'])) {
+			$hasRegistered = $this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'], $status);
+			if (!$hasRegistered) {
 				if ($this->piVars['cmd'] == 'register') {
 						// User provided registration information. Try to store the stuff ...
-					if ($this->storeData($data, $event['title'], $event['pid'] )) {
+					if ($this->storeData($data, $event, $status)) {
 							// ... storing sucessful -->Send emails and show registration confirmation
-						$notificationSent = $this->sendNotificationMail();
-						$confirmationSent = $this->sendConfirmationMail();
-						$content = $this->renderRegistrationConfirmation();
+						$notificationSent = $this->sendNotificationMail($status, 1);
+						$confirmationSent = $this->sendConfirmationMail($status, 1);
+						$content = $this->renderRegistrationConfirmation($status);
 					} else {
 							// ... storing failed -->Show registration form again
-						$content = $this->renderRegistrationForm();
-					}
+						$content = $this->renderRegistrationForm($event);
+					}					
 				} else {
 						// User has not yet registered for this event. Show the registration form
-					$content = $this->renderRegistrationForm();
+					$content = $this->renderRegistrationForm($event);
 				}
 			} else {
-					// User has already registered for this event. Show this information.
-				$content = $this->renderRegistrationDetails();
+				if ($this->piVars['cmd'] == 'unregister') {
+						// Unregister User
+					if ($this->storeDataUnregister($data, $event, $status)) {
+						$notificationSent = $this->sendNotificationMail($status, 2);
+						$confirmationSent = $this->sendConfirmationMail($status, 2);
+						$this->checkWaitlist($data['getdate'], $event);
+						$content = $this->renderRegistrationForm($event);
+					} else {
+							// .. unregistering failed --> Show Registration details again
+						$content = $this->renderRegistrationDetails($status);
+					}
+				} else {
+						// User has already registered for this event. Show this information.
+					$content = $this->renderRegistrationDetails($status);
+				}
 			}
 		}
 		return $content;
@@ -271,7 +286,7 @@ class tx_register4cal_main extends tslib_pibase {
 			$where = 'tx_register4cal_registrations.cal_event_getdate>=' . date('Ymd') . ' and' .
 				 ' tx_register4cal_registrations.pid IN (' . $pidlist . ')' .
 				 $this->cObj->enableFields('tx_register4cal_registrations');
-			$orderBy = 'tx_register4cal_registrations.cal_event_getdate ASC, tx_register4cal_registrations.cal_event_uid ASC';
+			$orderBy = 'tx_register4cal_registrations.cal_event_getdate ASC, tx_register4cal_registrations.cal_event_uid ASC, tx_register4cal_registrations.status ASC';
 			$registrationRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, '', $orderBy);
 			if ($GLOBALS['TYPO3_DB']->sql_num_rows($registrationRes) != 0) {
 				while (($registration = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($registrationRes))) {
@@ -397,7 +412,8 @@ class tx_register4cal_main extends tslib_pibase {
 			$table = 'tx_register4cal_registrations';
 			$where = 'tx_register4cal_registrations.feuser_uid=' . intval($feUserId) . ' AND' .
 				 ' tx_register4cal_registrations.cal_event_getdate>=' . date('Ymd') . ' AND' .
-				 ' tx_register4cal_registrations.pid IN (' . $pidlist . ')' .
+				 ' tx_register4cal_registrations.pid IN (' . $pidlist . ') AND' .
+				 ' tx_register4cal_registrations.status <> 3' .
 				 $this->cObj->enableFields('tx_register4cal_registrations');
 			$orderBy = 'tx_register4cal_registrations.cal_event_getdate ASC';
 			$resRegistration = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy, $limit);
@@ -492,17 +508,19 @@ class tx_register4cal_main extends tslib_pibase {
 	* @param	integer		$eventGetDate: getDate of the event for which the registration should be checked
 	* @param	integer		$userUid: UID if the user for which the registration should be checked
 	* @param	integer		$eventPid: PID of the page containing the registrations
+	* @param	integer		$status: Returns the registration status
 	* @return  	boolean  	TRUE: User has already registered, FALSE, User has not yet registered
 	*/
-	public function isUserAlreadyRegistered($eventUid, $eventGetDate, $userUid, $eventPid) {
+	public function isUserAlreadyRegistered($eventUid, $eventGetDate, $userUid, $eventPid, &$status) {
 		$select = '*';
 		$table = 'tx_register4cal_registrations';
 		$where = 'cal_event_uid=' . intval($eventUid) .
 			 ' AND cal_event_getdate=' . intval($eventGetDate) .
 			 ' AND feuser_uid=' . intval($userUid) .
 			 ' AND pid=' . intval($eventPid) .
+			 ' AND status <> 3'.
 			 $this->cObj->enableFields('tx_register4cal_registrations');
-		$orderBy = '';
+		$orderBy = 'tstamp desc';
 		$groupBy = '';
 		$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy , $orderBy, $limit);
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($result) == 0) {
@@ -510,12 +528,73 @@ class tx_register4cal_main extends tslib_pibase {
 		} else {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
 			$this->rendering->setRegistration($row);
+			$status = $row['status'];
 			$alreadyReg = true;
 		}
 		$GLOBALS['TYPO3_DB']->sql_free_result($result);
 		return $alreadyReg;
 	}
 
+	/*
+	* Determine the possible registration status
+	*
+	* @param	integer		$eventUid: Uid if the event (not mandatory from event record!)
+	* @param	integer		$eventGetDate: Date of the event (not mandatory from event record!)
+	* @param	integer		$event: event record
+	* @return  	integer  	Possible registration status as following:
+	*					0: No registration possible
+	*					1: Normal registration possible
+	*					2: Waitlist enlisting possible
+	*/
+	private function getPossibleRegistrationStatus($eventUid, $eventGetDate, $event) {
+		$statusCount = $this->getRegistrationCount($eventUid, $eventGetDate, $event['pid']);
+		
+		if ($event['tx_register4cal_maxattendees'] == 0) {
+			$regStatus = 1;								// no max # of attendees --> registration always possible
+		} else {
+			if ($event['tx_register4cal_maxattendees'] > $statusCount[1])	{	// max # of attendees given, but not reached --> registration possible
+				$regStatus = 1;
+			} else {								// max # of attendees given and reached --> check waitlist
+				if ($event['tx_register4cal_waitlist'] == 1) {
+					$regStatus = 2;						// Waitlist enabled --> Waitlist
+				} else {
+					$regStatus = 0;						// Waitlist disabled --> Registration not possible
+				}
+			}
+		}
+		
+		return $regStatus;
+	}
+
+	/*
+	* Determine the number of registrations per registration status
+	*
+	* @param	integer		$eventUid: Uid if the event
+	* @param	integer		$eventGetDate: Date of the event
+	* @param	integer		$eventPid: Pid where the event (and the registration) is stored
+	* @return  	Array  		Associative array, containing the number of registrations per status
+	*/
+	private function getRegistrationCount($eventUid, $eventGetDate, $eventPid) {
+			// Initialize Array
+		$statusCount = Array();
+		for($i = 1; $i <=3; $i++) $statusCount[$i] = 0;
+
+			// Count registrations
+		$select = 'status, count(*) as number';
+		$table = 'tx_register4cal_registrations';
+		$where = 'cal_event_uid=' . intval($eventUid) .
+			 ' AND cal_event_getdate=' . intval($eventGetDate) .
+			 ' AND pid=' . intval($eventPid) .
+			 $this->cObj->enableFields('tx_register4cal_registrations');
+		$orderBy = '';
+		$groupBy = 'status';
+		$resCount = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy , $orderBy, $limit);
+		if ($GLOBALS['TYPO3_DB']->sql_num_rows($resCount) != 0) {
+			while (($rowCount = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resCount))) $statusCount[$rowCount['status']] = $rowCount['number'];
+		}
+
+		return $statusCount;
+	}
 
 	/***********************************************************************************************************************************************************************
 	*
@@ -527,41 +606,82 @@ class tx_register4cal_main extends tslib_pibase {
 	* Store the registration in the database
 	*
 	* @param	array		$data: Data for the registration
-	* @param	string		$eventTitle: Title of the event
-	* @param	integer		$eventPid: Pid where the event (and the registration) is stored
+	* @param	array		$event: Event for which the registration should be stored
+	* @param	integer		$status: Returns the status for the registration
 	*
 	* @return  boolean  TRUE: Registration sucessfully stored,  FALSE: Registration not stored
 	*/
-	private function storeData($data, $eventTitle, $eventPid) {
-		if (!$this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $eventPid)) {
-				//Prepare additional fields
-			$addfields = Array();
-			$userfields = $this->settings['userfields'];
-			if (is_array($userfields)) {
-				foreach ($userfields as $field) {
-					$addfield = Array();
-					$addfield['conf'] = $field;
-					$addfield['value'] = $this->piVars['FIELD_' . $field['name']];
-					$addfields[$field['name']] = $addfield;
+	private function storeData($data, $event, &$status) {
+		if (!$this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'], $status)) {	
+				// Check possible registration status
+			$status = $this->getPossibleRegistrationStatus($data['uid'], $data['getdate'], $event);
+			if ($status != 0) {
+					//Prepare additional fields
+				$addfields = Array();
+				$userfields = $this->settings['userfields'];
+				if (is_array($userfields)) {
+					foreach ($userfields as $field) {
+						$addfield = Array();
+						$addfield['conf'] = $field;
+						$addfield['value'] = $this->piVars['FIELD_' . $field['name']];
+						$addfields[$field['name']] = $addfield;
+					}
 				}
+				 
+					//write registration record
+				$recordlabel = tx_register4cal_user1::formatDate($data['getdate'], 0, $this->settings['date_format']) . ' ' . $event['title'] . ': ' . $GLOBALS['TSFE']->fe_user->user['name'];
+				$write = Array();
+				$write['pid'] = intval($event['pid']);
+				$write['tstamp'] = time();
+				$write['crdate'] = time();
+				$write['recordlabel'] = $recordlabel;
+				$write['cruser_id'] = intval($GLOBALS['TSFE']->fe_user->user['uid']);
+				$write['cal_event_uid'] = intval($data['uid']);
+				$write['cal_event_getdate'] = intval($data['getdate']);
+				$write['feuser_uid'] = intval($GLOBALS['TSFE']->fe_user->user['uid']);
+				$write['additional_data'] = serialize($addfields);
+				$write['status'] = $status;
+				$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_register4cal_registrations', $write);
+				 
+				$this->rendering->setRegistration($write);
+				$success = TRUE;
+			} else {
+				$success = FALSE;
 			}
-			 
-				//write registration record
-			$recordlabel = tx_register4cal_user1::formatDate($data['getdate'], 0, $this->settings['date_format']) . ' ' . $eventTitle . ': ' . $GLOBALS['TSFE']->fe_user->user['name'];
-			$write = Array();
-			$write['pid'] = intval($eventPid);
-			$write['tstamp'] = time();
-			$write['crdate'] = time();
-			$write['recordlabel'] = $recordlabel;
-			$write['cruser_id'] = intval($GLOBALS['TSFE']->fe_user->user['uid']);
-			$write['cal_event_uid'] = intval($data['uid']);
-			$write['cal_event_getdate'] = intval($data['getdate']);
-			$write['feuser_uid'] = intval($GLOBALS['TSFE']->fe_user->user['uid']);
-			$write['additional_data'] = serialize($addfields);
-			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_register4cal_registrations', $write);
-			 
-			$this->rendering->setRegistration($write);
-			 
+		} else {
+			$success = FALSE;
+		}
+		return $success;
+	}
+
+	/*
+	* Store the cancelation of registration in the database
+	*
+	* @param	array		$data: Data for the registration
+	* @param	array		$event: Event for which the registration should be stored
+	* @param	integer		$oldStatus: Returns the status of the registration prior to the cancellation
+	*
+	* @return  	boolean  	TRUE: Unregistration sucessfully stored,  FALSE: Unregistration not stored
+	*/
+	private function storeDataUnregister($data, $event, &$oldStatus) {
+		if ($this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'], $oldStatus)) {	
+			$update = Array();
+			if ($this->settings['keepUnregistered'] == 1) {
+				$update['status'] = 3;
+			} else {
+				$update['deleted'] = 1;
+			}
+			$update['tstamp'] = time();
+			
+			$where = 'cal_event_uid=' . intval($data['uid']) .
+			 ' AND cal_event_getdate=' . intval($data['getdate']) .
+			 ' AND feuser_uid=' . intval($GLOBALS['TSFE']->fe_user->user['uid']) .
+			 ' AND pid=' . intval($event['pid']) .
+			 $this->cObj->enableFields('tx_register4cal_registrations');
+			$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_register4cal_registrations', $where, $update);
+				
+			$this->rendering->unsetRegistration();
+
 			$success = TRUE;
 		} else {
 			$success = FALSE;
@@ -570,12 +690,96 @@ class tx_register4cal_main extends tslib_pibase {
 	}
 
 	/*
+	* Check if there are free places and waitlist entries. If there are, the free places will be filled from
+	* the oldest waitlist entries. Confirmation and notification emails will be sent
+	*
+	* @param	integer		$eventGetDate: Date of the event (not mandatory the same than in the event record!)
+	* @param	array		$event: Event for which the registration should be checked
+	*
+	* @return  	void
+	*/
+	private function checkWaitlist($eventGetDate, $event) {
+			// We only need to do this if the number if attendees is limited
+		if ($event['tx_register4cal_maxattendees'] > 0 && $this->isRegistrationEnabled($event, $eventGetDate)) {
+			$statusCount = $this->getRegistrationCount($event['uid'], $eventGetDate, $event['pid']);
+				// as long we have some free places and somebody on the waiting list
+			while ($event['tx_register4cal_maxattendees'] > $statusCount[1] && $statusCount[2] > 0) {
+				// get oldest entry from waiting list
+				
+				$select = '*';
+				$table = 'tx_register4cal_registrations';
+				$where = 'cal_event_uid=' . intval($event['uid']) .
+					' AND cal_event_getdate=' . intval($eventGetDate) .
+					' AND pid=' . intval($event['pid']) .
+					' AND status = 2' .
+					$this->cObj->enableFields('tx_register4cal_registrations');
+				$orderBy = 'tstamp';
+				$groupBy = '';
+				$limit = '1';
+				$rowsRegistration = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($select, $table, $where, $groupBy , $orderBy, $limit);
+				$rowRegistration = $rowsRegistration[0];
+				
+					// set this entry to "attending"
+				$update = Array();
+				$update['status'] = 1;
+				$update['tstamp'] = time();
+				$where = 'uid='.intval($rowRegistration['uid']);
+				$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_register4cal_registrations', $where, $update);
+				
+					// update registration array and set in rendering class
+				$rowRegistration['status'] = $update['status'];
+				$rowRegistration['tstamp']= $update['tstamp'];
+				$this->rendering->setRegistration($rowRegistration);
+				
+					// set user who can now be set on "attending"
+				$select = '*';
+				$table = 'fe_users';
+				$where = 'uid='.intval($rowRegistration['feuser_uid']) . $this->cObj->enableFields('fe_users');
+				$groupBy = '';
+				$orderBy = '';
+				$limit = '';
+				$rowsUser = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($select, $table, $where, $groupBy , $orderBy, $limit);
+				$rowUser = $rowsUser[0];
+				$this->rendering->setUser($rowUser);
+				
+					//send notification and confirmation email
+				$notificationSent = $this->sendNotificationMail(1, 3);
+				$confirmationSent = $this->sendConfirmationMail(1, 3);
+				
+					//recount status
+				$statusCount = $this->getRegistrationCount($event['uid'], $eventGetDate, $event['pid']);
+			}
+			
+				// clear registration and reset user
+			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
+			$this->rendering->unsetRegistration();
+		}
+	}
+	
+	/*
 	* Render the registration form
 	*
 	* @return  string  	Registration form
 	*/
-	private function renderRegistrationForm() {
-		return $this->rendering->renderForm('###REGISTRATION_FORM###', 'registrationForm', 'edit');
+	private function renderRegistrationForm($event) {
+		$regStatus = $this->getPossibleRegistrationStatus($event['uid'], $event['start_date'], $event);
+		switch ($regStatus) {
+			case 0:
+				// Registration not possible
+				$content = $this->rendering->renderForm('###NOREGISTER_FORM###', 'noregisterForm', 'show');
+				break;
+			case 1:
+			case 3:
+				// Registration active
+				$content = $this->rendering->renderForm('###REGISTRATION_FORM###', 'registrationForm', 'edit');
+				break;
+			case 2:
+				// Waitlist registration active
+				$content = $this->rendering->renderForm('###WAITLIST_FORM###', 'waitlistForm', 'edit');
+				break;
+		}
+				
+		return $content;
 	}
 	 
 	/*
@@ -583,8 +787,17 @@ class tx_register4cal_main extends tslib_pibase {
 	*
 	* @return  string  	Registration confirmation
 	*/
-	private function renderRegistrationConfirmation() {
-		return $this->rendering->renderForm('###CONFIRMATION_FORM###', 'confirmationForm', 'show');
+	private function renderRegistrationConfirmation($status) {
+		switch ($status) {
+			case 1:
+				$content = $this->rendering->renderForm('###CONFIRMATION_FORM###', 'confirmationForm', 'show');
+				break;
+			case 2:
+				$content = $this->rendering->renderForm('###CONFIRMATION_WAITLIST_FORM###', 'confirmationWaitlistForm', 'show');
+				break;
+		}	
+		
+		return $content;
 	}
 	 
 	/*
@@ -592,8 +805,18 @@ class tx_register4cal_main extends tslib_pibase {
 	*
 	* @return  string  	Registration details
 	*/
-	private function renderRegistrationDetails() {
-		return $this->rendering->renderForm('###ALREADY_REGISTERED###', 'alreadyRegistered', 'show');
+	private function renderRegistrationDetails($status) {
+		switch ($status) {
+			case 1:	
+				$content = $this->rendering->renderForm('###ALREADY_REGISTERED###', 'alreadyRegistered', 'show');
+				break;
+			case 2:
+				$content = $this->rendering->renderForm('###ALREADY_WAITLIST###', 'alreadyWaitlist', 'show');
+				break;
+		}
+		
+		return $content;
+			
 	}
 
 
@@ -618,10 +841,27 @@ class tx_register4cal_main extends tslib_pibase {
 	/*
 	* Render the registration form
 	*
+	* @param   array	$event: Event data
 	* @return  string  	Registration form
 	*/
-	function renderListRegistrationEvent() {
-		return $this->rendering->renderForm('###LIST_REGISTRATION_EVENT###', 'listRegistrationEvent', 'edit');
+	function renderListRegistrationEvent($event) {
+		$regStatus = $this->getPossibleRegistrationStatus($event['uid'], $event['start_date'], $event);
+		switch ($regStatus) {
+			case 0:
+				// Registration not possible
+				//$content = $this->rendering->renderForm('###NOREGISTER_FORM###', 'noregisterForm', 'show');
+				break;
+			case 1:
+				// Registration active
+				$content = $this->rendering->renderForm('###LIST_REGISTRATION_EVENT###', 'listRegistrationEvent', 'edit');
+				break;
+			case 2:
+				// Waitlist registration active
+				$content = $this->rendering->renderForm('###LIST_WAITLIST_EVENT###', 'listWaitlistEvent', 'edit');
+				break;
+		}
+	
+		return $content;
 	}	 
 	 
 	/*
@@ -629,22 +869,57 @@ class tx_register4cal_main extends tslib_pibase {
 	*
 	* @return  string  	Registration details
 	*/
-	function renderListRegistrationDetails() {
-		return $this->rendering->renderForm('###LIST_ALREADY_REGISTERED###', 'listAlreadyRegistered', 'show');
+	function renderListRegistrationDetails($status) {
+		switch ($status) {
+			case 1:
+				$content = $this->rendering->renderForm('###LIST_ALREADY_REGISTERED###', 'listAlreadyRegistered', 'show');
+				break;
+			case 2:
+				$content = $this->rendering->renderForm('###LIST_ALREADY_WAITLIST###', 'listAlreadyWaitlist', 'show');
+				break;
+		}
+		
+		return $content;
 	}	
 	
 	/*
 	* Send confirmation email to the user (if wanted and email address of user is available)
 	*
-	* @return  boolean  TRUE: email sent,  FALSE: email not sent
+	* @param	integer		$status: Status of the registration (1: registered, 2: waitlist)
+	* @param	integer		$action: Action: (1: registering, 2: unregistering, 3: waitlist->registered)
+	* @return  	boolean  	TRUE: email sent,  FALSE: email not sent
 	*/
-	private function sendConfirmationMail() {
+	private function sendConfirmationMail($status, $action) {
 			//Send email if it should be sent and we have the email of the fe-user
 		$mailconf = $this->settings['mailconf'];
 		if ($mailconf['sendConfirmationMail'] == 1 && $GLOBALS['TSFE']->fe_user->user['email']) {
 				//render email
-			$content = $this->rendering->renderForm('###CONFIRMATION_MAIL###', 'confirmationMail', 'show');
-			$subject = $this->rendering->renderSubject('confirmationMail');
+			switch ($status.'-'.$action) {
+				case '1-1':
+					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_REGISTRATION###', 'emailConfirmationRegistration', 'show');
+					$subject = $this->rendering->renderSubject('emailConfirmationRegistration');
+					break;
+				case '2-1':
+					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_WAITLIST###', 'emailConfirmationWaitlist', 'show');
+					$subject = $this->rendering->renderSubject('emailConfirmationWaitlist');
+					break;
+				case '3-1':
+					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_NOWREGISTERED###', 'emailConfirmationNowregistered', 'show');
+					$subject = $this->rendering->renderSubject('emailConfirmationNowregistered');
+					break;
+				case '1-2':
+					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_REGISTRATION_CANCEL###', 'emailConfirmationRegistrationCancel', 'show');
+					$subject = $this->rendering->renderSubject('emailConfirmationRegistrationCancel');
+					break;
+				case '2-2':
+					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_WAITLIST_CANCEL###', 'emailConfirmationWaitlistCancel', 'show');
+					$subject = $this->rendering->renderSubject('emailConfirmationWaitlistCancel');
+					break;
+				case '1-3':
+					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_WAITLIST_UPGRADE###', 'emailConfirmationWaitlistUpgrade', 'show');
+					$subject = $this->rendering->renderSubject('emailConfirmationWaitlistUpgrade');
+					break;
+			}
 			 
 				//send email
 			$htmlmail = t3lib_div::makeInstance('t3lib_htmlmail');
@@ -671,9 +946,11 @@ class tx_register4cal_main extends tslib_pibase {
 	/*
 	* Send notification email to the organizer (if wanted and email address is set)
 	*
-	* @return  boolean  TRUE: email sent,  FALSE: email not sent
+	* @param	integer		$status: Status of the registration (1: registered, 2: waitlist)
+	* @param	integer		$action: Action: (1: registering, 2: unregistering, 3: waitlist->registered)
+	* @return  	boolean  	TRUE: email sent,  FALSE: email not sent
 	*/
-	private function sendNotificationMail() {
+	private function sendNotificationMail($status, $action) {
 			//Concatenate organizer email and admin email if necessary
 		$mailconf = $this->settings['mailconf'];
 		if ($this->settings['organizer_email'] != '' && $mailconf['adminAddress'] != '') {
@@ -685,8 +962,28 @@ class tx_register4cal_main extends tslib_pibase {
 			//Send email if it should be sent and we have at least one email adress given
 		if ($mailconf['sendNotificationMail'] == 1 && ($mailTo != '')) {
 				//render email
-			$content = $this->rendering->renderForm('###NOTIFICATION_MAIL###', 'notificationMail', 'show');
-			$subject = $this->rendering->renderSubject('notificationMail');
+			switch ($status.'-'.$action) {
+				case '1-1':
+					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_REGISTRATION###', 'emailNotificationRegistration', 'show');
+					$subject = $this->rendering->renderSubject('emailNotificationRegistration');
+					break;
+				case '2-1':
+					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_WAITLIST###', 'emailNotificationWaitlist', 'show');
+					$subject = $this->rendering->renderSubject('emailNotificationWaitlist');
+					break;
+				case '1-2':
+					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_REGISTRATION_CANCEL###', 'emailNotificationRegistrationCancel', 'show');
+					$subject = $this->rendering->renderSubject('emailNotificationRegistrationCancel');
+					break;
+				case '2-2':
+					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_WAITLIST_CANCEL###', 'emailNotificationWaitlistCancel', 'show');
+					$subject = $this->rendering->renderSubject('emailNotificationWaitlistCancel');
+					break;		
+				case '1-3':
+					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_WAITLIST_UPGRADE###', 'emailNotificationWaitlistUpgrade', 'show');
+					$subject = $this->rendering->renderSubject('emailNotificationWaitlistUpgrade');
+					break;					
+			}
 			 
 				//send email
 			$htmlmail = t3lib_div::makeInstance('t3lib_htmlmail');

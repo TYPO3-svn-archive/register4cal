@@ -50,11 +50,31 @@ $tempColumns = array (
 			'default'  => '0'
 		)
 	),
+	'tx_register4cal_maxattendees' => array (		
+		'exclude' => 0,		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_maxattendees',		
+		'config' => array (
+			'type'     => 'input',
+			'size'     => '8',
+			'max'      => '10',
+			'eval'     => 'num',
+			'checkbox' => '0',
+			'default'  => '0'
+		)
+	),
+
+	'tx_register4cal_waitlist' => array (		
+		'exclude' => 0,		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist',		
+		'config' => array (
+			'type' => 'check',
+		)
+	),
 );
 
 t3lib_div::loadTCA('tx_cal_event');
 t3lib_extMgm::addTCAcolumns('tx_cal_event',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('tx_cal_event','tx_register4cal_activate;;;;1-1-1, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_emailto, tx_register4cal_feUserView');
+t3lib_extMgm::addToAllTCAtypes('tx_cal_event','--div--;LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_tablabel,tx_register4cal_activate;;;;1-1-1, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees, tx_register4cal_waitlist');
 
 $tempColumns = Array (
 	'tx_register4cal_feUserId' => array (		

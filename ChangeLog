@@ -1,3 +1,8 @@
+2009-11-29 Thomas Ernst	<typo3@thernst.de>
+	* Fields in event table now displayed in a separate tab in the backend
+	* [Feature 5492] Limit number of attendees and implement waitlist
+	* [Feature 5491] Allow cancelation of registration
+
 2009-10-20 Thomas Ernst <typo3@thernst.de>
 	* Published version 0.4.2
 
