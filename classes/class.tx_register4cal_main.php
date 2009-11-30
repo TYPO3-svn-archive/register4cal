@@ -123,13 +123,19 @@ class tx_register4cal_main extends tslib_pibase {
 				$content = $this->renderListRegistrationEvent($event);
 					// Count registration form in user's session data
 				$GLOBALS['TSFE']->fe_user->fetchSessionData();
-				$count = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount');
+				$count = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount_register');
 				$count = $count + 1;
-				$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount', $count);
+				$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount_register', $count);
 				$GLOBALS['TSFE']->fe_user->storeSessionData();
 			} else {
 					// User has already registered for this event. Show this information.
 				$content = $this->renderListRegistrationDetails($status);
+					// Count registration form in user's session data
+				$GLOBALS['TSFE']->fe_user->fetchSessionData();
+				$count = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount_unregister');
+				$count = $count + 1;
+				$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount_unregister', $count);
+				$GLOBALS['TSFE']->fe_user->storeSessionData();				
 			}				
 		}
 		return $content;
@@ -153,11 +159,14 @@ class tx_register4cal_main extends tslib_pibase {
 	 *
 	 */
 	public function listViewRegistrationSubmit() {
-			// Read listeventcount from user'S session data
+			// Read listeventcount from user's session data
 		$GLOBALS["TSFE"]->fe_user->fetchSessionData();
-		$count = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount');
-		$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount', 0);
+		$countRegister = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount_register');
+		$countUnregister = $GLOBALS['TSFE']->fe_user->getKey('ses', 'tx_register4cal_listeventcount_unregister');
+		$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount_register', 0);
+		$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_register4cal_listeventcount_unregister', 0);
 		$GLOBALS['TSFE']->fe_user->storeSessionData();
+		$count = $countRegister + $countUnregister;
 		
 			// Show submit button if at least one event with registration form is being displayed
 		$content =  $count > 0 ? $this->renderListRegistrationSubmit() : '';
@@ -182,15 +191,29 @@ class tx_register4cal_main extends tslib_pibase {
 					$this->piVars = $registration;
 					if ($this->storeData($registration, $event, $status)) {
 							// ... storing sucessful -->Send emails and show registration confirmation
-						$notificationSent = $this->sendNotificationMail($status);
-						$confirmationSent = $this->sendConfirmationMail($status);
+						$notificationSent = $this->sendNotificationMail($status,1);
+						$confirmationSent = $this->sendConfirmationMail($status,1);
+					}
+					unset($this->registration->piVars);
+				} elseif ($registration['unregister'] == 1) {
+				
+					$event = $this->readEventRecord($uid);
+					$this->rendering->setEvent($event);
+					$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
+					$registration['uid'] = $uid;
+					$registration['getdate'] = $getdate;
+					$this->piVars = $registration;
+					if ($this->storeDataUnregister($registration, $event, $status)) {
+							// ... storing sucessful -->Send emails and show registration confirmation
+						$notificationSent = $this->sendNotificationMail($status,2);
+						$confirmationSent = $this->sendConfirmationMail($status,2);
+						$this->checkWaitlist($getdate, $event);
 					}
 					unset($this->registration->piVars);
 				}
 			}
 		}
 	}
-	
 	
 	/***********************************************************************************************************************************************************************
 	*
@@ -766,16 +789,18 @@ class tx_register4cal_main extends tslib_pibase {
 		switch ($regStatus) {
 			case 0:
 				// Registration not possible
-				$content = $this->rendering->renderForm('###NOREGISTER_FORM###', 'noregisterForm', 'show');
+				$content = $this->rendering->renderForm('single.noregister', 'show');
 				break;
 			case 1:
-			case 3:
 				// Registration active
-				$content = $this->rendering->renderForm('###REGISTRATION_FORM###', 'registrationForm', 'edit');
+				// Falltrough
+			case 3:
+				// Reregistration active
+				$content = $this->rendering->renderForm('single.registration.enter', 'edit');
 				break;
 			case 2:
 				// Waitlist registration active
-				$content = $this->rendering->renderForm('###WAITLIST_FORM###', 'waitlistForm', 'edit');
+				$content = $this->rendering->renderForm('single.waitlist.enter', 'edit');
 				break;
 		}
 				
@@ -790,10 +815,10 @@ class tx_register4cal_main extends tslib_pibase {
 	private function renderRegistrationConfirmation($status) {
 		switch ($status) {
 			case 1:
-				$content = $this->rendering->renderForm('###CONFIRMATION_FORM###', 'confirmationForm', 'show');
+				$content = $this->rendering->renderForm('single.registration.confirmation', 'show');
 				break;
 			case 2:
-				$content = $this->rendering->renderForm('###CONFIRMATION_WAITLIST_FORM###', 'confirmationWaitlistForm', 'show');
+				$content = $this->rendering->renderForm('single.waitlist.confirmation', 'show');
 				break;
 		}	
 		
@@ -808,10 +833,10 @@ class tx_register4cal_main extends tslib_pibase {
 	private function renderRegistrationDetails($status) {
 		switch ($status) {
 			case 1:	
-				$content = $this->rendering->renderForm('###ALREADY_REGISTERED###', 'alreadyRegistered', 'show');
+				$content = $this->rendering->renderForm('single.registration.alreadyDone', 'show');
 				break;
 			case 2:
-				$content = $this->rendering->renderForm('###ALREADY_WAITLIST###', 'alreadyWaitlist', 'show');
+				$content = $this->rendering->renderForm('single.waitlist.alreadyDone', 'show');
 				break;
 		}
 		
@@ -826,7 +851,7 @@ class tx_register4cal_main extends tslib_pibase {
 	 * @return   string  	"Need to login" form
 	 */
 	private function renderNeedLoginForm() {
-		return $this->rendering->renderForm('###NEEDLOGIN_FORM###', 'needloginForm', 'show');
+		return $this->rendering->renderForm('single.needLogin', 'show');
 	}
 	
 	/*
@@ -835,7 +860,7 @@ class tx_register4cal_main extends tslib_pibase {
 	* @return  string  	Registration form
 	*/
 	function renderListRegistrationSubmit() {
-		return $this->rendering->renderForm('###LIST_REGISTRATION_SUBMIT###', 'listRegistrationSubmit', 'edit');
+		return $this->rendering->renderForm('list.submit', 'edit');
 	}
 	 
 	/*
@@ -849,15 +874,14 @@ class tx_register4cal_main extends tslib_pibase {
 		switch ($regStatus) {
 			case 0:
 				// Registration not possible
-				//$content = $this->rendering->renderForm('###NOREGISTER_FORM###', 'noregisterForm', 'show');
 				break;
 			case 1:
 				// Registration active
-				$content = $this->rendering->renderForm('###LIST_REGISTRATION_EVENT###', 'listRegistrationEvent', 'edit');
+				$content = $this->rendering->renderForm('list.registration.enter', 'edit');
 				break;
 			case 2:
 				// Waitlist registration active
-				$content = $this->rendering->renderForm('###LIST_WAITLIST_EVENT###', 'listWaitlistEvent', 'edit');
+				$content = $this->rendering->renderForm('list.waitlist.enter', 'edit');
 				break;
 		}
 	
@@ -872,10 +896,10 @@ class tx_register4cal_main extends tslib_pibase {
 	function renderListRegistrationDetails($status) {
 		switch ($status) {
 			case 1:
-				$content = $this->rendering->renderForm('###LIST_ALREADY_REGISTERED###', 'listAlreadyRegistered', 'show');
+				$content = $this->rendering->renderForm('list.registration.alreadydone', 'show');
 				break;
 			case 2:
-				$content = $this->rendering->renderForm('###LIST_ALREADY_WAITLIST###', 'listAlreadyWaitlist', 'show');
+				$content = $this->rendering->renderForm('list.waitlist.alreadydone', 'show');
 				break;
 		}
 		
@@ -896,28 +920,24 @@ class tx_register4cal_main extends tslib_pibase {
 				//render email
 			switch ($status.'-'.$action) {
 				case '1-1':
-					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_REGISTRATION###', 'emailConfirmationRegistration', 'show');
-					$subject = $this->rendering->renderSubject('emailConfirmationRegistration');
+					$content = $this->rendering->renderForm('email.registration.enter.confirmation', 'show');
+					$subject = $this->rendering->renderSubject('email.registration.enter.confirmation');
 					break;
 				case '2-1':
-					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_WAITLIST###', 'emailConfirmationWaitlist', 'show');
-					$subject = $this->rendering->renderSubject('emailConfirmationWaitlist');
-					break;
-				case '3-1':
-					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_NOWREGISTERED###', 'emailConfirmationNowregistered', 'show');
-					$subject = $this->rendering->renderSubject('emailConfirmationNowregistered');
+					$content = $this->rendering->renderForm('email.waitlist.enter.confirmation', 'show');
+					$subject = $this->rendering->renderSubject('email.waitlist.enter.confirmation');
 					break;
 				case '1-2':
-					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_REGISTRATION_CANCEL###', 'emailConfirmationRegistrationCancel', 'show');
-					$subject = $this->rendering->renderSubject('emailConfirmationRegistrationCancel');
+					$content = $this->rendering->renderForm('email.registration.cancel.confirmation', 'show');
+					$subject = $this->rendering->renderSubject('email.registration.cancel.confirmation');
 					break;
 				case '2-2':
-					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_WAITLIST_CANCEL###', 'emailConfirmationWaitlistCancel', 'show');
-					$subject = $this->rendering->renderSubject('emailConfirmationWaitlistCancel');
+					$content = $this->rendering->renderForm('email.waitlist.cancel.confirmation', 'show');
+					$subject = $this->rendering->renderSubject('email.waitlist.cancel.confirmation');
 					break;
 				case '1-3':
-					$content = $this->rendering->renderForm('###EMAIL_CONFIRMATION_WAITLIST_UPGRADE###', 'emailConfirmationWaitlistUpgrade', 'show');
-					$subject = $this->rendering->renderSubject('emailConfirmationWaitlistUpgrade');
+					$content = $this->rendering->renderForm('email.waitlist.upgrade.confirmation', 'show');
+					$subject = $this->rendering->renderSubject('email.waitlist.upgrade.confirmation');
 					break;
 			}
 			 
@@ -964,24 +984,24 @@ class tx_register4cal_main extends tslib_pibase {
 				//render email
 			switch ($status.'-'.$action) {
 				case '1-1':
-					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_REGISTRATION###', 'emailNotificationRegistration', 'show');
-					$subject = $this->rendering->renderSubject('emailNotificationRegistration');
+					$content = $this->rendering->renderForm('email.registration.enter.notification', 'show');
+					$subject = $this->rendering->renderSubject('email.registration.enter.notification');
 					break;
 				case '2-1':
-					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_WAITLIST###', 'emailNotificationWaitlist', 'show');
-					$subject = $this->rendering->renderSubject('emailNotificationWaitlist');
+					$content = $this->rendering->renderForm('email.waitlist.enter.notification', 'show');
+					$subject = $this->rendering->renderSubject('email.waitlist.enter.notification');
 					break;
 				case '1-2':
-					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_REGISTRATION_CANCEL###', 'emailNotificationRegistrationCancel', 'show');
-					$subject = $this->rendering->renderSubject('emailNotificationRegistrationCancel');
+					$content = $this->rendering->renderForm('email.registration.cancel.notification', 'show');
+					$subject = $this->rendering->renderSubject('email.registration.cancel.notification');
 					break;
 				case '2-2':
-					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_WAITLIST_CANCEL###', 'emailNotificationWaitlistCancel', 'show');
-					$subject = $this->rendering->renderSubject('emailNotificationWaitlistCancel');
+					$content = $this->rendering->renderForm('email.waitlist.cancel.notification', 'show');
+					$subject = $this->rendering->renderSubject('email.waitlist.cancel.notification');
 					break;		
 				case '1-3':
-					$content = $this->rendering->renderForm('###EMAIL_NOTIFICATION_WAITLIST_UPGRADE###', 'emailNotificationWaitlistUpgrade', 'show');
-					$subject = $this->rendering->renderSubject('emailNotificationWaitlistUpgrade');
+					$content = $this->rendering->renderForm('email.waitlist.upgrade.notification', 'show');
+					$subject = $this->rendering->renderSubject('email.waitlist.upgrade.notification');
 					break;					
 			}
 			 

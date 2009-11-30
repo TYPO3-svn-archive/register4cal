@@ -182,7 +182,6 @@ class tx_register4cal_render {
        /*
          * Renders a form
 	 *      
-	 * @param	string		@templateSupart: Template subpart to use
 	 * @param	array		@confName: Name of TS config for the form to render
 	 * @param	string		@mode: View-Mode to render (edit or show)
 	 * @param	string		@templateSubpartSubpart: Subpart of the template subpart to use
@@ -191,13 +190,23 @@ class tx_register4cal_render {
 	 *
          * @return 	string		Rendered fields
          */	
-	public function renderForm($templateSubpart, $confName, $mode, $templateSubpartSubpart = '', $presetSubpartMarker = Array(), $presetMarker = Array()) {
+	public function renderForm($confName, $mode, $templateSubpartSubpart = '', $presetSubpartMarker = Array(), $presetMarker = Array()) {
+			// get requested configuration
+		$conf = $this->settings['forms'];
+		$confArray = explode('.', $confName);
+		foreach ($confArray as $confPart) {
+			$conf = $conf[$confPart.'.'];
+		}
+		
+		if (!isset($conf)) return $this->renderError('Configuration "'.$confName.'" not set!');
+		
 			// get requested template subpart
+		$templateSubpart = '###'.$conf['subtemplate'].'###';
 		$template = $this->cObj->getSubpart($this->settings['template'], $templateSubpart);
+		if ($template == '') return $this->renderError('Template "'.$templateSubpart.'" not set!');
 		if ($templateSubpartSubpart != '') $template = $this->cObj->getSubpart($template, $templateSubpartSubpart);
 		
-			// get requested configuration
-		$conf = $this->settings['forms'][$confName . '.'];
+		
 		
 			// replace preset subparts in the template
 		foreach ($presetSubpartMarker as $marker => $content) {
@@ -238,7 +247,23 @@ class tx_register4cal_render {
          * @return 	string		Rendered fields
          */	
 	public function renderSubject($confName) {
-		return $this->applyWrap('', $this->settings['forms'][$confName.'.'], 'subject', 'show');
+			// get requested configuration
+		$conf = $this->settings['forms'];
+		$confArray = explode('.', $confName);
+		foreach ($confArray as $confPart) {
+			$conf = $conf[$confPart.'.'];
+		}
+		
+		return $this->applyWrap('', $conf, 'subject', 'show');
+	}
+	
+	public function renderError($error) {
+		$content = '<div style="border:2px solid red;width:100%;padding:2px;margin_2px;background-color:red;">'.
+			   '<span style="font-size:x-large;color:yellow;">Extension register4cal: Error</span>'.
+			   '<p style="background-color:white;padding:1em;">'.$error.'</p>'.
+			   '<p style="background-color:white;padding:1em;">'.t3lib_div::debug_trail().'</p>'.
+			   '</div>';
+		return $content;
 	}
 
 

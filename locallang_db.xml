@@ -23,6 +23,8 @@
 			<label index="tx_cal_event.tx_register4cal_regend">Registration end</label>
 			<label index="tx_cal_event.tx_register4cal_maxattendees">Maximum number of attendees</label>
 			<label index="tx_cal_event.tx_register4cal_waitlist">Activate waitlist</label>
+			<label index="tx_cal_event.tx_register4cal_waitlist_on">active</label>
+			<label index="tx_cal_event.tx_register4cal_waitlist_off">inactive</label>
 			<label index="tx_cal_organizer.tx_register4cal_feUserId">Users who are allowed to see the registrations for events of this organizer</label>
 			<label index="tt_content.list_type_pi1">Registrations for TYPO3-Calendar</label>
 		</languageKey>
@@ -44,6 +46,8 @@
 			<label index="tx_cal_event.tx_register4cal_regend">Anmeldung bis</label>
 			<label index="tx_cal_event.tx_register4cal_maxattendees">Maximale Anzahl Teilnehmer</label>
 			<label index="tx_cal_event.tx_register4cal_waitlist">Warteliste aktivieren</label>
+			<label index="tx_cal_event.tx_register4cal_waitlist_on">aktiv</label>
+			<label index="tx_cal_event.tx_register4cal_waitlist_off">inaktiv</label>
 			<label index="tx_cal_organizer.tx_register4cal_feUserId">Web-Site-Benutzer die Anmeldungen zu Terminen dieses Organisators sehen dürfen</label>
 			<label index="tt_content.list_type_pi1">Anmeldungen für den TYPO3-Kalender</label>
 		</languageKey>
