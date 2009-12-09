@@ -74,9 +74,12 @@
 									<td>###LABEL_event_organizer_name###</td>	<td>###EVENT_organizer_name###</td>	<td>event_organizer_name</td>	<td>label_event-organizer_name</td></tr>
 		<tr><td colspan="2">Email of organizer (either from event or organizer table)</td>
 									<td>###LABEL_event_organizer_email###</td>	<td>###EVENT_organizer_email###</td>	<td>event_organizer_email</td>	<td>label_event-organizer_email</td></tr>
-		<tr><td colspan="2">Formated start of event</td>	<td>LABEL_event-formated_start</td>		<td>###EVENT_formated_start###</td>	<td>event_formated_start</td>	<td>label_event-formated_start</td></tr>
-		<tr><td colspan="2">Formated end of event</td>		<td>LABEL_event-formated_end</td>		<td>###EVENT_formated_end###</td>	<td>event_formated_endt</td>	<td>label_event-formated_end</td></tr>
-		<tr><td colspan="2">Registration status</td>		<td>LABEL_status</td>				<td>###STATUS###</td>			<td>status</td>			<td>label_status</td></tr>
+		<tr><td colspan="2">Formated start of event</td>	<td>###LABEL_event-formated_start###</td>	<td>###EVENT_formated_start###</td>	<td>event_formated_start</td>	<td>label_event-formated_start</td></tr>
+		<tr><td colspan="2">Formated end of event</td>		<td>###LABEL_event-formated_end###</td>		<td>###EVENT_formated_end###</td>	<td>event_formated_endt</td>	<td>label_event-formated_end</td></tr>
+		<tr><td colspan="2">Registration status</td>		<td>###LABEL_status###</td>			<td>###STATUS###</td>			<td>status</td>			<td>label_status</td></tr>
+		<tr><td colspan="2">Max. # of attendees</td>		<td>###LABEL_maxattendees###</td>		<td>###MAXATTENDEES###</td>		<td>maxattendees</td>		<td>label_maxattendees</td></tr>
+		<tr><td colspan="2">Current # of attendees</td>		<td>###LABEL_numattendees###</td>		<td>###NUMATTENDES###</td>		<td>numattendees</td>		<td>label_numattendees</td></tr>
+		<tr><td colspan="2">Current # of waitlist entries</td>	<td>###LABEL_numwaitlist###</td>		<td>###NUMWAITLIST###</td>		<td>numwaitlist</td>		<td>label_numwaitlist</td></tr>
 	</table>
 
 	<hr /><h1>Templates for single view</h1><hr /><!-- *************************************************************************************************************** -->
@@ -109,6 +112,9 @@
 	###HEADING###
 	###TEXTTOP###
 	<!-- ###FORM### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_maxattendees### ###MAXATTENDEES###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_numattendees### ###NUMATTENDEES###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_numwaitlist### ###NUMWAITLIST###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
@@ -144,7 +150,7 @@
 	<!-- ###SINGLE_REGISTRATION_ALREADYDONE### begin -->
 	###HEADING###
 	###TEXTTOP###
-	<!-- ###FORM### begin -->
+	<!-- ###FORM### begin -->	
 	<!-- ###TABLINE### begin -->###LABEL_status### ###STATUS###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###FIELDS###<!-- ###TABLINE### end -->
 	###UNREGISTER###
@@ -160,6 +166,9 @@
 	###HEADING###
 	###TEXTTOP###
 	<!-- ###FORM### begin -->
+	<!-- ###TABLINE### begin -->###LABEL_maxattendees### ###MAXATTENDEES###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_numattendees### ###NUMATTENDEES###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_numwaitlist### ###NUMWAITLIST###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
@@ -265,22 +274,11 @@
 	
 	
 
-	
-
-	
-
-	
-
-	
-	
-	
-	
-
-
-	<h1>Template to display an event list</h1>
+	<hr /><h1>Templates for list output</h1><hr /><!-- *************************************************************************************************************** -->
+	<h2>LIST_EVENTS</h2>
 	<p>This template defines how an event list should be displayed.</p>
 	<pre>
-	<!-- ###EVENT_LIST### begin -->
+	<!-- ###LIST_EVENTS### begin -->
 	<!-- ###TABLE### begin -->
 		<!-- ###TABLINE### begin -->
 		###LABEL_event-title###
@@ -309,13 +307,13 @@
 			<!-- ###TABLINE### end -->
 		<!-- ###NOLOGIN### end -->
 	<!-- ###TABLE### end -->
-	<!-- ###EVENT_LIST### end -->
+	<!-- ###LIST_EVENTS### end -->
 	</pre>
 	
-	<h1>Template to display an participants list</h1>
-	<p>This template defines how a participants list should be displayed.</p>
+	<h2>LIST_ATTENDEES</h2>
+	<p>This template defines how a attendees list should be displayed.</p>
 	<pre>
-	<!-- ###PARTICIPANT_LIST### begin -->
+	<!-- ###LIST_ATTENDEES### begin -->
 	<!-- ###TABLE### begin -->
 		<!-- ###NOEVENTS### begin -->
 			###LABEL_registration-noevents###
@@ -329,6 +327,12 @@
 			###LABEL_event-formated_start### ###EVENT_formated_start### 
 			###LABEL_event-formated_end### ###EVENT_formated_end###
 			<!-- ###TABLINE### end -->
+			<!-- ###TABLINE### begin -->
+			###LABEL_maxattendees### ###MAXATTENDEES###
+			###LABEL_numattendees### ###NUMATTENDEES###
+			###LABEL_numwaitlist### ###NUMWAITLIST###
+			###WAITLISTCHECKBUTTON###
+			<!-- ###TABLINE### end -->			
 			<!-- ###TABLINE### begin -->
 			###LABEL_user-name###
 			###LABEL_user-address###
@@ -357,7 +361,7 @@
 			<!-- ###TABLINE### end -->
 		<!-- ###NOLOGIN### end -->		
 	<!-- ###TABLE### end -->
-	<!-- ###PARTICIPANT_LIST### end -->
+	<!-- ###LIST_ATTENDEES### end -->
 	</pre>
 
 	<hr /><h1>Templates for Emails</h1><hr /><!-- *********************************************************************************************************************** -->

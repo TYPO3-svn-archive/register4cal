@@ -62,11 +62,11 @@ class tx_register4cal_render {
 	 *
          * @return	void
          */	
-	public function tx_register4cal_render($referring_pi_base, $settings) {
+	public function tx_register4cal_render($referring_pi_base, &$settings) {
 			// instance of pi_base referring to this class
 		$this->pi_base = $referring_pi_base;
 		$this->cObj = $referring_pi_base->cObj;
-		$this->settings = $settings;
+		$this->settings = &$settings;
 		
 			// clear variables
 		unset($this->event);
@@ -465,8 +465,30 @@ class tx_register4cal_render {
 					$hiddenFields .= '<input type="hidden" name="' . $this->pi_base->prefixId . '[cmd]" value="unregister" />';
 					$hiddenFields .= '<input type="hidden" name="no_cache" value="1" />';
 					$marker = $this->applyWrap($hiddenFields, $conf, 'unregister', $mode);
-					
 				}	
+				break;
+			case 'MAXATTENDEES':
+				$value = $this->event['data']['tx_register4cal_maxattendees'];
+				$marker = $this->applyWrap($value, $conf, 'maxattendees', $mode);
+				break;
+			case 'NUMATTENDEES':
+				if (!isset($this->event['regcount'])) $this->event['regcount'] = tx_register4cal_user1::getRegistrationCount($this->event['data']['uid'], $this->event['data']['start_date'], $this->event['data']['pid']);
+				$value = $this->event['regcount'][1];
+				$marker = $this->applyWrap($value, $conf, 'numattendees', $mode);
+				break;
+			case 'NUMWAITLIST':
+				if (!isset($this->event['regcount'])) $this->event['regcount'] = tx_register4cal_user1::getRegistrationCount($this->event['data']['uid'], $this->event['data']['start_date'], $this->event['data']['pid']);
+				$value = $this->event['regcount'][2];
+				$marker = $this->applyWrap($value, $conf, 'numwaitlist', $mode);
+				break;
+			case 'WAITLISTCHECKBUTTON':
+				$value = 	'<form action="'. $this->pi_base->pi_getPageLink($GLOBALS["TSFE"]->id) . '" method="post">'.
+						'<input type="hidden" name="tx_register4cal_main[cmd]" value="checkwaitlist" />'.
+						'<input type="hidden" name="tx_register4cal_main[uid]" value="' . $this->event['data']['uid'] . '" />'.
+						'<input type="hidden" name="tx_register4cal_main[getdate]" value="' . $this->event['data']['start_date'] . '" />'.
+						'<input type="submit" value = "' . $this->pi_base->pi_getLL('label.checkwaitlistbutton') . '" />'.
+						'</form>';
+				$marker = $this->applyWrap($value, $conf, 'waitlistcheckbutton', $mode);
 				break;
 			default :
 				if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
@@ -638,8 +660,27 @@ class tx_register4cal_render {
 			$this->event['organizerEmail'] ='';
 		} else {
 				// Organizer and email in separate organizer record
+			$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
+			$useOrganizerStructure = ($confArr['useOrganizerStructure'] ? $confArr['useOrganizerStructure'] : 'tx_cal_organizer');
+
+				// which table to use?
+			switch ($useOrganizerStructure) {
+				case 'tx_tt_address':
+					$table = 'tt_address';
+					break;
+				case 'tx_partner_main':
+					$table = 'tx_partner_main';
+					break;
+				case 'tx_feuser':
+					$table = 'fe_users';
+					break;
+				default:
+					$table = 'tx_cal_organizer';
+					break;
+			}
+				
+				// read data
 			$select = '*';
-			$table = 'tx_cal_organizer';
 			$where = 'uid=' . intval($this->event['data']['organizer_id']);
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);

@@ -45,6 +45,7 @@ require_once(t3lib_extMgm::extPath('cal') . 'res/pearLoader.php');
  * @subpackage	tx_register4cal
  */
 class tx_register4cal_user1 {
+	var $validateEvent;
 	
 	/*
 	 * Return an instance of the register4cal main class
@@ -62,7 +63,6 @@ class tx_register4cal_user1 {
 	 *
 	 * @param	string		$title: Title of the error message
 	 * @param	string		$text: Text of error message
-	 *
 	 * @return	string		rendered error message
 	 */	
 	public static function errormessage($title,$text) {
@@ -75,17 +75,64 @@ class tx_register4cal_user1 {
 		return $content;
 	}
 	
+	
+	/*
+	* Determine the number of registrations per registration status
+	*
+	* @param	integer		$eventUid: Uid if the event
+	* @param	integer		$eventGetDate: Date of the event
+	* @param	integer		$eventPid: Pid where the event (and the registration) is stored
+	* @return  	Array  		Associative array, containing the number of registrations per status
+	*/
+	public static function getRegistrationCount($eventUid, $eventGetDate, $eventPid) {
+			// Initialize Array
+		$statusCount = Array();
+		for($i = 1; $i <=3; $i++) $statusCount[$i] = 0;
+
+			// Count registrations
+		$select = 'status, count(*) as number';
+		$table = 'tx_register4cal_registrations';
+		$where = 'cal_event_uid=' . intval($eventUid) .
+			 ' AND cal_event_getdate=' . intval($eventGetDate) .
+			 ' AND pid=' . intval($eventPid) .
+			 ' AND deleted=0';
+		//	 $this->cObj->enableFields('tx_register4cal_registrations');
+		$orderBy = '';
+		$groupBy = 'status';
+		$resCount = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy , $orderBy, $limit);
+		if ($GLOBALS['TYPO3_DB']->sql_num_rows($resCount) != 0) {
+			while (($rowCount = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resCount))) $statusCount[$rowCount['status']] = $rowCount['number'];
+		}
+
+		return $statusCount;
+	}	
 /***********************************************************************************************************************************************************************
  *
  * Frontend editing
  *
  **********************************************************************************************************************************************************************/
+ 	/*
+         * Read an event record from the database
+         *
+	 * @param	integer		$eventUid: uid of the event to read
+         * @return	array		Event record
+         */
+	private function readEventRecord($eventUid) {
+		$select = 'tx_cal_event.*';
+		$table = 'tx_cal_event';
+		$where = 'tx_cal_event.uid=' . intval($eventUid);
+		$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
+		$event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
+		$GLOBALS['TYPO3_DB']->sql_free_result($result);
+		
+		return $event;
+	}
+ 
 	/*
          * UserFunction to convert a date into a timestamp
          *
 	 * @param	string		$content: Content the element
 	 * @param	array		$conf: Configuration of stdWrap
-	 *
          * @return 	new value for the content element
          */	
 	public function convertToTimestamp($content, $conf) {
@@ -100,7 +147,6 @@ class tx_register4cal_user1 {
 	 * @param	string		$string: Date to change
 	 * @param	string		$default: Default value used in case of errors
 	 * @param	int		$timestamp: 1: Return timestamp, 0: return "Y-m-d"
-	 *
          * @return 	converted date
          */	 
 	public static function getTimestamp($string, $default = 'now', $timestamp = 1) {
@@ -140,7 +186,6 @@ class tx_register4cal_user1 {
 	 * @param	integer		$time: Time to format (Should be in seconds since midnight)
 	 * @param	string		$format: Format which should be provided (PEAR-Syntax)
 	 * @param	string		$timezone: TZ to which the date/time should be convertet. Source-TZ is the system's default TZ.
-	 *
          * @return 	string		Formated and converted date/time
          */
 	static function formatDate($date, $time, $format, $timezone='') {
@@ -157,6 +202,55 @@ class tx_register4cal_user1 {
 		}
 		return $dateObj->format($format);
 	}
+
+	/*
+         * UserFunction to validate changes for tx_register4cal_activate
+         *
+	 * @param	integer		$value: Uid of the changed event
+	 * @param	array		$rule: Rule with constrains for field
+         * @return 	boolean		TRUE: Field ok, FALSE: Field not ok
+         */
+	public function validateActivate($value, $rule) {
+		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_checks.php'); 
+		
+		if (!tx_register4cal_checks::getEvent($value, $oldEvent, $error)) return false;
+		$newEvent = t3lib_div::GParrayMerged('tx_cal_controller');
+		
+		return tx_register4cal_checks::checkActivate($oldEvent, $newEvent, $error);		
+	}
+	
+	/*
+         * UserFunction to validate changes for tx_register4cal_maxattendees
+         *
+	 * @param	integer		$value: Uid of the changed event
+	 * @param	array		$rule: Rule with constrains for field
+         * @return 	boolean		TRUE: Field ok, FALSE: Field not ok
+         */
+	 public function validateMaxattendees($value, &$rule) {
+		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_checks.php'); 
+		
+		if (!tx_register4cal_checks::getEvent($value, $oldEvent, $error)) return false;
+		$newEvent = t3lib_div::GParrayMerged('tx_cal_controller');
+		
+		return tx_register4cal_checks::checkMaxattendees($oldEvent, $newEvent, $error);		
+	}	
+	
+	/*
+         * UserFunction to validate changes for tx_register4cal_waitlist
+         *
+	 * @param	integer		$value: Uid of the changed event
+	 * @param	array		$rule: Rule with constrains for field
+         * @return 	boolean		TRUE: Field ok, FALSE: Field not ok
+         */	
+	public function validateWaitlist($value, &$rule) {
+		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_checks.php'); 
+		
+		if (!tx_register4cal_checks::getEvent($value, $oldEvent, $error)) return false;
+		$newEvent = t3lib_div::GParrayMerged('tx_cal_controller');
+		
+		return tx_register4cal_checks::checkWaitlist($oldEvent, $newEvent, $error);		
+	}	
+	
 	
 /***********************************************************************************************************************************************************************
  *
@@ -168,7 +262,6 @@ class tx_register4cal_user1 {
 	 *      
          * @param  	array		$PA: item data
 	 * @param	??		$fobj: ??
-	 *
          * @return 	string		Formated and converted date/time
          */
 	public function additionalDataForBackend($PA, $fobj) {

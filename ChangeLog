@@ -1,3 +1,11 @@
+2009-12-09 Thomas Ernst <typo3@thernst.de>
+	* register4cal-related fields validated in backend editing
+	* register4cal-related fields validated in frontend editing
+	* Corrected bug using organizer email for the notification mail (thanks to Joerg Kummer)
+	* Supporting different cal organizer data model (thanks to Joerg Kummer)
+	* Waitlist-Checking can be initiated from attendees list for organizer
+	* Markers for no. of places, no. of attendees and no. of waitlist entries available
+
 2009-11-29 Thomas Ernst	<typo3@thernst.de>
 	* Fields in event table now displayed in a separate tab in the backend
 	* [Feature 5492] Limit number of attendees and implement waitlist

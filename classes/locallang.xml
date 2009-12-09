@@ -158,7 +158,15 @@
 			<label index="label.status">Status of registration</label>
 			<label index="label.status.1">Registered</label>
 			<label index="label.status.2">Waitlist</label>
-			<label index="label.status.3">Cancelled</label>						
+			<label index="label.status.3">Cancelled</label>	
+			<label index="label.maxattendees">Number of places</label>
+			<label index="label.numattendees">Occupied places</label>
+			<label index="label.numwaitlist">Waitlist entries</label>
+			
+			<label index="label.checkwaitlistbutton">Check waitlist</label>
+			<label index="error.activate">Registration must not be deactivated if registrations are already recorded.</label>
+			<label index="error.maxattendees">The maximum number of registrations must not be reduced to a value less than the current number of registrations.</label>
+			<label index="error.waitlist">The waitlist must not be deactivated if it already contains entries.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="default.submitbutton">Für diesen Termin anmelden</label>
@@ -307,6 +315,14 @@
 			<label index="label.status.1">Angemeldet</label>
 			<label index="label.status.2">Warteliste</label>
 			<label index="label.status.3">Zurückgezogen</label>
+			<label index="label.maxattendees">Anzahl Plätze</label>
+			<label index="label.numattendees">Belegte Plätze</label>
+			<label index="label.numwaitlist">Einträge auf Warteliste</label>
+			
+			<label index="label.checkwaitlistbutton">Warteliste prüfen</label>
+			<label index="error.activate">Die Anmeldung darf nicht deaktiviert werden, wenn bereits Anmeldungen gespeichert wurden.</label>
+			<label index="error.maxattendees">Die maximale Anzahl Anmeldungen darf nicht auf einen Wert reduziert werden, der niedriger ist als die aktuelle Anzahl Anmeldungen.</label>			
+			<label index="error.waitlist">Die Warteliste darf nicht deaktiviert werden, wenn sie bereits Einträge enthält.</label>
 		</languageKey>
 	</data>
 </T3locallang>

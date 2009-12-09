@@ -34,7 +34,10 @@
  *
  * Hint: use extdeveval to insert/update function index above.
  */
- 
+
+require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_user1.php'); 
+require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_checks.php'); 
+
 /**
  * Delete registrations when the relating event is being deleted by processing the hook 'processDatamap_afterAllOperations'
  *
@@ -62,6 +65,20 @@ class tx_register4cal_behooks {
 						}
 					}
 				}
+			}
+		}
+	}
+	
+	/***********************************************************************************************************************************************************************
+	*
+	* Hook from TCEmain to check event on the change of an event
+	*
+	**********************************************************************************************************************************************************************/	
+	function processDatamap_postProcessFieldArray($status, &$table, $id, &$fieldArray, $otherThis) {
+		if ($table == 'tx_cal_event' && $status == 'update') {
+			if (!tx_register4cal_checks::checkAll_Backend($id, $fieldArray, &$error)) {
+				$otherThis->log($table, $id, 5,0,1,$error);
+				$table = '';
 			}
 		}
 	}
