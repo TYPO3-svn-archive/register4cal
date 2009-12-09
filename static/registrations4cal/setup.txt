@@ -156,8 +156,8 @@ plugin.tx_register4cal_pi1{
 			label_registration-noitems.dataWrap = <td colspan="4">|</td>
 			label_registration-nologin.dataWrap = |
 			label_registration-noevents.dataWrap = |
-			label_event-noitems.dataWrap = <td colspan="4">|</td>	
-			label_event-nologin.dataWrap = <td colspan="4">|</td>
+			label_event-noitems.dataWrap = <td colspan="5">|</td>	
+			label_event-nologin.dataWrap = <td colspan="5">|</td>
 		}
 
 		# Registration in event single view ###################################################################################################################

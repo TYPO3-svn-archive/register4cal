@@ -461,7 +461,7 @@ class tx_register4cal_main extends tslib_pibase {
 		$feUserId = $GLOBALS['TSFE']->fe_user->user['uid'];
 		if ($feUserId != 0) {
 			$isAdminUser = in_Array($feUserId, $this->settings['adminusers']);
-			
+			$config = 'listOutput.events';
 				//user is the current user in this case
 			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
 			
@@ -491,7 +491,7 @@ class tx_register4cal_main extends tslib_pibase {
 					if ($GLOBALS['TYPO3_DB']->sql_num_rows($resEvent) != 0) {
 						while (($rowEvent = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resEvent))) {
 							$this->rendering->setEvent($rowEvent);
-							$items.=$this->rendering->renderForm('EVENT_LIST', 'eventList', 'show', 'ITEMS');
+							$items.=$this->rendering->renderForm($config, 'show', 'ITEMS');
 						}
 					}
 				}
@@ -499,15 +499,15 @@ class tx_register4cal_main extends tslib_pibase {
 			$nologin = '';
 		} else {
 			$items = '';
-			$nologin = $this->rendering->renderForm('EVENT_LIST', 'eventList', 'show', 'NOLOGIN');
+			$nologin = $this->rendering->renderForm($config, 'eventList', 'show', 'NOLOGIN');
 		}
 			//Final rendering
-		if ($items == '' && $nologin == '') $noitems=$this->rendering->renderForm('EVENT_LIST', 'eventList', 'show', 'NOITEMS');
+		if ($items == '' && $nologin == '') $noitems=$this->rendering->renderForm($config, 'show', 'NOITEMS');
 		$PresetSubparts = Array();
 		$PresetSubparts['###ITEMS###'] = $items;
 		$PresetSubparts['###NOITEMS###'] = $noitems;
 		$PresetSubparts['###NOLOGIN###'] = $nologin;
-		$content = $this->rendering->renderForm('EVENT_LIST', 'eventList', 'show', '', $PresetSubparts);
+		$content = $this->rendering->renderForm($config, 'show', '', $PresetSubparts);
 		
 		return $content;
 	}
