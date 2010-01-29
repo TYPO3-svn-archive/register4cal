@@ -113,7 +113,7 @@ class tx_register4cal_render {
 		
 			// instanciate event object
 		$tx_cal_phpicalendar_model = &t3lib_div::makeInstanceClassName('tx_cal_phpicalendar_model');
-		$this->event['object'] = &new $tx_cal_phpicalendar_model($event, FALSE, 'tx_cal_phpicalendar');
+		$this->event['object'] = new $tx_cal_phpicalendar_model($event, FALSE, 'tx_cal_phpicalendar');
 
 			// prepare other event information
 		$this->prepareFormatedDateTime();

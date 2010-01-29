@@ -111,6 +111,7 @@ class tx_register4cal_main extends tslib_pibase {
 	 * @return  	array 		HTML to display
 	 */
 	public function listViewRegistrationEvent($event) {
+		t3lib_div::debug($event,'Event');
 		if ($this->isRegistrationEnabled($event, $event['start_date'])) {
 				// Set propper data to rendering class
 			$this->rendering->setView('list');
@@ -231,6 +232,10 @@ class tx_register4cal_main extends tslib_pibase {
 	*/
 	public function singleEventRegistration($data) {
 		$event = $this->readEventRecord($data['uid']);
+		// Compatibility to cal 1.3: instead of getdate now year, month and day are supplied
+		if (!isset($data['getdate']) && isset($data['year'])) {
+			$data['getdate'] = intval($data['year'] . $data['month'] . $data['day']);
+		}
 		if ($this->isRegistrationEnabled($event, $data['getdate'])) {
 				// Set propper data in rendering class
 			$this->rendering->setView('single');
@@ -547,10 +552,10 @@ class tx_register4cal_main extends tslib_pibase {
 	private function isRegistrationEnabled($event, $getDate) {
 		if ($event['tx_register4cal_activate'] == 1) {
 			$start = $event['tx_register4cal_regstart'];
-			$ende = $event['tx_register4cal_regende'];
+			$ende = $event['tx_register4cal_regend'];
 			$now = time();
-			$start = isset($start) ? $start : $now;
-			$ende = isset($ende) ? $ende : strtotime($getDate);
+			$start = (isset($start) && $start != 0) ? $start : $now;
+			$ende = (isset($ende) && $ende != 0) ? $ende : strtotime($getDate);
 			$regEnabled = ($start <= $now && $ende >= $now);
 		} else {
 			$regEnabled = FALSE;
