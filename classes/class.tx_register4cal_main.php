@@ -111,7 +111,6 @@ class tx_register4cal_main extends tslib_pibase {
 	 * @return  	array 		HTML to display
 	 */
 	public function listViewRegistrationEvent($event) {
-		t3lib_div::debug($event,'Event');
 		if ($this->isRegistrationEnabled($event, $event['start_date'])) {
 				// Set propper data to rendering class
 			$this->rendering->setView('list');

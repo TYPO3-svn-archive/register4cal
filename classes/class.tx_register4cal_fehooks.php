@@ -57,7 +57,7 @@ class tx_register4cal_fehooks {
 		$user = $GLOBALS['TSFE']->fe_user->user;
 		
 		//Conditions to display the registration form (first step)
-		if ($data['view'] == 'event' && $data['uid'] != 0) {	/* Single event view displaying an event */
+		if ($otherThis->conf['view'] == 'event' && $data['uid'] != 0) {	/* Single event view displaying an event */
 			if ($user['uid'] != 0) {			/* An frontend user is logged in     */					
 				$main = tx_register4cal_user1::getReg4CalMainClass();
 				$content .= $main->SingleEventRegistration($data);
