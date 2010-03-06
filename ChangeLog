@@ -1,6 +1,7 @@
 2010-03-06 Thomas Ernst <typo3@thernst.de>
 	* Added danish translation (thanks to Joerg Kummer)
 	* Manual updated
+	* Published version 0.5.0
 
 2010-02-06 Thomas Ernst <typo3@thernst.de>
 	* [Bug 6375] Registration form is displayed with all views if multiple views are placed on one page (thanks to Paul Vetch)
