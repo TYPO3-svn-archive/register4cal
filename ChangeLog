@@ -1,3 +1,15 @@
+2010-03-06 Thomas Ernst <typo3@thernst.de>
+	* Added danish translation (thanks to Joerg Kummer)
+	* Manual updated
+
+2010-02-06 Thomas Ernst <typo3@thernst.de>
+	* [Bug 6375] Registration form is displayed with all views if multiple views are placed on one page (thanks to Paul Vetch)
+
+2010-01-29 Thomas Ernst <typo3@thernst.de>
+	* [Bug 6257] End of registration period not taken into account (thanks to Joerg Kummer)
+	* [Bug 6161] Syntax error in rendering vlass (thanks to Xavier Perseguers)
+	* [Bug 5943] Compatibility to cal 1.3.0 (thanks to Paul Vetch)
+
 2009-12-09 Thomas Ernst <typo3@thernst.de>
 	* register4cal-related fields validated in backend editing
 	* register4cal-related fields validated in frontend editing

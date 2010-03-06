@@ -418,10 +418,9 @@ plugin.tx_register4cal_pi1{
 				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
 			}				
 		}
-		1 >
 		
 		# Example for selection
-		1 {
+		2 {
 			name=Selection
 			caption.default=I attend the event
 			caption.de=Ich nehme teil
