@@ -1,3 +1,6 @@
+2010-03-29 Thomas Ernst <typo3@thernst.de>
+	* [Bug 7056] Fixed XML in locallang.xml
+
 2010-03-06 Thomas Ernst <typo3@thernst.de>
 	* Added danish translation (thanks to Joerg Kummer)
 	* Manual updated

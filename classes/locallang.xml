@@ -333,7 +333,7 @@
 			<label index="single.noregister.textbottom">(Hvis en deltager vedkommendes registrering annulleres, hvis ansøgningen senere maa paa ny)</label>
 			<label index="single.needlogin.heading">Tilmelding til denne begivenhed</label>
 			<label index="single.needlogin.texttop">Tilmeldinger er kun muligt for brugere, som er registreret bruger på vores hjemmeside.</label>
-			<label index=“single.needlogin.textbottom"></label>
+			<label index="single.needlogin.textbottom"></label>
 			<label index="single.needlogin.onetimeaccountbutton">Opret engangs-account</label>
 			<label index="single.needlogin.loginbutton">Tilmelding med eksisterende konto</label>
 			<label index="single.registration.enter.heading">Tilmelding til denne begivenhed</label>
