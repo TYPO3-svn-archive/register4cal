@@ -364,7 +364,7 @@ class tx_register4cal_main extends tslib_pibase {
 						unset($curEventUid);
 						unset($curEventGetdate);
 						unset($items);
-						
+										
 							//get the new event and check it
 						$select = 'tx_cal_event.*, tx_cal_organizer.tx_register4cal_feUserId';
 						$table = 'tx_cal_event, tx_cal_organizer';
@@ -377,16 +377,16 @@ class tx_register4cal_main extends tslib_pibase {
 						$eventRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 						if ($GLOBALS['TYPO3_DB']->sql_num_rows($eventRes) == 0) continue;
 						if (!($event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($eventRes))) continue;
-						if (!$isAdminUser && !in_Array($feUserId, explode(',', $event['tx_register4cal_feUserId']))) continue;
+						if (!$isAdminUser && !in_Array($feUserId, explode(',', $event['tx_register4cal_feUserId']))) continue;;
 						$this->rendering->setEvent($event);
-						
+
 							//store information on this event
 						$curEventUid = $registration['cal_event_uid'];
 						$curEventGetdate = $registration['cal_event_getdate'];
 						if (!in_array($curEventUid, $processedEvents)) $processedEvents[] = $curEventUid;
 					}
 					$this->rendering->setRegistration($registration);
-					
+
 						//get the user
 					$select = 'fe_users.*';
 					$table = 'fe_users';

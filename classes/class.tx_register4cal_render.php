@@ -36,7 +36,8 @@
  */
 
 require_once(t3lib_extMgm::extPath('cal') . 'res/pearLoader.php'); 
-require_once (t3lib_extMgm::extPath('cal') . 'model/class.tx_cal_phpicalendar_model.php');
+require_once(t3lib_extMgm::extPath('cal') . 'model/class.tx_cal_phpicalendar_model.php');
+require_once(t3lib_extMgm::extPath('cal') . 'controller/class.tx_cal_registry.php');
 
 /**
  * Main rendering functions for extension 'register4cal' 
@@ -261,7 +262,7 @@ class tx_register4cal_render {
 		$content = '<div style="border:2px solid red;width:100%;padding:2px;margin_2px;background-color:red;">'.
 			   '<span style="font-size:x-large;color:yellow;">Extension register4cal: Error</span>'.
 			   '<p style="background-color:white;padding:1em;">'.$error.'</p>'.
-			   '<p style="background-color:white;padding:1em;">'.t3lib_div::debug_trail().'</p>'.
+			   //'<p style="background-color:white;padding:1em;">'.t3lib_div::debug_trail().'</p>'.
 			   '</div>';
 		return $content;
 	}
