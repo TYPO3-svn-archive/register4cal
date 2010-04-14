@@ -674,6 +674,19 @@ class tx_register4cal_main extends tslib_pibase {
 				$write['status'] = $status;
 				$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_register4cal_registrations', $write);
 				 
+					// remove previous registration record with status "unregistered" if existing
+				if ($this->settings['keepUnregistered'] == 2) {
+					$update = Array();
+					$update['deleted'] = 1;
+					$where = 'cal_event_uid=' . intval($data['uid']) .
+							' AND cal_event_getdate=' . intval($data['getdate']) .
+							' AND feuser_uid=' . intval($GLOBALS['TSFE']->fe_user->user['uid']) .
+							' AND pid=' . intval($event['pid']) .
+							' AND status=3'.
+							$this->cObj->enableFields('tx_register4cal_registrations');
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_register4cal_registrations', $where, $update);					
+				}
+				 
 				$this->rendering->setRegistration($write);
 				$success = TRUE;
 			} else {
@@ -697,7 +710,7 @@ class tx_register4cal_main extends tslib_pibase {
 	private function storeDataUnregister($data, $event, &$oldStatus) {
 		if ($this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'], $oldStatus)) {	
 			$update = Array();
-			if ($this->settings['keepUnregistered'] == 1) {
+			if ($this->settings['keepUnregistered'] == 1 || $this->settings['keepUnregistered'] == 2) {
 				$update['status'] = 3;
 			} else {
 				$update['deleted'] = 1;
