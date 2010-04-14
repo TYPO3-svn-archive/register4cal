@@ -518,13 +518,6 @@ plugin.tx_cal_controller.rights {
 			public = 1
 			default = 0
 			required = 0
-			constrain.1 {
-				conditionField = uid
-				rule = userfunc
-				userFunc = tx_register4cal_user1->validateActivate
-				message = TEXT
-				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/classes/locallang.xml:error.activate}</span>
-			}
 		}
 		fields.tx_register4cal_regstart {
 			user =
@@ -546,14 +539,6 @@ plugin.tx_cal_controller.rights {
 			public = 1
 			default = 0
 			required = 0
-			constrain.1 {
-				conditionField = uid
-				rule = userfunc
-				userFunc = tx_register4cal_user1->validateMaxattendees
-				message = TEXT
-				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/classes/locallang.xml:error.maxattendees}</span>
-			
-			}
 		}
 		fields.tx_register4cal_waitlist {
 			user =
@@ -561,13 +546,6 @@ plugin.tx_cal_controller.rights {
 			public = 1
 			default = 0
 			required = 0
-			constrain.1 {
-				conditionField = uid
-				rule = userfunc
-				userFunc = tx_register4cal_user1->validateWaitlist
-				message = TEXT
-				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/classes/locallang.xml:error.waitlist}</span>
-			}
 		}		
 	}
 
