@@ -18,6 +18,38 @@ $TCA['tx_register4cal_registrations'] = array (
 	),
 );
 
+$TCA['tx_register4cal_fields'] = array (
+	'ctrl' => array (
+		'title'     => 'LLL:EXT:register4cal/locallang_db.xml:tx_register4cal_fields',		
+		'label'     => 'caption',	
+		'tstamp'    => 'tstamp',
+		'crdate'    => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'type' => 'type',	
+		'languageField'            => 'sys_language_uid',	
+		'transOrigPointerField'    => 'l10n_parent',	
+		'transOrigDiffSourceField' => 'l10n_diffsource',	
+		'default_sortby' => 'ORDER BY caption',	
+		'delete' => 'deleted',	
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_register4cal_fields.gif',
+	),
+);
+
+$TCA['tx_register4cal_fieldsets'] = array (
+	'ctrl' => array (
+		'title'     => 'LLL:EXT:register4cal/locallang_db.xml:tx_register4cal_fieldsets',		
+		'label'     => 'name',	
+		'tstamp'    => 'tstamp',
+		'crdate'    => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'default_sortby' => 'ORDER BY crdate',	
+		'delete' => 'deleted',	
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_register4cal_fieldsets.gif',
+	),
+);
+
 $tempColumns = array (
 	'tx_register4cal_activate' => array (		
 		'exclude' => 0,		
@@ -28,7 +60,8 @@ $tempColumns = array (
 	),
 	'tx_register4cal_regstart' => array (		
 		'exclude' => 0,		
-		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart',		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart',
+		'displayCond' => 'FIELD:tx_register4cal_activate:REQ:true',
 		'config' => array (
 			'type'     => 'input',
 			'size'     => '8',
@@ -40,7 +73,8 @@ $tempColumns = array (
 	),
 	'tx_register4cal_regend' => array (		
 		'exclude' => 0,		
-		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend',		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend',
+		'displayCond' => 'FIELD:tx_register4cal_activate:REQ:true',
 		'config' => array (
 			'type'     => 'input',
 			'size'     => '8',
@@ -52,7 +86,8 @@ $tempColumns = array (
 	),
 	'tx_register4cal_maxattendees' => array (		
 		'exclude' => 0,		
-		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_maxattendees',		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_maxattendees',
+		'displayCond' => 'FIELD:tx_register4cal_activate:REQ:true',
 		'config' => array (
 			'type'     => 'input',
 			'size'     => '8',
@@ -65,16 +100,32 @@ $tempColumns = array (
 
 	'tx_register4cal_waitlist' => array (		
 		'exclude' => 0,		
-		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist',		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist',
+		'displayCond' => 'FIELD:tx_register4cal_activate:REQ:true',
 		'config' => array (
 			'type' => 'check',
 		)
 	),
+
+	'tx_register4cal_fieldset' => array (		
+		'exclude' => 0,		
+		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset',
+		'displayCond' => 'FIELD:tx_register4cal_activate:REQ:true',  
+		'config' => array (
+			'type' => 'select',	
+			'foreign_table' => 'tx_register4cal_fieldsets',	
+			'foreign_table_where' => 'ORDER BY tx_register4cal_fieldsets.name',	
+			'size' => 1,	
+			'minitems' => 1,
+			'maxitems' => 1,
+		)
+	),	
 );
 
 t3lib_div::loadTCA('tx_cal_event');
 t3lib_extMgm::addTCAcolumns('tx_cal_event',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('tx_cal_event','--div--;LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_tablabel,tx_register4cal_activate;;;;1-1-1, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees, tx_register4cal_waitlist');
+t3lib_extMgm::addToAllTCAtypes('tx_cal_event','--div--;LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_tablabel,tx_register4cal_activate;;;;1-1-1, tx_register4cal_fieldset, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees, tx_register4cal_waitlist');
+$TCA['tx_cal_event']['ctrl']['requestUpdate'] .= ',tx_register4cal_activate';
 
 $tempColumns = Array (
 	'tx_register4cal_feUserId' => array (		

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'register4cal'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">			
+			<label index="s0.restartlink">Restart update</label>
+			<label index="s1.currentConf.head">Current configuration</label>
+			<label index="s1.currentConf.text">The following configuration has been found in TypoScript:</label>
+			<label index="s1.languages.head">Languages</label>
+			<label index="s1.languages.text">The following languages have been found on TypoScript. Please assign sys_language_uid-values for these languages. If a language shall not be used, leave the field empty.</label>
+			<label index="s1.languages.col1">Language</label>
+			<label index="s1.languages.col2">sys_language_uid</label>
+			<label index="s1.targetPid.head">Target page</label>
+			<label index="s1.targetPid.text">Please enter the PID of the page, where the configuration records should be stored:</label>
+			<label index="s2.languages.head">Languages</label>
+			<label index="s2.languages.text">The assignment of languages has been defined as following:</label>
+			<label index="s2.languages.col1">Language</label>
+			<label index="s2.languages.col2">sys_language_uid</label>
+			<label index="s2.targetPid.head">Target page</label>
+			<label index="s2.targetPid.text">The configuration records will be stored on the page with PID ###NUM###.</label>
+			<label index="s2.fieldconfig.head">Field configuration</label>
+			<label index="s2.fieldconfig.text">The field configuration in TypoScript has been analyzed. The following field configuration records will be created:</label>
+			<label index="s2.fieldconfig.col1">sys_language_uid</label>
+			<label index="s2.fieldconfig.col2">Name</label>
+			<label index="s2.fieldconfig.col3">Type</label>
+			<label index="s2.fieldconfig.col4">Caption</label>
+			<label index="s2.fieldconfig.col5">Default value</label>
+			<label index="s2.fieldconfig.col6">Width</label>
+			<label index="s2.fieldconfig.col7">Height</label>
+			<label index="s2.fieldconfig.col8">Options</label>
+			<label index="s2.fieldgroups.head">Field group configuration</label>
+			<label index="s2.fieldgroups.text">A field group named "Default" will be created. All fields will be assigned to this field group.</label>
+			<label index="s3.fieldconfig.head">Creation of the field configuration</label>
+			<label index="s3.fieldconfig.text">###NUM### field configuration records have been created.</label>
+			<label index="s3.fieldgroups.head">Createn of the field group</label>
+			<label index="s3.fieldgroups.text">The field group "Default" has been created.</label>
+			<label index="s3.error">Error</label>
+			<label index="s1.submit">Prepare update</label>
+			<label index="s2.submit">Update configuration</label>
+			<label index="displayWarning">Important note</label>
+			<label index="displayError">An error has occured</label>
+			<label index="error.nofields">No definition of Userfields found in TypoScript. The update can't be executed.</label>
+			<label index="error.alreadydefined">The configuration tables already contain Userfields. The update can't be executed.</label>
+			<label index="error.nolangid0">One language needs to have sys_language_uid 0 assigend!</label>
+			<label index="error.nopid">No PID has been given to store the configuration records!</label>
+			<label index="error.data">Data error. Update has been restarted.</label>
+			<label index="infobox.option">Update</label>
+			<label index="infobox.header">Important note!</label>
+			<label index="infobox.message">register4cal 0.6.0 now stores the defined userfields in the database. Run the update to transfer your currently defined userfields from TypoScript to the database.</label>
+			<label index="infobox.link">Click here to open the update</label>
+		</languageKey>
+		<languageKey index="de" type="array">			
+			<label index="s0.restartlink">Update neu starten</label>
+			<label index="s1.currentConf.head">Aktuelle Konfiguration</label>
+			<label index="s1.currentConf.text">Die folgende Konfiguration wurde in TypoScript gefunden:</label>
+			<label index="s1.languages.head">Sprachen</label>
+			<label index="s1.languages.text">Die folgenden Sprachen wurden im TypoScript gefunden. Bitte ordnen Sie die sys_language_uid-Werte für die Sprachen zu. Bei Sprachen, die nicht verwendet werden, lassen Sie den Wert leer.</label>
+			<label index="s1.languages.col1">Sprache</label>
+			<label index="s1.languages.col2">sys_language_uid</label>
+			<label index="s1.targetPid.head">Zielseite</label>
+			<label index="s1.targetPid.text">Bitte geben Sie die Pid der Seite an, auf der die Konfigurationsdatensätze angelegt werden sollen:</label>
+			<label index="s2.languages.head">Sprachen</label>
+			<label index="s2.languages.text">Die Zuordnung der Sprachen wurde wie folgt festgelegt:</label>
+			<label index="s2.languages.col1">Sprache</label>
+			<label index="s2.languages.col2">sys_language_uid</label>
+			<label index="s2.targetPid.head">Zielseite</label>
+			<label index="s2.targetPid.text">Die Konfigurationsdatensätze werden auf der Seite mit der Pid ###NUM### angelegt.</label>
+			<label index="s2.fieldconfig.head">Feldkonfiguration</label>
+			<label index="s2.fieldconfig.text">Die Feldkonfiguration in TypoScript wurde analysiert. Folgende Felddatensätze werden angelegt:</label>
+			<label index="s2.fieldconfig.col1">sys_language_uid</label>
+			<label index="s2.fieldconfig.col2">Name</label>
+			<label index="s2.fieldconfig.col3">Typ</label>
+			<label index="s2.fieldconfig.col4">Beschriftung</label>
+			<label index="s2.fieldconfig.col5">Vorgabewert</label>
+			<label index="s2.fieldconfig.col6">Breite</label>
+			<label index="s2.fieldconfig.col7">Höhe</label>
+			<label index="s2.fieldconfig.col8">Optionen</label>
+			<label index="s2.fieldconfig.col9">Name</label>
+			<label index="s2.fieldgroups.head">Feldgruppenkonfiguration</label>
+			<label index="s2.fieldgroups.text">Es wird eine Feldgruppe mit dem Namen "Default" angelegt. Alle Felder werden der Feldgruppe zugeordnet.</label>
+			<label index="s3.fieldconfig.head">Anlegen der Feldkonfiguration</label>
+			<label index="s3.fieldconfig.text">Es wurden ###NUM### Feldkonfigurationsdatensäte angelegt.</label>
+			<label index="s3.fieldgroups.head">Anlegen der Feldgruppe</label>
+			<label index="s3.fieldgroups.text">Die Feldgruppene "Default" wurde angelegt.</label>
+			<label index="s3.error">Fehler</label>
+			<label index="s1.submit">Update vorbereiten</label>
+			<label index="s2.submit">Update durchführen</label>
+			<label index="displayWarning">Wichtiger Hinweis</label>
+			<label index="displayError">Ein Fehler ist aufgetreten</label>
+			<label index="error.nofields">Keine Definitionen von Benutzerfeldern im TypoScript gefunden. Das Update kann nicht ausgeführt werden.</label>
+			<label index="error.alreadydefined">In den Tabellen wurden bereits Benutzerfelder angelegt. Das Update kann nicht ausgeführt werden.</label>
+			<label index="error.nolangid0">Einer Sprache muss die sys_language_uid 0 zugeordnet werden!</label>
+			<label index="error.nopid">Es wurde keine Pid für die Ablage der Konfigurationsdatensätze angegeben!</label>
+			<label index="error.data">Datenfehler. Update wurde neu gestartet.</label>
+			<label index="infobox.option">Update</label>
+			<label index="infobox.header">Wichtiger Hinweis!</label>
+			<label index="infobox.message">In register4cal 0.6.0 werden die Benutzerfelder nun in der Datenbank gespeichert. Führen Sie das Update aus, um die aktuell definierten Benutzerfelder von TypoScript in die Datenbank zu übertragen.</label>
+			<label index="infobox.link">Hier klicken, um das Update zu starten</label>
+		</languageKey>		
+	</data>
+</T3locallang>

@@ -119,6 +119,7 @@ class tx_register4cal_render {
 			// prepare other event information
 		$this->prepareFormatedDateTime();
 		$this->getOrganizerData();
+		$this->event['userfields'] = $this->getUserfieldData($event);
 	}
 
 	/*
@@ -301,98 +302,105 @@ class tx_register4cal_render {
         /*
          * Render a single userfield
          *
-	 * @param	array		$conf: Array containing the configuration of the field from TypoScript
+	 * @param	array		$field: Array containing the configuration of the field from database
+	 * @param	array		$conf: Array containing the configuration of the fields from TypoScript
 	 * @param	string		$mode: Mode to render (currently "edit" and "show" are supported)
 	 * @param	string		$value: Value of the field. Required for mode="show"
 	 
          * @return 	string		Rendered field
          */
-	private function renderUserField($conf, $mode,  $value='') {
-		if ($mode == 'edit') $value = isset($this->pi_base->piVars[$fieldname]) ? $this->pi_base->piVars[$fieldname] : $conf['default'];
-		$value = htmlspecialchars($value);
-				
-		$caption = $conf['caption.'][$this->settings['language']] != '' ? $conf['caption.'][$this->settings['language']] : $conf['caption.']['default'];
-		$field = $this->cObj->stdWrap($value, $conf['layout.'][$mode . '.']);
-		$options = '';
-		if (isset($conf['options.'])) {
-			foreach($conf['options.'] as $optionArray) {
-				if (!is_array($optionArray)) {
-					$option = $optionArray;
-				} else {
-					$option = $optionArray[$this->settings['language']] != '' ? $optionArray[$this->settings['language']] : $optionArray['default'];
-				}
-				$selected = $option == $value ? ' selected' : '';
-				$options .= '<option' . $selected . '>' . htmlspecialchars($option) . '</option>';
-			}
-		}
-		
+	private function renderUserField($field,  $conf, $mode,  $value='') { //$conf,
+			// fieldname
+		$fieldname = 'FIELD_' . $field['name'];
 		if ($this->view == 'single') {
-			$fieldname = htmlspecialchars($this->pi_base->prefixId . '[FIELD_' . $conf['name'] . ']');
+			$fieldnamePrefix = htmlspecialchars($this->pi_base->prefixId . '[' . $fieldname . ']');
 		} elseif ($this->view == 'list') {
-			$fieldname = htmlspecialchars($this->pi_base->prefixId . '[' . $this->event['data']['uid'] . '][' . $this->event['data']['start_date'] . '][FIELD_' . $conf['name'] . ']');
+			$fieldnamePrefix = htmlspecialchars($this->pi_base->prefixId . '[' . $this->event['data']['uid'] . '][' . $this->event['data']['start_date'] . '][' . $fieldname . ']');
 		}
-		
-		$marker = Array();
-		$marker['###NAME###'] = $fieldname;
-		$marker['###CAPTION###'] = htmlspecialchars($caption);
-		$marker['###OPTIONS###'] = $options;
-		$field = $this->cObj->substituteMarkerArray($field, $marker);	
-		return $field;
-	}	
 
-	/*
-         * Render a single userfield which has been stored in register4cal version < 0.3.0
-	 * This function will propably be removed in the furure
-         *
-	 * @param	array		$conf: Array containing the configuration of the field from TypoScript
-	 * @param	string		$mode: Mode to render (currently "edit" and "show" are supported)
-	 * @param	string		$value: Value of the field. Required for mode="show"
-	 
-         * @return 	string		Rendered field
-         */
-	private function renderOldUserField($field) {
-		$caption = $field['caption'][$this->settings['language']] != '' ? $field['caption'][$this->settings['language']] : $field['caption']['default'];
-		$template = $this->cObj->getSubpart($this->settings['template'], '###SHOW_' . strtoupper($field['type']) . '###');
-		$marker = array();
-		$marker['###SIZE###'] = htmlspecialchars($field['size']);
-		$marker['###NAME###'] = htmlspecialchars($field['name']);
-		$marker['###VALUE###'] =  htmlspecialchars($field['value']);
-		$marker['###CAPTION###'] = htmlspecialchars($caption);
-		return $this->cObj->substituteMarkerArray($template,$marker);
+			// value of field
+		if ($mode == 'edit') $value = isset($this->pi_base->piVars[$fieldname]) ? $this->pi_base->piVars[$fieldname] : $field['defaultvalue'];
+		$value = htmlspecialchars($value);
+		
+		if ($mode == 'edit') {
+			switch ($field['type']) {
+				case 1: 	// Single textfield
+					$size = $field['width'] != 0 ? $field['width'] : 30;
+					$content = '<input type="text" size="' . $size . '" name="' . $fieldnamePrefix . '" value="' . $value . '" />';
+					break;
+				
+				case 2:		// Multiline textfield
+					$cols = $field['width'] != 0 ? $field['width'] : 30;
+					$rows = $field['height'] != 0 ? $field['height'] : 5;
+					$content = '<textarea rows="' . $rows . '" cols="' . $cols . '" name="' . $fieldnamePrefix . '">' . $value . '</textarea>';
+					break;
+				
+				case 3:		// Select field
+					$size = $field['height'] != 0 ? $field['height'] : 1;
+					$options = '';
+					$optArray = explode('|',$field['options']);
+					foreach($optArray as $optValue) {
+						$selected = $optValue == $field['defaultvalue'] ? ' selected' : '';
+						$options .= '<option' . $selected . '>' . htmlspecialchars($optValue) . '</option>';
+					}
+					$content = '<select size="' . $size . '" name="' . $fieldnamePrefix . '">' . $options . '</select>';
+					break;
+			
+			}
+		} else {
+			switch ($field['type']) {
+				case 1: 	// Single textfield
+					$content = $value;
+					break;
+				
+				case 2:		// Multiline textfield
+					$cols = $field['width'] != 0 ? $field['width'] : 30;
+					$rows = $field['height'] != 0 ? $field['height'] : 5;
+					$content = '<textarea rows="' . $rows . '" cols="' . $cols . '" name="' . $fieldnamePrefix . '" readonly="yes">' . $value . '</textarea>';
+					break;
+				
+				case 3:		// Select field
+					$content = $value;
+					break;
+			
+			}		
+		}
+
+			// render the field
+		$content = $this->applyWrap($content, $conf, 'userfield', $mode);
+		$marker = Array();
+		$marker['###CAPTION###'] = htmlspecialchars($field['caption']);
+		$content = $this->cObj->substituteMarkerArray($content, $marker);	
+		return $content;
 	}	
 	
 	/*
          * Render all userdefined fields (entry or display mode)
          *
-	 * @param	array		$conf: Array containing the configuration of the field from TypoScript
+	 * @param	array		$conf: Array containing the configuration of the fields from TypoScript
 	 * @param	string		$mode: Mode to render (currently "edit" and "show" are supported)
 	 
          * @return 	string		Rendered fields
          */	
 	private function renderUserFields($conf, $mode) {
-		$fields = '';
+		$field = '';
 		if ($mode == 'show' && isset($this->registration['additional_data'])) {
 				// Mode = Show: Render based on userfields in registration record
 			$fieldsarray = unserialize($this->registration['additional_data']);
 			if (is_array($fieldsarray)) {
 				foreach ($fieldsarray as $name => $field) {
-					if (isset($field['type'])) {
-						$fields .= $this->renderOldUserField($field);
-					} else {
-						// "new" version
-						$fields .= $this->renderUserField($field['conf'], $mode, $field['value']);
-					}				
+					$fields .= $this->renderUserField($field['conf'], $conf, $mode, $field['value']);
 				}
 			}
-		} elseif ($mode == 'edit' && isset($this->settings['userfields'])){
-				// Mode = Edit: Render fields based on userfields in TypoScript
-			if (is_array($this->settings['userfields'])) {
-				foreach ($this->settings['userfields'] as $field) {
-					$fields .= $this->renderUserField($field, $mode);
+		} elseif ($mode == 'edit' && isset($this->event['userfields'])){
+				// Mode = Edit: Render fields based on userfields in database
+			if (is_array($this->event['userfields'])) {
+				foreach ($this->event['userfields'] as $field) {
+					$fields .= $this->renderUserField($field, $conf, $mode);
 				}
 			}
 		}
-		
+
 		if ($mode == 'edit') {	
 			$hiddenFields = '';
 			if ($this->view == 'single') {
@@ -404,7 +412,7 @@ class tx_register4cal_render {
 				$hiddenFields .= '<input type="hidden" name="no_cache" value="1" />';
 				$fields .= $this->applyWrap($hiddenFields, $conf, 'submitbutton', $mode);
 			}		
-		}
+		}		
 		return $fields;
 	}
 	
@@ -690,6 +698,34 @@ class tx_register4cal_render {
 			$this->event['organizer'] = $row;
 			$this->settings['organizer_email'] = $row['email'];
 		}
+	}
+	
+	public function getUserfieldData($event) {
+		$ufData = Array();
+			// determine fields only if registration is active 
+		if ($event['tx_register4cal_activate'] == 1) { 
+				// if fieldset is set, read it, otherwise read first fieldset having the "isdefault" flag set
+			if ($event['tx_register4cal_fieldset'] != 0) {
+				$where = 'uid='.intval($event['tx_register4cal_fieldset']);
+			} else {
+				$where = 'isdefault <> 0';
+			}
+			
+				//read fieldset
+			$resFS = $GLOBALS['TYPO3_DB']->exec_SELECTquery('fields','tx_register4cal_fieldsets', $where);
+			if($rowFS = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFS)) {
+					//read fields
+				$fieldlist = $GLOBALS['TYPO3_DB']->cleanIntList($rowFS['fields']);
+				$resFD = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_register4cal_fields','uid IN ('.$fieldlist.') AND sys_language_uid IN (0,-1)');
+				while ($rowFD = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFD)) {
+						// translate
+					$rowFD = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_register4cal_fields',$rowFD,$GLOBALS['TSFE']->sys_language_uid,$GLOBALS['TSFE']->config['config']['sys_language_overlay']);
+					$ufData[$rowFD['name']] = $rowFD;
+				}
+			}
+			$GLOBALS['TYPO3_DB']->sql_free_result($resFS);
+		}
+		return $ufData;
 	}
 }
 

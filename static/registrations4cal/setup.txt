@@ -158,6 +158,8 @@ plugin.tx_register4cal_pi1{
 			label_registration-noevents.dataWrap = |
 			label_event-noitems.dataWrap = <td colspan="5">|</td>	
 			label_event-nologin.dataWrap = <td colspan="5">|</td>
+			
+			userfield.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
 		}
 
 		# Registration in event single view ###################################################################################################################
@@ -389,35 +391,35 @@ plugin.tx_register4cal_pi1{
 		}
 	}
 
-	# User defined fields (example) ###############################################################################################################################
-	userfields {
-		# Example for simple input fields
-		0 {
-			name=participants
-			caption.default=No of participants
-			caption.de=Anzahl Teilnehmer
-			default = 1
-			layout {
-				edit = stdWrap
-				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><input type="text" size="20" name="###NAME###" value="|" /></td></tr>
-				show = stdWrap
-				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
-			}
-		}
-		
-		# Example for text area
-		1 {
-			name=Comments
-			caption.default=Comments
-			caption.de=Kommentar
-			default = 
-			layout {
-				edit = stdWrap
-				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" name="###NAME###">|</textarea></td></tr>
-				show = stdWrap
-				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
-			}				
-		}
+#	# User defined fields (example) ###############################################################################################################################
+#	userfields {
+#		# Example for simple input fields
+#		0 {
+#			name=participants
+#			caption.default=No of participants
+#			caption.de=Anzahl Teilnehmer
+#			default = 1
+#			layout {
+#				edit = stdWrap
+#				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><input type="text" size="20" name="###NAME###" value="|" /></td></tr>
+#				show = stdWrap
+#				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+#			}
+#		}
+#		
+#		# Example for text area
+#		1 {
+#			name=Comments
+#			caption.default=Comments
+#			caption.de=Kommentar
+#			default = 
+#			layout {
+#				edit = stdWrap
+#				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" name="###NAME###">|</textarea></td></tr>
+#				show = stdWrap
+#				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
+#			}				
+#		}
 		
 		# Example for selection
 		2 {

@@ -649,15 +649,16 @@ class tx_register4cal_main extends tslib_pibase {
 			if ($status != 0) {
 					//Prepare additional fields
 				$addfields = Array();
-				$userfields = $this->settings['userfields'];
-				if (is_array($userfields)) {
-					foreach ($userfields as $field) {
-						$addfield = Array();
-						$addfield['conf'] = $field;
-						$addfield['value'] = $this->piVars['FIELD_' . $field['name']];
-						$addfields[$field['name']] = $addfield;
-					}
+				//$userfields = $this->settings['userfields'];
+				$userfields = $this->rendering->getUserfieldData($event);
+				//if (is_array($userfields)) {
+				foreach ($userfields as $field) {
+					$addfield = Array();
+					$addfield['conf'] = $field;
+					$addfield['value'] = $this->piVars['FIELD_' . $field['name']];
+					$addfields[$field['name']] = $addfield;
 				}
+				//}
 				 
 					//write registration record
 				$recordlabel = tx_register4cal_user1::formatDate($data['getdate'], 0, $this->settings['date_format']) . ' ' . $event['title'] . ': ' . $GLOBALS['TSFE']->fe_user->user['name'];

@@ -267,20 +267,10 @@ class tx_register4cal_user1 {
 	public function additionalDataForBackend($PA, $fobj) {
 		$fieldsarray = unserialize($PA['itemFormElValue']);
 		$additionalFields = '';
-		$lang = $this->data['language'];
 		if (is_array($fieldsarray)) {
 			foreach ($fieldsarray as $name => $field) {
-				if (isset($field['type'])) {
-					//"old" version
-					$caption = $field['caption'][$lang] != '' ? $field['caption'][$lang] : $field['caption']['default'];
-					$additionalFields .= '<tr><td width= 100px;><b>' . htmlspecialchars($caption) . '</b></td>' . 
-							     '<td>' . htmlspecialchars($field['value']) . '</td></tr>';
-				} else {
-					//"new" version
-					$caption = $field['conf']['caption.'][$lang] != '' ? $field['conf']['caption.'][$lang] : $field['conf']['caption.']['default'];
-					$additionalFields .= '<tr><td width= 100px;><b>' . htmlspecialchars($caption).'</b></td>' .
-							     '<td>' . htmlspecialchars($field['value']) . '</td></tr>';
-				}				
+				$additionalFields .= '<tr><td width= 100px;><b>' . htmlspecialchars($field['conf']['caption']).'</b></td>' .
+						     '<td>' . htmlspecialchars($field['value']) . '</td></tr>';
 			}		
 			$additionalFields = '<table width=100% border = 1 style="border:1px solid black;border-collapse:collapse;">' . $additionalFields . '</table>';
 		}

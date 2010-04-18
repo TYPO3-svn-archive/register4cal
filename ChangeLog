@@ -1,3 +1,6 @@
+2010-04-18 Thomas Ernst <typo3@thernst.de>
+	* [Feature 7057] Enable different sets of userfields
+	
 2010-04-14 Thomas Ernst <typo3@thernst.de>
 	* [Bug 7036] cal frontend editing: Create event not working due to register4cal constraints
 	* [Feature 7249] Registering again after unregistering -> only one record should be kept

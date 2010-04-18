@@ -1,0 +1,2 @@
+  # cat=basic/dev/1000; type=user[EXT:register4cal/classes/class.tx_register4cal_tsparserext.php:tx_register4cal_tsparserext->displayMessage]; label=LLL:EXT:register4cal/locallang_update.xml:infobox.option
+updateMessage=0
