@@ -112,12 +112,18 @@ $tempColumns = array (
 		'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset',
 		'displayCond' => 'FIELD:tx_register4cal_activate:REQ:true',  
 		'config' => array (
-			'type' => 'select',	
+			'type' => 'select',
+			'items' => Array (
+				Array('LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset.option.2', -2),
+				Array('LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset.option.1', -1),
+				Array('LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset.option.0','--div--'),
+			),
 			'foreign_table' => 'tx_register4cal_fieldsets',	
-			'foreign_table_where' => 'ORDER BY tx_register4cal_fieldsets.name',	
+			'foreign_table_where' => 'AND tx_register4cal_fieldsets.pid=###CURRENT_PID### ORDER BY tx_register4cal_fieldsets.name',	
 			'size' => 1,	
 			'minitems' => 1,
 			'maxitems' => 1,
+			'default' => -1,
 		)
 	),	
 );

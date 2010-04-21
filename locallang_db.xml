@@ -26,7 +26,7 @@
 			<label index="tx_register4cal_fields.defaultvalue">Default value</label>
 			<label index="tx_register4cal_fields.width">Width</label>
 			<label index="tx_register4cal_fields.height">Height</label>
-			<label index="tx_register4cal_fields.isnumparticipants">Field contains number if participants</label>
+			<label index="tx_register4cal_fields.isnumparticipants">Field contains number of participants</label>
 			<label index="tx_register4cal_fieldsets">Fieldsets</label>
 			<label index="tx_register4cal_fieldsets.name">Name</label>
 			<label index="tx_register4cal_fieldsets.fields">Fields</label>
@@ -42,6 +42,9 @@
 			<label index="tx_cal_event.tx_register4cal_waitlist_on">active</label>
 			<label index="tx_cal_event.tx_register4cal_waitlist_off">inactive</label>
 			<label index="tx_cal_event.tx_register4cal_fieldset">Fieldset</label>
+			<label index="tx_cal_event.tx_register4cal_fieldset.option.0">Defined fieldgroups:</label>
+			<label index="tx_cal_event.tx_register4cal_fieldset.option.1">Use default fieldset</label>
+			<label index="tx_cal_event.tx_register4cal_fieldset.option.2">Don't use any userfields</label>
 			<label index="tx_cal_organizer.tx_register4cal_feUserId">Users who are allowed to see the registrations for events of this organizer</label>
 			<label index="tt_content.list_type_pi1">Registrations for TYPO3-Calendar</label>el>
 		</languageKey>
@@ -82,6 +85,9 @@
 			<label index="tx_cal_event.tx_register4cal_waitlist_on">aktiv</label>
 			<label index="tx_cal_event.tx_register4cal_waitlist_off">inaktiv</label>
 			<label index="tx_cal_event.tx_register4cal_fieldset">Feldgruppe</label>
+			<label index="tx_cal_event.tx_register4cal_fieldset.option.0">Angelegte Feldgruppen:</label>
+			<label index="tx_cal_event.tx_register4cal_fieldset.option.1">Vorgabe-Feldgruppe verwenden</label>
+			<label index="tx_cal_event.tx_register4cal_fieldset.option.2">Keine Benutzerfelder verwenden</label>
 			<label index="tx_cal_organizer.tx_register4cal_feUserId">Web-Site-Benutzer die Anmeldungen zu Terminen dieses Organisators sehen dürfen</label>
 			<label index="tt_content.list_type_pi1">Anmeldungen für den TYPO3-Kalender</label>
 		</languageKey>

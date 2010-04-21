@@ -64,7 +64,15 @@ if (TYPO3_MODE == 'FE') {
 			'className' => 'tx_register4cal_waitlist',
 		)
 	);
-	
+	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_fieldset',
+		array(
+			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
+			'available' => TRUE, 'priority' => 50, 'quality' => 50,
+			'os' => '', 'exec' => '',
+			'classFile' => t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_fieldset.php',
+			'className' => 'tx_register4cal_fieldset',
+		)
+	);	
 	
 	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_listreg',
 		array(

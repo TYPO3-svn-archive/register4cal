@@ -703,12 +703,12 @@ class tx_register4cal_render {
 	public function getUserfieldData($event) {
 		$ufData = Array();
 			// determine fields only if registration is active 
-		if ($event['tx_register4cal_activate'] == 1) { 
+		if ($event['tx_register4cal_activate'] == 1 && $event['tx_register4cal_fieldset'] != -2) { 
 				// if fieldset is set, read it, otherwise read first fieldset having the "isdefault" flag set
-			if ($event['tx_register4cal_fieldset'] != 0) {
-				$where = 'uid='.intval($event['tx_register4cal_fieldset']);
+			if ($event['tx_register4cal_fieldset'] != 0 && $event['tx_register4cal_fieldset'] != -1) {
+				$where = 'uid=' . intval($event['tx_register4cal_fieldset']) . ' AND pid=' . intval($event['pid']);
 			} else {
-				$where = 'isdefault <> 0';
+				$where = 'isdefault <> 0' . ' AND pid=' . intval($event['pid']);
 			}
 			
 				//read fieldset
@@ -716,10 +716,10 @@ class tx_register4cal_render {
 			if($rowFS = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFS)) {
 					//read fields
 				$fieldlist = $GLOBALS['TYPO3_DB']->cleanIntList($rowFS['fields']);
-				$resFD = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_register4cal_fields','uid IN ('.$fieldlist.') AND sys_language_uid IN (0,-1)');
+				$resFD = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_register4cal_fields','uid IN (' . $fieldlist . ') AND sys_language_uid IN (0,-1)');
 				while ($rowFD = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFD)) {
 						// translate
-					$rowFD = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_register4cal_fields',$rowFD,$GLOBALS['TSFE']->sys_language_uid,$GLOBALS['TSFE']->config['config']['sys_language_overlay']);
+					$rowFD = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_register4cal_fields', $rowFD, $GLOBALS['TSFE']->sys_language_uid,$GLOBALS['TSFE']->config['config']['sys_language_overlay']);
 					$ufData[$rowFD['name']] = $rowFD;
 				}
 			}

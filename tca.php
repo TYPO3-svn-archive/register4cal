@@ -201,8 +201,8 @@ $TCA['tx_register4cal_fields'] = array (
 	'types' => array (
 		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, type'),
 		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, name, caption, type, defaultvalue, width, isnumparticipants'),
-		'2' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, name, caption, type, defaultvalue, width, height, isnumparticipants'),
-		'3' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, name, caption, type, options, defaultvalue, width, height, isnumparticipants'),
+		'2' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, name, caption, type, defaultvalue, width, height'),
+		'3' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, name, caption, type, options, defaultvalue, width, height'),
 	),
 	'palettes' => array (
 		'1' => array('showitem' => '')

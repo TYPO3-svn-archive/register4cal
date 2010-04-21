@@ -479,7 +479,7 @@ plugin.tx_cal_controller.view {
 		tx_register4cal_waitlist_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_on}</option>
 		tx_register4cal_waitlist_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_off}</option>
 		tx_register4cal_waitlist_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist}:</label><span class="tx_register4cal_waitlist"><select name="tx_cal_controller[tx_register4cal_waitlist]" size=1>|</select></span>###TX_REGISTER4CAL_WAITLIST_CONSTRAIN###</p>
-
+		tx_register4cal_fieldset_stdWrap.dataWrap = <p><label for="tx_register4cal_fieldset">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset}:</label><span class="tx_register4cal_fieldset"><select name="tx_cal_controller[tx_register4cal_fieldset]" size=1>|</select></span></p>
 	}
 	edit_event {
 		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
@@ -491,7 +491,7 @@ plugin.tx_cal_controller.view {
 		tx_register4cal_waitlist_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_on}</option>
 		tx_register4cal_waitlist_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_off}</option>
 		tx_register4cal_waitlist_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist}:</label><span class="tx_register4cal_waitlist"><select name="tx_cal_controller[tx_register4cal_waitlist]" size=1>|</select></span>###TX_REGISTER4CAL_WAITLIST_CONSTRAIN###</p>
-
+		tx_register4cal_fieldset_stdWrap.dataWrap = <p><label for="tx_register4cal_fieldset">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset}:</label><span class="tx_register4cal_fieldset"><select name="tx_cal_controller[tx_register4cal_fieldset]" size=1>|</select></span></p>
 	}
 	confirm_event {
 		tx_register4cal_activate_on_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_activate]"/>
@@ -503,7 +503,7 @@ plugin.tx_cal_controller.view {
 		tx_register4cal_waitlist_on_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_on}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_waitlist]"/>
 		tx_register4cal_waitlist_off_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_off}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_waitlist]"/>
 		tx_register4cal_waitlist_stdWrap.dataWrap = <div><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist}:</label>|</div>
-
+		tx_register4cal_fieldset_stdWrap.dataWrap = <p><label for="tx_register4cal_fieldset">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_FIELDSET_VALUE###" name="tx_cal_controller[tx_register4cal_fieldset]"/></p>
 	}
 	save_event {
 		additional_fields.tx_register4cal_regstart_stdWrap.postUserFunc = tx_register4cal_user1->convertToTimestamp
@@ -513,7 +513,7 @@ plugin.tx_cal_controller.view {
 
 plugin.tx_cal_controller.rights {
 	create.event {
-		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees, tx_register4cal_waitlist
+		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees, tx_register4cal_waitlist, tx_register4cal_fieldset
 		fields.tx_register4cal_activate {
 			user =
 			group =
@@ -549,10 +549,17 @@ plugin.tx_cal_controller.rights {
 			default = 0
 			required = 0
 		}		
+		fields.tx_register4cal_fieldset {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
 	}
 
 	edit.event {
-		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees,  tx_register4cal_waitlist
+		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees,  tx_register4cal_waitlist, tx_register4cal_fieldset
 		fields.tx_register4cal_activate {
 			user =
 			group =
@@ -608,6 +615,13 @@ plugin.tx_cal_controller.rights {
 				message = TEXT
 				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/classes/locallang.xml:error.waitlist}</span>
 			}
+		}
+		fields.tx_register4cal_fieldset {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
 		}
 	}
 
