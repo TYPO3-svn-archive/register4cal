@@ -420,29 +420,29 @@ plugin.tx_register4cal_pi1{
 #				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
 #			}				
 #		}
-		
-		# Example for selection
-		2 {
-			name=Selection
-			caption.default=I attend the event
-			caption.de=Ich nehme teil
-			default =
-			options {
-				1.default = Yes
-				1.de = Ja
-				2.default = No
-				2.de = Nein
-				3.default = Yes, but I'll be late
-				3.de = Ja, aber ich komme später
-			}
-			layout {
-				edit = stdWrap
-				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><SELECT SIZE=1 name="###NAME###">###OPTIONS###</SELECT></td></tr>
-				show = stdWrap
-				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
-			}
-		}
-	}	
+#		
+#		# Example for selection
+#		2 {
+#			name=Selection
+#			caption.default=I attend the event
+#			caption.de=Ich nehme teil
+#			default =
+#			options {
+#				1.default = Yes
+#				1.de = Ja
+#				2.default = No
+#				2.de = Nein
+#				3.default = Yes, but I'll be late
+#				3.de = Ja, aber ich komme später
+#			}
+#			layout {
+#				edit = stdWrap
+#				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><SELECT SIZE=1 name="###NAME###">###OPTIONS###</SELECT></td></tr>
+#				show = stdWrap
+#				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+#			}
+#		}
+#	}	
 
 	edit {
 		useDateSelector = 1

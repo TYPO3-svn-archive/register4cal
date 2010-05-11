@@ -377,7 +377,7 @@ class tx_register4cal_main extends tslib_pibase {
 						$eventRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 						if ($GLOBALS['TYPO3_DB']->sql_num_rows($eventRes) == 0) continue;
 						if (!($event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($eventRes))) continue;
-						if (!$isAdminUser && !in_Array($feUserId, explode(',', $event['tx_register4cal_feUserId']))) continue;;
+						if (!$isAdminUser && $this->hideEvent($event['tx_register4cal_feUserId'])) continue;
 						$this->rendering->setEvent($event);
 
 							//store information on this event
@@ -400,7 +400,7 @@ class tx_register4cal_main extends tslib_pibase {
 						//Render the registration entry
 					$items .= $this->rendering->renderForm($config, 'show', 'ITEMS');
 				}
-				
+
 					//Render the last event and add it to the event array
 				if ($curEventUid != 0)
 					$eventList[$curEventGetdate . $curEventUid] = 
@@ -423,7 +423,7 @@ class tx_register4cal_main extends tslib_pibase {
 				$this->rendering->unsetUser();
 				$this->rendering->unsetRegistration();
 				while (($event = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($eventRes))) {
-					if (!$isAdminUser && !in_Array($feUserId,explode(',', $event['tx_register4cal_feUserId']))) continue;
+					if (!$isAdminUser && $this->hideEvent($event['tx_register4cal_feUserId'])) continue;
 					$this->rendering->setEvent($event);
 					$eventList[$event['start_date'] . $event['uid']] = 
 						$this->rendering->renderForm($config, 'show', 'EVENTENTRY') .
@@ -447,6 +447,35 @@ class tx_register4cal_main extends tslib_pibase {
 		return $content;
 	}
 
+	/*
+         * Check if the current user fits to the given list of fe_users/fe_groups or if the event should be hidden
+	 * 
+	 * @param	string		$feUserId: List of users/groups from tx_cal_organizers.tx_register4cal_feUserId
+         *
+         * @return 	boolean		false: User fits, do not hide event
+	 *				true: User does not fit, hide event
+         */
+	private function hideEvent($feUserId) {
+		$checkUserId = 'fe_users_' . intval($GLOBALS['TSFE']->fe_user->user['uid']);
+	
+			// UserId in list of users
+		if (in_Array($checkUserId,explode(',', $feUserId))) return false;
+		
+			// get list of usergroups where user is member
+		$from = 'fe_users';
+		$fields = 'usergroup';
+		$where = 'uid=' . intval($GLOBALS['TSFE']->fe_user->user['uid']);
+		$rows_groups = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($fields, $from, $where);
+		$checkUserGroups = explode(',',$rows_groups[0]['usergroup']);
+		
+			// now check UserGroups in list of users
+		foreach($checkUserGroups as $checkUserGroup) {
+			$checkUserGroup = 'fe_groups_' . $checkUserGroup;
+			if (in_Array($checkUserGroup,explode(',', $feUserId))) return false;
+		}
+		
+		return true;
+	}
 
 	/***********************************************************************************************************************************************************************
 	 *
