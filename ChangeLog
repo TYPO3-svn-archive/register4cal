@@ -1,3 +1,6 @@
+2010-05-11 Thomas Ernst <typo3@thernst.de>
+	* [Bug 7741] Double registration form in single event view
+
 2010-04-21 Thomas Ernst <typo3@thernst.de>
 	* [Feature 7057] Nicer selection of fieldgroups in backend
 	* [Feature 7057] Fieldgroup selection in frontend editing

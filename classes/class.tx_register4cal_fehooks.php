@@ -52,22 +52,26 @@ class tx_register4cal_fehooks {
 	**********************************************************************************************************************************************************************/
 	function preFinishViewRendering() {}
 	function postSearchForObjectMarker($otherThis, &$content) {
-		//get piVars from tx_cal_controler and user data
-		$data = t3lib_div::GParrayMerged('tx_cal_controller');
-		$user = $GLOBALS['TSFE']->fe_user->user;
-		
 		//Conditions to display the registration form (first step)
-		if ($otherThis->conf['view'] == 'event' && $data['uid'] != 0) {	/* Single event view displaying an event */
-			if ($user['uid'] != 0) {			/* An frontend user is logged in     */					
-				$main = tx_register4cal_user1::getReg4CalMainClass();
-				$content .= $main->SingleEventRegistration($data);
-			} else {					/* no frontend user is logged in */
-				//Check if a onetimepid is given. If this is the case, offer link for
-				//creating a onetimeaccount using onetimeaccount
-				$disableNeedLoginForm = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['disableNeedLoginForm'];
-				if ($disableNeedLoginForm == 0) {
-					$main = tx_register4cal_user1::getReg4CalMainClass();
-					$content .= $main->SingleEventLogin();
+		if ($otherThis->conf['view'] == 'event') {				/* Single event view ... */
+				// get piCars from tx_cal_controler
+			$data = t3lib_div::GParrayMerged('tx_cal_controller');
+			if ($data['uid'] != 0) {						/* ...displaying an event ... */
+				if (strpos($content, 'phpicalendar_event')) {				/* ... with event template (not location or organizer ...) */
+						// get user data
+					$user = $GLOBALS['TSFE']->fe_user->user;
+					if ($user['uid'] != 0) {						/* An frontend user is logged in     */					
+						$main = tx_register4cal_user1::getReg4CalMainClass();
+						$content .= $main->SingleEventRegistration($data);
+					} else {								/* no frontend user is logged in */
+						//Check if a onetimepid is given. If this is the case, offer link for
+						//creating a onetimeaccount using onetimeaccount
+						$disableNeedLoginForm = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.']['disableNeedLoginForm'];
+						if ($disableNeedLoginForm == 0) {
+							$main = tx_register4cal_user1::getReg4CalMainClass();
+							$content .= $main->SingleEventLogin();
+						}
+					}
 				}
 			}
 		}
