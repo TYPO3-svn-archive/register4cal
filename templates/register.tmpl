@@ -80,6 +80,9 @@
 		<tr><td colspan="2">Max. # of attendees</td>		<td>###LABEL_maxattendees###</td>		<td>###MAXATTENDEES###</td>		<td>maxattendees</td>		<td>label_maxattendees</td></tr>
 		<tr><td colspan="2">Current # of attendees</td>		<td>###LABEL_numattendees###</td>		<td>###NUMATTENDES###</td>		<td>numattendees</td>		<td>label_numattendees</td></tr>
 		<tr><td colspan="2">Current # of waitlist entries</td>	<td>###LABEL_numwaitlist###</td>		<td>###NUMWAITLIST###</td>		<td>numwaitlist</td>		<td>label_numwaitlist</td></tr>
+		<tr><td colspan="2">Current # of remaining places</td>	<td>###LABEL_numfree###</td>			<td>###NUMFREE###</td>			<td>numfree</td>		<td>label_numfree</td></tr>
+		<tr><td colspan="2">Errormessage</td>			<td>&nbsp;</td>					<td>###ERRORMESSAGE###</td>		<td>errormessage</td>		<td>&nbsp;</td></tr>
+		
 	</table>
 
 	<hr /><h1>Templates for single view</h1><hr /><!-- *************************************************************************************************************** -->
@@ -111,10 +114,12 @@
 	<!-- ###SINGLE_REGISTRATION_ENTER### begin -->
 	###HEADING###
 	###TEXTTOP###
+	###ERRORMESSAGE###
 	<!-- ###FORM### begin -->
 	<!-- ###TABLINE### begin -->###LABEL_maxattendees### ###MAXATTENDEES###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_numattendees### ###NUMATTENDEES###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_numwaitlist### ###NUMWAITLIST###<!-- ###TABLINE### end -->
+	<!-- ###TABLINE### begin -->###LABEL_numfree### ###NUMFREE###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
@@ -188,6 +193,7 @@
 	<!-- ###SINGLE_WAITLIST_CONFIRMATION### begin -->
 	###HEADING###
 	###TEXTTOP###
+	###ERRORMESSAGE###
 	<!-- ###TABLE### begin -->
 	<!-- ###TABLINE### begin -->###LABEL_user-name### ###USER_name###<!-- ###TABLINE### end -->
 	<!-- ###TABLINE### begin -->###LABEL_user-address### ###USER_address###<!-- ###TABLINE### end -->

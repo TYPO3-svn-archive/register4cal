@@ -10,6 +10,7 @@
 			<label index="tx_register4cal_registrations.recordlabel">Registration</label>
 			<label index="tx_register4cal_registrations.cal_event_uid">Event</label>
 			<label index="tx_register4cal_registrations.feuser_uid">FE-User</label>
+			<label index="tx_register4cal_registrations.numattendees">Number of attendees</label>
 			<label index="tx_register4cal_registrations.additional_data">Additional data</label>
 			<label index="tx_register4cal_registrations.status">Status of registration</label>
 			<label index="tx_register4cal_registrations.status.1">Attending</label>
@@ -53,6 +54,7 @@
 			<label index="tx_register4cal_registrations.recordlabel">Anmeldung</label>
 			<label index="tx_register4cal_registrations.cal_event_uid">Termin</label>
 			<label index="tx_register4cal_registrations.feuser_uid">FE-Benutzer</label>
+			<label index="tx_register4cal_registrations.numattendees">Anzahl Teilnehmer</label>
 			<label index="tx_register4cal_registrations.additional_data">Zusätzliche Daten</label>
 			<label index="tx_register4cal_registrations.status">Anmeldestatus</label>
 			<label index="tx_register4cal_registrations.status.1">Teilnehmend</label>

@@ -1,3 +1,6 @@
+2010-05-12 Thomas Ernst <typo3@thernst.de>
+	* [Feature 6376] Number of attendees per registration
+
 2010-05-11 Thomas Ernst <typo3@thernst.de>
 	* [Bug 7741] Double registration form in single event view
 	* [Feature 7742] Allow frontend usergroups to see registrations

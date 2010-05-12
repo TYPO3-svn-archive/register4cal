@@ -90,20 +90,18 @@ class tx_register4cal_user1 {
 		for($i = 1; $i <=3; $i++) $statusCount[$i] = 0;
 
 			// Count registrations
-		$select = 'status, count(*) as number';
+		$select = 'status, sum(numattendees) as number';
 		$table = 'tx_register4cal_registrations';
 		$where = 'cal_event_uid=' . intval($eventUid) .
 			 ' AND cal_event_getdate=' . intval($eventGetDate) .
 			 ' AND pid=' . intval($eventPid) .
 			 ' AND deleted=0';
-		//	 $this->cObj->enableFields('tx_register4cal_registrations');
 		$orderBy = '';
 		$groupBy = 'status';
 		$resCount = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy , $orderBy, $limit);
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($resCount) != 0) {
 			while (($rowCount = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resCount))) $statusCount[$rowCount['status']] = $rowCount['number'];
 		}
-
 		return $statusCount;
 	}	
 /***********************************************************************************************************************************************************************

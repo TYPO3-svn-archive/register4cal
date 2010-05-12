@@ -14,6 +14,7 @@ CREATE TABLE tx_register4cal_registrations (
 	feuser_uid tinytext,
 	additional_data text,
 	status tinyint(3) DEFAULT '1' NOT NULL,
+	numattendees int(11) DEFAULT '1' NOT NULL,
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );

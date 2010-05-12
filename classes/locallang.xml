@@ -162,11 +162,14 @@
 			<label index="label.maxattendees">Number of places</label>
 			<label index="label.numattendees">Occupied places</label>
 			<label index="label.numwaitlist">Waitlist entries</label>
+			<label index="label.numfree">Remaining free places</label>
 			
 			<label index="label.checkwaitlistbutton">Check waitlist</label>
 			<label index="error.activate">Registration must not be deactivated if registrations are already recorded.</label>
 			<label index="error.maxattendees">The maximum number of registrations must not be reduced to a value less than the current number of registrations.</label>
 			<label index="error.waitlist">The waitlist must not be deactivated if it already contains entries.</label>
+			<label index="error.notenoughplaces">There are not enough free places for the number of attendees you want to register!</label>
+			<label index="error.notenoughplaces_waitlist">There are not enough free places for the number of attendees you want to register. Your registration has been recorded to the waitlist.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="default.submitbutton">Für diesen Termin anmelden</label>
@@ -318,11 +321,15 @@
 			<label index="label.maxattendees">Anzahl Plätze</label>
 			<label index="label.numattendees">Belegte Plätze</label>
 			<label index="label.numwaitlist">Einträge auf Warteliste</label>
+			<label index="label.numfree">Verbleibende freie Plätze</label>
 			
 			<label index="label.checkwaitlistbutton">Warteliste prüfen</label>
 			<label index="error.activate">Die Anmeldung darf nicht deaktiviert werden, wenn bereits Anmeldungen gespeichert wurden.</label>
 			<label index="error.maxattendees">Die maximale Anzahl Anmeldungen darf nicht auf einen Wert reduziert werden, der niedriger ist als die aktuelle Anzahl Anmeldungen.</label>			
 			<label index="error.waitlist">Die Warteliste darf nicht deaktiviert werden, wenn sie bereits Einträge enthält.</label>
+			<label index="error.notenoughplaces">Es gibt nicht genügend Plätze für die Anzahl der Teilnehmer, die Sie anmelden wollen.</label>
+			<label index="error.notenoughplaces_waitlist">Es gibt nicht genügend Plätze für die Anzahl der Teilnehmer, die Sie anmelden wollen. Ihre Anmeldung wurde auf die Warteliste aufgenommen.</label>
+
 		</languageKey>
 		
 		<languageKey index="dk" type="array">

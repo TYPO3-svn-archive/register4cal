@@ -54,6 +54,7 @@ class tx_register4cal_render {
 	private $registration;			//Array containing registration record
 	private $user;				//Array containing user record
 	private $view;				//view mode ('single' or 'list')
+	private $message;			//error message
 	
 	/*
          * Constructor for class tx_register4cal_render
@@ -81,6 +82,17 @@ class tx_register4cal_render {
  * Getter and Setter Methods 
  *
  **********************************************************************************************************************************************************************/
+	/*
+	 * Sets the message
+	 *
+	 * @param	string	$message: Message
+	 *
+	 * @return	void
+	 */
+	public function setMessage($message) {
+		$this->message = $message;
+	}
+	
 	/*
 	 * Sets the view (single event or event list)
 	 *
@@ -427,6 +439,11 @@ class tx_register4cal_render {
          */
 	private function renderSingleMarker($singleMarker, $conf, $mode) {
 		switch ($singleMarker) {
+			case 'ERRORMESSAGE' :
+					// Render the error message
+				$value = $this->message;
+				$marker = $this->applyWrap($value, $conf, 'errormessage', $mode);
+				break;	
 			case 'FIELDS' :
 					// Render the userfields
 				$fields = $this->renderUserFields($conf, $mode);
@@ -484,6 +501,11 @@ class tx_register4cal_render {
 				if (!isset($this->event['regcount'])) $this->event['regcount'] = tx_register4cal_user1::getRegistrationCount($this->event['data']['uid'], $this->event['data']['start_date'], $this->event['data']['pid']);
 				$value = $this->event['regcount'][1];
 				$marker = $this->applyWrap($value, $conf, 'numattendees', $mode);
+				break;
+			case 'NUMFREE':
+				if (!isset($this->event['regcount'])) $this->event['regcount'] = tx_register4cal_user1::getRegistrationCount($this->event['data']['uid'], $this->event['data']['start_date'], $this->event['data']['pid']);
+				$value = $this->event['data']['tx_register4cal_maxattendees'] - $this->event['regcount'][1];
+				$marker = $this->applyWrap($value, $conf, 'numfree', $mode);
 				break;
 			case 'NUMWAITLIST':
 				if (!isset($this->event['regcount'])) $this->event['regcount'] = tx_register4cal_user1::getRegistrationCount($this->event['data']['uid'], $this->event['data']['start_date'], $this->event['data']['pid']);
@@ -726,6 +748,17 @@ class tx_register4cal_render {
 			$GLOBALS['TYPO3_DB']->sql_free_result($resFS);
 		}
 		return $ufData;
+	}
+	
+	public function getNumberOfAttendeesField() {
+			// determine userfield containing number of attendees
+		foreach($this->event['userfields'] as $name => $data) {
+			if ($data['isnumparticipants']) {
+				$field = $name;
+				break;
+			}
+		}
+		return $field;
 	}
 }
 

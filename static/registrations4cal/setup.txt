@@ -6,6 +6,8 @@ plugin.tx_register4cal_pi1{
 	disableNeedLoginForm = 1
 	disableWaitlist = 0
 	disableUnregister = 0
+	useWaitlistIfNotEnoughPlaces = 1
+	waitlistMode = 1
 	keepUnregistered = 1
 	onetimepid = 0
 	onetimereturnparam = redirect_url
@@ -36,6 +38,9 @@ plugin.tx_register4cal_pi1{
 			label_numattendees.dataWrap = <td><b>|</b></td>
 			numwaitlist.dataWrap = <td>|</td>
 			label_numwaitlist.dataWrap = <td><b>|</b></td>
+			numfree.dataWrap = <td>|</td>
+			label_numfree.dataWrap = <td><b>|</b></td>
+			errormessage.dataWrap = <span style="color:red;font-weight:bold;">|</span>
 			
 			status.dataWrap = <td>|</td>
 			label_status.dataWrap = <td><b>|</b></td>
@@ -389,60 +394,7 @@ plugin.tx_register4cal_pi1{
 				
 			}
 		}
-	}
-
-#	# User defined fields (example) ###############################################################################################################################
-#	userfields {
-#		# Example for simple input fields
-#		0 {
-#			name=participants
-#			caption.default=No of participants
-#			caption.de=Anzahl Teilnehmer
-#			default = 1
-#			layout {
-#				edit = stdWrap
-#				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><input type="text" size="20" name="###NAME###" value="|" /></td></tr>
-#				show = stdWrap
-#				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
-#			}
-#		}
-#		
-#		# Example for text area
-#		1 {
-#			name=Comments
-#			caption.default=Comments
-#			caption.de=Kommentar
-#			default = 
-#			layout {
-#				edit = stdWrap
-#				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" name="###NAME###">|</textarea></td></tr>
-#				show = stdWrap
-#				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><textarea rows="10" cols="40" readonly="yes">|</textarea></td></tr>
-#			}				
-#		}
-#		
-#		# Example for selection
-#		2 {
-#			name=Selection
-#			caption.default=I attend the event
-#			caption.de=Ich nehme teil
-#			default =
-#			options {
-#				1.default = Yes
-#				1.de = Ja
-#				2.default = No
-#				2.de = Nein
-#				3.default = Yes, but I'll be late
-#				3.de = Ja, aber ich komme später
-#			}
-#			layout {
-#				edit = stdWrap
-#				edit.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td><SELECT SIZE=1 name="###NAME###">###OPTIONS###</SELECT></td></tr>
-#				show = stdWrap
-#				show.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
-#			}
-#		}
-#	}	
+	}	
 
 	edit {
 		useDateSelector = 1
