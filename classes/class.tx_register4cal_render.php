@@ -478,7 +478,7 @@ class tx_register4cal_render {
 				$marker = $this->applyWrap($value, $conf, 'loginlink', $mode);
 				break;
 			case 'STATUS' :
-				$value = $this->pi_base->pi_getLL('label.status.'.intval($this->registration['status']));
+				$value = $this->pi_base->pi_getLL('label_status_'.intval($this->registration['status']));
 				$marker = $this->applyWrap($value, $conf, 'status', $mode);
 				break;
 			case 'UNREGISTER':
@@ -517,7 +517,7 @@ class tx_register4cal_render {
 						'<input type="hidden" name="tx_register4cal_main[cmd]" value="checkwaitlist" />'.
 						'<input type="hidden" name="tx_register4cal_main[uid]" value="' . $this->event['data']['uid'] . '" />'.
 						'<input type="hidden" name="tx_register4cal_main[getdate]" value="' . $this->event['data']['start_date'] . '" />'.
-						'<input type="submit" value = "' . $this->pi_base->pi_getLL('label.checkwaitlistbutton') . '" />'.
+						'<input type="submit" value = "' . $this->pi_base->pi_getLL('label_checkwaitlistbutton') . '" />'.
 						'</form>';
 				$marker = $this->applyWrap($value, $conf, 'waitlistcheckbutton', $mode);
 				break;
@@ -582,7 +582,7 @@ class tx_register4cal_render {
 					$value = isset($this->user[$fieldname]) ? $value =$this->user[$fieldname] : '';
 				} elseif (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
 						// Insert a label field
-					$fieldname = 'label.' . str_replace('-', '.', substr($singleMarker, 6));;
+					$fieldname = 'label_' . substr($singleMarker, 6);
 					$value = $this->pi_base->pi_getLL($fieldname);
 				} else {
 					$value='';

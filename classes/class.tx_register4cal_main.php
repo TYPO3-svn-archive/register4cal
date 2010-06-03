@@ -62,12 +62,14 @@ class tx_register4cal_main extends tslib_pibase {
 	public function tx_register4cal_main() {
 			// Init class
 		parent::tslib_pibase();
+		$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.'];
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->cObj = new tslib_cObj();
 		
 			// Init settings
 		$tsconf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.'];
+		
 		$this->settings['template_file'] = $tsconf['template'];
 		$this->settings['date_format'] = $tsconf['dateformat'];
 		$this->settings['time_format'] = $tsconf['timeformat'];
@@ -713,10 +715,10 @@ class tx_register4cal_main extends tslib_pibase {
 			if ($statusDisplayed != $status) {
 				switch($status) {
 					case 2:
-						$message = $this->pi_getLL('error.notenoughplaces_waitlist');
+						$message = $this->pi_getLL('error_notenoughplaces_waitlist');
 						break;
 					case 0:
-						$message = $this->pi_getLL('error.notenoughplaces');
+						$message = $this->pi_getLL('error_notenoughplaces');
 						return FALSE;
 				} 
 			}
