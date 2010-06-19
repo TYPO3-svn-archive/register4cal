@@ -1,3 +1,9 @@
+2010-06-19 Thomas Ernst <typo3@thernst.de>
+	* Published version 0.6.1
+
+2010-06-03 Thomas Ernst <typo3@thernst.de>
+	* [Bug 8043] Labels in locallang.xml contain dots, therefore texts can'b be changed via TS
+	
 2010-05-30 Thomas Ernst <typo3@thernst.de>
 	* Published version 0.6.0
 
