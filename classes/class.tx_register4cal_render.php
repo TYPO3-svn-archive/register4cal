@@ -737,15 +737,18 @@ class tx_register4cal_render {
 			$resFS = $GLOBALS['TYPO3_DB']->exec_SELECTquery('fields','tx_register4cal_fieldsets', $where);
 			if($rowFS = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFS)) {
 					//read fields
-				$fieldlist = $GLOBALS['TYPO3_DB']->cleanIntList($rowFS['fields']);
-				$resFD = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_register4cal_fields','uid IN (' . $fieldlist . ') AND sys_language_uid IN (0,-1)');
-				while ($rowFD = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFD)) {
+				$fieldlist = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($rowFS['fields']));
+				foreach ($fieldlist as $field) {
+					$resFD = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','tx_register4cal_fields','uid=' . $field . ' AND sys_language_uid IN (0,-1)');
+					if ($rowFD = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resFD)) {
 						// translate
-					$rowFD = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_register4cal_fields', $rowFD, $GLOBALS['TSFE']->sys_language_uid,$GLOBALS['TSFE']->config['config']['sys_language_overlay']);
-					$ufData[$rowFD['name']] = $rowFD;
+						$rowFD = $GLOBALS['TSFE']->sys_page->getRecordOverlay('tx_register4cal_fields', $rowFD, $GLOBALS['TSFE']->sys_language_uid,$GLOBALS['TSFE']->config['config']['sys_language_overlay']);
+						$ufData[$rowFD['name']] = $rowFD;
+					}
+					$GLOBALS['TYPO3_DB']->sql_free_result($resFS);
 				}
 			}
-			$GLOBALS['TYPO3_DB']->sql_free_result($resFS);
+			
 		}
 		return $ufData;
 	}

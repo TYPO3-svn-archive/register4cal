@@ -244,7 +244,6 @@ class tx_register4cal_main extends tslib_pibase {
 			$this->rendering->setView('single');
 			$this->rendering->setEvent($event);
 			$this->rendering->setUser($GLOBALS['TSFE']->fe_user->user);
-			
 				// Render depending on registration status
 			$hasRegistered = $this->isUserAlreadyRegistered($data['uid'], $data['getdate'], $GLOBALS['TSFE']->fe_user->user['uid'], $event['pid'], $status);
 			if (!$hasRegistered) {
@@ -589,6 +588,8 @@ class tx_register4cal_main extends tslib_pibase {
 		if ($event['tx_register4cal_activate'] == 1) {
 			$start = $event['tx_register4cal_regstart'];
 			$ende = $event['tx_register4cal_regend'];
+
+			
 			$now = time();
 			$start = (isset($start) && $start != 0) ? $start : $now;
 			$ende = (isset($ende) && $ende != 0) ? $ende : strtotime($getDate);
