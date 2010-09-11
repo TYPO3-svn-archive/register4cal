@@ -1,4 +1,7 @@
-2010-06-19 Thomas Ernst <typo3@thernst.de>
+2010-09-11 Thomas Ernst <typo3@thernst.de>
+	* [Bug #9685] Deprecated TYPO3 function t3lib_div::makeInstanceClassName (thanks to J. Kummer)
+
+2010-08-31 Thomas Ernst <typo3@thernst.de>
 	* [Bug #9523] Userfields not displayed in same order as defined	
 
 2010-06-19 Thomas Ernst <typo3@thernst.de>

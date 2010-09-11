@@ -54,8 +54,7 @@ class tx_register4cal_user1 {
 	 */
 	public static function getReg4CalMainClass() {
 		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_main.php');
-		$tx_register4cal_main = &t3lib_div::makeInstanceClassName('tx_register4cal_main');
-		return new $tx_register4cal_main();
+		return t3lib_div::makeInstance('tx_register4cal_main');
 	}	
 	
 	/*

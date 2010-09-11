@@ -95,9 +95,13 @@ class tx_register4cal_main extends tslib_pibase {
 		$this->settings['template'] = $this->cObj->fileResource($this->settings['template_file']);
 
 			// Instanciate rendering class
-		require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_render.php');
-		$tx_register4cal_render = &t3lib_div::makeInstanceClassName('tx_register4cal_render');
-		$this->rendering = new $tx_register4cal_render($this, $this->settings);
+                require_once(t3lib_extMgm::extPath('register4cal') . 'classes/class.tx_register4cal_render.php');
+                if (t3lib_div::int_from_ver(TYPO3_version) <= 4003000) {;
+                    $tx_register4cal_render = &t3lib_div::makeInstanceClassName('tx_register4cal_render');
+                    $this->rendering = new $tx_register4cal_render($this, $this->settings);
+                } else {
+                    $this->rendering = &t3lib_div::makeInstance('tx_register4cal_render', $this, $this->settings);
+                }
 	}
 
 
