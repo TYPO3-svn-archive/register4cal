@@ -1,3 +1,6 @@
+2010-10-10 Thomas Ernst <typo3@thernst.de>
+	* Published Version 0.6.2
+
 2010-09-11 Thomas Ernst <typo3@thernst.de>
 	* [Bug #9685] Deprecated TYPO3 function t3lib_div::makeInstanceClassName (thanks to J. Kummer)
 
