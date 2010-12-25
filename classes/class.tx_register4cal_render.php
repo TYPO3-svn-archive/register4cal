@@ -767,6 +767,7 @@ class tx_register4cal_render {
 	    } else {
 		$where = 'isdefault <> 0' . ' AND pid=' . intval($event['pid']);
 	    }
+	    $where .= $this->cObj->enableFields('tx_register4cal_fieldsets');
 
 	    //read fieldset
 	    $resFS = $GLOBALS['TYPO3_DB']->exec_SELECTquery('fields', 'tx_register4cal_fieldsets', $where);
