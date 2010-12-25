@@ -32,7 +32,7 @@
 			<label index="tx_register4cal_fieldsets.name">Name</label>
 			<label index="tx_register4cal_fieldsets.fields">Fields</label>
 			<label index="tx_register4cal_fieldsets.isdefault">Default fieldset</label>
-			<label index="tx_cal_event.tx_register4cal_tablabel">Registrations for event</label>
+			<label index="tx_cal_event.tx_register4cal_tablabel">Registration</label>
 			<label index="tx_cal_event.tx_register4cal_activate">Activate registration</label>
 			<label index="tx_cal_event.tx_register4cal_activate_on">active</label>
 			<label index="tx_cal_event.tx_register4cal_activate_off">inactive</label>
@@ -76,7 +76,7 @@
 			<label index="tx_register4cal_fieldsets.name">Name</label>
 			<label index="tx_register4cal_fieldsets.fields">Felder</label>
 			<label index="tx_register4cal_fieldsets.isdefault">Vorgabefeldgruppe</label>
-			<label index="tx_cal_event.tx_register4cal_tablabel">Anmeldungen zum Termin</label>
+			<label index="tx_cal_event.tx_register4cal_tablabel">Anmeldung</label>
 			<label index="tx_cal_event.tx_register4cal_activate">Anmeldung aktivieren</label>
 			<label index="tx_cal_event.tx_register4cal_activate_on">aktiv</label>
 			<label index="tx_cal_event.tx_register4cal_activate_off">inaktiv</label>
