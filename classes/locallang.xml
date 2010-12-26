@@ -165,6 +165,7 @@
 			<label index="label_numfree">Remaining free places</label>
 			
 			<label index="label_checkwaitlistbutton">Check waitlist</label>
+			<label index="label_registerforeignuserbutton">Register user</label>
 			<label index="error_activate">Registration must not be deactivated if registrations are already recorded.</label>
 			<label index="error_maxattendees">The maximum number of registrations must not be reduced to a value less than the current number of registrations.</label>
 			<label index="error_waitlist">The waitlist must not be deactivated if it already contains entries.</label>
@@ -324,6 +325,7 @@
 			<label index="label_numfree">Verbleibende freie Plätze</label>
 			
 			<label index="label_checkwaitlistbutton">Warteliste prüfen</label>
+			<label index="label_registerforeignuserbutton">Benutzer anmelden</label>
 			<label index="error_activate">Die Anmeldung darf nicht deaktiviert werden, wenn bereits Anmeldungen gespeichert wurden.</label>
 			<label index="error_maxattendees">Die maximale Anzahl Anmeldungen darf nicht auf einen Wert reduziert werden, der niedriger ist als die aktuelle Anzahl Anmeldungen.</label>			
 			<label index="error_waitlist">Die Warteliste darf nicht deaktiviert werden, wenn sie bereits Einträge enthält.</label>

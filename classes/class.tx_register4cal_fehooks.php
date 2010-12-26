@@ -60,9 +60,9 @@ class tx_register4cal_fehooks {
 				if (strpos($content, 'phpicalendar_event')) {				/* ... with event template (not location or organizer ...) */
 						// get user data
 					$user = $GLOBALS['TSFE']->fe_user->user;
-					if ($user['uid'] != 0) {						/* An frontend user is logged in     */					
-						$main = tx_register4cal_user1::getReg4CalMainClass();
-						$content .= $main->SingleEventRegistration($data);
+					if ($user['uid'] != 0) {						/* An frontend user is logged in     */
+					    $main = tx_register4cal_user1::getReg4CalMainClass();
+					    $content .= $main->SingleEventRegistration($data);
 					} else {								/* no frontend user is logged in */
 						//Check if a onetimepid is given. If this is the case, offer link for
 						//creating a onetimeaccount using onetimeaccount

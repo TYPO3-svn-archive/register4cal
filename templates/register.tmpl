@@ -320,7 +320,7 @@
 	<p>This template defines how a attendees list should be displayed.</p>
 	<pre>
 	<!-- ###LIST_ATTENDEES### begin -->
-	<!-- ###TABLE### begin -->
+	<table width="100%" border="0" style="margin-bottom:1em;border:1px solid black;border-collapse:collapse;">
 		<!-- ###NOEVENTS### begin -->
 			###LABEL_registration_noevents###
 		<!-- ###NOEVENTS### end -->
@@ -337,7 +337,10 @@
 			###LABEL_maxattendees### ###MAXATTENDEES###
 			###LABEL_numattendees### ###NUMATTENDEES###
 			###LABEL_numwaitlist### ###NUMWAITLIST###
-			###WAITLISTCHECKBUTTON###
+			<td  style="border-bottom:1px solid black;">
+			    ###WAITLISTCHECKBUTTON###<br />
+			    ###REGISTERFOREIGNUSERBUTTON###
+			</td>
 			<!-- ###TABLINE### end -->			
 			<!-- ###TABLINE### begin -->
 			###LABEL_user_name###
@@ -355,9 +358,11 @@
 				###USER_email###
 				###STATUS###
 			<!-- ###TABLINE### end -->
-			<!-- ###TABLINE### begin -->
-				###FIELDS###
-			<!-- ###TABLINE### end -->
+			<!-- ###TABLINE_BB### begin -->
+			    <td colspan="5">
+				<table width="100%" border="0">###FIELDS###</table>
+			    </td>
+			<!-- ###TABLINE_BB### end -->
 		<!-- ###ITEMS### end -->
 		<!-- ###NOITEMS### begin -->
 			<!-- ###TABLINE###begin -->
@@ -368,8 +373,9 @@
 			<!-- ###TABLINE###begin -->
 				###LABEL_registration_nologin###
 			<!-- ###TABLINE### end -->
-		<!-- ###NOLOGIN### end -->		
-	<!-- ###TABLE### end -->
+		<!-- ###NOLOGIN### end -->
+		
+	</table>
 	<!-- ###LIST_ATTENDEES### end -->
 	</pre>
 

@@ -212,7 +212,7 @@ class tx_register4cal_user1 {
 		
 		if (!tx_register4cal_checks::getEvent($value, $oldEvent, $error)) return false;
 		$newEvent = t3lib_div::GParrayMerged('tx_cal_controller');
-		
+
 		return tx_register4cal_checks::checkActivate($oldEvent, $newEvent, $error);		
 	}
 	

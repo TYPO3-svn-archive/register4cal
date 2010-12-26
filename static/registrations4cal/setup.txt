@@ -13,7 +13,14 @@ plugin.tx_register4cal_pi1{
 	onetimereturnparam = redirect_url
 	loginpid = 0
 	loginreturnparam = redirect_url
-	
+
+
+	foreignUserRegistration {
+	    enable = 0
+	    allowOnlyGroups = 
+	    denyGroups = 
+	}
+
 	emails {
 		sendConfirmationMail = 1
 		sendNotificationMail = 1
@@ -45,6 +52,7 @@ plugin.tx_register4cal_pi1{
 			status.dataWrap = <td>|</td>
 			label_status.dataWrap = <td><b>|</b></td>
 			tabline.dataWrap = <tr>|</tr>
+			tabline_bb.dataWrap = <tr style="border-bottom:1px solid black;">|</tr>
 			user.dataWrap = <td style="vertical-align:top;" colspan="2"><h3>{LLL:EXT:register4cal/classes/locallang.xml:label_user}</h3></td>
 			label_user_uid.dataWrap = <td><b>|</b></td>
 			user_uid.dataWrap = <td>|</td>
@@ -381,8 +389,6 @@ plugin.tx_register4cal_pi1{
 			}
 			attendees {		
 				subtemplate = LIST_ATTENDEES
-				table.dataWrap = <table width="100%" border="0" style="margin-bottom:1em;border:1px solid black;border-collapse:collapse;">|</table>				
-				waitlistcheckbutton.dataWrap = <td  style="border-bottom:1px solid black;">|</td>
 				event_link.dataWrap = |			
 				event_title.dataWrap = <td><a href="###EVENT_link###">|</a></td>
 				maxattendees.dataWrap = |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -391,7 +397,7 @@ plugin.tx_register4cal_pi1{
 				label_numattendees.dataWrap = |:
 				numwaitlist.dataWrap = |</td>
 				label_numwaitlist.dataWrap = |:
-				
+
 			}
 		}
 	}	

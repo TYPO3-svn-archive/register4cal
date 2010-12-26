@@ -202,6 +202,10 @@ class tx_register4cal_render {
 	unset($this->user);
     }
 
+    public function addSetting($name, $value) {
+	$this->settings[$name] = $value;
+    }
+
     /*     * *********************************************************************************************************************************************************************
      *
      * Main rendering functions 
@@ -546,6 +550,32 @@ class tx_register4cal_render {
 			'</form>';
 		$marker = $this->applyWrap($value, $conf, 'waitlistcheckbutton', $mode);
 		break;
+	    case 'REGISTERFOREIGNUSERBUTTON':
+		if ($this->settings['enableForeignUserRegistration']) {
+
+		    $fields =
+		    '<input type="hidden" name="tx_cal_controller[view]" value="event" />' .
+		    '<input type="hidden" name="tx_cal_controller[type]" value="tx_cal_phpicalendar" />';
+
+
+		    if (empty($this->registration)) {
+			$fields .=
+			'<input type="hidden" name="tx_cal_controller[getdate]" value="'. intval($this->event['data']['start_date']) . '" />' .
+			'<input type="hidden" name="tx_cal_controller[uid]" value="' . intval($this->event['data']['uid']) . '" />';
+		    } else {
+			$fields .=
+			'<input type="hidden" name="tx_cal_controller[getdate]" value="'. intval($this->registration['cal_event_getdate']) . '" />' .
+			'<input type="hidden" name="tx_cal_controller[uid]" value="' . intval($this->registration['cal_event_uid']) . '" />';
+		    }
+//target="aPopup" onsubmit="window.open(\'\',\'aPopup\',\'height=500px,width=500px\');"
+		    $value = '<form action="' . $this->pi_base->pi_getPageLink($this->settings['eventpid']) . '" method="post" >' .
+			    '<input type="hidden" name="tx_cal_controller[tx_register4cal_cmd]" value="registerforeinguser" />' .
+			    $fields.
+			    '<input type="submit" value = "' . $this->pi_base->pi_getLL('label_registerforeignuserbutton') . '" />' .
+			    '</form>';
+		}
+		$marker = $this->applyWrap($value, $conf, 'registerforeignuserbutton', $mode);
+		break;
 	    default :
 		if (preg_match('/EVENT_([A-Z0-9_-])*/', $singleMarker)) {
 		    // Insert an event field. We have some special replacements here ...
@@ -608,7 +638,12 @@ class tx_register4cal_render {
 		} elseif (preg_match('/USER_([A-Z0-9_-])*/', $singleMarker)) {
 		    // Insert an user field
 		    $fieldname = substr($singleMarker, 5);
-		    $value = isset($this->user[$fieldname]) ? $value = $this->user[$fieldname] : '';
+		    if ($this->settings['registerForeignUser'] && !$this->user['uid']) {
+			$value = '';
+			if ($fieldname == 'name') $value = $this->getUserselection();
+		    } else {
+			$value = isset($this->user[$fieldname]) ? $value = $this->user[$fieldname] : '';
+		    }
 		} elseif (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
 		    // Insert a label field
 		    $fieldname = 'label_' . substr($singleMarker, 6);
@@ -797,6 +832,39 @@ class tx_register4cal_render {
 	    }
 	}
 	return $field;
+    }
+
+    private function getUserselection() {
+	$allowOnly = $this->settings['foreignUserRegistrationAllow'];
+	$deny = $this->settings['foreignUserRegistrationDeny'];
+
+	if ($allowOnly) {
+	    $groups = t3lib_div::intExplode(',',$allowOnly);
+	    foreach($groups as $group) {
+		if ($where) $where .= ' OR ';
+		$where .= 'FIND_IN_SET(\'' . $group . '\', usergroup) > 0';
+	    }
+	    $where = '(' . $where . ')';
+	}elseif ($deny) {
+	    $groups = t3lib_div::intExplode(',',$deny);
+	    foreach($groups as $group) {
+		if ($where) $where .= ' AND ';
+		$where .= 'FIND_IN_SET(\'' . $group . '\', usergroup) = 0';
+	    }
+	}else $where = '1=1';
+
+	$options = '<option selected value="0"></option>';
+
+	$select = 'uid, name, usergroup';
+	$table = 'fe_users';
+	$where .= ' AND uid <> ' . $GLOBALS['TSFE']->fe_user->user['uid'] . $this->cObj->enableFields($table);
+	$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
+	while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
+	    $options .= '<option value="' . $row['uid'] .'">' . $row['name'] . '</option>';
+	}
+	$start = '<select size="1" name="tx_register4cal_main[useruid]">';
+	$ende = '</select>';
+	return $start.$options.$ende;
     }
 
 }
