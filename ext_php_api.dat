@@ -1,0 +1,203 @@
+a:2:{s:4:"meta";a:3:{s:5:"title";s:12:"register4cal";s:5:"descr";s:32:"Registration for calendar events";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:11:{s:14:"MD5_c96395ecf6";a:4:{s:8:"filename";s:41:"classes/class.ttx_register4cal_regend.php";s:8:"filesize";i:3564;s:6:"header";a:5:{s:4:"text";s:128:"
+
+Class to handle marker ###MODULE__tx_register4cal_regend###
+--> Field "End of registration period" for event frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:1:{i:1;a:8:{s:6:"header";s:55:"class tx_register4cal_regend extends tx_cal_base_view {";s:5:"class";i:1;s:11:"parentClass";s:22:"tx_register4cal_regend";s:4:"cDat";a:5:{s:4:"text";s:128:"
+
+Class to handle marker ###MODULE__tx_register4cal_regend###
+--> Field "End of registration period" for event frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:1973;s:13:"content_lines";i:41;s:6:"atLine";i:46;}}}s:14:"MD5_cdb1ec707e";a:4:{s:8:"filename";s:42:"classes/class.tx_register4cal_activate.php";s:8:"filesize";i:3537;s:6:"header";a:5:{s:4:"text";s:123:"
+
+Class to handle marker ###MODULE__tx_register4cal_avtivate###
+--> Field "Registration active" for event frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:1:{i:1;a:8:{s:6:"header";s:57:"class tx_register4cal_activate extends tx_cal_base_view {";s:5:"class";i:1;s:11:"parentClass";s:24:"tx_register4cal_activate";s:4:"cDat";a:5:{s:4:"text";s:123:"
+
+Class to handle marker ###MODULE__tx_register4cal_avtivate###
+--> Field "Registration active" for event frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:1877;s:13:"content_lines";i:21;s:6:"atLine";i:46;}}}s:14:"MD5_0bc37468ac";a:4:{s:8:"filename";s:41:"classes/class.tx_register4cal_behooks.php";s:8:"filesize";i:2781;s:6:"header";a:5:{s:4:"text";s:123:"
+
+Delete registrations when the relating event is being deleted by processing the hook 'processDatamap_afterAllOperations'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:40:"@author 	Thomas Ernst <typo3@thernst.de>";i:1;s:15:"@package 	TYPO3";i:2;s:28:"@subpackage 	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:31:"class tx_register4cal_behooks {";s:5:"class";i:1;s:11:"parentClass";s:23:"tx_register4cal_behooks";s:4:"cDat";a:5:{s:4:"text";s:124:"
+
+Delete registrations when the relating event is being deleted by processing the hook 'processDatamap_afterAllOperations'
+
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:40:"@author 	Thomas Ernst <typo3@thernst.de>";i:1;s:15:"@package 	TYPO3";i:2;s:28:"@subpackage 	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:6:"atLine";i:43;}i:3;a:7:{s:6:"header";s:57:"function processDatamap_afterAllOperations ($otherThis) {";s:11:"parentClass";s:23:"tx_register4cal_behooks";s:4:"cDat";a:3:{s:4:"text";s:405:"
+********************************************************************************************************************************************************************
+
+Hook from TCEmain to delete registrations on the deletion of the event
+
+*********************************************************************************************************************************************************************/";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"[type]";i:1;s:15:"$otherThis: ...";}}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:805;s:13:"content_lines";i:22;s:6:"atLine";i:54;}}}s:14:"MD5_d9bcb444d4";a:4:{s:8:"filename";s:41:"classes/class.tx_register4cal_fehooks.php";s:8:"filesize";i:4886;s:6:"header";a:5:{s:4:"text";s:101:"
+
+Display the registration form in single event view by processing the hook 'preFinishViewRendering'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:40:"@author 	Thomas Ernst <typo3@thernst.de>";i:1;s:15:"@package 	TYPO3";i:2;s:28:"@subpackage 	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:4:{i:1;a:8:{s:6:"header";s:31:"class tx_register4cal_fehooks {";s:5:"class";i:1;s:11:"parentClass";s:23:"tx_register4cal_fehooks";s:4:"cDat";a:5:{s:4:"text";s:101:"
+
+Display the registration form in single event view by processing the hook 'preFinishViewRendering'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:40:"@author 	Thomas Ernst <typo3@thernst.de>";i:1;s:15:"@package 	TYPO3";i:2;s:28:"@subpackage 	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:441;s:13:"content_lines";i:7;s:6:"atLine";i:45;}i:3;a:6:{s:6:"header";s:59:"function postSearchForObjectMarker($otherThis, &$content) {";s:11:"parentClass";s:23:"tx_register4cal_fehooks";s:7:"content";s:0:"";s:12:"content_size";i:1405;s:13:"content_lines";i:28;s:6:"atLine";i:60;}i:5;a:3:{s:6:"header";s:45:"function preListRendering($events, &$class) {";s:11:"parentClass";s:23:"tx_register4cal_fehooks";s:6:"atLine";i:96;}i:7;a:7:{s:6:"header";s:57:"function postListRendering(&$content, $events, &$class) {";s:11:"parentClass";s:23:"tx_register4cal_fehooks";s:4:"cDat";a:3:{s:4:"text";s:403:"
+********************************************************************************************************************************************************************
+
+Use hook of cal extension to add form to event list view if required
+
+*********************************************************************************************************************************************************************/";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"[type]";i:1;s:14:"$$content: ...";}i:1;a:2:{i:0;s:6:"[type]";i:1;s:12:"$events: ...";}i:2;a:2:{i:0;s:6:"[type]";i:1;s:11:"$class: ...";}}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:561;s:13:"content_lines";i:14;s:6:"atLine";i:118;}}}s:14:"MD5_e761cff8ab";a:4:{s:8:"filename";s:41:"classes/class.tx_register4cal_listreg.php";s:8:"filesize";i:2375;s:6:"header";a:5:{s:4:"text";s:123:"
+
+Class to handle marker ###MODULE__tx_register4cal_listreg###
+--> Registration form in list view: Fields for single event
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:56:"class tx_register4cal_listreg extends tx_cal_base_view {";s:5:"class";i:1;s:11:"parentClass";s:23:"tx_register4cal_listreg";s:4:"cDat";a:5:{s:4:"text";s:123:"
+
+Class to handle marker ###MODULE__tx_register4cal_listreg###
+--> Registration form in list view: Fields for single event
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:6:"atLine";i:47;}i:3;a:6:{s:6:"header";s:31:"function start(&$moduleCaller){";s:11:"parentClass";s:23:"tx_register4cal_listreg";s:7:"content";s:0:"";s:12:"content_size";i:533;s:13:"content_lines";i:11;s:6:"atLine";i:50;}}}s:14:"MD5_65f0ca1cfb";a:4:{s:8:"filename";s:38:"classes/class.tx_register4cal_main.php";s:8:"filesize";i:29599;s:6:"header";a:5:{s:4:"text";s:46:"
+
+Main functions for extension 'register4cal'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:23:{i:1;a:8:{s:6:"header";s:49:"class tx_register4cal_main extends tslib_pibase {";s:5:"class";i:1;s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:5:{s:4:"text";s:46:"
+
+Main functions for extension 'register4cal'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:509;s:13:"content_lines";i:12;s:6:"atLine";i:46;}i:3;a:6:{s:6:"header";s:40:"public function tx_register4cal_main() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:1557;s:13:"content_lines";i:35;s:6:"atLine";i:60;}i:5;a:7:{s:6:"header";s:51:"public function listViewRegistrationEvent($event) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:3:{s:4:"text";s:514:"
+********************************************************************************************************************************************************************
+
+Registration form for event list view
+
+*********************************************************************************************************************************************************************/
+	/*
+Handle registration form for event list view (registration form, registration confirmation or
+registration notice, depending on status)
+
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:5:"array";i:1;s:18:"$event: Event data";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:15:"HTML to display";}}s:7:"content";s:0:"";s:12:"content_size";i:931;s:13:"content_lines";i:16;s:6:"atLine";i:109;}i:7;a:6:{s:6:"header";s:52:"public function listViewRegistrationForm($content) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:162;s:13:"content_lines";i:8;s:6:"atLine";i:141;}i:9;a:6:{s:6:"header";s:46:"public function listViewRegistrationSubmit() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:633;s:13:"content_lines";i:16;s:6:"atLine";i:151;}i:11;a:6:{s:6:"header";s:50:"public function listViewRegistrationStore($data) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:758;s:13:"content_lines";i:21;s:6:"atLine";i:169;}i:13;a:7:{s:6:"header";s:48:"public function singleEventRegistration($data) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:3:{s:4:"text";s:519:"
+********************************************************************************************************************************************************************
+
+Registration form for single event view
+
+*********************************************************************************************************************************************************************/
+
+	/*
+Handle registration form for single event view (registration form, registration confirmation or
+registration notice, depending on status)
+
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:5:"array";i:1;s:55:"$data:Get/Post-Data from cal extension (event uid, ...)";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:15:"HTML to display";}}s:7:"content";s:0:"";s:12:"content_size";i:1210;s:13:"content_lines";i:24;s:6:"atLine";i:205;}i:15;a:6:{s:6:"header";s:36:"public function singleEventLogin() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:44;s:13:"content_lines";i:3;s:6:"atLine";i:243;}i:17;a:7:{s:6:"header";s:36:"function participantList($pidlist) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:3:{s:4:"text";s:445:"
+********************************************************************************************************************************************************************
+
+Participants list
+
+*********************************************************************************************************************************************************************/
+	/*
+Renders the list of participants for all events, the current fe-user is allowed to see
+
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:62:"$pidlist: List of pids from which registrations should be read";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"HTML for participants list";}}s:7:"content";s:0:"";s:12:"content_size";i:6064;s:13:"content_lines";i:112;s:6:"atLine";i:259;}i:19;a:7:{s:6:"header";s:30:"function eventList($pidlist) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:3:{s:4:"text";s:462:"
+********************************************************************************************************************************************************************
+
+List of events for which an user has registered
+
+*********************************************************************************************************************************************************************/
+
+	/*
+Renders the list of events, for which the current fe-user has registered
+
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:62:"$pidlist: List of pids from which registrations should be read";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:19:"HTML for event list";}}s:7:"content";s:0:"";s:12:"content_size";i:2558;s:13:"content_lines";i:53;s:6:"atLine";i:385;}i:21;a:7:{s:6:"header";s:45:"private function readEventRecord($eventUid) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:3:{s:4:"text";s:401:"
+********************************************************************************************************************************************************************
+
+Supporting functions
+
+*********************************************************************************************************************************************************************/
+
+	/*
+Read an event record from the database
+
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:7:"integer";i:1;s:35:"$eventUid: uid of the event to read";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:12:"Event record";}}s:7:"content";s:0:"";s:12:"content_size";i:628;s:13:"content_lines";i:17;s:6:"atLine";i:452;}i:23;a:6:{s:6:"header";s:58:"private function isRegistrationEnabled($event, $getDate) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:320;s:13:"content_lines";i:7;s:6:"atLine";i:471;}i:25;a:6:{s:6:"header";s:88:"public function isUserAlreadyRegistered($eventUid, $eventGetDate, $userUid, $eventPid) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:753;s:13:"content_lines";i:22;s:6:"atLine";i:495;}i:27;a:7:{s:6:"header";s:59:"private function storeData($data, $eventTitle, $eventPid) {";s:11:"parentClass";s:20:"tx_register4cal_main";s:4:"cDat";a:3:{s:4:"text";s:411:"
+********************************************************************************************************************************************************************
+
+Private registration functions
+
+*********************************************************************************************************************************************************************/
+
+	/*
+Store the registration in the database
+
+";s:5:"param";a:3:{i:0;a:2:{i:0;s:5:"array";i:1;s:32:"$data: Data for the registration";}i:1;a:2:{i:0;s:6:"string";i:1;s:31:"$eventTitle: Title of the event";}i:2;a:2:{i:0;s:7:"integer";i:1;s:63:"$eventPid: Pid where the event (and the registration) is stored";}}s:6:"return";a:2:{i:0;s:7:"boolean";i:1;s:70:"TRUE: Registration sucessfully stored,  FALSE: Registration not stored";}}s:7:"content";s:0:"";s:12:"content_size";i:1322;s:13:"content_lines";i:30;s:6:"atLine";i:533;}i:29;a:6:{s:6:"header";s:43:"private function renderRegistrationForm() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:195;s:13:"content_lines";i:7;s:6:"atLine";i:575;}i:31;a:6:{s:6:"header";s:51:"private function renderRegistrationConfirmation() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:185;s:13:"content_lines";i:7;s:6:"atLine";i:584;}i:33;a:6:{s:6:"header";s:46:"private function renderRegistrationDetails() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:193;s:13:"content_lines";i:8;s:6:"atLine";i:593;}i:35;a:6:{s:6:"header";s:40:"private function renderNeedLoginForm() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:173;s:13:"content_lines";i:7;s:6:"atLine";i:603;}i:37;a:6:{s:6:"header";s:41:"function renderListRegistrationSubmit() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:192;s:13:"content_lines";i:7;s:6:"atLine";i:612;}i:39;a:6:{s:6:"header";s:40:"function renderListRegistrationEvent() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:196;s:13:"content_lines";i:7;s:6:"atLine";i:621;}i:41;a:6:{s:6:"header";s:42:"function renderListRegistrationDetails() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:271;s:13:"content_lines";i:7;s:6:"atLine";i:630;}i:43;a:3:{s:6:"header";s:41:"private function sendConfirmationMail() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:6:"atLine";i:639;}i:45;a:6:{s:6:"header";s:41:"private function sendNotificationMail() {";s:11:"parentClass";s:20:"tx_register4cal_main";s:7:"content";s:0:"";s:12:"content_size";i:1585;s:13:"content_lines";i:42;s:6:"atLine";i:674;}}}s:14:"MD5_a0fabfc868";a:4:{s:8:"filename";s:42:"classes/class.tx_register4cal_regstart.php";s:8:"filesize";i:3716;s:6:"header";a:5:{s:4:"text";s:132:"
+
+Class to handle marker ###MODULE__tx_register4cal_regstart###
+--> Field "Start of registration period" for event frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:1:{i:1;a:8:{s:6:"header";s:57:"class tx_register4cal_regstart extends tx_cal_base_view {";s:5:"class";i:1;s:11:"parentClass";s:24:"tx_register4cal_regstart";s:4:"cDat";a:5:{s:4:"text";s:132:"
+
+Class to handle marker ###MODULE__tx_register4cal_regstart###
+--> Field "Start of registration period" for event frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:2024;s:13:"content_lines";i:40;s:6:"atLine";i:46;}}}s:14:"MD5_19385abec3";a:4:{s:8:"filename";s:40:"classes/class.tx_register4cal_render.php";s:8:"filesize";i:24468;s:6:"header";a:5:{s:4:"text";s:56:"
+
+Main rendering functions for extension 'register4cal'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:21:{i:1;a:8:{s:6:"header";s:30:"class tx_register4cal_render {";s:5:"class";i:1;s:11:"parentClass";s:22:"tx_register4cal_render";s:4:"cDat";a:5:{s:4:"text";s:56:"
+
+Main rendering functions for extension 'register4cal'
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:659;s:13:"content_lines";i:15;s:6:"atLine";i:46;}i:3;a:6:{s:6:"header";s:71:"public function tx_register4cal_render($referring_pi_base, $settings) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:286;s:13:"content_lines";i:12;s:6:"atLine";i:63;}i:5;a:7:{s:6:"header";s:32:"public function setView($view) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:4:"cDat";a:3:{s:4:"text";s:409:"
+********************************************************************************************************************************************************************
+
+Getter and Setter Methods
+
+*********************************************************************************************************************************************************************/
+	/*
+Sets the view (single event or event list)
+
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:32:"$view: View ("single" or "list")";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:7:"content";s:0:"";s:12:"content_size";i:16;s:13:"content_lines";i:0;s:6:"atLine";i:88;}i:7;a:6:{s:6:"header";s:34:"public function setEvent($event) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:494;s:13:"content_lines";i:17;s:6:"atLine";i:107;}i:9;a:6:{s:6:"header";s:30:"public function unsetEvent() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:181;s:13:"content_lines";i:9;s:6:"atLine";i:126;}i:11;a:6:{s:6:"header";s:48:"public function setRegistration($registration) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:195;s:13:"content_lines";i:9;s:6:"atLine";i:137;}i:13;a:6:{s:6:"header";s:37:"public function unsetRegistration() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:242;s:13:"content_lines";i:11;s:6:"atLine";i:148;}i:15;a:6:{s:6:"header";s:32:"public function setUser($user) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:127;s:13:"content_lines";i:8;s:6:"atLine";i:161;}i:17;a:6:{s:6:"header";s:29:"public function unsetUser() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:26;s:13:"content_lines";i:3;s:6:"atLine";i:171;}i:19;a:7:{s:6:"header";s:151:"public function renderForm($templateSubpart, $confName, $mode, $templateSubpartSubpart = '', $presetSubpartMarker = Array(), $presetMarker = Array()) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:4:"cDat";a:3:{s:4:"text";s:386:"
+********************************************************************************************************************************************************************
+
+Main rendering functions
+
+*********************************************************************************************************************************************************************/
+       /*
+Renders a form
+
+";s:5:"param";a:6:{i:0;a:2:{i:0;s:6:"string";i:1;s:40:"@templateSupart: Template subpart to use";}i:1;a:2:{i:0;s:5:"array";i:1;s:51:"@confName: Name of TS config for the form to render";}i:2;a:2:{i:0;s:6:"string";i:1;s:41:"@mode: View-Mode to render (edit or show)";}i:3;a:2:{i:0;s:6:"string";i:1;s:63:"@templateSubpartSubpart: Subpart of the template subpart to use";}i:4;a:2:{i:0;s:5:"array";i:1;s:68:"@presetSubpartMarker: Array containing preset subpart markers to use";}i:5;a:2:{i:0;s:5:"array";i:1;s:54:"@presetMarker: Array containting preset markers to use";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:15:"Rendered fields";}}s:7:"content";s:0:"";s:12:"content_size";i:1427;s:13:"content_lines";i:28;s:6:"atLine";i:192;}i:21;a:6:{s:6:"header";s:42:"public function renderSubject($confName) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:83;s:13:"content_lines";i:4;s:6:"atLine";i:239;}i:23;a:7:{s:6:"header";s:58:"private function applyWrap($value, $conf, $field, $mode) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:4:"cDat";a:3:{s:4:"text";s:938:"
+********************************************************************************************************************************************************************
+
+Functions, supporting the rendering process
+
+*********************************************************************************************************************************************************************/
+        /*
+Apply stdWrap to a value
+
+$conf is usualy a branch of the "forms"-section in the TypoScript config, except the "allForms" section.
+This function now checks, whether a subsection for the field is contained in the given section. If not,
+the according subsection of the "default" section is being taken. If this subsection contains branches
+called "show" and/or "edit". The branch matching the given mode is being used as stdWrap-Configuration.
+Otherwise the whole subsection is being used.
+Important: fieldnames are converted into lowercase before!
+
+";s:5:"param";a:4:{i:0;a:2:{i:0;s:6:"string";i:1;s:47:"$value: Value to wich stdWrap should be applied";}i:1;a:2:{i:0;s:5:"array";i:1;s:71:"$conf: Array containing the configuration of the fields from TypoScript";}i:2;a:2:{i:0;s:6:"string";i:1;s:52:"$field: Fieldname to determine stdWrap-Configuration";}i:3;a:2:{i:0;s:6:"string";i:1;s:65:"$mode: Mode to render (currently "edit" and "show" are supported)";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"Value with stdWrap applied";}}s:7:"content";s:0:"";s:12:"content_size";i:648;s:13:"content_lines";i:15;s:6:"atLine";i:266;}i:25;a:6:{s:6:"header";s:60:"private function renderUserField($conf, $mode,  $value='') {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:1017;s:13:"content_lines";i:20;s:6:"atLine";i:283;}i:27;a:6:{s:6:"header";s:45:"private function renderOldUserField($field) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:903;s:13:"content_lines";i:17;s:6:"atLine";i:326;}i:29;a:6:{s:6:"header";s:49:"private function renderUserFields($conf, $mode) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:1010;s:13:"content_lines";i:25;s:6:"atLine";i:345;}i:31;a:6:{s:6:"header";s:66:"private function renderSingleMarker($singleMarker, $conf, $mode) {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:4587;s:13:"content_lines";i:97;s:6:"atLine";i:391;}i:33;a:6:{s:6:"header";s:25:"function getEventLink() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:330;s:13:"content_lines";i:7;s:6:"atLine";i:510;}i:35;a:6:{s:6:"header";s:44:"private function prepareFormatedDateTime() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:956;s:13:"content_lines";i:14;s:6:"atLine";i:532;}i:37;a:6:{s:6:"header";s:28:"function setOrganizerObj() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:51;s:13:"content_lines";i:0;s:6:"atLine";i:559;}i:39;a:3:{s:6:"header";s:27:"function setLocationObj() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:6:"atLine";i:574;}i:41;a:6:{s:6:"header";s:29:"function getOrganizerData() {";s:11:"parentClass";s:22:"tx_register4cal_render";s:7:"content";s:0:"";s:12:"content_size";i:999;s:13:"content_lines";i:23;s:6:"atLine";i:589;}}}s:14:"MD5_c8f41b01c2";a:4:{s:8:"filename";s:40:"classes/class.tx_register4cal_submit.php";s:8:"filesize";i:2363;s:6:"header";a:5:{s:4:"text";s:112:"
+
+Class to handle marker ###MODULE__tx_register4cal_submit###
+--> Registration form in list view: Submit-Button
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:55:"class tx_register4cal_submit extends tx_cal_base_view {";s:5:"class";i:1;s:11:"parentClass";s:22:"tx_register4cal_submit";s:4:"cDat";a:5:{s:4:"text";s:112:"
+
+Class to handle marker ###MODULE__tx_register4cal_submit###
+--> Registration form in list view: Submit-Button
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:6:"atLine";i:47;}i:3;a:6:{s:6:"header";s:31:"function start(&$moduleCaller){";s:11:"parentClass";s:22:"tx_register4cal_submit";s:7:"content";s:0:"";s:12:"content_size";i:532;s:13:"content_lines";i:11;s:6:"atLine";i:50;}}}s:14:"MD5_7856f670d0";a:4:{s:8:"filename";s:39:"classes/class.tx_register4cal_user1.php";s:8:"filesize";i:8673;s:6:"header";a:5:{s:4:"text";s:53:"
+
+Functions for backend display and frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:7:{i:1;a:8:{s:6:"header";s:29:"class tx_register4cal_user1 {";s:5:"class";i:1;s:11:"parentClass";s:21:"tx_register4cal_user1";s:4:"cDat";a:5:{s:4:"text";s:53:"
+
+Functions for backend display and frontend editing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:7:"content";s:0:"";s:12:"content_size";i:121;s:13:"content_lines";i:5;s:6:"atLine";i:45;}i:3;a:6:{s:6:"header";s:46:"public static function getReg4CalMainClass() {";s:11:"parentClass";s:21:"tx_register4cal_user1";s:7:"content";s:0:"";s:12:"content_size";i:414;s:13:"content_lines";i:12;s:6:"atLine";i:52;}i:5;a:6:{s:6:"header";s:51:"public static function errormessage($title,$text) {";s:11:"parentClass";s:21:"tx_register4cal_user1";s:7:"content";s:0:"";s:12:"content_size";i:438;s:13:"content_lines";i:9;s:6:"atLine";i:66;}i:7;a:7:{s:6:"header";s:53:"public function convertToTimestamp($content, $conf) {";s:11:"parentClass";s:21:"tx_register4cal_user1";s:4:"cDat";a:3:{s:4:"text";s:405:"
+********************************************************************************************************************************************************************
+
+Frontend editing
+
+*********************************************************************************************************************************************************************/
+	/*
+UserFunction to convert a date into a timestamp
+
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:29:"$content: Content the element";}i:1;a:2:{i:0;s:5:"array";i:1;s:31:"$conf: Configuration of stdWrap";}}s:6:"return";a:2:{i:0;s:3:"new";i:1;s:29:"value for the content element";}}s:7:"content";s:0:"";s:12:"content_size";i:495;s:13:"content_lines";i:13;s:6:"atLine";i:89;}i:9;a:6:{s:6:"header";s:80:"public static function getTimestamp($string, $default = 'now', $timestamp = 1) {";s:11:"parentClass";s:21:"tx_register4cal_user1";s:7:"content";s:0:"";s:12:"content_size";i:1426;s:13:"content_lines";i:19;s:6:"atLine";i:104;}i:11;a:3:{s:6:"header";s:65:"static function formatDate($date, $time, $format, $timezone='') {";s:11:"parentClass";s:21:"tx_register4cal_user1";s:6:"atLine";i:144;}i:13;a:7:{s:6:"header";s:54:"public function additionalDataForBackend($PA, $fobj) {";s:11:"parentClass";s:21:"tx_register4cal_user1";s:4:"cDat";a:3:{s:4:"text";s:394:"
+********************************************************************************************************************************************************************
+
+Backend display
+
+*********************************************************************************************************************************************************************/
+	/*
+Render userfields for backend display
+
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:5:"array";i:1;s:14:"$PA: item data";}i:1;a:2:{i:0;s:2:"??";i:1;s:9:"$fobj: ??";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:32:"Formated and converted date/time";}}s:7:"content";s:0:"";s:12:"content_size";i:1317;s:13:"content_lines";i:27;s:6:"atLine";i:172;}}}s:14:"MD5_7fc1730514";a:4:{s:8:"filename";s:33:"pi1/class.tx_register4cal_pi1.php";s:8:"filesize";i:3711;s:6:"header";a:5:{s:4:"text";s:73:"
+
+Plugin 'Registration for Cal-Events' for the 'register4cal' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:48:"class tx_register4cal_pi1 extends tslib_pibase {";s:5:"class";i:1;s:11:"parentClass";s:19:"tx_register4cal_pi1";s:4:"cDat";a:5:{s:4:"text";s:73:"
+
+Plugin 'Registration for Cal-Events' for the 'register4cal' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:39:"@author	Thomas Ernst <typo3@thernst.de>";i:1;s:14:"@package	TYPO3";i:2;s:27:"@subpackage	tx_register4cal";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:31:"Thomas Ernst <typo3@thernst.de>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:16:"tx_register4cal ";}}}s:6:"atLine";i:45;}i:3;a:7:{s:6:"header";s:32:"function main($content, $conf) {";s:11:"parentClass";s:19:"tx_register4cal_pi1";s:4:"cDat";a:3:{s:4:"text";s:32:"
+
+The main method of the PlugIn
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:28:"$content: The PlugIn content";}i:1;a:2:{i:0;s:5:"array";i:1;s:31:"$conf: The PlugIn configuration";}}s:6:"return";a:2:{i:0;s:3:"The";i:1;s:40:"content that is displayed on the website";}}s:7:"content";s:0:"";s:12:"content_size";i:1695;s:13:"content_lines";i:42;s:6:"atLine";i:58;}}}}}

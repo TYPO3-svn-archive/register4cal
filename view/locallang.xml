@@ -21,10 +21,10 @@
 			<label index="single_registration_enter_textbottom"></label>
 			<label index="single_registration_confirmation_heading">Confirmation of registration</label>
 			<label index="single_registration_confirmation_texttop">Thank you for registering for an event on our website. We recorded the following data:</label>
-			<label index="single_registration_confirmation_textbottom">For further information, please contact the organizer of the event_</label>
+			<label index="single_registration_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="single_registration_alreadydone_heading">Already registered</label>
 			<label index="single_registration_alreadydone_texttop">You have registered for this event_ We recorded the following data:</label>
-			<label index="single_registration_alreadydone_textbottom">For further information, please contact the organizer of the event_</label>	
+			<label index="single_registration_alreadydone_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="single_registration_alreadydone_labelsubmit">Cancel registration</label>
 			<label index="single_waitlist_enter_heading">Register for this event - Waitlist</label>
 			<label index="single_waitlist_enter_heading_texttop">Unfortunately, this event is fully booked at the moment. However, a waitlist is available. Enlist to the waitlist here:</label>
@@ -32,10 +32,10 @@
 			<label index="single_waitlist_enter_heading_labelsubmit">Enlist in waitlist</label>
 			<label index="single_waitlist_confirmation_heading">Confirmation of waitlist entry</label>
 			<label index="single_waitlist_confirmation_texttop">Thank you for enlisting in the waitlist for an event on our website. We recorded the following data:</label>
-			<label index="single_waitlist_confirmation_textbottom">For further information, please contact the organizer of the event_</label>
+			<label index="single_waitlist_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="single_waitlist_alreadydone_heading">Already on waitlist</label>
 			<label index="single_waitlist_alreadydone_texttop">You have enlisted to the waitlist for this event_ We recorded the following data:</label>
-			<label index="single_waitlist_alreadydone_textbottom">For further information, please contact the organizer of the event_</label>	
+			<label index="single_waitlist_alreadydone_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="single_waitlist_alreadydone_labelsubmit">Cancel waitlist entry</label>
 			
 			<label index="list_submit_submitbutton">Register/Unregister for selected events</label>
@@ -49,11 +49,21 @@
 			<label index="email_registration_enter_confirmation_subject">Confirmation of registration</label>
 			<label index="email_registration_enter_confirmation_heading">Confirmation of registration</label>
 			<label index="email_registration_enter_confirmation_texttop">Thank you for registering for an event on our website. We recorded the following data:</label>
-			<label index="email_registration_enter_confirmation_textbottom">For further information, please contact the organizer of the event_</label>
+			<label index="email_registration_enter_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="email_registration_enter_notification_subject">Notification of registration</label>
 			<label index="email_registration_enter_notification_heading">Notification of registration</label>
 			<label index="email_registration_enter_notification_texttop">An user has registered for one of your events:</label>
 			<label index="email_registration_enter_notification_textbottom"></label>	
+
+			<label index="email_registration_enter_confirmation_rfu_subject">Confirmation of registration by event organizer</label>
+			<label index="email_registration_enter_confirmation_rfu_heading">Confirmation of registration by event organizer</label>
+			<label index="email_registration_enter_confirmation_rfu_texttop">An event organizer has registered you for an event on our website. We recorded the following data:</label>
+			<label index="email_registration_enter_confirmation_rfu_textbottom">For further information, please contact the organizer of the event.</label>
+			<label index="email_registration_enter_notification_rfu_subject">Notification of registration by event organizer</label>
+			<label index="email_registration_enter_notification_rfu_heading">Notification of registration by event organizer</label>
+			<label index="email_registration_enter_notification_rfu_texttop">An event organizer has registered an user for the following event:</label>
+			<label index="email_registration_enter_notification_rfu_textbottom"></label>
+
 			<label index="email_registration_cancel_confirmation_subject">Confirmation of cancelled registration</label>
 			<label index="email_registration_cancel_confirmation_heading">Confirmation of cancelled registration</label>
 			<label index="email_registration_cancel_confirmation_texttop">You have cancelled your registration for the following event:</label>
@@ -61,15 +71,35 @@
 			<label index="email_registration_cancel_notification_subject">Notification of cancelled registration</label>
 			<label index="email_registration_cancel_notification_heading">Notification of cancelled registration</label>
 			<label index="email_registration_cancel_notification_texttop">An user has cancelled his registration for one of your events:</label>
-			<label index="email_registration_cancel_notification_textbottom"></label>			
+			<label index="email_registration_cancel_notification_textbottom"></label>
+
+			<label index="email_registration_cancel_confirmation_rfu_subject">Confirmation of registration cancelled by event organizer</label>
+			<label index="email_registration_cancel_confirmation_rfu_heading">Confirmation of registration cancelled by event organizer</label>
+			<label index="email_registration_cancel_confirmation_rfu_texttop">An event organiezer has cancelled your registration for the following event:</label>
+			<label index="email_registration_cancel_confirmation_rfu_textbottom"></label>
+			<label index="email_registration_cancel_notification_rfu_subject">Notification of registration cancelled by event organizer</label>
+			<label index="email_registration_cancel_notification_rfu_heading">Notification of registration cancelled by event organizern</label>
+			<label index="email_registration_cancel_notification_rfu_texttop">An event organizer has cancelled a registration for the following event:</label>
+			<label index="email_registration_cancel_notification_rfu_textbottom"></label>
+
 			<label index="email_waitlist_enter_confirmation_subject">Confirmation of waitlist entry</label>
 			<label index="email_waitlist_enter_confirmation_heading">Confirmation of waitlist entry</label>
 			<label index="email_waitlist_enter_confirmation_texttop">Thank you for enlisting in the waitlist for an event on our website. We recorded the following data:</label>
-			<label index="email_waitlist_enter_confirmation_textbottom">For further information, please contact the organizer of the event_</label>
+			<label index="email_waitlist_enter_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="email_waitlist_enter_notification_subject">Notification of waitlist entry</label>
 			<label index="email_waitlist_enter_notification_heading">Notification of waitlist entry</label>
 			<label index="email_waitlist_enter_notification_texttop">An user has enlisted to the waitlist for one of your events:</label>
 			<label index="email_waitlist_enter_notification_textbottom"></label>
+
+			<label index="email_waitlist_enter_confirmation_rfu_subject">Confirmation of waitlist entry by event organizer</label>
+			<label index="email_waitlist_enter_confirmation_rfu_heading">Confirmation of waitlist entry by event organizer</label>
+			<label index="email_waitlist_enter_confirmation_rfu_texttop">An event organizer has enlisted you in the waitlist for an event on our website. We recorded the following data:</label>
+			<label index="email_waitlist_enter_confirmation_rfu_textbottom">For further information, please contact the organizer of the event.</label>
+			<label index="email_waitlist_enter_notification_rfu_subject">Notification of waitlist entry by event organizer</label>
+			<label index="email_waitlist_enter_notification_rfu_heading">Notification of waitlist entry by event organizer</label>
+			<label index="email_waitlist_enter_notification_rfu_texttop">An event organizer has enlisted an user to the waitlist for the following event:</label>
+			<label index="email_waitlist_enter_notification_rfu_textbottom"></label>
+
 			<label index="email_waitlist_cancel_confirmation_subject">Confirmation of cancelled waitlist entry</label>
 			<label index="email_waitlist_cancel_confirmation_heading">Confirmation of cancelled waitlist entry</label>
 			<label index="email_waitlist_cancel_confirmation_texttop">You have removed your entry in the waitlist for the following event:</label>
@@ -78,10 +108,21 @@
 			<label index="email_waitlist_cancel_notification_heading">Notification of cancelled waitlist entry</label>
 			<label index="email_waitlist_cancel_notification_texttop">An user has removed his entry in the waitlist for one of your events:</label>
 			<label index="email_waitlist_cancel_notification_textbottom"></label>
+
+			<label index="email_waitlist_cancel_confirmation_rfu_subject">Confirmation of waitlist entry canceled by event organizer</label>
+			<label index="email_waitlist_cancel_confirmation_rfu_heading">Confirmation of waitlist entry canceled by event organizer</label>
+			<label index="email_waitlist_cancel_confirmation_rfu_texttop">An event organizer has removed your entry in the waitlist for the following event:</label>
+			<label index="email_waitlist_cancel_confirmation_rfu_textbottom"></label>
+			<label index="email_waitlist_cancel_notification_rfu_subject">Notification of waitlist entry canceled by event organizer</label>
+			<label index="email_waitlist_cancel_notification_rfu_heading">Notification of waitlist entry canceled by event organizer</label>
+			<label index="email_waitlist_cancel_notification_rfu_texttop">An event organizer has removed an entry in the waitlist for the following event:</label>
+			<label index="email_waitlist_cancel_notification_rfu_textbottom"></label>
+
+
 			<label index="email_waitlist_upgrade_confirmation_subject">Confirmation of registration waitlist --> attending</label>
 			<label index="email_waitlist_upgrade_confirmation_heading">Confirmation of registration waitlist --> attending</label>
 			<label index="email_waitlist_upgrade_confirmation_texttop">You enlisted to the waitlist for the following event_ As places became available, you are now registered as attendant for this event:</label>
-			<label index="email_waitlist_upgrade_confirmation_textbottom">For further information, please contact the organizer of the event_</label>
+			<label index="email_waitlist_upgrade_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="email_waitlist_upgrade_notification_subject">Notification of registration waitlist --> attending</label>
 			<label index="email_waitlist_upgrade_notification_heading">Notification of registration waitlist --> attending</label>
 			<label index="email_waitlist_upgrade_notification_texttop">An user of the waitlist has been registeted as attendant:</label>
@@ -163,14 +204,36 @@
 			<label index="label_numattendees">Occupied places</label>
 			<label index="label_numwaitlist">Waitlist entries</label>
 			<label index="label_numfree">Remaining free places</label>
-			
+			<label index="label_unlimited">Unlimited</label>
+
+			<label index="label_submit_register_normal">Register for this event</label>
+			<label index="label_submit_register_waitlist">Enlist to waitlist for this event</label>
+			<label index="label_submit_unregister_normal">Unregister from this event</label>
+			<label index="label_submit_unregister_waitlist">Cancel waitlist entry for this event</label>
+			<label index="label_question_unregister_normal">Do you really want to unregister from this event?</label>
+			<label index="label_question_unregister_waitlist">Do you really want to cancel your waitlist entry for this event?</label>
+
+			<label index="label_admin_title">Administrative tasks</label>
+			<label index="label_admin_none">(select action)</label>
+			<label index="label_admin_checkwaitlist">Check waitlist</label>
+			<label index="label_admin_registerforeignuser">Register foreign user</label>
+			<label index="label_admin_removecancelled">Delete cancelled registrations</label>
+			<label index="label_admin_execute">Execute</label>
+			<label index="label_admin_back">Leave administrative task</label>
+			<label index="label_admin_selectuser">Select user</label>
+			<label index="label_admin_changeuser">Change user</label>
 			<label index="label_checkwaitlistbutton">Check waitlist</label>
 			<label index="label_registerforeignuserbutton">Register user</label>
+			<label index="label_error_nouser">No user has been selected!</label>
+			<label index="label_error_noregistration">Registrations for this event are currently not possible</label>
+			<label index="label_error_alreadywaitlist">This user has already enlisted on the waitlist for this event</label>
+			<label index="label_error_alreadyregistered">This user has already registered for this event</label>
 			<label index="error_activate">Registration must not be deactivated if registrations are already recorded.</label>
 			<label index="error_maxattendees">The maximum number of registrations must not be reduced to a value less than the current number of registrations.</label>
 			<label index="error_waitlist">The waitlist must not be deactivated if it already contains entries.</label>
 			<label index="error_notenoughplaces">There are not enough free places for the number of attendees you want to register!</label>
-			<label index="error_notenoughplaces_waitlist">There are not enough free places for the number of attendees you want to register. Your registration has been recorded to the waitlist_</label>
+			<label index="error_notenoughplaces_waitlist">There are not enough free places for the number of attendees you want to register. Your registration has been recorded to the waitlist.</label>
+		
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="default_submitbutton">Für diesen Termin anmelden</label>
@@ -178,25 +241,30 @@
 			<label index="single_noregister_heading">Termin ausgebucht</label>
 			<label index="single_noregister_texttop">Leider ist die Veranstaltung derzeit ausgebucht. Da es keine Warteliste gibt ist derzeit keine Anmeldung möglich.</label>
 			<label index="single_noregister_textbottom">Wenn ein Teilnehmer seine Anmeldung storniert wird die Anmeldung später möglicherweise erneut möglich sein.</label>
+
 			<label index="single_needlogin_heading">Fur diesen Termin anmelden</label>
 			<label index="single_needlogin_texttop">Anmeldungen sind nur für Benutzer möglich, die einen Account auf unserer Webseite haben.</label>
 			<label index="single_needlogin_textbottom"></label>
 			<label index="single_needlogin_onetimeaccountbutton">Einmal-Account anlegen</label>
 			<label index="single_needlogin_loginbutton">Mit bestehenden Account anmelden</label>
+
 			<label index="single_registration_enter_heading">Für diesen Termin anmelden</label>
 			<label index="single_registration_enter_texttop"></label>
 			<label index="single_registration_enter_textbottom"></label>
+
 			<label index="single_registration_confirmation_heading">Anmeldebestätigung</label>
 			<label index="single_registration_confirmation_texttop">Vielen Dank für die Anmeldung für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="single_registration_confirmation_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+
 			<label index="single_registration_alreadydone_heading">Bereits registriert</label>
 			<label index="single_registration_alreadydone_texttop">Sie sind für diesen Termin bereits angemeldet. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="single_registration_alreadydone_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>	
 			<label index="single_registration_alreadydone_labelsubmit">Von diesem Termin abmelden</label>
+
 			<label index="single_waitlist_enter_heading">Für diesen Termin anmelden - Warteliste</label>
-			<label index="single_waitlist_enter_heading_texttop">Leider ist die Veranstaltung derzeit ausgebucht. Es ist jedoch eine Warteliste verfügbar. Tragen Sie sich hier für die Warteliste ein</label>
-			<label index="single_waitlist_enter_heading_textbottom">Wenn ein Teilnehmer seine Anmeldung storniert und ein Platz für Sie frei wird, werden Sie benachtichtigt.</label>
-			<label index="single_waitlist_enter_heading_labelsubmit">In die Warteliste eintragen</label>
+			<label index="single_waitlist_enter_texttop">Leider ist die Veranstaltung derzeit ausgebucht. Es ist jedoch eine Warteliste verfügbar. Tragen Sie sich hier für die Warteliste ein</label>
+			<label index="single_waitlist_enter_textbottom">Wenn ein Teilnehmer seine Anmeldung storniert und ein Platz für Sie frei wird, werden Sie benachtichtigt.</label>
+			<label index="single_waitlist_enter_labelsubmit">In die Warteliste eintragen</label>
 			<label index="single_waitlist_confirmation_heading">Warteliste</label>
 			<label index="single_waitlist_confirmation_texttop">Vielen Dank für das Eintragen auf die Warteliste für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="single_waitlist_confirmation_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
@@ -220,7 +288,17 @@
 			<label index="email_registration_enter_notification_subject">Anmeldeinformation</label>
 			<label index="email_registration_enter_notification_heading">Anmeldeinformation</label>
 			<label index="email_registration_enter_notification_texttop">Ein Benutzer hat sich zu einer Veranstaltung von Ihnen angemeldet:</label>
-			<label index="email_registration_enter_notification_textbottom"></label>	
+			<label index="email_registration_enter_notification_textbottom"></label>
+
+			<label index="email_registration_enter_confirmation_rfu_subject">Anmeldebestätigung (Anmeldung durch Organisator)</label>
+			<label index="email_registration_enter_confirmation_rfu_heading">Anmeldebestätigung (Anmeldung durch Organisator)</label>
+			<label index="email_registration_enter_confirmation_rfu_texttop">Ein Organisator hat Sie für einen Termin auf unserer Internetseite angemeldet. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="email_registration_enter_confirmation_rfu_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+			<label index="email_registration_enter_notification_rfu_subject">Anmeldeinformation (Anmeldung durch Organisator)</label>
+			<label index="email_registration_enter_notification_rfu_heading">Anmeldeinformation (Anmeldung durch Organisator)</label>
+			<label index="email_registration_enter_notification_rfu_texttop">Ein Benutzer wurde von einem Organisator zu einer Veranstaltung von Ihnen angemeldet:</label>
+			<label index="email_registration_enter_notification_rfu_textbottom"></label>
+
 			<label index="email_registration_cancel_confirmation_subject">Abmeldebestätigung</label>
 			<label index="email_registration_cancel_confirmation_heading">Abmeldebestätigung</label>
 			<label index="email_registration_cancel_confirmation_texttop">Sie haben sich von folgender Veranstaltung abgemeldet:</label>
@@ -229,6 +307,16 @@
 			<label index="email_registration_cancel_notification_heading">Abmeldeinformation</label>
 			<label index="email_registration_cancel_notification_texttop">Ein Benutzer hat sich von einer Veranstaltung von Ihnen abgemeldet:</label>
 			<label index="email_registration_cancel_notification_textbottom"></label>			
+
+			<label index="email_registration_cancel_confirmation_rfu_subject">Abmeldebestätigung (Abmeldung durch Organisator)</label>
+			<label index="email_registration_cancel_confirmation_rfu_heading">Abmeldebestätigung (Abmeldung durch Organisator)</label>
+			<label index="email_registration_cancel_confirmation_rfu_texttop">Ein Organisator hat Sie von folgender Veranstaltung abgemeldet:</label>
+			<label index="email_registration_cancel_confirmation_rfu_textbottom"></label>
+			<label index="email_registration_cancel_notification_rfu_subject">Abmeldeinformation (Abmeldung durch Organisator)</label>
+			<label index="email_registration_cancel_notification_rfu_heading">Abmeldeinformation (Abmeldung durch Organisator)</label>
+			<label index="email_registration_cancel_notification_rfu_texttop">Ein Benutzer wurde von einem Organisator von einer Veranstaltung von Ihnen abgemeldet:</label>
+			<label index="email_registration_cancel_notification_rfu_textbottom"></label>
+
 			<label index="email_waitlist_enter_confirmation_subject">Anmeldebestätigung - Warteliste</label>
 			<label index="email_waitlist_enter_confirmation_heading">Anmeldebestätigung - Warteliste</label>
 			<label index="email_waitlist_enter_confirmation_texttop">Vielen Dank für das Eintragen auf die Warteliste für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
@@ -237,6 +325,16 @@
 			<label index="email_waitlist_enter_notification_heading">Anmeldeinformation - Warteliste</label>
 			<label index="email_waitlist_enter_notification_texttop">Ein Benutzer hat sich bei einer Veranstaltung von Ihnen in die Warteliste eingetragen:</label>
 			<label index="email_waitlist_enter_notification_textbottom"></label>
+
+			<label index="email_waitlist_enter_confirmation_rfu_subject">Anmeldebestätigung - Warteliste (Anmeldung durch Organisator)</label>
+			<label index="email_waitlist_enter_confirmation_rfu_heading">Anmeldebestätigung - Warteliste (Anmeldung durch Organisator)</label>
+			<label index="email_waitlist_enter_confirmation_rfu_texttop">Ein Organisator hat Sie auf der Warteliste für einen Termin auf unserer Internetseite eingetragen. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="email_waitlist_enter_confirmation_rfu_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
+			<label index="email_waitlist_enter_notification_rfu_subject">Anmeldeinformation - Warteliste (Anmeldung durch Organisator)</label>
+			<label index="email_waitlist_enter_notification_rfu_heading">Anmeldeinformation - Warteliste (Anmeldung durch Organisator)</label>
+			<label index="email_waitlist_enter_notification_rfu_texttop">Ein Benutzer wurde von einem Organisator bei einer Veranstaltung von Ihnen in die Warteliste eingetragen:</label>
+			<label index="email_waitlist_enter_notification_rfu_textbottom"></label>
+
 			<label index="email_waitlist_cancel_confirmation_subject">Abmeldebestätigung - Warteliste</label>
 			<label index="email_waitlist_cancel_confirmation_heading">Abmeldebestätigung - Warteliste</label>
 			<label index="email_waitlist_cancel_confirmation_texttop">Sie haben sich aus der Warteliste zu folgender Veranstaltung ausgetragen:</label>
@@ -245,6 +343,16 @@
 			<label index="email_waitlist_cancel_notification_heading">Abmeldeinformation - Warteliste</label>
 			<label index="email_waitlist_cancel_notification_texttop">Ein Benutzer hat sich bei einer Veranstaltung von Ihnen aus der Warteliste ausgetragen:</label>
 			<label index="email_waitlist_cancel_notification_textbottom"></label>
+
+			<label index="email_waitlist_cancel_confirmation_rfu_subject">Abmeldebestätigung - Warteliste (Abmeldung durch Organisator)</label>
+			<label index="email_waitlist_cancel_confirmation_rfu_heading">Abmeldebestätigung - Warteliste (Abmeldung durch Organisator)</label>
+			<label index="email_waitlist_cancel_confirmation_rfu_texttop">Ein Organisator hat Sie aus der Warteliste zu folgender Veranstaltung ausgetragen:</label>
+			<label index="email_waitlist_cancel_confirmation_rfu_textbottom"></label>
+			<label index="email_waitlist_cancel_notification_rfu_subject">Abmeldeinformation - Warteliste (Abmeldung durch Organisator)</label>
+			<label index="email_waitlist_cancel_notification_rfu_heading">Abmeldeinformation - Warteliste (Abmeldung durch Organisator)</label>
+			<label index="email_waitlist_cancel_notification_rfu_texttop">Ein Benutzer wurde von einem Organisator bei einer Veranstaltung von Ihnen aus der Warteliste ausgetragen:</label>
+			<label index="email_waitlist_cancel_notification_rfu_textbottom"></label>
+
 			<label index="email_waitlist_upgrade_confirmation_subject">Anmeldebestätigung Warteliste --> Teilnehmend</label>
 			<label index="email_waitlist_upgrade_confirmation_heading">Anmeldebestätigung Warteliste --> Teilnehmend</label>
 			<label index="email_waitlist_upgrade_confirmation_texttop">Sie waren zu folgender Veranstaltung auf die Warteliste eingetragen. Da nun Plätze frei geworden sind, können Sie nun teilnehmen:</label>
@@ -323,7 +431,24 @@
 			<label index="label_numattendees">Belegte Plätze</label>
 			<label index="label_numwaitlist">Einträge auf Warteliste</label>
 			<label index="label_numfree">Verbleibende freie Plätze</label>
-			
+			<label index="label_unlimited">Unbegrenzt</label>
+
+			<label index="label_submit_register_normal">Für diese Veranstaltung anmelden</label>
+			<label index="label_submit_register_waitlist">Für diese Veranstaltung in die Warteliste eintragen</label>
+			<label index="label_submit_unregister_normal">Von dieser Veranstaltung wieder abmelden</label>
+			<label index="label_submit_unregister_waitlist">Für diese Veranstaltung wieder aus der Warteliste austragen</label>
+			<label index="label_question_unregister_normal">Wollen Sie sich wirklich von dieser Veranstaltung abmelden?</label>
+			<label index="label_question_unregister_waitlist">Wollen Sie sich wirklich aus der Warteliste für diese Veranstaltung austragen?</label>
+
+			<label index="label_admin_title">Verwaltung der Anmeldungen</label>
+			<label index="label_admin_none">(Aktion wählen)</label>
+			<label index="label_admin_checkwaitlist">Warteliste prüfen</label>
+			<label index="label_admin_registerforeignuser">Fremden Benutzer anmelden</label>
+			<label index="label_admin_removecancelled">Zurückgezogene Anmeldungen löschen</label>
+			<label index="label_admin_execute">Ausführen</label>
+			<label index="label_admin_back">Administrationsmodus verlassen</label>
+			<label index="label_admin_selectuser">Benutzer auswählen</label>
+			<label index="label_admin_changeuser">Benutzer ändern</label>
 			<label index="label_checkwaitlistbutton">Warteliste prüfen</label>
 			<label index="label_registerforeignuserbutton">Benutzer anmelden</label>
 			<label index="error_activate">Die Anmeldung darf nicht deaktiviert werden, wenn bereits Anmeldungen gespeichert wurden.</label>
@@ -484,6 +609,7 @@
 			<label index="label_maxattendees">(antal steder)</label>
 			<label index="label_numattendees">(Belegte steder)</label>
 			<label index="label_numwaitlist">(angivelser paa en venteliste)</label>
+			<label index="label_unlimited">ubegrænset</label>
 
 			<label index="label_checkwaitlistbutton">(Kontrollere Venteliste)</label>
 			<label index="error_activate">(Begaeringen kan ikke handicappede hvis allerede ansøgninger er blevet oplagret.)</label>

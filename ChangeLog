@@ -1,3 +1,6 @@
+2011-01-12 Thomas Ernst <typo3@thernst.de>
+	* [Feature #11720] templates simplified, static templates split, coding transfered into mvc concept
+
 2010-12-25 Thomas Ernst	<typo3@thernst.de>
 	* [Feature #11563] Allow some users to register other users as participants for events
 	* [Bug #11716] Wrong default fieldgroup used

@@ -91,9 +91,9 @@
 	<p>Information, that no registration is possible at the moment</p>
 	<pre>
 	<!-- ###SINGLE_NOREGISTER### begin -->
-	###HEADING###
-	###TEXTTOP###
-	###TEXTBOTTOM###
+	    <h2>###HEADING###</h2>
+	    <p>###TEXTTOP###</p>
+	    <p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_NOREGISTER### end -->
 	</pre>	
 	
@@ -101,10 +101,11 @@
 	<p>Information, that the user needs to login for registering</p>
 	<pre>	
 	<!-- ###SINGLE_NEEDLOGIN### begin-->
-	###HEADING###
-	###TEXTTOP###
-	###LOGINBUTTON### ###ONETIMEACCOUNTBUTTON###
-	###TEXTBOTTOM###
+	    <h2>###HEADING###</h2>
+	    <p>###TEXTTOP###</p>
+	    <form action="###LOGINLINK###" method="post"><input type="submit" value="###LABEL_login###" /></form>
+	    <form action="###ONETIMEACCOUNTLINK###" method="post"><input type="submit" value="###LABEL_ONETIMEACCOUNT###" /></form>
+	    <p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_NEEDLOGIN### end-->
 	</pre>	
 	
@@ -112,130 +113,86 @@
 	<p>Registration in single event view</p>
 	<pre>
 	<!-- ###SINGLE_REGISTRATION_ENTER### begin -->
-	###HEADING###
-	###TEXTTOP###
-	###ERRORMESSAGE###
-	<!-- ###FORM### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_maxattendees### ###MAXATTENDEES###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_numattendees### ###NUMATTENDEES###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_numwaitlist### ###NUMWAITLIST###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_numfree### ###NUMFREE###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_location_name### ###LOCATION_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_organizer_name### ###ORGANIZER_name###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###FORM### end -->
-	###TEXTBOTTOM###
+	<h2>###HEADING###</h2>
+	<p>###TEXTTOP###<p>
+	###MESSAGES###
+	<form action="###LINK###" method="post"><table width="100%">
+	    <tr><td colspan=2>
+		<b>###LABEL_maxattendees###:</b> ###MAXATTENDEES###
+		<b>###LABEL_numattendees###:</b> ###NUMATTENDEES###
+		<b>###LABEL_numwaitlist###:</b> ###NUMWAITLIST###
+		<b>###LABEL_numfree###:</b> ###NUMFREE###<br /><br />
+	    </td></tr>
+	    <tr>
+		<td><b>###LABEL_user_name###:</b></td>
+		<td>###USER_name###</td>
+	    </tr><tr>
+		<td><b>###LABEL_user_address###:</b></td>
+		<td>###USER_address###</td>
+	    </tr><tr>
+		<td><b>###LABEL_user_zip###/###LABEL_user_city###:</b></td>
+		<td>###USER_zip### ###USER_city###</td>
+	    </tr><tr>
+		<td><b>###LABEL_user_email###:</b></td>
+		<td>###USER_email###</td>
+	    </tr><tr>
+		<td><b>###LABEL_location_name###:</b></td>
+		<td>###LOCATION_name###</td>
+	    </tr><tr>
+		<td><b>###LABEL_organizer_name###:</b></td>
+		<td>###ORGANIZER_name###</td>
+	    </tr>
+	    ###FIELDS###
+	    <tr><td colspan="2" align="center">
+		###SUBMITBUTTON###
+	    </td></tr>
+	</table></form>
+	<p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_REGISTRATION_ENTER### end -->
 	</pre>
-	
-	<h2>SINGLE_REGISTRATION_CONFIRMATION</h2>
-	<p>Confirmation of registration for single event</p>
-	<pre>
-	<!-- ###SINGLE_REGISTRATION_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###SINGLE_REGISTRATION_CONFIRMATION### end -->
-	</pre>	
 	
 	<h2>SINGLE_REGISTRATION_ALREADYDONE</h2>
 	<p>Informing the user that he has already registered for an event</p>
 	<pre>
 	<!-- ###SINGLE_REGISTRATION_ALREADYDONE### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###FORM### begin -->	
-	<!-- ###TABLINE### begin -->###LABEL_status### ###STATUS###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###FIELDS###<!-- ###TABLINE### end -->
-	###UNREGISTER###
-	<!-- ###FORM### end -->
-	###TEXTBOTTOM###
+	<h2>###HEADING###</h2>
+	<p>###TEXTTOP###</p>
+	###MESSAGES###
+	<form action="###LINK###" method="post"><table width="100%">
+	    <tr><td colspan=2>
+		<b>###LABEL_maxattendees###:</b> ###MAXATTENDEES###
+		<b>###LABEL_numattendees###:</b> ###NUMATTENDEES###
+		<b>###LABEL_numwaitlist###:</b> ###NUMWAITLIST###
+		<b>###LABEL_numfree###:</b> ###NUMFREE###<br /><br />
+	    </td></tr>
+	    <tr>
+		<td><b>###LABEL_status###:</b></td>
+		<td>###STATUS###</td>
+	    </tr>
+	    ###FIELDS###
+	    <tr><td colspan="2" align="center">
+		###SUBMITBUTTON###
+	    </td></tr>
+	</table></form>
+	<p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_REGISTRATION_ALREADYDONE### end -->
 	</pre>
-
-	<h2>SINGLE_WAITLIST_ENTER</h2>
-	<p>Waitlist registration in single event view</p>
-	<pre>
-	<!-- ###SINGLE_WAITLIST_ENTER### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###FORM### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_maxattendees### ###MAXATTENDEES###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_numattendees### ###NUMATTENDEES###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_numwaitlist### ###NUMWAITLIST###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_location_name### ###LOCATION_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_organizer_name### ###ORGANIZER_name###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###FORM### end -->
-	###TEXTBOTTOM###
-	<!-- ###SINGLE_WAITLIST_ENTER### end -->
-	</pre>	
-	
-	<h2>SINGLE_WAITLIST_CONFIRMATION</h2>
-	<p>Confirmation of waitlisting for single event
-	</p>
-	<pre>
-	<!-- ###SINGLE_WAITLIST_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	###ERRORMESSAGE###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###SINGLE_WAITLIST_CONFIRMATION### end -->
-	</pre>
-	
-	<h2>SINGLE_WAITLIST_ALREADYDONE</h2>
-	<p>Informing the user that he is already waitlisted for an event</p>
-	<pre>
-	<!-- ###SINGLE_WAITLIST_ALREADYDONE### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###FORM### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_status### ###STATUS###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###FIELDS###<!-- ###TABLINE### end -->
-	###UNREGISTER###
-	<!-- ###FORM### end -->
-	###TEXTBOTTOM###
-	<!-- ###SINGLE_WAITLIST_ALREADYDONE### end -->
-	</pre>	
 	
 	<hr /><h1>Templates for list view</h1><hr /><!-- *************************************************************************************************************** -->
 	<h2>LIST_SUBMIT</h2>
 	<p>This part defines the form to register for an event if displayed in list view</p>
 	<pre>
-	<!-- ###LIST_SUBMIT### start -->###SUBMITBUTTON###<!-- ###LIST_SUBMIT### end -->
+	<!-- ###LIST_SUBMIT### start --><input type="submit" value="###SUBMITBUTTON###" /><!-- ###LIST_SUBMIT### end -->
 	</pre>
 
 	<h2>LIST_REGISTRATION_ENTER</h2>
 	<p>Registration for an event in list view</p>
 	<pre>
 	<!-- ###LIST_REGISTRATION_ENTER### start -->
-	<!--###FIELDSET### begin -->
-	<!-- ###TABLE### begin -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	<!-- ###FIELDSET### end -->
+	<fieldset><legend>###EVENT_CHECKBOX### ###TITLE###</legend>
+	###MESSAGES###
+	<table width="100%">###FIELDS###</table>
+	</fieldset>
 	<!-- ###LIST_REGISTRATION_ENTER### end -->
 	</pre>
 	
@@ -243,41 +200,13 @@
 	<p>Informing the user that he has already registered</p>
 	<pre>
 	<!-- ###LIST_REGISTRATION_ALREADYDONE### begin -->
-	<!--###FIELDSET### begin -->
-	<!-- ###TABLE### begin -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###CHECKBOX_UNREGISTER_THIS###
-	<!-- ###FIELDSET### end -->
+	<fieldset><legend>###TITLE###</legend>
+	###MESSAGES###
+	<table width="100%">###FIELDS###</table>
+	###EVENT_CHECKBOX### ###UNREGISTERME###
+	</fieldset>
 	<!-- ###LIST_REGISTRATION_ALREADYDONE### end -->
 	</pre>
-	
-	
-	<h1>LIST_WAITLIST_ENTER</h1>
-	<p>Waitlisting for an event in list view</p>
-	<pre>
-	<!-- ###LIST_WAITLIST_ENTER### start -->
-	<!--###FIELDSET### begin -->
-	<!-- ###TABLE### begin -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	<!-- ###FIELDSET### end -->
-	<!-- ###LIST_WAITLIST_ENTER### end -->
-	</pre>
-	
-	<h1>LIST_WAITLIST_ALREADYDONE</h1>
-	<p>Informing the user that he is already waitlisted</p>
-	<pre>
-	<!-- ###LIST_WAITLIST_ALREADYDONE### begin -->
-	<!--###FIELDSET### begin -->
-	<!-- ###TABLE### begin -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###CHECKBOX_UNREGISTER_THIS###
-	<!-- ###FIELDSET### end -->
-	<!-- ###LIST_WAITLIST_ALREADYDONE### end -->
-	</pre>	
-	
 	
 
 	<hr /><h1>Templates for list output</h1><hr /><!-- *************************************************************************************************************** -->
@@ -285,34 +214,30 @@
 	<p>This template defines how an event list should be displayed.</p>
 	<pre>
 	<!-- ###LIST_EVENTS### begin -->
-	<!-- ###TABLE### begin -->
-		<!-- ###TABLINE### begin -->
-		###LABEL_event_title###
-		###LABEL_event_formated_start###
-		###LABEL_event_formated_end###
-		###LABEL_event_organizer_name###
-		###LABEL_status###
-		<!-- ###TABLINE### end -->
+	<table width="100%" border="1">
+		<tr>
+			<th>###LABEL_event_title###</th>
+			<th>###LABEL_event_formated_start###</th>
+			<th>###LABEL_event_formated_end###</th>
+			<th>###LABEL_event_organizer_name###</th>
+			<th>###LABEL_status###</th>
+		</tr>
 		<!-- ###ITEMS### begin -->
-			<!-- ###TABLINE### begin -->
-				###EVENT_title###
-				###EVENT_formated_start###
-				###EVENT_formated_end###
-				###EVENT_organizer_name###
-				###STATUS###
-			<!-- ###TABLINE### end -->
+			<tr>
+				<td><a href="###EVENT_link###">###EVENT_title###</a></td>
+				<td>###EVENT_formated_start###</td>
+				<td>###EVENT_formated_end###</td>
+				<td>###EVENT_organizer_name###</td>
+				<td>###STATUS###</td>
+			</tr>
 		<!-- ###ITEMS### end -->
 		<!-- ###NOITEMS### begin -->
-			<!-- ###TABLINE###begin -->
-				###LABEL_event_noitems###
-			<!-- ###TABLINE### end -->
+			<tr><td colspan=5>###LABEL_event_noitems###</td></tr>
 		<!-- ###NOITEMS### end -->
 		<!-- ###NOLOGIN### begin-->
-			<!-- ###TABLINE###begin -->
-				###LABEL_event_nologin###
-			<!-- ###TABLINE### end -->
+			<tr><td colspan=5>###LABEL_event_nologin###</td></tr>
 		<!-- ###NOLOGIN### end -->
-	<!-- ###TABLE### end -->
+	</table>
 	<!-- ###LIST_EVENTS### end -->
 	</pre>
 	
@@ -320,202 +245,113 @@
 	<p>This template defines how a attendees list should be displayed.</p>
 	<pre>
 	<!-- ###LIST_ATTENDEES### begin -->
-	<table width="100%" border="0" style="margin-bottom:1em;border:1px solid black;border-collapse:collapse;">
+	<table width="100%" border="1" style="border-collapse:collapse;">
 		<!-- ###NOEVENTS### begin -->
-			###LABEL_registration_noevents###
+			<tr><td colspan=5>###LABEL_registration_noevents###</td></tr>
 		<!-- ###NOEVENTS### end -->
 		<!-- ###EVENTENTRY### begin -->
-			<!-- ###TABLINE### begin -->
-			###LABEL_event_title### ###EVENT_title###
-			###LABEL_event_organizer_name### ###EVENT_organizer_name###
-			<!-- ###TABLINE### end -->
-			<!-- ###TABLINE### begin -->
-			###LABEL_event_formated_start### ###EVENT_formated_start### 
-			###LABEL_event_formated_end### ###EVENT_formated_end###
-			<!-- ###TABLINE### end -->
-			<!-- ###TABLINE### begin -->
-			###LABEL_maxattendees### ###MAXATTENDEES###
-			###LABEL_numattendees### ###NUMATTENDEES###
-			###LABEL_numwaitlist### ###NUMWAITLIST###
-			<td  style="border-bottom:1px solid black;">
-			    ###WAITLISTCHECKBUTTON###<br />
-			    ###REGISTERFOREIGNUSERBUTTON###
+			<tr>
+			<th>###LABEL_event_title###</th><td><a href="###EVENT_link###">###EVENT_title###</a></td>
+			<th>###LABEL_event_organizer_name###</th><td>###EVENT_organizer_name###</td>
+			<td rowspan=2>
+				###LABEL_maxattendees###: ###MAXATTENDEES###<br />
+				###LABEL_numattendees### ###NUMATTENDEES###<br />
+				###LABEL_numwaitlist### ###NUMWAITLIST###<br />
 			</td>
-			<!-- ###TABLINE### end -->			
-			<!-- ###TABLINE### begin -->
-			###LABEL_user_name###
-			###LABEL_user_address###
-			###LABEL_user_zip###/###LABEL_user_city###
-			###LABEL_user_email###
-			###LABEL_status###
-			<!-- ###TABLINE### end -->
+			</tr>
+			<tr>
+			<th>###LABEL_event_formated_start###</th><td>###EVENT_formated_start###</td>
+			<th>###LABEL_event_formated_end###</th><td>###EVENT_formated_end###</td>
+			</tr>
+			<tr>
+				<td colspan=5><b>###LABEL_admin_title###</b><br />###ADMINPANEL###</td>
+			</tr>
+			<tr>
+			<th rowspan=2>###LABEL_user_name###</th>
+			<th>###LABEL_user_address###</th>
+			<th>###LABEL_user_zip###/###LABEL_user_city###</th>
+			<th>###LABEL_user_email###</th>
+			<th>###LABEL_status###</th>
+			</tr><tr>
+				<th colspan="4">###LABEL_userfields###</th>
+			</tr>
 		<!-- ###EVENTENTRY### end -->
 		<!-- ###ITEMS### begin -->
-			<!-- ###TABLINE### begin -->
-				###USER_name###
-				###USER_address###
-				###USER_zip### ###USER_city###
-				###USER_email###
-				###STATUS###
-			<!-- ###TABLINE### end -->
-			<!-- ###TABLINE_BB### begin -->
-			    <td colspan="5">
+			<tr>
+				<td rowspan=2 style="vertical-align:top;">###USER_name###</td>
+				<td>###USER_address###</td>
+				<td>###USER_zip### ###USER_city###</td>
+				<td>###USER_email###</td>
+				<td>###STATUS###</td>
+			</tr><tr>
+			    <td colspan="4">
 				<table width="100%" border="0">###FIELDS###</table>
 			    </td>
-			<!-- ###TABLINE_BB### end -->
+			</tr>
 		<!-- ###ITEMS### end -->
+		<!---###EVENTSPACER### begin -->
+			<tr><td colspan=5 style="border-left:1px solid transparent;border-right:1px solid transparent;">&nbsp;</td></tr>
+		<!---###EVENTSPACER### end -->
 		<!-- ###NOITEMS### begin -->
-			<!-- ###TABLINE###begin -->
-				###LABEL_registration_noitems###
-			<!-- ###TABLINE### end -->
+			<tr><td colspan=5>###LABEL_registration_noitems###</td></tr>
 		<!-- ###NOITEMS### end -->
 		<!-- ###NOLOGIN### begin-->
-			<!-- ###TABLINE###begin -->
-				###LABEL_registration_nologin###
-			<!-- ###TABLINE### end -->
+			<tr><td colspan=5>###LABEL_registration_nologin###</td></tr>
 		<!-- ###NOLOGIN### end -->
 		
 	</table>
 	<!-- ###LIST_ATTENDEES### end -->
 	</pre>
 
+
+	<h2>LIST_REGISTERFOREIGNUSER</h2>
+	<p>This template defines how a attendees list should be displayed.</p>
+	<pre>
+	<!-- ###LIST_REGISTERFOREIGNUSER### begin -->
+	<table width="100%" border="1" style="border-collapse:collapse;">
+		<tr>
+		<th>###LABEL_event_title###</th><td><a href="###EVENT_link###">###EVENT_title###</a></td>
+		<th>###LABEL_event_organizer_name###</th><td>###EVENT_organizer_name###</td>
+		<td rowspan=2>
+			###LABEL_maxattendees###: ###MAXATTENDEES###<br />
+			###LABEL_numattendees### ###NUMATTENDEES###<br />
+			###LABEL_numwaitlist### ###NUMWAITLIST###<br />
+		</td>
+		</tr>
+		<tr>
+		<th>###LABEL_event_formated_start###</th><td>###EVENT_formated_start###</td>
+		<th>###LABEL_event_formated_end###</th><td>###EVENT_formated_end###</td>
+		</tr>
+		<tr><td colspan = 5>
+			<h2>###LABEL_admin_registerforeignuser###</h2>
+			###MESSAGES###
+			###USERSELECTION###
+			###FOREIGNUSERREGISTRATION###
+		</td></tr>
+	</table>
+	<!-- ###LIST_REGISTERFOREIGNUSER### end -->
+	</pre>
+
+
 	<hr /><h1>Templates for Emails</h1><hr /><!-- *********************************************************************************************************************** -->
 	
-	<h2>EMAIL_REGISTRATION_ENTER_CONFIRMATION</h2>
-	<p>Sent to the attendee when he registered for an event</p>	
+	<h2>EMAIL_DEFAULT</h2>
+	<p>Default email showing some text and the userdefined fields</p>
 	<pre>
-	<!-- ###EMAIL_REGISTRATION_ENTER_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
+	<!-- ###EMAIL_DEFAULT### begin -->
+	<h2>###HEADING###</h2>
+	###MESSAGES###
+	<p>###TEXTTOP###</p>
+	<table width="100%">
+	<tr><td><b>###LABEL_user_name###</b></td><td>###USER_name###</td></tr>
+	<tr><td><b>###LABEL_user_address###</b></td><td>###USER_address###</td></tr>
+	<tr><td><b>###LABEL_user_zip###/###LABEL_user_city###</b></td><td>###USER_zip### ###USER_city###</td></tr>
+	<tr><td><b>###LABEL_user_email###</b></td><td>###USER_email###</td></tr>
 	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_REGISTRATION_ENTER_CONFIRMATION### end -->
+	</table>
+	<p>###TEXTBOTTOM###</p>
+	<!-- ###EMAIL_DEFAULT### end -->
 	</pre>
-	
-	<h2>EMAIL_REGISTRATION_ENTER_NOTIFICATION</h2>
-	<p>Sent to the organizer when someone registered for an event</p>
-	<pre>
-	<!-- ###EMAIL_REGISTRATION_ENTER_NOTIFICATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_REGISTRATION_ENTER_NOTIFICATION### end -->
-	</pre>
-	
-	<h2>EMAIL_REGISTRATION_CANCEL_CONFIRMATION</h2>
-	<p>Sent to the attendee when he unregistered from an event</p>	
-	<pre>
-	<!-- ###EMAIL_REGISTRATION_CANCEL_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_REGISTRATION_CANCEL_CONFIRMATION### end -->
-	</pre>
-	
-	<h2>EMAIL_REGISTRATION_CANCEL_NOTIFICATION</h2>
-	<p>Sent to the organizer when someone unregistered for an event</p>
-	<pre>
-	<!-- ###EMAIL_REGISTRATION_CANCEL_NOTIFICATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_REGISTRATION_CANCEL_NOTIFICATION### end -->
-	</pre>
-	
-	<h2>EMAIL_WAITLIST_ENTER_CONFIRMATION</h2>
-	<p>Sent to the attendee when he enlisted to the waitlist for an event</p>	
-	<pre>
-	<!-- ###EMAIL_WAITLIST_ENTER_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_WAITLIST_ENTER_CONFIRMATION### end -->
-	</pre>	
-	
-	<h2>EMAIL_WAITLIST_ENTER_NOTIFICATION</h2>
-	<p>Sent to the organizer when someone enlisted to the waitlist for an event</p>
-	<pre>
-	<!-- ###EMAIL_WAITLIST_ENTER_NOTIFICATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_WAITLIST_ENTER_NOTIFICATION### end -->
-	</pre>
-	
-	<h2>EMAIL_WAITLIST_CANCEL_CONFIRMATION</h2>
-	<p>Sent to the attendee when he discharged from the waitlist for an event</p>	
-	<pre>
-	<!-- ###EMAIL_WAITLIST_CANCEL_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_WAITLIST_CANCEL_CONFIRMATION### end -->
-	</pre>		
-	
-	<h2>EMAIL_WAITLIST_CANCEL_NOTIFICATION</h2>
-	<p>Sent to the organizer when someone discharged from the waitlist for an event</p>
-	<pre>
-	<!-- ###EMAIL_WAITLIST_CANCEL_NOTIFICATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_WAITLIST_CANCEL_NOTIFICATION### end -->
-	</pre>	
 	
 	<h2>EMAIL_WAITLIST_UPGRADE_CONFIRMATION</h2>
 	<p>Sent to the attendee when his registration has been updated from waitlist to attending</p>	

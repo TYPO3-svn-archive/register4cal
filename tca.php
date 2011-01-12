@@ -62,7 +62,7 @@ $TCA['tx_register4cal_registrations'] = array (
 			'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_register4cal_registrations.additional_data',		
 			'config' => array (
 				'type' => 'user',
-				'userFunc' => 'tx_register4cal_user1->additionalDataForBackend',
+				'userFunc' => 'tx_register4cal_backend_hooks->additionalDataForBackend',
 			)
 		),
 		'numattendees' => array(

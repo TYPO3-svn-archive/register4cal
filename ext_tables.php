@@ -158,5 +158,7 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']='pi_fle
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1','FILE:EXT:'.$_EXTKEY.'/pi1/flexform_ds.xml');
 
 t3lib_extMgm::addPlugin(array('LLL:EXT:register4cal/locallang_db.xml:tt_content.list_type_pi1',$_EXTKEY.'_pi1'),'list_type');
-t3lib_extMgm::addStaticFile($_EXTKEY,'static/registrations4cal/', 'registrations4cal');
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/basic/', 'Basic settings');
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/fe-editing/', 'FE-Editing');
+t3lib_extMgm::addStaticFile($_EXTKEY,'static/old_templates/', 'Compatibility to old templates');
 ?>

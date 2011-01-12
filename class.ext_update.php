@@ -281,7 +281,6 @@ class ext_update {
 		$spaces = str_repeat('&nbsp;',($level+1)*4);
 		if (is_array($data)) {
 			foreach ($data as $key => $value) {
-				//t3lib_div::debug($value, $key);
 				if (substr($key,-1) == '.') {
 					$out[] = $spaces . substr($key, 0, strlen($key) - 1) . ' {';
 					$this->getConfigText($value, $level + 1, $out);
@@ -516,7 +515,7 @@ class ext_update {
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tt_news/class.ext_update.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/tt_news/class.ext_update.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/class.ext_update.php']) {
+	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/class.ext_update.php']);
 }
 ?>
