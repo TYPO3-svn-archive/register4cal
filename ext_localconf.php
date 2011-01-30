@@ -1,5 +1,4 @@
 <?php
-// TODO SEV3 Rewrite manuals
 // TODO SEV3 Remove update task
 // TODO SEV9 Version 0.7.1 Add backend module
 // TODO SEV9 Version 0.7.1 Add scheduler task to delete past registrations

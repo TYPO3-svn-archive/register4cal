@@ -323,7 +323,7 @@ class tx_register4cal_base_view extends tslib_pibase {
 		switch ($singleMarker) {
 			case 'LINK' :
 				// Marker for the registration form
-				$marker = $this->applyWrap(link, htmlspecialchars($this->pi_getPageLink($TSFE->id)));
+				$marker = $this->applyWrap('link', htmlspecialchars($this->pi_getPageLink($TSFE->id)));
 				break;
 			case 'STATUS' :
 				$value = $this->pi_getLL('label_status_' . intval($this->registration->getRegistrationField('status')));
