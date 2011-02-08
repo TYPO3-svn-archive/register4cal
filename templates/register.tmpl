@@ -5,87 +5,7 @@
 	<title>Templates for TYPO3 extenstion "register4cal"</title>
 </head>
 <body>
-	<h1>Markers</h1>
-	<p>Since version 0.3.0 this extension allows nearly unlimited markers, configurable via typo-script. The following list describes the basic set of markers, 
-	containing data of event, user and registration. See the manual for further information</p>
-	<table width="100%" border="1" style="border-collapse:collapse">
-		<tr><th>Table</th>		<th>Field</th>		<th>Marker (Label)</th>				<th>Marker (Content)</th>		<th>TS-Wrap (Label)</th>	<th>TS-Wrap (Content)</th></tr>
-		<tr><td>fe_users</td>		<td>uid</td>		<td>###LABEL_user_uid###</td>			<td>###USER_uid###</td>			<td>user_uid</td>		<td>label_user_uid</td></tr>
-		<tr><td>fe_users</td>		<td>name</td>		<td>###LABEL_user_name###</td>			<td>###USER_name###</td>		<td>user_name</td>		<td>label_user_name</td></tr>
-		<tr><td>fe_users</td>		<td>first_name</td>	<td>###LABEL_user_first_name###</td>		<td>###USER_first_name###</td>		<td>user_first_name</td>	<td>label_user_first_name</td></tr>
-		<tr><td>fe_users</td>		<td>last_name</td>	<td>###LABEL_user_last_name###</td>		<td>###USER_last_name###</td>		<td>user_last_name</td>		<td>label_user_last_name</td></tr>
-		<tr><td>fe_users</td>		<td>title</td>		<td>###LABEL_user_title###</td>			<td>###USER_title###</td>		<td>user_title</td>		<td>label_user_title</td></tr>
-		<tr><td>fe_users</td>		<td>address</td>	<td>###LABEL_user_address###</td>		<td>###USER_address###</td>		<td>user_address</td>		<td>label_user_address</td></tr>
-		<tr><td>fe_users</td>		<td>telephone</td>	<td>###LABEL_user_telephone###</td>		<td>###USER_telephone###</td>		<td>user_telephone</td>		<td>label_user_telephone</td></tr>
-		<tr><td>fe_users</td>		<td>fax</td>		<td>###LABEL_user_fax###</td>			<td>###USER_fax###</td>			<td>user_fax</td>		<td>label_user_fax</td></tr>
-		<tr><td>fe_users</td>		<td>email</td>		<td>###LABEL_user_email###</td>			<td>###USER_email###</td>		<td>user_email</td>		<td>label_user_email</td></tr>
-		<tr><td>fe_users</td>		<td>zip</td>		<td>###LABEL_user_zip###</td>			<td>###USER_zip###</td>			<td>user_zip</td>		<td>label_user_zip</td></tr>
-		<tr><td>fe_users</td>		<td>city</td>		<td>###LABEL_user_city###</td>			<td>###USER_city###</td>		<td>user_city</td>		<td>label_user_city</td></tr>
-		<tr><td>fe_users</td>		<td>country</td>	<td>###LABEL_user_country###</td>		<td>###USER_country###</td>		<td>user_country</td>		<td>label_user_country</td></tr>
-		<tr><td>fe_users</td>		<td>www</td>		<td>###LABEL_user_www###</td>			<td>###USER_www###</td>			<td>user_www</td>		<td>label_user_www</td></tr>
-		<tr><td>fe_users</td>		<td>company</td>	<td>###LABEL_user_company###</td>		<td>###USER_company###</td>		<td>user_company</td>		<td>label_user_company</td></tr>
-		<tr><td>tx_cal_event</td>	<td>uid</td>		<td>###LABEL_event_uid###</td>			<td>###EVENT_uid###</td>		<td>event_uid</td>		<td>label_event_uid</td></tr>
-		<tr><td>tx_cal_event</td>	<td>start_time</td>	<td>###LABEL_event_start_time###</td>		<td>###EVENT_start_time###</td>		<td>event_start_time</td>	<td>label_event_start_time</td></tr>
-		<tr><td>tx_cal_event</td>	<td>end_time</td>	<td>###LABEL_event_end_time###</td>		<td>###EVENT_end_time###</td>		<td>event_end_time</td>		<td>label_event_end_time</td></tr>
-		<tr><td>tx_cal_event</td>	<td>start_date</td>	<td>###LABEL_event_start_date###</td>		<td>###EVENT_start_date###</td>		<td>event_start_date</td>	<td>label_event_start_date</td></tr>
-		<tr><td>tx_cal_event</td>	<td>end_date</td>	<td>###LABEL_event_end_date###</td>		<td>###EVENT_end_date###</td>		<td>event_end_date</td>		<td>label_event_end_date</td></tr>
-		<tr><td>tx_cal_event</td>	<td>allday</td>		<td>###LABEL_event_allday###</td>		<td>###EVENT_allday###</td>		<td>event_allday</td>		<td>label_event_allday</td></tr>
-		<tr><td>tx_cal_event</td>	<td>title</td>		<td>###LABEL_event_title###</td>		<td>###EVENT_title###</td>		<td>event_title</td>		<td>label_event_title</td></tr>
-		<tr><td>tx_cal_event</td>	<td>organizer</td>	<td>###LABEL_event_organizer###</td>		<td>###EVENT_organizer###</td>		<td>event_organizer</td>	<td>label_event_organizer</td></tr>
-		<tr><td>tx_cal_event</td>	<td>location</td>	<td>###LABEL_event_location###</td>		<td>###EVENT_location###</td>		<td>event_location</td>		<td>label_event_location</td></tr>
-		<tr><td>tx_cal_event</td>	<td>teaser</td>		<td>###LABEL_event_teaser###</td>		<td>###EVENT_teaser###</td>		<td>event_teaser</td>		<td>label_event_teaser</td></tr>
-		<tr><td>tx_cal_event</td>	<td>description</td>	<td>###LABEL_event_description###</td>		<td>###EVENT_description###</td>	<td>event_description</td>	<td>label_event_description</td></tr>
-		
-		<tr><td colspan="6"><b><br />If the event is linked with a location:</b></td></tr>
-		<tr><td>tx_cal_location</td>	<td>uid</td>		<td>###LABEL_location_uid###</td>		<td>###LOCATION_uid###</td>		<td>location_uid</td>		<td>label_location_uid</td></tr>
-		<tr><td>tx_cal_location</td>	<td>name</td>		<td>###LABEL_location_name###</td>		<td>###LOCATION_name###</td>		<td>location_name</td>		<td>label_location_name</td></tr>
-		<tr><td>tx_cal_location</td>	<td>description</td>	<td>###LABEL_location_description###</td>	<td>###LOCATION_description###</td>	<td>location_description</td>	<td>label_location_description</td></tr>
-		<tr><td>tx_cal_location</td>	<td>street</td>		<td>###LABEL_location_street###</td>		<td>###LOCATION_street###</td>		<td>location_street</td>	<td>label_location_street</td></tr>
-		<tr><td>tx_cal_location</td>	<td>city</td>		<td>###LABEL_location_city###</td>		<td>###LOCATION_city###</td>		<td>location_city</td>		<td>label_location_city</td></tr>
-		<tr><td>tx_cal_location</td>	<td>zip</td>		<td>###LABEL_location_zip###</td>		<td>###LOCATION_zip###</td>		<td>location_zip</td>		<td>label_location_zip</td></tr>
-		<tr><td>tx_cal_location</td>	<td>country</td>	<td>###LABEL_location_country###</td>		<td>###LOCATION_country###</td>		<td>location_country</td>	<td>label_location_country</td></tr>
-		<tr><td>tx_cal_location</td>	<td>phone</td>		<td>###LABEL_location_phone###</td>		<td>###LOCATION_phone###</td>		<td>location_phone</td>		<td>label_location_phone</td></tr>
-		<tr><td>tx_cal_location</td>	<td>email</td>		<td>###LABEL_location_email###</td>		<td>###LOCATION_email###</td>		<td>location_email</td>		<td>label_location_email</td></tr>
-		<tr><td>tx_cal_location</td>	<td>link</td>		<td>###LABEL_location_link###</td>		<td>###LOCATION_link###</td>		<td>location_link</td>		<td>label_location_link</td></tr>
-
-		<tr><td colspan="6"><b><br />If the event is linked with an organizer:</b></td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>uid</td>		<td>###LABEL_organizer_uid###</td>		<td>###ORGANIZER_uid###</td>		<td>organizer_uid</td>		<td>label_organizer_uid</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>name</td>		<td>###LABEL_organizer_name###</td>		<td>###ORGANIZER_name###</td>		<td>organizer_name</td>		<td>label_organizer_name</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>description</td>	<td>###LABEL_organizer_description###</td>	<td>###ORGANIZER_description###</td>	<td>organizer_description</td>	<td>label_organizer_description</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>street</td>		<td>###LABEL_organizer_street###</td>		<td>###ORGANIZER_street###</td>		<td>organizer_street</td>	<td>label_organizer_street</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>city</td>		<td>###LABEL_organizer_city###</td>		<td>###ORGANIZER_city###</td>		<td>organizer_city</td>		<td>label_organizer_city</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>zip</td>		<td>###LABEL_organizer_zip###</td>		<td>###ORGANIZER_zip###</td>		<td>organizer_zip</td>		<td>label_organizer_zip</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>country</td>	<td>###LABEL_organizer_country###</td>		<td>###ORGANIZER_country###</td>	<td>organizer_country</td>	<td>label_organizer_country</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>phone</td>		<td>###LABEL_organizer_phone###</td>		<td>###ORGANIZER_phone###</td>		<td>organizer_phone</td>	<td>label_organizer_phone</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>email</td>		<td>###LABEL_organizer_email###</td>		<td>###ORGANIZER_email###</td>		<td>organizer_email</td>	<td>label_organizer_email</td></tr>
-		<tr><td>tx_cal_organizer</td>	<td>link</td>		<td>###LABEL_organizer_link###</td>		<td>###ORGANIZER_link###</td>		<td>organizer_link</td>		<td>label_organizer_link</td></tr>
-
-		<tr><td colspan="6"><b><br />Special fields</b></td></tr>
-		<tr><td colspan="2">Userfields from typoscript</td>	<td>n/a</td>					<td>###FIELDS###</td>			<td>userfields</td>		<td>n/a</td></tr>
-		<tr><td colspan="2">Registration form</td>		<td>n/a</td>					<td>###FORM###</td>			<td>form</td>			<td>n/a</td></tr>
-		<tr><td colspan="2">Link for registration form</td>	<td>n/a</td>					<td>###LINK###</td>			<td>link</td>			<td>n/a</td></tr>
-		<tr><td colspan="2">Submit-Button</td>			<td>n/a</td>					<td>n/a</td>				<td>submitbutton</td>		<td>n/a</td></tr>
-		<tr><td colspan="2">Link to create onetime-account</td>	<td>n/a</td>					<td>###ONETIMEACCOUNTLINK###</td>	<td>onetimeaccountlink</td>	<td>n/a</td></tr>
-		<tr><td colspan="2">Button to create onetime-account</td><td>n/a</td>					<td>###ONETIMEACCOUNTBUTTON###</td>	<td>onetimeaccountbutton</td>	<td>n/a</td></tr>
-		<tr><td colspan="2">Link to login page</td>		<td>n/a</td>					<td>###LOGINLINK###</td>		<td>loginlink</td>		<td>n/a</td></tr>
-		<tr><td colspan="2">Button for login page</td>		<td>n/a</td>					<td>###LOGINBUTTON###</td>		<td>loginbutton</td>		<td>n/a</td></tr>
-		<tr><td colspan="2">Link to event single view</td>	<td>n/a</td>					<td>###EVENT_link###</td>		<td>event_link</td>		<td>n/a</td></tr>
-		<tr><td colspan="2">Name of organizer (either from event or organizer table)</td>
-									<td>###LABEL_event_organizer_name###</td>	<td>###EVENT_organizer_name###</td>	<td>event_organizer_name</td>	<td>label_event-organizer_name</td></tr>
-		<tr><td colspan="2">Email of organizer (either from event or organizer table)</td>
-									<td>###LABEL_event_organizer_email###</td>	<td>###EVENT_organizer_email###</td>	<td>event_organizer_email</td>	<td>label_event-organizer_email</td></tr>
-		<tr><td colspan="2">Formated start of event</td>	<td>###LABEL_event-formated_start###</td>	<td>###EVENT_formated_start###</td>	<td>event_formated_start</td>	<td>label_event-formated_start</td></tr>
-		<tr><td colspan="2">Formated end of event</td>		<td>###LABEL_event-formated_end###</td>		<td>###EVENT_formated_end###</td>	<td>event_formated_endt</td>	<td>label_event-formated_end</td></tr>
-		<tr><td colspan="2">Registration status</td>		<td>###LABEL_status###</td>			<td>###STATUS###</td>			<td>status</td>			<td>label_status</td></tr>
-		<tr><td colspan="2">Max. # of attendees</td>		<td>###LABEL_maxattendees###</td>		<td>###MAXATTENDEES###</td>		<td>maxattendees</td>		<td>label_maxattendees</td></tr>
-		<tr><td colspan="2">Current # of attendees</td>		<td>###LABEL_numattendees###</td>		<td>###NUMATTENDES###</td>		<td>numattendees</td>		<td>label_numattendees</td></tr>
-		<tr><td colspan="2">Current # of waitlist entries</td>	<td>###LABEL_numwaitlist###</td>		<td>###NUMWAITLIST###</td>		<td>numwaitlist</td>		<td>label_numwaitlist</td></tr>
-		<tr><td colspan="2">Current # of remaining places</td>	<td>###LABEL_numfree###</td>			<td>###NUMFREE###</td>			<td>numfree</td>		<td>label_numfree</td></tr>
-		<tr><td colspan="2">Errormessage</td>			<td>&nbsp;</td>					<td>###ERRORMESSAGE###</td>		<td>errormessage</td>		<td>&nbsp;</td></tr>
-		
-	</table>
-
-	<hr /><h1>Templates for single view</h1><hr /><!-- *************************************************************************************************************** -->
+	<h1>Templates for single view</h1><hr /><!-- *************************************************************************************************************** -->
 	
 	<h2>SINGLE_NOREGISTER</h2>
 	<p>Information, that no registration is possible at the moment</p>
@@ -343,6 +263,8 @@
 	###MESSAGES###
 	<p>###TEXTTOP###</p>
 	<table width="100%">
+	<tr><td><b>###LABEL_event_title###</b></td><td>###EVENT_title###</td></tr>
+	<tr><td><b>###LABEL_event_organizer_name###</b></td><td>###EVENT_organizer_name###</td></tr>
 	<tr><td><b>###LABEL_user_name###</b></td><td>###USER_name###</td></tr>
 	<tr><td><b>###LABEL_user_address###</b></td><td>###USER_address###</td></tr>
 	<tr><td><b>###LABEL_user_zip###/###LABEL_user_city###</b></td><td>###USER_zip### ###USER_city###</td></tr>
@@ -352,40 +274,6 @@
 	<p>###TEXTBOTTOM###</p>
 	<!-- ###EMAIL_DEFAULT### end -->
 	</pre>
-	
-	<h2>EMAIL_WAITLIST_UPGRADE_CONFIRMATION</h2>
-	<p>Sent to the attendee when his registration has been updated from waitlist to attending</p>	
-	<pre>
-	<!-- ###EMAIL_WAITLIST_UPGRADE_CONFIRMATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_WAITLIST_UPGRADE_CONFIRMATION### end -->
-	</pre>		
-	
-	<h2>EMAIL_WAITLIST_UPGRADE_NOTIFICATION</h2>
-	<p>Sent to the organizer when his registration has been updated from waitlist to attending</p>	
-	<pre>
-	<!-- ###EMAIL_WAITLIST_UPGRADE_NOTIFICATION### begin -->
-	###HEADING###
-	###TEXTTOP###
-	<!-- ###TABLE### begin -->
-	<!-- ###TABLINE### begin -->###LABEL_user_name### ###USER_name###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_address### ###USER_address###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_zip###/###LABEL_user-city######USER_zip### ###USER_city###<!-- ###TABLINE### end -->
-	<!-- ###TABLINE### begin -->###LABEL_user_email### ###USER_email###<!-- ###TABLINE### end -->
-	###FIELDS###
-	<!-- ###TABLE### end -->
-	###TEXTBOTTOM###
-	<!-- ###EMAIL_WAITLIST_UPGRADE_NOTIFICATION### end -->
-	</pre>	
 
 </body>
 </html>
