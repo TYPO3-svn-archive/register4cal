@@ -174,7 +174,6 @@ class tx_register4cal_base_controller {
 	 */
 	protected function sendNotificationEmail($registration, $oldStatus, $messages = Array(), $rfu=FALSE) {
 		if (!$this->settings->mailSendNotification) return;
-
 		if ($this->settings->mailAdminAddress) $recipients = t3lib_div::trimExplode(',', $this->settings->mailAdminAddress, 1);
 		if ($registration->getEventField('organizer_email')) $recipients[] = $registration->getEventField('organizer_email');
 

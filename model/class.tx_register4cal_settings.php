@@ -292,7 +292,7 @@ class tx_register4cal_settings implements t3lib_Singleton {
 		$this->mailSendConfirmation = $this->validateFlag($temp);
 
 		$temp = isset($tsconf['emails.']['sendNotification']) ? $tsconf['emails.']['sendNotification'] : $tsconf['emails.']['sendNotificationMail'];
-		$this->MailSendNotification = $this->validateFlag($temp);
+		$this->mailSendNotification = $this->validateFlag($temp);
 
 		$this->mailAdminAddress = $tsconf['emails.']['adminAddress'];
 

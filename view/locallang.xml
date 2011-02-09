@@ -19,22 +19,16 @@
 			<label index="single_registration_enter_heading">Register for this event</label>
 			<label index="single_registration_enter_texttop"></label>
 			<label index="single_registration_enter_textbottom"></label>
-			<label index="single_registration_confirmation_heading">Confirmation of registration</label>
-			<label index="single_registration_confirmation_texttop">Thank you for registering for an event on our website. We recorded the following data:</label>
-			<label index="single_registration_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
-			<label index="single_registration_alreadydone_heading">Already registered</label>
-			<label index="single_registration_alreadydone_texttop">You have registered for this event_ We recorded the following data:</label>
+			<label index="single_registration_alreadydone_heading">Registered for this event</label>
+			<label index="single_registration_alreadydone_texttop">You have registered for this event. We recorded the following data:</label>
 			<label index="single_registration_alreadydone_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="single_registration_alreadydone_labelsubmit">Cancel registration</label>
 			<label index="single_waitlist_enter_heading">Register for this event - Waitlist</label>
 			<label index="single_waitlist_enter_heading_texttop">Unfortunately, this event is fully booked at the moment. However, a waitlist is available. Enlist to the waitlist here:</label>
 			<label index="single_waitlist_enter_heading_textbottom">If an attendee canceled his registration and a place becomes available, you will be notified via email_</label>
 			<label index="single_waitlist_enter_heading_labelsubmit">Enlist in waitlist</label>
-			<label index="single_waitlist_confirmation_heading">Confirmation of waitlist entry</label>
-			<label index="single_waitlist_confirmation_texttop">Thank you for enlisting in the waitlist for an event on our website. We recorded the following data:</label>
-			<label index="single_waitlist_confirmation_textbottom">For further information, please contact the organizer of the event.</label>
-			<label index="single_waitlist_alreadydone_heading">Already on waitlist</label>
-			<label index="single_waitlist_alreadydone_texttop">You have enlisted to the waitlist for this event_ We recorded the following data:</label>
+			<label index="single_waitlist_alreadydone_heading">Enlisted in waitlist</label>
+			<label index="single_waitlist_alreadydone_texttop">You have enlisted to the waitlist for this event. We recorded the following data:</label>
 			<label index="single_waitlist_alreadydone_textbottom">For further information, please contact the organizer of the event.</label>
 			<label index="single_waitlist_alreadydone_labelsubmit">Cancel waitlist entry</label>
 			
@@ -251,13 +245,8 @@
 			<label index="single_registration_enter_heading">Für diesen Termin anmelden</label>
 			<label index="single_registration_enter_texttop"></label>
 			<label index="single_registration_enter_textbottom"></label>
-
-			<label index="single_registration_confirmation_heading">Anmeldebestätigung</label>
-			<label index="single_registration_confirmation_texttop">Vielen Dank für die Anmeldung für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
-			<label index="single_registration_confirmation_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
-
-			<label index="single_registration_alreadydone_heading">Bereits registriert</label>
-			<label index="single_registration_alreadydone_texttop">Sie sind für diesen Termin bereits angemeldet. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="single_registration_alreadydone_heading">Für den Termin angemeldet</label>
+			<label index="single_registration_alreadydone_texttop">Sie sind für diesen Termin angemeldet. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="single_registration_alreadydone_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>	
 			<label index="single_registration_alreadydone_labelsubmit">Von diesem Termin abmelden</label>
 
@@ -265,11 +254,8 @@
 			<label index="single_waitlist_enter_texttop">Leider ist die Veranstaltung derzeit ausgebucht. Es ist jedoch eine Warteliste verfügbar. Tragen Sie sich hier für die Warteliste ein</label>
 			<label index="single_waitlist_enter_textbottom">Wenn ein Teilnehmer seine Anmeldung storniert und ein Platz für Sie frei wird, werden Sie benachtichtigt.</label>
 			<label index="single_waitlist_enter_labelsubmit">In die Warteliste eintragen</label>
-			<label index="single_waitlist_confirmation_heading">Warteliste</label>
-			<label index="single_waitlist_confirmation_texttop">Vielen Dank für das Eintragen auf die Warteliste für einen Termin auf unserer Internetseite. Wir haben die folgenden Daten vermerkt:</label>
-			<label index="single_waitlist_confirmation_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>
-			<label index="single_waitlist_alreadydone_heading">Bereits auf der Warteliste</label>
-			<label index="single_waitlist_alreadydone_texttop">Sie sind für diesen Termin bereits auf der Warteliste eingetragen. Wir haben die folgenden Daten vermerkt:</label>
+			<label index="single_waitlist_alreadydone_heading">Auf der Warteliste eingetragen</label>
+			<label index="single_waitlist_alreadydone_texttop">Sie sind für diesen Termin auf der Warteliste eingetragen. Wir haben die folgenden Daten vermerkt:</label>
 			<label index="single_waitlist_alreadydone_textbottom">Für weitere Informationen kontaktieren Sie bitte den Organisator des Termins.</label>	
 			<label index="single_waitlist_alreadydone_labelsubmit">Von der Warteliste austragen</label>
 			

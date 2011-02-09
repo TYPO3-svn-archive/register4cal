@@ -912,6 +912,7 @@ class tx_register4cal_registration_model {
 					' AND cal_event_getdate=' . intval($this->eventDate) .
 					' AND feuser_uid=' . intval($this->user['uid']) .
 					' AND pid=' . intval($this->event['pid']) .
+					' AND status<>3'.											//ThER090211: Ensure that this does not cause issues somewhere
 					$TSFE->cObj->enableFields($table);
 			$orderBy = 'tstamp desc';
 			$result = $TYPO3_DB->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy);
@@ -942,21 +943,29 @@ class tx_register4cal_registration_model {
 		 *  0: No value set, use default fieldset, too
 		 * >0: uid of fieldset to use
 		 */
-
 		if ($this->registration['uid']) {
 			$userfields = unserialize($this->registration['additional_data']);
 		} else {
 			$userfields = Array();
 			// determine fields only if registration is active
 			if ($this->event['tx_register4cal_activate'] == 1 && $this->event['tx_register4cal_fieldset'] != -2) {
+				// get extension confArr
+				$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['register4cal']);
+				// page where records will be stored
+				$sPid = '=' . intval($this->event['pid']) .' ';
+				if (isset($confArr['fieldStoragePid'])) {
+					$fieldStoragePid = intval($confArr['fieldStoragePid']);
+					if ($fieldStoragePid != 0) $sPid = ' IN (' . intval($this->event['pid']) .',' . $fieldStoragePid . ' )';
+				}
+
 				// if fieldset is set, read it, otherwise read first fieldset having the "isdefault" flag set
 				if ($this->event['tx_register4cal_fieldset'] != 0 && $this->event['tx_register4cal_fieldset'] != -1) {
-					$where = 'uid=' . intval($this->event['tx_register4cal_fieldset']) . ' AND pid=' . intval($this->event['pid']);
+					$where = 'uid=' . intval($this->event['tx_register4cal_fieldset']) . ' AND pid'.$sPid;
 				} else {
-					$where = 'isdefault <> 0' . ' AND pid=' . intval($this->event['pid']);
+					$where = 'isdefault <> 0' . ' AND pid' . $sPid;
 				}
 				$where .= $TSFE->cObj->enableFields('tx_register4cal_fieldsets');
-
+				
 				//read fieldset
 				$res = $TYPO3_DB->exec_SELECTquery('fields', 'tx_register4cal_fieldsets', $where);
 				if (($row = $TYPO3_DB->sql_fetch_assoc($res))) {

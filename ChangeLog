@@ -1,3 +1,7 @@
+2011-02-09 Thomas Ernst	<typo3@thernst.de>
+	* [Feature #12861] Compatibility to TYPO3 4.5
+	* Corrected several small issues
+
 2011-02-08 Thomas Ernst <typo3@thernst.de>
 	* [Feature #12860] Page where userdefined fields are stored should be configurable
 
