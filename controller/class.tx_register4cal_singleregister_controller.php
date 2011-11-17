@@ -92,8 +92,8 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 			}
 
 			// get piVars from cal and register4cal
-			$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
-			$r4cPiVars = t3lib_div::GParrayMerged($this->prefixId);
+			$calPiVars = t3lib_div::_GPmerged('tx_cal_controller');
+			$r4cPiVars = t3lib_div::_GPmerged($this->prefixId);
 
 			// extract required variables
 			$eventId = intval($calPiVars['uid']);

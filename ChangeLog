@@ -1,3 +1,6 @@
+2011-17-11 Thomas Ernst	<typo3@thernst.de>
+	* Compatibility to Typo3 4.6: Removed usage of deprecated function t3lib_div::GParrayMerged
+
 2011-10-27 Thomas Ernst	<typo3@thernst.de>
 	* FInished german manual
 	* corrections on english manual

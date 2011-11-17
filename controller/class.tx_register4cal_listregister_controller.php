@@ -77,7 +77,7 @@ class tx_register4cal_listregister_controller extends tx_register4cal_base_contr
 		global $TSFE, $TX_REGISTER4CAL_DATA;
 
 		// get data and leave if nothing needs to be processed
-		$data = t3lib_div::GParrayMerged($this->prefixId);
+		$data = t3lib_div::_GPmerged($this->prefixId);
 		if (!is_array($data)) return;
 		if (count($data) == 0) return;
 

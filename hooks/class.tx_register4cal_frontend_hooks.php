@@ -62,7 +62,7 @@ class tx_register4cal_frontend_hooks {
 		//Conditions to display the registration form (first step)
 		if ($parent->conf['view'] == 'event') { /* Single event view ... */
 			// get piVars from tx_cal_controler
-			$data = t3lib_div::GParrayMerged('tx_cal_controller');
+			$data = t3lib_div::_GPmerged('tx_cal_controller');
 			if ($data['uid'] != 0) { /* ...displaying an event ... */
 				if (strpos($content, 'phpicalendar_event')) { /* ... with event template (not location or organizer ...) */
 					try {

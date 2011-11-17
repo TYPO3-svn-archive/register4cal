@@ -387,7 +387,7 @@ class tx_register4cal_base_view extends tslib_pibase {
 	 * @return string 
 	 */
 	protected function getHiddenFields($noCache = 0, $cmd = '', $other = Array()) {
-		$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+		$calPiVars = t3lib_div::_GPmerged('tx_cal_controller');
 		foreach ($calPiVars as $name => $value) {
 			$hiddenFields .= '<input type="hidden" name="tx_cal_controller[' . htmlspecialchars($name) . ']" value="' . htmlspecialchars($value) . '" />';
 		}
@@ -404,7 +404,7 @@ class tx_register4cal_base_view extends tslib_pibase {
 	 */
 	protected function getCalParams() {
 		$calParams = Array();
-		$calPiVars = t3lib_div::GParrayMerged('tx_cal_controller');
+		$calPiVars = t3lib_div::_GPmerged('tx_cal_controller');
 		foreach ($calPiVars as $name => $value) {
 			$calParams['tx_cal_controller[' . htmlspecialchars($name) . ']'] = htmlspecialchars($value);
 		}

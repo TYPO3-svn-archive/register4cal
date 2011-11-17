@@ -76,7 +76,7 @@ class tx_register4cal_activate extends tx_cal_base_view {
 	 */
 	public function validate($eventId, $rule) {
 		require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_validation_controller.php');
-		$newEvent = t3lib_div::GParrayMerged('tx_cal_controller');
+		$newEvent = t3lib_div::_GPmerged('tx_cal_controller');
 		return tx_register4cal_validation_controller::checkActivate($eventId, $newEvent, $error);
 	}
 

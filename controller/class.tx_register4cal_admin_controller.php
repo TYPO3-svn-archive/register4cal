@@ -118,7 +118,7 @@ class tx_register4cal_admin_controller extends tx_register4cal_base_controller {
 		// -> there is no need to check if the user is organizer for the given event, here,
 		//    because this is being checked before executing the functions inside
 		//    tx_register4cal_registration_model
-		$this->piVars = t3lib_div::GParrayMerged($this->prefixId);		
+		$this->piVars = t3lib_div::_GPmerged($this->prefixId);		
 		$eventId = intval($this->piVars['uid']);
 		$eventDate = intval($this->piVars['getdate']);
 		$cmd = $this->piVars['cmd'];
