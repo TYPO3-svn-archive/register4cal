@@ -1,0 +1,28 @@
+#
+# This directory contains modified templates from cal, which have all required
+# changes to use register4cal functionality included. The modifications are 
+# based on the cal-classic templates.
+# You can simply add the following lines of TypoScript Code to your system, if
+# you decide to use these templates.
+#
+
+# Registration in list view ####################################################
+plugin.tx_cal_controller.view {
+    list.listTemplate = EXT:register4cal/templates/cal_classic/list.tmpl
+    event.eventModelTemplate = EXT:register4cal/templates/cal_classic/event_model.tmpl
+}
+
+# Frontend-editing with own tab ################################################
+plugin.tx_cal_controller.view {
+    create_event.template = EXT:register4cal/templates/cal_classic/create_event.tmpl
+    edit_event.template = EXT:register4cal/templates/cal_classic/create_event.tmpl
+    confirm_event.template = EXT:register4cal/templates/cal_classic/confirm_event.tmpl
+    create_event.tabbedMenu {
+	7 = TEXT
+	7.dataWrap = <li><a href="" rel="sc7"><b>{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_tablabel}</b></a></li>
+    }
+    edit_event.tabbedMenu {
+	7 = TEXT
+	7.dataWrap = <li><a href="" rel="sc7"><b>{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_tablabel}</b></a></li>
+    }
+}
