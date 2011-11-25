@@ -1,5 +1,4 @@
 <?php
-// TODO SEV3 Remove update task
 // TODO SEV9 Version 0.7.1 Add backend module
 // TODO SEV9 Version 0.7.1 Add scheduler task to delete past registrations
 if (!defined ('TYPO3_MODE')) {
@@ -17,14 +16,13 @@ if (TYPO3_MODE == 'FE') {
 
 	//Use hooks in cal extension to display the registration form and save registrations stored in list view
 	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/controller/class.tx_cal_controller.php']['finishViewRendering'][]='EXT:register4cal/hooks/class.tx_register4cal_frontend_hooks.php:tx_register4cal_frontend_hooks';
-	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/controller/class.tx_cal_controller.php']['drawlistClass'][]='EXT:register4cal/hooks/class.tx_register4cal_frontend_hooks.php:tx_register4cal_frontend_hooks';
+	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/controller/class.tx_cal_controller.php']['drawListClass'][]='EXT:register4cal/hooks/class.tx_register4cal_frontend_hooks.php:tx_register4cal_frontend_hooks';
 	$GLOBALS['TYPO3_CONF_VARS']['FE']['EXTCONF']['ext/cal/model/class.tx_cal_base_model.php']['searchForObjectMarker'][]='EXT:register4cal/hooks/class.tx_register4cal_frontend_hooks.php:tx_register4cal_frontend_hooks';
-
-	
 
 	//Define services, used by the cal extension when displaying the additional fields in frontend editing
 	require_once(t3lib_extMgm::extPath($_EXTKEY).'calview/class.tx_register4cal_activate.php');
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_activate',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_activate',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_activate',  'tx_register4cal_activate',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -33,7 +31,8 @@ if (TYPO3_MODE == 'FE') {
 			'className' => 'tx_register4cal_activate',
 		)
 	);
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_regstart',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_regstart',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_regstart',  'tx_register4cal_regstart',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -42,7 +41,8 @@ if (TYPO3_MODE == 'FE') {
 			'className' => 'tx_register4cal_regstart',
 		)
 	);
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_regend',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_regend',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_regend',  'tx_register4cal_regend',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -52,7 +52,8 @@ if (TYPO3_MODE == 'FE') {
 		)
 	);
 	require_once(t3lib_extMgm::extPath($_EXTKEY).'calview/class.tx_register4cal_maxattendees.php');
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_maxattendees',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_maxattendees',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_maxattendees',  'tx_register4cal_maxattendees',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -62,7 +63,8 @@ if (TYPO3_MODE == 'FE') {
 		)
 	);
 	require_once(t3lib_extMgm::extPath($_EXTKEY).'calview/class.tx_register4cal_waitlist.php');
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_waitlist',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_waitlist',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_waitlist',  'tx_register4cal_waitlist',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -71,7 +73,8 @@ if (TYPO3_MODE == 'FE') {
 			'className' => 'tx_register4cal_waitlist',
 		)
 	);
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_fieldset',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_fieldset',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_fieldset',  'tx_register4cal_fieldset',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -81,7 +84,8 @@ if (TYPO3_MODE == 'FE') {
 		)
 	);	
 	
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_listreg',
+	//t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal',  'tx_register4cal_listreg',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_listreg',  'tx_register4cal_listreg',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,
@@ -91,7 +95,8 @@ if (TYPO3_MODE == 'FE') {
 		)
 	);	
 
-	t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_submit',
+	//t3lib_extMgm::addService($_EXTKEY,  'register4cal',  'tx_register4cal_submit',
+        t3lib_extMgm::addService($_EXTKEY,  'tx_register4cal_submit',  'tx_register4cal_submit',
 		array(
 			'title' => 'Extension Model for tx_register4cal fields', 'description' => '', 'subtype' => 'module',
 			'available' => TRUE, 'priority' => 50, 'quality' => 50,

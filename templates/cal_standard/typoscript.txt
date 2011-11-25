@@ -7,15 +7,15 @@
 
 # Registration in list view ####################################################
 plugin.tx_cal_controller.view {
-    list.listTemplate = EXT:register4cal/templates/cal_examples/list.tmpl
-    event.eventModelTemplate = EXT:register4cal/templates/cal_examples/event_model.tmpl
+    list.listTemplate = EXT:register4cal/templates/cal_standard/list.tmpl
+    event.eventModelTemplate = EXT:register4cal/templates/cal_standard/event_model.tmpl
 }
 
 # Frontend-editing with own tab ################################################
 plugin.tx_cal_controller.view {
-    create_event.template = EXT:register4cal/templates/cal_examples/create_event.tmpl
-    edit_event.template = EXT:register4cal/templates/cal_examples/create_event.tmpl
-    confirm_event.template = EXT:register4cal/templates/cal_examples/confirm_event.tmpl
+    create_event.template = EXT:register4cal/templates/cal_standard/create_event.tmpl
+    edit_event.template = EXT:register4cal/templates/cal_standard/create_event.tmpl
+    confirm_event.template = EXT:register4cal/templates/cal_standard/confirm_event.tmpl
     create_event.tabbedMenu {
 	7 = TEXT
 	7.dataWrap = <li><a href="" rel="sc7"><b>{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_tablabel}</b></a></li>

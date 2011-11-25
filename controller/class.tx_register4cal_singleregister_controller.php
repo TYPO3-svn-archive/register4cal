@@ -165,7 +165,7 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 					break;
 			}
 		} catch (Exception $ex) {
-			$content = tx_register4cal_baseview::renderError($ex->getMessage());
+			$content = tx_register4cal_base_view::renderError($ex->getMessage());
 		}
 		return $content;
 	}

@@ -80,7 +80,7 @@ class tx_register4cal_frontend_hooks {
 	/* =========================================================================
 	 * Use hook of cal extension to process registration in list view
 	 * ========================================================================= */
-	function drawlistClass() {
+	function drawListClass() {
 		
 	}
 

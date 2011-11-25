@@ -52,7 +52,7 @@ class tx_register4cal_listreg extends tx_cal_base_view {
 	 * @return string HTML content for marker
 	 */
 	function start(&$parent) {
-		global $TX_REGISTER4CAL_DATA;
+                global $TX_REGISTER4CAL_DATA;
 
 		if ($GLOBALS['TSFE']->fe_user->user['uid'] != 0) {   // A frontend user is logged in
 			if (isset($TX_REGISTER4CAL_DATA['controller'])) {

@@ -161,7 +161,7 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 				if ($this->registration->getStatus() == 3 || $this->registration->getStatus() == 4) {
 					$cmd = 'register';
 				} else {
-					$cmd = 'unregister';
+                                        $cmd = 'unregister';
 				}
 				$value = '<input type="checkbox" name="' . $this->prefixId . '[' . $this->registration->getEventField('uid') . '][' . $this->registration->getEventDate() . '][' . $cmd . ']" value="1" />';
 				$marker = $this->applyWrap('eventcheckbox', $value);
@@ -306,7 +306,19 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 		}
 		return $marker;
 	}
-
+        
+       /**
+	* Render subpart of template and return result
+	* @param String $subpartName Name of subpart
+	* @return <type> Subpart content
+	*/
+        public function renderSubpart($subpartName) {
+            // Don't show UNREGISTER_ENABLED if unregistering is disabled
+            if ($subpartName=='UNREGISTER_ENABLED' && $this->settings->disableUnregister) 
+                return '';
+            
+            return parent::renderSubpart($subpartName);
+        }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/view/class.tx_register4cal_register_view.php']) {

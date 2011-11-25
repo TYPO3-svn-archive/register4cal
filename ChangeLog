@@ -1,8 +1,15 @@
-2011-17-11 Thomas Ernst	<typo3@thernst.de>
+2011-11-25 Thomas Ernst <typo3@thernst.de>
+        * Compatibility to cal 1.4.x (Classic/Standard template)
+        * Services where not working with Typo3 4.6/Cal 1.4.x
+        * Updated manuals
+        * [Bug #28416] disableUnregister not working in list registration
+        * Published Version 0.7.0
+
+2011-11-17 Thomas Ernst	<typo3@thernst.de>
 	* Compatibility to Typo3 4.6: Removed usage of deprecated function t3lib_div::GParrayMerged
 
 2011-10-27 Thomas Ernst	<typo3@thernst.de>
-	* FInished german manual
+	* Finished german manual
 	* corrections on english manual
 	
 2011-09-17 Thomas Ernst	<typo3@thernst.de>

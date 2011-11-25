@@ -244,10 +244,10 @@ class tx_register4cal_base_view extends tslib_pibase {
 		while ($count > 0) {
 			$allSubparts = array_unique($match[1]);
 			foreach ($allSubparts as $singleSubpart) {
-				//$subpartContent = $this->renderSubpart($singleSubpart);
-				$subpartContent = $this->cObj->getSubpart($this->template, '###' . $singleSubpart . '###');
-				$subpartContent = $this->applyWrap(strtolower($singleSubpart), $subpartContent);
-				$this->template = $this->cObj->substituteSubpart($this->template, '###' . $singleSubpart . '###', $subpartContent, 0);
+				$subpartContent = $this->renderSubpart($singleSubpart);
+				//$subpartContent = $this->cObj->getSubpart($this->template, '###' . $singleSubpart . '###');
+				//$subpartContent = $this->applyWrap(strtolower($singleSubpart), $subpartContent);
+                                $this->template = $this->cObj->substituteSubpart($this->template, '###' . $singleSubpart . '###', $subpartContent, 0);
 			}
 			$count = preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $this->template, $match);
 		}
