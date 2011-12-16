@@ -76,22 +76,10 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 	public function SingleEventRegistration() {
 		global $TSFE;
 		require_once(t3lib_extMgm::extPath('register4cal') . 'view/class.tx_register4cal_register_view.php');
-
-		try {
-			// show form "NeedLoginForm" if no user has logged in and the form should be shown
-			if (intval($TSFE->fe_user->user['uid']) == 0) {
-				if ($this->settings->needLoginFormDisable == 0) {
-					$view = tx_register4cal_register_view::getInstance();
-					$view->load('single.needLogin');
-					$content = $view->render();
-					return $content;
-				} else {
-					// NeedLoginForm should be hidden, login not possible --> Display nothing!
-					return '';
-				}
-			}
-
-			// get piVars from cal and register4cal
+                require_once(t3lib_extMgm::extPath('register4cal') . 'model/class.tx_register4cal_registration_model.php');
+                
+		try {	
+                        // get piVars from cal and register4cal
 			$calPiVars = t3lib_div::_GPmerged('tx_cal_controller');
 			$r4cPiVars = t3lib_div::_GPmerged($this->prefixId);
 
@@ -108,9 +96,23 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 			} else {
 				$userId = intval($TSFE->fe_user->user['uid']);
 			}
+                    
+                        // show form "NeedLoginForm" if no user has logged in and the form should be shown
+			if (intval($TSFE->fe_user->user['uid']) == 0) {
+				if ($this->settings->needLoginFormDisable == 0) {                                       
+                                        $registration = tx_register4cal_registration_model::getInstance($eventId, $eventDate, 0);                                        
+                                        $view = tx_register4cal_register_view::getInstance();
+					$view->setRegistration($registration);
+                                        $view->load('single.needLogin');
+					$content = $view->render();
+					return $content;
+				} else {
+					// NeedLoginForm should be hidden, login not possible --> Display nothing!
+					return '';
+				}
+			}
 
-			// create instance of registration object
-			require_once(t3lib_extMgm::extPath('register4cal') . 'model/class.tx_register4cal_registration_model.php');
+			// create instance of registration object			
 			$registration = tx_register4cal_registration_model::getInstance($eventId, $eventDate, $userId);
 			// create instance of view object
 			$view = tx_register4cal_register_view::getInstance();

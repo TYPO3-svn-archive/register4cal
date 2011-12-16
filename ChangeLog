@@ -1,3 +1,6 @@
+2011-12-16 Thomas Ernst <typo3@thernst.de>
+        * [Feature #28414] Free places (and other event-specific markers) can be used even if no user is logged in.
+
 2011-11-25 Thomas Ernst <typo3@thernst.de>
         * Compatibility to cal 1.4.x (Classic/Standard template)
         * Services where not working with Typo3 4.6/Cal 1.4.x
