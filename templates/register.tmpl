@@ -98,6 +98,29 @@
 	<!-- ###SINGLE_REGISTRATION_ALREADYDONE### end -->
 	</pre>
 	
+        <h2>SINGLE_REGISTRATION_OVER_RUNNING_FINISHED</h2>
+	<p>Informing a registered user that the registration period is over/the event has started/the event is finished
+	<pre>
+	<!-- ###SINGLE_REGISTRATION_OVER_RUNNING_FINISHED### begin -->
+	<h2>###HEADING###</h2>
+	<p>###TEXTTOP###</p>
+	<table width="100%">
+	    <tr><td colspan=2>
+		<b>###LABEL_maxattendees###:</b> ###MAXATTENDEES###
+		<b>###LABEL_numattendees###:</b> ###NUMATTENDEES###
+		<b>###LABEL_numwaitlist###:</b> ###NUMWAITLIST###
+		<b>###LABEL_numfree###:</b> ###NUMFREE###<br /><br />
+	    </td></tr>
+	    <tr>
+		<td><b>###LABEL_status###:</b></td>
+		<td>###STATUS###</td>
+	    </tr>
+	    ###FIELDS###
+	</table>
+	<p>###TEXTBOTTOM###</p>
+	<!-- ###SINGLE_REGISTRATION_OVER_RUNNING_FINISHED### end -->
+	</pre>
+
 	<hr /><h1>Templates for list view</h1><hr /><!-- *************************************************************************************************************** -->
 	<h2>LIST_SUBMIT</h2>
 	<p>This part defines the form to register for an event if displayed in list view</p>
@@ -128,6 +151,16 @@
 	<!-- ###LIST_REGISTRATION_ALREADYDONE### end -->
 	</pre>
 	
+        <h2>LIST_REGISTRATION_OVER_RUNNING_FINISHED</h2>
+	<p>Informing a registered user that the registration period is over/the event has started/the event is finished</p>
+	<pre>
+	<!-- ###LIST_REGISTRATION_OVER_RUNNING_FINISHED### begin -->
+	<fieldset><legend>###TITLE###</legend>
+        <p>###TEXTTOP###</p>
+	<table width="100%">###FIELDS###</table>
+	</fieldset>
+	<!-- ###LIST_REGISTRATION_OVER_RUNNING_FINISHED### end -->
+	</pre>
 
 	<hr /><h1>Templates for list output</h1><hr /><!-- *************************************************************************************************************** -->
 	<h2>LIST_EVENTS</h2>

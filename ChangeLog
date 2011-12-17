@@ -1,3 +1,10 @@
+2011-12-17 Thomas Ernst <typo3@thernst.de>
+        * [Bug #32647] needToLogin form is being displayed, even if registration is not possible
+        * [Feature #30523] Deadline for registration more flexible
+        * [Bug #32645] Even after the registration period and the event, it is possible to unregister
+        * [Bug #32648] Submit buttons showed in list view, even if no events with activated registrations displayed
+        * [Feature #32649] Disable displaying of error messages in frontend
+
 2011-12-16 Thomas Ernst <typo3@thernst.de>
         * [Feature #28414] Free places (and other event-specific markers) can be used even if no user is logged in.
 

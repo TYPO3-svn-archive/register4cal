@@ -1,5 +1,8 @@
 # cat=basic/dev/1000; type=user[EXT:register4cal/classes/class.tx_register4cal_tsparserext.php:tx_register4cal_tsparserext->displayMessage]; label=LLL:EXT:register4cal/locallang_update.xml:infobox.option
 #updateMessage=0
 
+# cat=basic/errors/100; type=boolean; label= Hide errors in frontend: Check this option to suppress error messages in the frontend.
+hideErrorsInFrontend = 0
+
 # cat=basic/links/100; type=text; label= Storage PID for userdefined fields: Id of page where userdefined fields are stored (additionaly to pid where events are stored)
 fieldStoragePid =
