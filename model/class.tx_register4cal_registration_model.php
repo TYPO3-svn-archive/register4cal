@@ -610,7 +610,7 @@ class tx_register4cal_registration_model {
         $feUserId = intval($TSFE->fe_user->user['uid']);
 
         // is user in adminUsers list?
-        if (in_Array($feUserId, $this->settings->adminUsers))
+        if (t3lib_div::inList($this->settings->adminUsers, $feUserId))
             return true;
 
         // is user selected in organizer feUserId field
