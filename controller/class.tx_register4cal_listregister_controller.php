@@ -165,11 +165,18 @@ class tx_register4cal_listregister_controller extends tx_register4cal_base_contr
                 $view->setMessages($TX_REGISTER4CAL_DATA['messages'][$event['uid']][$event['start_date']]);
             switch ($registration->getStatus()) {
                 case 0;  // No registration active
-                // fall through
+					// this block can not be reached as the marker already checks if
+					// the registration is active. But if anything goes wrong, we leave
+					// here again.
+					$content = '';
+                    break;
                 case 1:  // No registration possible at the moment (outside registration period)
-                // fall trough
+					// TODO SEV 3 Display message here (target: V0.7.1)
+					$content = '';
+                    break;
                 case 2:  // no registration possible at the moment (event fully booked)
-                    $content = '';
+                    // TODO SEV 3 Display message here (target: V0.7.1)
+					$content = '';
                     break;
                 case 3:  // Normal registration is possible
                     $view->load('list.registration.enter');

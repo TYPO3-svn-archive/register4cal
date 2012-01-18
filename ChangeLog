@@ -1,5 +1,8 @@
+2012-01-18 Thomas Ernst <typo3@thernst.de>
+		* [Bug #33275] 	Leave processing earlier if registration is not activated (thanks to G. Hoelzl)		
+
 2012-01-09 Thomas Ernst <typo3@thernst.de>
-		* [Bug #33074] Wrong check of "adminUsers"-Parameter
+		* [Bug #33074] Wrong check of "adminUsers"-Parameter (thanks to G. Hoelzl)
 
 2011-12-17 Thomas Ernst <typo3@thernst.de>
         * [Bug #32647] needToLogin form is being displayed, even if registration is not possible

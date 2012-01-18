@@ -54,7 +54,7 @@ class tx_register4cal_listreg extends tx_cal_base_view {
 	function start(&$parent) {
                 global $TX_REGISTER4CAL_DATA;
 
-		if ($GLOBALS['TSFE']->fe_user->user['uid'] != 0) {   // A frontend user is logged in
+		if ($GLOBALS['TSFE']->fe_user->user['uid'] != 0 && $parent->cachedValueArray['tx_register4cal_activate']) {   // A frontend user is logged in
 			if (isset($TX_REGISTER4CAL_DATA['controller'])) {
 				$content = $TX_REGISTER4CAL_DATA['controller']->ListViewRegistration_Event($parent->row);
 			}
