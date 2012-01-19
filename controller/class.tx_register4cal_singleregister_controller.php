@@ -148,7 +148,7 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 
             // prepare output
             $view->setRegistration($registration);
-            switch ($registration->getStatus()) {
+			switch ($registration->getStatus()) {
                 case 0;  // No registration active
 					// this block can not be reached as the FE-Hook already checks if
 					// the registration is active. But if anything goes wrong, we leave
@@ -156,12 +156,12 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 					$content = '';
                     break;
                 case 1:  // No registration possible at the moment (outside registration period)
-					// TODO SEV 3 Display message here (target: V0.7.1)
-					$content = '';
+					$view->load('single.outsidePeriod');
+					$content = $view->render();
                     break;
                 case 2:  // no registration possible at the moment (event fully booked)
-                    // TODO SEV 3 Display message here (target: V0.7.1)
-					$content = '';
+                    $view->load('single.noregister');
+					$content = $view->render();
                     break;
                 case 3:  // Normal registration is possible
                     $view->load('single.registration.enter');

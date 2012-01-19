@@ -1,3 +1,6 @@
+2012-01-19 Thomas Ernst <typo3@thernst.de>
+		* [Bug #33276] 	Display messages if registration is not possible (thanks to G. Hoelzl)		
+
 2012-01-18 Thomas Ernst <typo3@thernst.de>
 		* [Bug #33275] 	Leave processing earlier if registration is not activated (thanks to G. Hoelzl)		
 

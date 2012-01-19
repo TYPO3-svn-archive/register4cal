@@ -171,12 +171,12 @@ class tx_register4cal_listregister_controller extends tx_register4cal_base_contr
 					$content = '';
                     break;
                 case 1:  // No registration possible at the moment (outside registration period)
-					// TODO SEV 3 Display message here (target: V0.7.1)
-					$content = '';
+					$view->load('list.outsidePeriod');
+                    $content = $view->render();
                     break;
                 case 2:  // no registration possible at the moment (event fully booked)
-                    // TODO SEV 3 Display message here (target: V0.7.1)
-					$content = '';
+                    $view->load('list.noregister');
+                    $content = $view->render();
                     break;
                 case 3:  // Normal registration is possible
                     $view->load('list.registration.enter');
