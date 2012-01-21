@@ -1,3 +1,9 @@
+2012-01-21 Thomas Ernst <typo3@thernst.de>
+		* [Bug #33347] Issue during upload of 0.7.0 causes version to be increased to 0.16.0
+		* Defined cal compatibility from version 1.3.3 (no security issue) up to 1.4.2 (current version)
+		* Status is now "Stable"
+		* Published version 0.16.0 (due to an issue when uploading 0.7.0, that version was uploaded several times, up to 0.15.0)
+
 2012-01-19 Thomas Ernst <typo3@thernst.de>
 		* [Bug #33276] 	Display messages if registration is not possible (thanks to G. Hoelzl)		
 
@@ -171,9 +177,9 @@
 
 2009-05-09 Thomas Ernst <typo3@thernst.de>
 	* Complete revision of extension. Substantial changes in templates, TypoScript, etc. (Feature 3190)
-		* All fields from user, registration and event tables can be used as markers
-		* Nearly unlimited markers can be configured via TypoScript
-		* Marker layout now defined via TypoScript
+	* All fields from user, registration and event tables can be used as markers
+	* Nearly unlimited markers can be configured via TypoScript
+	* Marker layout now defined via TypoScript
 
 2009-04-27 Thomas Ernst <typo3@thernst.de>
 	* DateSelector-Configuration for field "regend" was not read correctly (Bug 3191)
