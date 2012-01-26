@@ -59,16 +59,16 @@ class tx_register4cal_validation_controller {
 	public static function onBackendEventUpdate($eventId, $newEvent, &$error) {
 		$error = '';
 		// get old event
-		if (!self::getEvent($eventId, $oldEvent, &$error)) return false;
+		if (!self::getEvent($eventId, $oldEvent, $error)) return false;
 
 		// check if registration has been deactivated
-		if (!self::checkActivate($oldEvent, $newEvent, &$error)) return false;
+		if (!self::checkActivate($oldEvent, $newEvent, $error)) return false;
 
 		// check if maximum number of attendees has been reduced
-		if (!self::checkMaxattendees($oldEvent, $newEvent, &$error)) return false;
+		if (!self::checkMaxattendees($oldEvent, $newEvent, $error)) return false;
 
 		// check if waitlist has been deactivated
-		if (!self::checkWaitlist($olfEvent, $newEvent, &$error)) return false;
+		if (!self::checkWaitlist($olfEvent, $newEvent, $error)) return false;
 
 		// All checks performed, no errors found
 		return true;
@@ -86,7 +86,7 @@ class tx_register4cal_validation_controller {
 	 */
 	public static function checkActivate($oldEvent, $newEvent, &$error) {
 		if (isset($newEvent['tx_register4cal_activate'])) {
-			if (!is_array($oldEvent)) self::getEvent ($oldEvent, &$oldEvent, $error);
+			if (!is_array($oldEvent)) self::getEvent ($oldEvent, $oldEvent, $error);
 			if ($newEvent['tx_register4cal_activate'] == 0 && $oldEvent['tx_register4cal_activate'] != 0) {
 				$numberOfRegistrations = self::countRegistratons($oldEvent);
 				if ($numberOfRegistrations > 0) $error = 'You can not deactivate registration as there are already ' . $maxReg . ' registrations!';
@@ -104,7 +104,7 @@ class tx_register4cal_validation_controller {
 	 */
 	public static function checkMaxattendees($oldEvent, $newEvent, &$error) {
 		if (isset($newEvent['tx_register4cal_maxattendees'])) {
-			if (!is_array($oldEvent)) self::getEvent ($oldEvent, &$oldEvent, $error);
+			if (!is_array($oldEvent)) self::getEvent ($oldEvent, $oldEvent, $error);
 			if ($newEvent['tx_register4cal_maxattendees'] < $oldEvent['tx_register4cal_maxattendees']) {
 				$numberOfRegistrations = self::countRegistratons($oldEvent, 1);
 				if ($numberOfRegistrations > $newEvent['tx_register4cal_maxattendees']) $error = 'You can not reduce max. number of attendees to ' . $newEvent['tx_register4cal_maxattendees'] . ' as there are already ' . $numberOfRegistrations . ' registrations!';
@@ -122,7 +122,7 @@ class tx_register4cal_validation_controller {
 	 */
 	public static function checkWaitlist($oldEvent, $newEvent, &$error) {
 		if (isset($newEvent['tx_register4cal_waitlist'])) {
-			if (!is_array($oldEvent)) self::getEvent ($oldEvent, &$oldEvent, $error);
+			if (!is_array($oldEvent)) self::getEvent ($oldEvent, $oldEvent, $error);
 			if ($newEvent['tx_register4cal_waitlist'] == 0 && $oldEvent['tx_register4cal_waitlist'] != 0) {
 				$numberOfWaitlistEntries = self::countRegistratons($oldEvent, 2);
 				if ($numberOfWaitlistEntries > 0) $error = 'You can not deactivate waitlist as there are already ' . $numberOfWaitlistEntries . ' waitlist entries!';
