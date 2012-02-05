@@ -113,6 +113,14 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 		$this->userList = $userList;
 	}
 
+	/**
+	 * Set the "render for display only" flag
+	 * @param boolean $renderDisplayOnly Render for display only?
+	 */
+	public function setRenderDisplayOnly($renderDisplayOnly = FALSE) {
+		$this->renderDisplayOnly = $renderDisplayOnly;
+	}	
+	
 	/* =========================================================================
 	 * Private methods
 	 * ========================================================================= */

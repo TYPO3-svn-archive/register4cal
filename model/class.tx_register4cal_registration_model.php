@@ -688,9 +688,19 @@ class tx_register4cal_registration_model {
 		// If display of other registered users is disabled, we leave her immediately
 		if (!$this->settings->showOtherRegisteredUsers_Enable) return Array();
 		
+		// Registration Status selection
+		$status = 'status=1';
+		if ($this->settings->showOtherRegisteredUsers_includeWaitlist)
+			$status .= ' OR status=2';
+		if ($this->settings->showOtherRegisteredUsers_includeCancelled)
+			$status .= ' OR status=3';
+		$status = ' AND (' . $status . ')';
+		
 		$select = 'uid';
 		$table = 'tx_register4cal_registrations';
-		$where = 'feuser_uid<>' . $this->user['uid'] . ' AND cal_event_uid=' . $this->event['uid'] . ' AND cal_event_getdate=' . $this->event['get_date'];
+		$where = 'cal_event_uid=' . $this->event['uid'] . ' AND cal_event_getdate=' . $this->event['get_date'] . $status;
+		if (!$this->settings->showOtherRegisteredUsers_includeOwnRegistration)
+			$where .= ' AND feuser_uid<>' . $this->user['uid']; 
 		if (!$this->userIsOrganizer())
 			$where .= ' AND visible_for_other_users = 1';
 		$where .= $TSFE->cObj->enableFields($table);

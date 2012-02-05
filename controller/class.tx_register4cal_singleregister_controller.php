@@ -233,11 +233,13 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 		$otherUsers = '';
 		$otherUserRegistrations = $registration->getRegistrationsFromOtherUsers();
 		if (count($otherUserRegistrations) != 0) {
+			$view->setRenderDisplayOnly(TRUE);
 			foreach ($otherUserRegistrations as $otherUserRegistration) {
 				$view->setRegistration($otherUserRegistration);
 				$otherUsers .= $view->renderSubpart('OTHER_USER');
 			}
 			$view->setRegistration($registration);
+			$view->setRenderDisplayOnly();
 			$view->replaceSubpart('OTHER_USER', $otherUsers);
 			unset($subparts['OTHER_USERS_LIST']);
 		}

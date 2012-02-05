@@ -18,8 +18,11 @@ plugin.tx_register4cal_pi1{
 	}
 
 	showOtherRegisteredUsersAtRegistration {
-		enable = 1
+		enable = 0
 		onlyAfterRegistration = 1
+		includeOwnRegistration = 1
+		includeWaitlist = 0
+		includeCancelled = 0
 	}
 
 	needLoginForm {

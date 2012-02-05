@@ -181,6 +181,24 @@ class tx_register4cal_settings implements t3lib_Singleton {
 	 * @var integer 
 	 */
 	public $showOtherRegisteredUsers_onlyAfterRegistration;
+	
+	/**
+	 * Flag: Include own registration when displaying other registered users data
+	 * @var integer 
+	 */
+	public $showOtherRegisteredUsers_includeOwnRegistration;
+	
+	/**
+	 * Flag: Include waitlist registrations when displaying other registered users data
+	 * @var integer 
+	 */
+	public $showOtherRegisteredUsers_includeWaitlist;
+	
+	/**
+	 * Flag: Include cancelled registrations when displaying other registered users data
+	 * @var integer 
+	 */
+	public $showOtherRegisteredUsers_includeCancelled;
 	/**
 	 * Configuration subset with all forms configuration
 	 * @var array
@@ -317,6 +335,15 @@ class tx_register4cal_settings implements t3lib_Singleton {
 		
 		$temp = $tsconf['showOtherRegisteredUsersAtRegistration.']['onlyAfterRegistration'];
 		$this->showOtherRegisteredUsers_onlyAfterRegistration = $this->validateFlag($temp, 0);
+		
+		$temp = $tsconf['showOtherRegisteredUsersAtRegistration.']['includeOwnRegistration'];
+		$this->showOtherRegisteredUsers_includeOwnRegistration = $this->validateFlag($temp, 0);
+		
+		$temp = $tsconf['showOtherRegisteredUsersAtRegistration.']['includeWaitlist'];
+		$this->showOtherRegisteredUsers_includeWaitlist = $this->validateFlag($temp, 0);
+		
+		$temp = $tsconf['showOtherRegisteredUsersAtRegistration.']['includeCancelled'];
+		$this->showOtherRegisteredUsers_includeCancelled = $this->validateFlag($temp, 0);
 		
 		$this->forms = $tsconf['forms.'];
 	}
