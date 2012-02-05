@@ -1,0 +1,182 @@
+plugin.tx_register4cal_pi1 {
+	edit {
+		useDateSelector = 1
+		calConf {
+			dateTimeFormat =
+			toolTipDateTimeFormat =
+			inputFieldDateTimeFormat < plugin.tx_register4cal_pi1.dateformat
+			weekStartsMonday = 0
+			weekend = 6,0
+			allowedYearMin = 1900
+			allowedYearMax = 2070
+			displayWeekNumbers = 1
+			showMethod = element
+			showPositionAbsolute = 0,0
+			stylesheet = EXT:rlmp_dateselectlib/calendar-system.css
+			inputFieldLabel = ...
+		}
+	}
+}
+
+#Settings to enable the additional fields for the frontend editing feature of the cal extension
+plugin.tx_cal_controller.view {
+	create_event {
+		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
+		tx_register4cal_activate_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}</option>
+		tx_register4cal_activate_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label><span class="tx_register4cal_activate"><select name="tx_cal_controller[tx_register4cal_activate]" size=1>|</select></span>###TX_REGISTER4CAL_ACTIVATE_CONSTRAIN###</p>
+		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/>###REGSTART_SELECTOR###</span></p>
+		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" />###REGEND_SELECTOR###</span></p>
+		tx_register4cal_maxattendees_stdWrap.dataWrap = <p><label for="tx_register4cal_maxattendees">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_maxattendees}:</label><span class="tx_register4cal_maxattendees"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_maxattendees]" id="tx_register4cal_maxattendees" /></span>###TX_REGISTER4CAL_MAXATTENDEES_CONSTRAIN###</p>
+		tx_register4cal_waitlist_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_on}</option>
+		tx_register4cal_waitlist_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_off}</option>
+		tx_register4cal_waitlist_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist}:</label><span class="tx_register4cal_waitlist"><select name="tx_cal_controller[tx_register4cal_waitlist]" size=1>|</select></span>###TX_REGISTER4CAL_WAITLIST_CONSTRAIN###</p>
+		tx_register4cal_fieldset_stdWrap.dataWrap = <p><label for="tx_register4cal_fieldset">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset}:</label><span class="tx_register4cal_fieldset"><select name="tx_cal_controller[tx_register4cal_fieldset]" size=1>|</select></span></p>
+	}
+	edit_event {
+		tx_register4cal_activate_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}</option>
+		tx_register4cal_activate_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}</option>
+		tx_register4cal_activate_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label><span class="tx_register4cal_activate"><select name="tx_cal_controller[tx_register4cal_activate]" size=1>|</select></span>###TX_REGISTER4CAL_ACTIVATE_CONSTRAIN###</p>
+		tx_register4cal_regstart_stdWrap.dataWrap = <p><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label><span class="tx_register4cal_regstart"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regstart]" id="tx_register4cal_regstart"/>###REGSTART_SELECTOR###</span></p>
+		tx_register4cal_regend_stdWrap.dataWrap = <p><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label><span class="tx_register4cal_regend"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_regend]" id="tx_register4cal_regend" />###REGEND_SELECTOR###</span></p>
+		tx_register4cal_maxattendees_stdWrap.dataWrap = <p><label for="tx_register4cal_maxattendees">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_maxattendees}:</label><span class="tx_register4cal_maxattendees"><input type="text" value="|" size="10" name="tx_cal_controller[tx_register4cal_maxattendees]" id="tx_register4cal_maxattendees" /></span>###TX_REGISTER4CAL_MAXATTENDEES_CONSTRAIN###</p>
+		tx_register4cal_waitlist_on_stdWrap.dataWrap = <option | value="1">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_on}</option>
+		tx_register4cal_waitlist_off_stdWrap.dataWrap = <option | value="0">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_off}</option>
+		tx_register4cal_waitlist_stdWrap.dataWrap = <p><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist}:</label><span class="tx_register4cal_waitlist"><select name="tx_cal_controller[tx_register4cal_waitlist]" size=1>|</select></span>###TX_REGISTER4CAL_WAITLIST_CONSTRAIN###</p>
+		tx_register4cal_fieldset_stdWrap.dataWrap = <p><label for="tx_register4cal_fieldset">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset}:</label><span class="tx_register4cal_fieldset"><select name="tx_cal_controller[tx_register4cal_fieldset]" size=1>|</select></span></p>
+	}
+	confirm_event {
+		tx_register4cal_activate_on_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_on}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_activate]"/>
+		tx_register4cal_activate_off_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate_off}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_activate]"/>
+		tx_register4cal_activate_stdWrap.dataWrap = <div><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_activate}:</label>|</div>
+		tx_register4cal_regstart_stdWrap.dataWrap = <div><label for="tx_register4cal_regstart">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regstart}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_REGSTART_VALUE###" name="tx_cal_controller[tx_register4cal_regstart]"/></div>
+		tx_register4cal_regend_stdWrap.dataWrap = <div><label for="tx_register4cal_regend">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_regend}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_REGEND_VALUE###" name="tx_cal_controller[tx_register4cal_regend]"/></div>
+		tx_register4cal_maxattendees_stdWrap.dataWrap = <div><label for="tx_register4cal_maxattendees">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_maxattendees}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_MAXATTENDEES_VALUE###" name="tx_cal_controller[tx_register4cal_maxattendees]"/></div>
+		tx_register4cal_waitlist_on_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_on}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_waitlist]"/>
+		tx_register4cal_waitlist_off_stdWrap.dataWrap = {LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist_off}<input type="hidden" value="|" name="tx_cal_controller[tx_register4cal_waitlist]"/>
+		tx_register4cal_waitlist_stdWrap.dataWrap = <div><label for="tx_register4cal_activate">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_waitlist}:</label>|</div>
+		tx_register4cal_fieldset_stdWrap.dataWrap = <p><label for="tx_register4cal_fieldset">{LLL:EXT:register4cal/locallang_db.xml:tx_cal_event.tx_register4cal_fieldset}:</label>|<input type="hidden" value="###TX_REGISTER4CAL_FIELDSET_VALUE###" name="tx_cal_controller[tx_register4cal_fieldset]"/></p>
+	}
+	save_event {
+		additional_fields.tx_register4cal_regstart_stdWrap.postUserFunc = tx_register4cal_datetime->convertToTimestamp
+		additional_fields.tx_register4cal_regend_stdWrap.postUserFunc = tx_register4cal_datetime->convertToTimestamp
+	}
+}
+
+plugin.tx_cal_controller.rights {
+	create.event {
+		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees, tx_register4cal_waitlist, tx_register4cal_fieldset
+		fields.tx_register4cal_activate {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regstart {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regend {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_maxattendees {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_waitlist {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_fieldset {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+	}
+
+	edit.event {
+		additionalFields = tx_register4cal_activate, tx_register4cal_regstart, tx_register4cal_regend, tx_register4cal_maxattendees,  tx_register4cal_waitlist, tx_register4cal_fieldset
+		fields.tx_register4cal_activate {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+			constrain.1 {
+				conditionField = uid
+				rule = userfunc
+				userFunc = tx_register4cal_activate->validate
+				message = TEXT
+				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/view/locallang.xml:error_activate}</span>
+			}
+		}
+		fields.tx_register4cal_regstart {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_regend {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+		fields.tx_register4cal_maxattendees {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+			constrain.1 {
+				conditionField = uid
+				rule = userfunc
+				userFunc = tx_register4cal_maxattendees->validate
+				message = TEXT
+				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/view/locallang.xml:error_maxattendees}</span>
+			}
+		}
+		fields.tx_register4cal_waitlist {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+			constrain.1 {
+				conditionField = uid
+				rule = userfunc
+				userFunc = tx_register4cal_waitlist->validate
+				message = TEXT
+				message.dataWrap = <span class="constrain">{LLL:EXT:register4cal/view/locallang.xml:error_waitlist}</span>
+			}
+		}
+		fields.tx_register4cal_fieldset {
+			user =
+			group =
+			public = 1
+			default = 0
+			required = 0
+		}
+	}
+
+}
+
+
+

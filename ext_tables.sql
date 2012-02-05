@@ -15,6 +15,7 @@ CREATE TABLE tx_register4cal_registrations (
 	additional_data text,
 	status tinyint(3) DEFAULT '1' NOT NULL,
 	numattendees int(11) DEFAULT '1' NOT NULL,
+	visible_for_other_users tinyint(4) DEFAULT '0' NOT NULL,
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );

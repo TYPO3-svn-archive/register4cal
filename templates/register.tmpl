@@ -63,10 +63,31 @@
 		<td>###ORGANIZER_name###</td>
 	    </tr>
 	    ###FIELDS###
+		<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->
+		<tr>
+		<td><b>###LABEL_question_visible_for_other_users###:</b></td>
+		<td>###CHECKBOX_VISIBLE_FOR_OTHER_USERS###</td>
+	    </tr>
+		<!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->		
 	    <tr><td colspan="2" align="center">
 		###SUBMITBUTTON###
 	    </td></tr>
 	</table></form>
+	<!-- ###OTHER_USERS_LIST### begin -->
+	<h3>###LABEL_other_users_list###:</h3>
+	<table>
+		<tr>
+			<th>###LABEL_user_name###</th>
+			<th>###LABEL_user_email###</th>
+		</tr>
+		<!-- ###OTHER_USER### begin -->
+		<tr>
+			<td>###USER_name###</td>
+			<td>###USER_email###</td>
+		</tr>
+		<!-- ###OTHER_USER### end -->
+	</table>		
+	<!-- ###OTHER_USERS_LIST### end -->
 	<p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_REGISTRATION_ENTER### end -->
 	</pre>
@@ -90,15 +111,36 @@
 		<td>###STATUS###</td>
 	    </tr>
 	    ###FIELDS###
+		<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->
+		<tr>
+		<td><b>###LABEL_question_visible_for_other_users###:</b></td>
+		<td>###CHECKBOX_VISIBLE_FOR_OTHER_USERS###</td>
+	    </tr>
+		<!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->
 	    <tr><td colspan="2" align="center">
 		###SUBMITBUTTON###
 	    </td></tr>
 	</table></form>
+	<!-- ###OTHER_USERS_LIST### begin -->
+	<h3>###LABEL_other_users_list###:</h3>
+	<table>
+		<tr>
+			<th>###LABEL_user_name###</th>
+			<th>###LABEL_user_address###</th>
+		</tr>
+		<!-- ###OTHER_USER### begin -->
+		<tr>
+			<td>###USER_name###</td>
+			<td>###USER_address###</td>
+		</tr>
+		<!-- ###OTHER_USER### end -->
+	</table>		
+	<!-- ###OTHER_USERS_LIST### end -->
 	<p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_REGISTRATION_ALREADYDONE### end -->
 	</pre>
 	
-        <h2>SINGLE_REGISTRATION_OVER_RUNNING_FINISHED</h2>
+    <h2>SINGLE_REGISTRATION_OVER_RUNNING_FINISHED</h2>
 	<p>Informing a registered user that the registration period is over/the event has started/the event is finished
 	<pre>
 	<!-- ###SINGLE_REGISTRATION_OVER_RUNNING_FINISHED### begin -->
@@ -115,8 +157,29 @@
 		<td><b>###LABEL_status###:</b></td>
 		<td>###STATUS###</td>
 	    </tr>
+		<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->
+		<tr>
+		<td><b>###LABEL_question_visible_for_other_users###:</b></td>
+		<td>###CHECKBOX_VISIBLE_FOR_OTHER_USERS###</td>
+	    </tr>
+		<!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->
 	    ###FIELDS###
 	</table>
+	<!-- ###OTHER_USERS_LIST### begin -->
+	<h3>###LABEL_other_users_list###:</h3>
+	<table>
+		<tr>
+			<th>###LABEL_user_name###</th>
+			<th>###LABEL_user_address###</th>
+		</tr>
+		<!-- ###OTHER_USER### begin -->
+		<tr>
+			<td>###USER_name###</td>
+			<td>###USER_address###</td>
+		</tr>
+		<!-- ###OTHER_USER### end -->
+	</table>		
+	<!-- ###OTHER_USERS_LIST### end -->
 	<p>###TEXTBOTTOM###</p>
 	<!-- ###SINGLE_REGISTRATION_OVER_RUNNING_FINISHED### end -->
 	</pre>
@@ -146,6 +209,7 @@
 	<fieldset><legend>###EVENT_CHECKBOX### ###TITLE###</legend>
 	###MESSAGES###
 	<table width="100%">###FIELDS###</table>
+	<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->###CHECKBOX_VISIBLE_FOR_OTHER_USERS### ###LABEL_question_visible_for_other_users###<!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->
 	</fieldset>
 	<!-- ###LIST_REGISTRATION_ENTER### end -->
 	</pre>
@@ -157,6 +221,7 @@
 	<fieldset><legend>###TITLE###</legend>
 	###MESSAGES###
 	<table width="100%">###FIELDS###</table>
+	<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->###LABEL_question_visible_for_other_users###: ###CHECKBOX_VISIBLE_FOR_OTHER_USERS###<br /><!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->
 	<!-- ###UNREGISTER_ENABLED### begin -->###EVENT_CHECKBOX### ###UNREGISTERME###<!-- ###UNREGISTER_ENABLED### end -->
 	</fieldset>
 	<!-- ###LIST_REGISTRATION_ALREADYDONE### end -->
@@ -169,6 +234,7 @@
 	<fieldset><legend>###TITLE###</legend>
         <p>###TEXTTOP###</p>
 	<table width="100%">###FIELDS###</table>
+	<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->###LABEL_question_visible_for_other_users###: ###CHECKBOX_VISIBLE_FOR_OTHER_USERS###<br /><!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->
 	</fieldset>
 	<!-- ###LIST_REGISTRATION_OVER_RUNNING_FINISHED### end -->
 	</pre>
@@ -313,11 +379,13 @@
 	<tr><td><b>###LABEL_user_address###</b></td><td>###USER_address###</td></tr>
 	<tr><td><b>###LABEL_user_zip###/###LABEL_user_city###</b></td><td>###USER_zip### ###USER_city###</td></tr>
 	<tr><td><b>###LABEL_user_email###</b></td><td>###USER_email###</td></tr>
+	<!-- ###OTHER_USERS_VISIBLE_QUESTION### begin -->
+	<tr><td><b>###LABEL_question_visible_for_other_users###</b></td><td>###CHECKBOX_VISIBLE_FOR_OTHER_USERS###</td></tr>
+	<!-- ###OTHER_USERS_VISIBLE_QUESTION### end -->
 	###FIELDS###
-	</table>
+	</table>	
 	<p>###TEXTBOTTOM###</p>
 	<!-- ###EMAIL_DEFAULT### end -->
 	</pre>
-
 </body>
 </html>

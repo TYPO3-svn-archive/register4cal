@@ -1,0 +1,406 @@
+#Setup
+plugin.tx_register4cal_pi1{
+	templateFile = EXT:register4cal/templates/register.tmpl
+	dateformat = %d.%m.%Y
+	timeformat = %H:%M
+	disableWaitlist = 0
+	disableUnregister = 0
+	useWaitlistIfNotEnoughPlaces = 1
+	eventFillMode = 1
+	keepUnregistered = 1
+	adminUsers =
+	singleEventPid =	
+
+	foreignUserRegistration {
+	    enable = 0
+	    allowOnlyGroups = 
+	    denyGroups = 
+	}
+
+	showOtherRegisteredUsersAtRegistration {
+		enable = 1
+		onlyAfterRegistration = 1
+	}
+
+	needLoginForm {
+		disable = 1
+		onetimepid = 0
+		onetimereturnparam = redirect_url
+		loginpid = 0
+		loginreturnparam = redirect_url
+	}
+
+	emails {
+		sendConfirmation = 0
+		sendNotification = 0
+		senderName = 
+		senderAddress = 
+		adminAddress =
+	}
+
+	forms {
+		# Registration in event single view ###################################################################################################################
+		single {
+			default {
+				userfield.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+				messagetype_i.dataWrap = <li>|</li>
+				messagetype_e.dataWrap = <li style="color:red";>|</li>
+				messages.dataWrap = <ul>|</ul>
+			}
+			noregister < plugin.tx_register4cal_pi1.forms.single.default
+			noregister {
+				subtemplate = SINGLE_NOREGISTER
+				heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_noregister_heading}
+				texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_noregister_texttop}
+				textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_noregister_textbottom}
+			}
+			outsidePeriod < plugin.tx_register4cal_pi1.forms.single.default
+			outsidePeriod {
+				subtemplate = SINGLE_NOREGISTER
+				heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_outsideperiod_heading}
+				texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_outsideperiod_texttop}
+				textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_outsideperiod_textbottom}
+			}
+			needLogin < plugin.tx_register4cal_pi1.forms.single.default
+			needLogin {
+				subtemplate = SINGLE_NEEDLOGIN
+				heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_needlogin_heading}
+				texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_needlogin_texttop}
+				textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single.needlogin_textbottom}
+				label_onetimeaccount.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_needlogin_onetimeaccountbutton}
+				label_login.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_needlogin_loginbutton}
+			}
+			registration {
+				enter < plugin.tx_register4cal_pi1.forms.single.default
+				enter {
+					subtemplate = SINGLE_REGISTRATION_ENTER
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_enter_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_enter_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_enter_textbottom}
+				}
+				alreadyDone < plugin.tx_register4cal_pi1.forms.single.default
+				alreadyDone {
+					subtemplate = SINGLE_REGISTRATION_ALREADYDONE
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_alreadydone_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_alreadydone_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_alreadydone_textbottom}
+				}
+                over < plugin.tx_register4cal_pi1.forms.single.default
+				over {
+					subtemplate = SINGLE_REGISTRATION_OVER_RUNNING_FINISHED
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_over_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_over_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_over_textbottom}
+				}
+                running < plugin.tx_register4cal_pi1.forms.single.default
+				running {
+					subtemplate = SINGLE_REGISTRATION_OVER_RUNNING_FINISHED
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_running_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_running_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_running_textbottom}
+				}
+                finished < plugin.tx_register4cal_pi1.forms.single.default
+				finished {
+					subtemplate = SINGLE_REGISTRATION_OVER_RUNNING_FINISHED
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_finished_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_finished_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_registration_finished_textbottom}
+				}
+
+			}
+			waitlist {
+				enter < plugin.tx_register4cal_pi1.forms.single.default
+				enter {
+					subtemplate = SINGLE_REGISTRATION_ENTER
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_enter_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_enter_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_enter_textbottom}
+				}
+				alreadyDone < plugin.tx_register4cal_pi1.forms.single.default
+				alreadyDone {
+					subtemplate = SINGLE_REGISTRATION_ALREADYDONE
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_alreadydone_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_alreadydone_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_alreadydone_textbottom}
+				}
+                over < plugin.tx_register4cal_pi1.forms.single.default
+				over {
+					subtemplate = SINGLE_REGISTRATION_OVER_RUNNING_FINISHED
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_over_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_over_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_over_textbottom}
+				}
+                running < plugin.tx_register4cal_pi1.forms.single.default
+				running {
+					subtemplate = SINGLE_REGISTRATION_OVER_RUNNING_FINISHED
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_running_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_running_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_running_textbottom}
+				}
+                finished < plugin.tx_register4cal_pi1.forms.single.default
+				finished {
+					subtemplate = SINGLE_REGISTRATION_OVER_RUNNING_FINISHED
+					heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_finished_heading}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_finished_texttop}
+					textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:single_waitlist_finished_textbottom}
+				}
+			}                        
+		}
+		list {
+			default {
+				userfield.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+				messagetype_i.dataWrap = <li>|</li>
+				messagetype_e.dataWrap = <li style="color:red";>|</li>
+				messages.dataWrap = <ul>|</ul>
+			}
+			noregister < plugin.tx_register4cal_pi1.forms.list.default
+			noregister {
+				subtemplate = LIST_NOREGISTER
+				title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_noregister_heading}
+				texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_noregister_texttop}
+				textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_noregister_textbottom}
+			}
+			outsidePeriod < plugin.tx_register4cal_pi1.forms.list.default
+			outsidePeriod {
+				subtemplate = LIST_NOREGISTER
+				title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_outsideperiod_heading}
+				texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_outsideperiod_texttop}
+				textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_outsideperiod_textbottom}				
+			}
+			submit {
+				subtemplate = LIST_SUBMIT
+			}
+			registration {
+				enter < plugin.tx_register4cal_pi1.forms.list.default
+				enter {
+					subtemplate = LIST_REGISTRATION_ENTER
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_enter_fieldset}
+				}
+				alreadyDone < plugin.tx_register4cal_pi1.forms.list.default
+				alreadyDone {
+					subtemplate = LIST_REGISTRATION_ALREADYDONE
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_alreadydone_fieldset}
+					unregisterme.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_alreadydone_unregister}
+				}
+                over < plugin.tx_register4cal_pi1.forms.list.default
+				over {
+					subtemplate = LIST_REGISTRATION_OVER_RUNNING_FINISHED
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_over_fieldset}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_over_texttop}
+				}
+                running < plugin.tx_register4cal_pi1.forms.list.default
+				running {
+					subtemplate = LIST_REGISTRATION_OVER_RUNNING_FINISHED
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_running_fieldset}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_running_texttop}
+				}
+                finished < plugin.tx_register4cal_pi1.forms.list.default
+				finished {
+					subtemplate = LIST_REGISTRATION_OVER_RUNNING_FINISHED
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_finished_fieldset}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_finished_texttop}
+				}
+			}
+			waitlist {
+				enter < plugin.tx_register4cal_pi1.forms.list.default
+				enter {
+					subtemplate = LIST_REGISTRATION_ENTER
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_enter_fieldset}
+				}
+				alreadyDone < plugin.tx_register4cal_pi1.forms.list.default
+				alreadyDone {
+					subtemplate = LIST_REGISTRATION_ALREADYDONE
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_waitlist_fieldset}
+					unregisterme.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_registration_waitlist_unregister}
+				}
+                over < plugin.tx_register4cal_pi1.forms.list.default
+				over {
+					subtemplate = LIST_REGISTRATION_OVER_RUNNING_FINISHED
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_over_fieldset}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_over_texttop}
+				}
+                running < plugin.tx_register4cal_pi1.forms.list.default
+				running {
+					subtemplate = LIST_REGISTRATION_OVER_RUNNING_FINISHED
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_running_fieldset}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_running_texttop}
+				}
+                finished < plugin.tx_register4cal_pi1.forms.list.default
+				finished {
+					subtemplate = LIST_REGISTRATION_OVER_RUNNING_FINISHED
+					title.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_finished_fieldset}
+					texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:list_waitlist_finished_texttop}
+				}
+			}
+		}
+		# Emails ##############################################################################################################################################
+		email {
+			default {
+				subtemplate = EMAIL_DEFAULT
+				userfield.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+				messagetype_i.dataWrap = <li>|</li>
+				messagetype_e.dataWrap = <li style="color:red";>|</li>
+				messages.dataWrap = <ul>|</ul>
+			}
+			registration {
+				enter{
+					confirmation < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_textbottom}
+					}
+					notification < plugin.tx_register4cal_pi1.forms.email.default
+					notification {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_notification_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_notification_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_notification_texttop}
+					}
+					confirmation_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_rfu_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_rfu_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_rfu_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_confirmation_rfu_textbottom}
+					}
+					notification_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					notification_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_notification_rfu_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_notification_rfu_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_enter_notification_rfu_texttop}
+					}
+				}
+				cancel {
+					confirmation < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_textbottom}
+					}
+					notification < plugin.tx_register4cal_pi1.forms.email.default
+					notification {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_textbottom}
+					}
+					confirmation_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_rfu_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmatio_rfun_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_rfu_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_confirmation_rfu_textbottom}
+					}
+					notification_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					notification_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_rfu_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_rfu_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_rfu_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_registration_cancel_notification_rfu_textbottom}
+					}
+				}
+			}
+
+			waitlist {
+				enter {
+					confirmation < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_textbottom}
+					}
+					notification < plugin.tx_register4cal_pi1.forms.email.default
+					notification {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_heading}
+						texttop.dataWrap ={LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_textbottom}
+					}
+					confirmation_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_rfu_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_rfu_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_rfu_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_confirmation_rfu_textbottom}
+					}
+					notification_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					notification_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_rfu_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_rfu_heading}
+						texttop.dataWrap ={LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_rfu_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_enter_notification_rfu_textbottom}
+					}
+				}
+				cancel {
+					confirmation < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_confirmation_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_confirmation_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_confirmation_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_confirmation_textbottom}
+					}
+
+					notification < plugin.tx_register4cal_pi1.forms.email.default
+					notification {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_subject}
+						heading.dataWrap = <h2>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_heading}</h2>
+						texttop.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_texttop}</p>
+						textbottom.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_textbottom}</p>
+					}
+					confirmation_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_rfu_confirmation_subject}
+						heading.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_rfu_confirmation_heading}
+						texttop.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_rfu_confirmation_texttop}
+						textbottom.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_rfu_confirmation_textbottom}
+					}
+
+					notification_rfu < plugin.tx_register4cal_pi1.forms.email.default
+					notification_rfu {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_rfu_subject}
+						heading.dataWrap = <h2>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_rfu_heading}</h2>
+						texttop.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_rfu_texttop}</p>
+						textbottom.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_cancel_notification_rfu_textbottom}</p>
+					}
+				}
+				upgrade {
+					confirmation < plugin.tx_register4cal_pi1.forms.email.default
+					confirmation {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_confirmation_subject}
+						heading.dataWrap = <h2>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_confirmation_heading}</h2>
+						texttop.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_confirmation_texttop}</p>
+						textbottom.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_confirmation_textbottom}</p>
+					}
+
+					notification < plugin.tx_register4cal_pi1.forms.email.default
+					notification {
+						subject.dataWrap = {LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_notification_subject}
+						heading.dataWrap = <h2>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_notification_heading}</h2>
+						texttop.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_notification_texttop}</p>
+						textbottom.dataWrap = <p>{LLL:EXT:register4cal/view/locallang.xml:email_waitlist_upgrade_notification_textbottom}</p>
+					}
+				}
+			}
+		}
+		listOutput {
+			events {
+				subtemplate = LIST_EVENTS
+			}
+			attendees {
+				subtemplate = LIST_ATTENDEES
+				userfield.dataWrap = <tr><td style="width:10px;vertical-align:top;"><b>###CAPTION###</b></td><td>|</td></tr>
+			}
+			registerForeignUser < plugin.tx_register4cal_pi1.forms.single.default
+			registerForeignUser {
+				subtemplate = LIST_REGISTERFOREIGNUSER
+				
+			}
+		}
+	}
+}
+
+
+

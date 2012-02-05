@@ -1,3 +1,6 @@
+2012-02-05 Thomas Ernst <typo3@thernst.de>
+		* [Feature #33646] Add marker to show list of registered users
+
 2012-01-26 Thomas Ernst <typo3@thernst.de>
 		* [Bug #33453] register4cal uses deprecated call-time pass-by-reference		
 

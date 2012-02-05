@@ -16,6 +16,7 @@
 			<label index="tx_register4cal_registrations.status.1">Attending</label>
 			<label index="tx_register4cal_registrations.status.2">Waitlist</label>
 			<label index="tx_register4cal_registrations.status.3">Registration canceled</label>
+			<label index="tx_register4cal_registrations.visible_for_other_users">Other users can see this registration</label>
 			<label index="tx_register4cal_fields">Fields</label>
 			<label index="tx_register4cal_fields.name">Name</label>
 			<label index="tx_register4cal_fields.caption">Caption</label>
@@ -60,6 +61,7 @@
 			<label index="tx_register4cal_registrations.status.1">Teilnehmend</label>
 			<label index="tx_register4cal_registrations.status.2">Warteliste</label>
 			<label index="tx_register4cal_registrations.status.3">Anmeldung zurückgezogen</label>
+			<label index="tx_register4cal_registrations.visible_for_other_users">Andere Benutzer können diese Anmeldung sehen</label>
 			<label index="tx_register4cal_fields">Felder</label>
 			<label index="tx_register4cal_fields.name">Name</label>
 			<label index="tx_register4cal_fields.caption">Bezeichnung</label>

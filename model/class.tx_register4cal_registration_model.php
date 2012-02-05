@@ -109,6 +109,12 @@ class tx_register4cal_registration_model {
 	private $numberOfAttendeesUserfield = '';
 
 	/**
+	 * Flag: Registration is visible for other users
+	 * @var type Boolean
+	 */
+	private $visibleForOtherUsers = 0;
+
+	/**
 	 * Instance of tx_register4cal_settings model, containing extension settings
 	 * @var tx_register4cal_settings
 	 */
@@ -234,6 +240,22 @@ class tx_register4cal_registration_model {
 		$this->userdefinedFields[$field]['value'] = $value;
 	}
 
+	/**
+	 * Returns if the registration should be visible for other users
+	 * @return integer 1: Should be visible, 0: Should not be visible
+	 */
+	public function getVisibleForOtherUsers() {
+		return ($this->visibleForOtherUsers) ? 1 : 0;
+	}
+
+	/**
+	 * Sets if the registration should be visible for other users
+	 * @param integer $value 1: Should be visible, 0: Should not be visible 
+	 */
+	public function setVisibleForOtherUsers($value) {
+		$this->visibleForOtherUsers = ($value) ? 1 : 0;
+	}
+
 	/* =========================================================================
 	 * Constructor and static getInstance method
 	 * ========================================================================= */
@@ -277,6 +299,8 @@ class tx_register4cal_registration_model {
 			$eventId = $this->registration['cal_event_uid'];
 			$eventDate = $this->registration['cal_event_getdate'];
 			$userId = $this->registration['feuser_uid'];
+
+			$this->visibleForOtherUsers = $this->registration['visible_for_other_users'];
 		}
 		if (intval($eventId) == 0)
 			throw new Exception('Missing EventId!');
@@ -304,6 +328,7 @@ class tx_register4cal_registration_model {
 		// set registration data (if not already read)
 		if (count($this->registration) == 0)
 			$this->registration = $this->readRegistrationRecord();
+		$this->visibleForOtherUsers = $this->registration['visible_for_other_users'];
 
 		// set userfield data
 		$this->userdefinedFields = $this->readUserfieldRecords();
@@ -474,7 +499,7 @@ class tx_register4cal_registration_model {
 		$TYPO3_DB->sql_free_result($result);
 		return $registrations;
 	}
-
+	
 	/* =========================================================================
 	 * Public methods
 	 * ========================================================================= */
@@ -556,6 +581,7 @@ class tx_register4cal_registration_model {
 			$this->registration['additional_data'] = serialize($this->userdefinedFields);
 			$this->registration['status'] = $registrationStatus;
 			$this->registration['numattendees'] = $numAttendees;
+			$this->registration['visible_for_other_users'] = $this->visibleForOtherUsers;
 
 			// write to db and refresh status
 			$this->writeNewRegistrationRecord();
@@ -583,9 +609,6 @@ class tx_register4cal_registration_model {
 		} else {
 			$this->deleteRegistrationRecord();
 		}
-
-
-
 		$this->registration = Array();
 		$this->refreshStatus();
 	}
@@ -647,8 +670,39 @@ class tx_register4cal_registration_model {
 		$this->writeUpdatedRegistrationRecord();
 		$this->refreshStatus();
 		return true;
-	}
+	}	
 
+	/**
+	 * Returns an array containing the registration objects for registrations,
+	 * other users did for a this event. If the current user is organizer of this
+	 * event (or global organizer) all registrations are provided. Otherwise only
+	 * such registrations are provided, where the user allowed other users to see
+	 * his registration.
+	 * @global t3lib_DB $TYPO3_DB Typo3-DB
+	 * @global tslib_fe $TSFE Typo3 TSFE
+	 * @return Array Array containing instances of tx_register4cal_registration_model
+	 */
+	public function getRegistrationsFromOtherUsers() {
+		global $TYPO3_DB, $TSFE;
+		
+		// If display of other registered users is disabled, we leave her immediately
+		if (!$this->settings->showOtherRegisteredUsers_Enable) return Array();
+		
+		$select = 'uid';
+		$table = 'tx_register4cal_registrations';
+		$where = 'feuser_uid<>' . $this->user['uid'] . ' AND cal_event_uid=' . $this->event['uid'] . ' AND cal_event_getdate=' . $this->event['get_date'];
+		if (!$this->userIsOrganizer())
+			$where .= ' AND visible_for_other_users = 1';
+		$where .= $TSFE->cObj->enableFields($table);
+		$result = $TYPO3_DB->exec_SELECTquery($select, $table, $where);
+		$otherUserRegistrations = Array();
+		while (($row = $TYPO3_DB->sql_fetch_assoc($result))) {			
+			$otherUserRegistrations[] = tx_register4cal_registration_model::getInstance(0, 0,0, $row['uid']);						
+		}
+		$TYPO3_DB->sql_free_result($result);
+		return $otherUserRegistrations;
+	}
+	
 	/* =========================================================================
 	 * Private methods
 	 * ========================================================================= */
@@ -1015,7 +1069,6 @@ class tx_register4cal_registration_model {
 			}
 			$TYPO3_DB->sql_free_result($result);
 		} else {
-			;
 			$registration = Array();
 		}
 		return $registration;

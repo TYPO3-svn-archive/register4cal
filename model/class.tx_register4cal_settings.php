@@ -169,6 +169,18 @@ class tx_register4cal_settings implements t3lib_Singleton {
 	 * @var string
 	 */
 	public $foreignUserRegistrationDenyGroups;
+	
+	/**
+	 * Flag: Enable the display of other registered users 
+	 * @var integer 
+	 */
+	public $showOtherRegisteredUsers_Enable;
+		
+	/**
+	 * Flag: Display other registered users only after an user has registered
+	 * @var integer 
+	 */
+	public $showOtherRegisteredUsers_onlyAfterRegistration;
 	/**
 	 * Configuration subset with all forms configuration
 	 * @var array
@@ -300,6 +312,12 @@ class tx_register4cal_settings implements t3lib_Singleton {
 
 		$this->mailSenderName = $tsconf['emails.']['senderName'];
 
+		$temp = $tsconf['showOtherRegisteredUsersAtRegistration.']['enable'];
+		$this->showOtherRegisteredUsers_Enable = $this->validateFlag($temp, 0);
+		
+		$temp = $tsconf['showOtherRegisteredUsersAtRegistration.']['onlyAfterRegistration'];
+		$this->showOtherRegisteredUsers_onlyAfterRegistration = $this->validateFlag($temp, 0);
+		
 		$this->forms = $tsconf['forms.'];
 	}
 

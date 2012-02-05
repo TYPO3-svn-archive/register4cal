@@ -48,11 +48,13 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 	 * ========================================================================= */
 
 	protected $messages = Array();
+
 	/**
 	 * Flag: Render in display mode only (no Input mode)
 	 * @var boolean 
 	 */
 	protected $renderDisplayOnly = FALSE;
+
 	/**
 	 * List of users for user selection field
 	 * @var Array Array(uid=>name) 
@@ -62,6 +64,7 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 	/* =========================================================================
 	 * Constructor and static getInstance() methid
 	 * ========================================================================= */
+
 	/**
 	 * Create an instance of the class while taking care of the different ways
 	 * to instanciace classes having constructors with parameters in different
@@ -93,6 +96,7 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 	/* =========================================================================
 	 * Properties (get and set)
 	 * ========================================================================= */
+
 	/**
 	 * Set array of messages to use
 	 * @param array $messages Messages to use (Array(Array('label'=>llKey,'type'=>type))
@@ -112,6 +116,7 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 	/* =========================================================================
 	 * Private methods
 	 * ========================================================================= */
+
 	/**
 	 * Render a single marker
 	 * @param	string		$singleMarker: marker string, without ###
@@ -161,10 +166,21 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 				if ($this->registration->getStatus() == 3 || $this->registration->getStatus() == 4) {
 					$cmd = 'register';
 				} else {
-                                        $cmd = 'unregister';
+					$cmd = 'unregister';
 				}
 				$value = '<input type="checkbox" name="' . $this->prefixId . '[' . $this->registration->getEventField('uid') . '][' . $this->registration->getEventDate() . '][' . $cmd . ']" value="1" />';
 				$marker = $this->applyWrap('eventcheckbox', $value);
+				break;
+			case 'CHECKBOX_VISIBLE_FOR_OTHER_USERS':
+				if ($this->registration->getStatus() == 3 || $this->registration->getStatus() == 4) {
+					$checked = $this->registration->getVisibleForOtherUsers() ? ' CHECKED' : '';
+					$value = '<input type="checkbox" name="' . $this->prefixId . '[' . $this->registration->getEventField('uid') . '][' . $this->registration->getEventDate() . '][visible_for_other_users]" value="1" ' . $checked . '/>';
+				} else {
+					$value = $this->registration->getVisibleForOtherUsers() ? 'yes' : 'no';
+					$value = $this->pi_getLL($value);
+				}
+				$marker = $this->applyWrap('checkbox_visible_for_other_users', $value);
+
 				break;
 			case 'ONETIMEACCOUNTLINK' :
 				// Link to the onetime account display
@@ -297,7 +313,8 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 							$value = $subView->render();
 							break;
 					}
-				} else $value = '';
+				} else
+					$value = '';
 				$marker = $this->applyWrap('foreignuserregistration', $value);
 				break;
 			default :
@@ -306,19 +323,20 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 		}
 		return $marker;
 	}
-        
-       /**
-	* Render subpart of template and return result
-	* @param String $subpartName Name of subpart
-	* @return <type> Subpart content
-	*/
-        public function renderSubpart($subpartName) {
-            // Don't show UNREGISTER_ENABLED if unregistering is disabled
-            if ($subpartName=='UNREGISTER_ENABLED' && $this->settings->disableUnregister) 
-                return '';
-            
-            return parent::renderSubpart($subpartName);
-        }
+
+	/**
+	 * Render subpart of template and return result
+	 * @param String $subpartName Name of subpart
+	 * @return <type> Subpart content
+	 */
+	public function renderSubpart($subpartName) {
+		// Don't show UNREGISTER_ENABLED if unregistering is disabled
+		if ($subpartName == 'UNREGISTER_ENABLED' && $this->settings->disableUnregister)
+			return '';
+
+		return parent::renderSubpart($subpartName);
+	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/view/class.tx_register4cal_register_view.php']) {

@@ -86,9 +86,18 @@ $TCA['tx_register4cal_registrations'] = array(
 				'readOnly' => 1,
 			)
 		),
+		'visible_for_other_users' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:register4cal/locallang_db.xml:tx_register4cal_registrations.visible_for_other_users',
+			'l10n_mode' => 'exclude',
+			'config' => array(
+				'type' => 'check',
+				'readOnly' => 1,
+			)
+		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'cal_event_uid;;;;1-1-1, feuser_uid, status, numattendees, additional_data')
+		'0' => array('showitem' => 'cal_event_uid;;;;1-1-1, feuser_uid, status, numattendees, additional_data,visible_for_other_users')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => '')

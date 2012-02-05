@@ -240,7 +240,9 @@
 			<label index="label_numwaitlist">Waitlist entries</label>
 			<label index="label_numfree">Remaining free places</label>
 			<label index="label_unlimited">Unlimited</label>
-
+			<label index="label_question_visible_for_other_users">Other users may see that I have registered for this event</label>
+			<label index="label_other_users_list">Other users which have registered for this event</label>
+			
 			<label index="label_submit_register_normal">Register for this event</label>
 			<label index="label_submit_register_waitlist">Enlist to waitlist for this event</label>
 			<label index="label_submit_unregister_normal">Unregister from this event</label>
@@ -268,7 +270,8 @@
 			<label index="error_waitlist">The waitlist must not be deactivated if it already contains entries.</label>
 			<label index="error_notenoughplaces">There are not enough free places for the number of attendees you want to register!</label>
 			<label index="error_notenoughplaces_waitlist">There are not enough free places for the number of attendees you want to register. Your registration has been recorded to the waitlist.</label>
-		
+			<label index="yes">Yes</label>
+			<label index="no">No</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="default_submitbutton">Für diesen Termin anmelden</label>
@@ -500,7 +503,9 @@
 			<label index="label_numwaitlist">Einträge auf Warteliste</label>
 			<label index="label_numfree">Verbleibende freie Plätze</label>
 			<label index="label_unlimited">Unbegrenzt</label>
-
+			<label index="label_question_visible_for_other_users">Andere Benutzer dürfen sehen, dass ich mich für diese Veranstaltung angemeldet habe</label>
+			<label index="label_other_users_list">Andere Benutzer, die sich für diesen Termin angemeldet haben</label>
+			
 			<label index="label_submit_register_normal">Für diese Veranstaltung anmelden</label>
 			<label index="label_submit_register_waitlist">Für diese Veranstaltung in die Warteliste eintragen</label>
 			<label index="label_submit_unregister_normal">Von dieser Veranstaltung wieder abmelden</label>
@@ -524,7 +529,8 @@
 			<label index="error_waitlist">Die Warteliste darf nicht deaktiviert werden, wenn sie bereits Einträge enthält.</label>
 			<label index="error_notenoughplaces">Es gibt nicht genügend Plätze für die Anzahl der Teilnehmer, die Sie anmelden wollen.</label>
 			<label index="error_notenoughplaces_waitlist">Es gibt nicht genügend Plätze für die Anzahl der Teilnehmer, die Sie anmelden wollen. Ihre Anmeldung wurde auf die Warteliste aufgenommen.</label>
-
+			<label index="yes">Ja</label>
+			<label index="no">Nein</label>
 		</languageKey>
 		
 		<languageKey index="dk" type="array">
