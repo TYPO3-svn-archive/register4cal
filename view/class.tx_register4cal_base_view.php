@@ -138,6 +138,7 @@ class tx_register4cal_base_view extends tslib_pibase {
 		global $TSFE;
 
 		parent::tslib_pibase();
+		$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.'];						
 		$this->pi_loadLL();
 		$this->cObj = $TSFE->cObj;
 
