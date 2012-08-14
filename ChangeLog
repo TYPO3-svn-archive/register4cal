@@ -1,3 +1,6 @@
+2012-08-14 Thomas Ernst <typo3@thernst.de>
+		* [Bug #39776] Activating waiting list throws error
+		
 2012-04-19 Thomas Ernst <typo3@thernst.de>
 		* [Bug #36312] During Upload, verison 0.17.0 was recorded in TER as 0.15.1. Now trying to get it to 0.18.0
 		* Published version 0.18.0

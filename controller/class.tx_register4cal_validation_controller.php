@@ -58,9 +58,9 @@ class tx_register4cal_validation_controller {
 	 */
 	public static function onBackendEventUpdate($eventId, $newEvent, &$error) {
 		$error = '';
+
 		// get old event
 		if (!self::getEvent($eventId, $oldEvent, $error)) return false;
-
 		// check if registration has been deactivated
 		if (!self::checkActivate($oldEvent, $newEvent, $error)) return false;
 
@@ -68,7 +68,7 @@ class tx_register4cal_validation_controller {
 		if (!self::checkMaxattendees($oldEvent, $newEvent, $error)) return false;
 
 		// check if waitlist has been deactivated
-		if (!self::checkWaitlist($olfEvent, $newEvent, $error)) return false;
+		if (!self::checkWaitlist($oldEvent, $newEvent, $error)) return false;
 
 		// All checks performed, no errors found
 		return true;
@@ -122,6 +122,7 @@ class tx_register4cal_validation_controller {
 	 */
 	public static function checkWaitlist($oldEvent, $newEvent, &$error) {
 		if (isset($newEvent['tx_register4cal_waitlist'])) {
+			error_log('Oldevent' . $oldEvent);
 			if (!is_array($oldEvent)) self::getEvent ($oldEvent, $oldEvent, $error);
 			if ($newEvent['tx_register4cal_waitlist'] == 0 && $oldEvent['tx_register4cal_waitlist'] != 0) {
 				$numberOfWaitlistEntries = self::countRegistratons($oldEvent, 2);
