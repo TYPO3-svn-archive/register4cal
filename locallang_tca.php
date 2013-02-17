@@ -8,7 +8,7 @@
 			'register4cal.pi1_flexform.label_displayMode.I.3' => 'Registrations for events of the frontend user',
 		),
 		'de' => Array (
-			'register4cal.pi1_flexform.label_pages' => 'Ablageordner für Anmeldungen',
+			'register4cal.pi1_flexform.label_pages' => 'Ablageordner fÃ¼r Anmeldungen',
 			'register4cal.pi1_flexform.label_recursive' => 'Rekursiv',
 			'register4cal.pi1_flexform.label_displayMode' => 'Was soll angezeigt werden',
 			'register4cal.pi1_flexform.label_displayMode.I.2' => 'Anmeldungen des Frontend-Benutzers',

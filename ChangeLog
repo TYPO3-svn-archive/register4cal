@@ -1,6 +1,7 @@
 2013-02-17 Thomas Ernst <typo3@thernst.de>
                 * Compatiblilty to Typo3 4.7 and cal 1.5.2
                 * [Bug #45354] htmlmail deprecated in Typo3 4.7
+                * Published version 0.18.2
                  
 2012-08-14 Thomas Ernst <typo3@thernst.de>
 		* [Bug #39776] Activating waiting list throws error
