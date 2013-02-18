@@ -33,7 +33,7 @@
  *
  * Hint: use extdeveval to insert/update function index above.
  */
-require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_base_controller.php');
+require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_register_controller.php');
 
 /**
  * Class implementing a register controller for registering from event single view
@@ -42,7 +42,7 @@ require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_regist
  * @package	TYPO3
  * @subpackage	tx_register4cal
  */
-class tx_register4cal_singleregister_controller extends tx_register4cal_base_controller {
+class tx_register4cal_singleregister_controller extends tx_register4cal_register_controller {
 	/* =========================================================================
 	 * Constructor and static getInstance method
 	 * ========================================================================= */
@@ -55,7 +55,7 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_base_con
 	 */
 	public static function getInstance() {
 		$className = 'tx_register4cal_singleregister_controller';
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4003000) {
+		if (tx_register4cal_static::getTypo3IntVersion() <= 4003000) {
 			$className = &t3lib_div::makeInstanceClassName($className);
 			$class = new $className();
 		} else {

@@ -94,7 +94,7 @@ class tx_register4cal_userdefinedfield_view {
 	 */
 	public static function getInstance($name, $registration, $renderDisplayOnly) {
 		$className = 'tx_register4cal_userdefinedfield_view';
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4003000) {
+		if (tx_register4cal_static::getTypo3IntVersion() <= 4003000) {
 			$className = &t3lib_div::makeInstanceClassName($className);
 			$class = new $className($name, $registration, $renderDisplayOnly);
 		} else {

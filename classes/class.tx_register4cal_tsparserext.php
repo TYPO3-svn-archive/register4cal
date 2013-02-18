@@ -40,7 +40,7 @@ class tx_register4cal_tsparserext {
 	function displayMessage(&$params, &$tsObj) {
 		$out = '';
 
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
+		if (tx_register4cal_static::getTypo3IntVersion() < 4003000) {
 			// 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
 			$cssPath = $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('register4cal');
 			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'templates/flashmessages.css" media="screen" />';

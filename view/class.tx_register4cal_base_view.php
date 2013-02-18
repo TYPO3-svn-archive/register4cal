@@ -120,7 +120,7 @@ class tx_register4cal_base_view extends tslib_pibase {
      * @return tx_register4cal_base_view
      */
     public static function getInstance() {
-        if (t3lib_div::int_from_ver(TYPO3_version) <= 4003000) {
+        if (tx_register4cal_static::getTypo3IntVersion() <= 4003000) {
             $className = &t3lib_div::makeInstanceClassName('tx_register4cal_base_view');
             $class = new $className($renderDisplayOnly);
         } else {
@@ -292,34 +292,48 @@ class tx_register4cal_base_view extends tslib_pibase {
      * @param string/array email address(es) of recipient(s)
      * @param Array $presetSubpartMarker Array containing predefined subpart content
      * @param Array $predefinedMarkers  Array containing predefined markers
+     * @param Array $attachments Array containing attachments for Email
      */
-    public function sendMail($recipientAddresses, $presetSubpartMarker = Array(), $predefinedMarkers = Array()) {
+    public function sendMail($recipientAddresses, $presetSubpartMarker = Array(), $predefinedMarkers = Array(), $attachments = Array()) {
         $subject = $this->applyWrap('subject');
         $content = $this->render($presetSubpartMarker, $predefinedMarkers);
-
+      
         //send email
-        //ThEr170213: Start of changes -----------------------------------------
-        //$htmlmail = t3lib_div::makeInstance('t3lib_htmlmail');
-        //$htmlmail->start();
-        //$htmlmail->subject = $subject;
-        //$htmlmail->from_email = $this->settings->mailSenderAddress;
-        //$htmlmail->CharSet = 'UTF-8';
-        //$htmlmail->from_name = $this->settings->mailSenderName;
-        //$htmlmail->replyto_email = $htmlmail->from_email;
-        //$htmlmail->replyto_name = $htmlmail->from_name;
-        //$htmlmail->setHtml($content);
-        //$htmlmail->setHeaders();
-        //$htmlmail->setContent();
-        //$htmlmail->setRecipient($recipientAddresses);
-        //$htmlmail->sendTheMail();        
-        $mail = t3lib_div::makeInstance('t3lib_mail_Message');
-        $mail->setFrom(array($this->settings->mailSenderAddress => $this->settings->mailSenderName));
-        $mail->setTo($recipientAddresses);
-        $mail->setSubject($subject);
-        $mail->setBody($content, 'text/html');
-        $mail->addPart($this->html2text($content),'text/plain');
-        $mail->send();
-        //ThEr170213: End of changes -------------------------------------------
+        if (tx_register4cal_static::getTypo3IntVersion() < 4005000) {
+            // Before Typo3 4.5: Use htmlmail
+            $htmlmail = t3lib_div::makeInstance('t3lib_htmlmail');
+            $htmlmail->start();
+            $htmlmail->subject = $subject;
+            $htmlmail->from_email = $this->settings->mailSenderAddress;
+            $htmlmail->CharSet = 'UTF-8';
+            $htmlmail->from_name = $this->settings->mailSenderName;
+            $htmlmail->replyto_email = $htmlmail->from_email;
+            $htmlmail->replyto_name = $htmlmail->from_name;
+            $htmlmail->setHtml($content);
+            $htmlmail->setHeaders();
+            $htmlmail->setContent();
+            $htmlmail->setRecipient($recipientAddresses);
+            $htmlmail->sendTheMail();
+        } else {
+            // From Typo3 4.5 on: Use swiftmailer
+            $mail = t3lib_div::makeInstance('t3lib_mail_Message');
+            $mail->setFrom(array($this->settings->mailSenderAddress => $this->settings->mailSenderName));
+            $mail->setTo($recipientAddresses);
+            $mail->setSubject($subject);
+            $mail->setBody($content, 'text/html');
+            $mail->addPart($this->html2text($content), 'text/plain');
+            
+            foreach ($attachments as $attachment) {
+                if (is_array($attachment)) {
+                    $obj = Swift_Attachment::newInstance($attachment['content'], $attachment['filename'], $attachment['mimetype']); 
+                } else {
+                    $obj = Swift_Attachment::newInstance($attachment);                     
+                }
+                $mail->attach($obj);
+            }            
+            
+            $mail->send();
+        }
     }
 
     /* =========================================================================
@@ -451,10 +465,10 @@ class tx_register4cal_base_view extends tslib_pibase {
     private function html2text($html) {
         $text = $html;
         static $search = array(
-            '@<script.+?</script>@usi', // Strip out javascript content
-            '@<style.+?</style>@usi', // Strip style content
-            '@<!--.+?-->@us', // Strip multi-line comments including CDATA
-            '@</?[a-z].*?\>@usi', // Strip out HTML tags
+    '@<script.+?</script>@usi', // Strip out javascript content
+    '@<style.+?</style>@usi', // Strip style content
+    '@<!--.+?-->@us', // Strip multi-line comments including CDATA
+    '@</?[a-z].*?\>@usi', // Strip out HTML tags
         );
         $text = preg_replace($search, ' ', $text);
         // normalize common entities
@@ -529,6 +543,7 @@ class tx_register4cal_base_view extends tslib_pibase {
         } // end first time build
         return preg_replace($find, $repl, $text);
     }
+
     //ThEr170213: End of changes -----------------------------------------------
 }
 

@@ -137,7 +137,7 @@ class tx_register4cal_registration_model {
 	 * @var string $field Name of field to retrieve.
 	 * @return mixed Empty string if field does not exist, otherwise value
 	 */
-	public function getUserField($field) {
+	public function getUserField($field) {            
 		if (isset($this->user[$field]))
 			return $this->user[$field];
 		else
@@ -273,7 +273,7 @@ class tx_register4cal_registration_model {
 	 */
 	public static function getInstance($eventId=0, $eventDate=0, $userId=0, $registrationId=0) {
 		$className = 'tx_register4cal_registration_model';
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4003000) {
+		if (tx_register4cal_static::getTypo3IntVersion() <= 4003000) {
 			$className = &t3lib_div::makeInstanceClassName($className);
 			$class = new $className($eventId, $eventDate, $userId, $registrationID);
 		} else {

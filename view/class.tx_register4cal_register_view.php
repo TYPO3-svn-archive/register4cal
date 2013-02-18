@@ -74,7 +74,7 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 	 */
 	public static function getInstance($renderDisplayOnly = FALSE) {
 		$className = 'tx_register4cal_register_view';
-		if (t3lib_div::int_from_ver(TYPO3_version) <= 4003000) {
+		if (tx_register4cal_static::getTypo3IntVersion() <= 4003000) {
 			$className = &t3lib_div::makeInstanceClassName($className);
 			$class = new $className($renderDisplayOnly);
 		} else {

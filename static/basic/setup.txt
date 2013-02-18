@@ -40,7 +40,94 @@ plugin.tx_register4cal_pi1{
 		senderAddress = 
 		adminAddress =
 	}
-
+        vcard {
+            attachToNotification = 1
+            filename = attendee.vcf            
+            fieldmapping {
+                # Simple fields
+                uid = USER_uid
+                fullname = USER_name
+                title = USER_title
+                firstname = USER_first_name
+                lastname = USER_last_name
+                additionalnames = USER_middle_name
+                nameprefix =
+                namesuffix =
+                nickname = USER_username
+                birthday =
+                organization = USER_company
+                department =
+                subdepartment =
+                role =
+                revision =
+                geolocation =
+                mailer =
+                timezone =
+                phonenumbers {
+                    0 = USER_telephone
+                    0 {
+                        PREF = 0
+                        WORK = 0
+                        HOME = 1
+                        OTHER = 0
+                        VOICE = 1
+                        FAX = 0
+                        MSG = 0
+                        CELL = 0
+                        CAR = 0
+                    }
+                    1 = USER_fax
+                    1 {
+                        PREF = 0
+                        WORK = 0
+                        HOME = 1
+                        OTHER = 0
+                        VOICE = 0
+                        FAX = 1
+                        MSG = 0
+                        CELL = 0
+                        CAR = 0                       
+                    }
+                }
+                emails {
+                    0 = USER_email
+                    0 {
+                        INTERNET = 0
+                        HOME = 1
+                        WORK = 0
+                        OTHER = 0
+                        PREF = 0
+                    }                    
+                }
+                urls {
+                    0 = USER_www
+                    0 {
+                        WORK = 0
+                        HOME = 1
+                        OTHER = 0
+                        PREF = 0
+                    }
+                }
+                addresses {
+                    0 {
+                        postofficeaddress =
+                        extendedaddress =
+                        street = USER_address
+                        city = USER_city
+                        zip = USER_zip
+                        country = USER_country
+                        type {
+                            DOM = 0
+                            INTL = 0
+                            POSTAL = 0
+                            PARCEL = 0
+                            HOME = 1
+                            WORK = 0
+                        }
+                    }
+                }
+            }
+        }
 	forms {
 		# Registration in event single view ###################################################################################################################
 		single {

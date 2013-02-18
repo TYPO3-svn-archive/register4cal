@@ -7,6 +7,7 @@ if (!defined ('TYPO3_MODE')) {
 
 t3lib_extMgm::addPItoST43($_EXTKEY, 'pi1/class.tx_register4cal_pi1.php', '_pi1', 'list_type', 0);
 require_once(t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_datetime.php');
+require_once(t3lib_extMgm::extPath($_EXTKEY).'classes/class.tx_register4cal_static.php');
 
 if (TYPO3_MODE == 'FE') {
 	//require rlmp_dateselectlib-class if this extension is installed

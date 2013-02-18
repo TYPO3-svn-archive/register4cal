@@ -124,7 +124,8 @@ class tx_register4cal_settings implements t3lib_Singleton {
 	 * Email-Settings: Flag: Send notification emails (to organizer)
 	 * @var integer [0|1]
 	 */
-	public $mailSendNotification;
+	public $mailSendNotification;        
+        
 	/**
 	 * NeedLoginForm: Flag: Form disabled?
 	 * @var integer [0|1]
@@ -203,9 +204,26 @@ class tx_register4cal_settings implements t3lib_Singleton {
 	 * Configuration subset with all forms configuration
 	 * @var array
 	 */
-	private $forms = Array();
+	private $forms = array();
 
-
+        /**
+         * VCard: Attach vcard to notification email
+         * @var integer [0|1]
+         */
+        public $vcardAttachToNotification;
+        
+        /**
+         * VCard: Filename for attached vcard-file
+         * @var string 
+         */
+        public $vcardFilename;
+        
+        /**
+         * VCard: Configuration subset with vcard fieldmapping
+         * @var array
+         */
+        public $vcardFieldmapping = array();
+        
 	/* =========================================================================
 	 * Constructor and static getInstance method
 	 * ========================================================================= */
@@ -346,6 +364,14 @@ class tx_register4cal_settings implements t3lib_Singleton {
 		$this->showOtherRegisteredUsers_includeCancelled = $this->validateFlag($temp, 0);
 		
 		$this->forms = $tsconf['forms.'];
+                
+                $temp = $tsconf['vcard.']['attachToNotification'];                
+                $this->vcardAttachToNotification = $this->validateFlag($temp, 0);
+                
+                $temp = $tsconf['vcard.']['filename'];
+                $this->vcardFilename = $temp ? $temp : 'vcard.vcf';
+                
+                $this->vcardFieldmapping = $tsconf['vcard.']['fieldmapping.'];
 	}
 
 	/**
