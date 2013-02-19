@@ -210,19 +210,19 @@ class tx_register4cal_settings implements t3lib_Singleton {
          * VCard: Attach vcard to notification email
          * @var integer [0|1]
          */
-        public $vcardAttachToNotification;
+        public $notificationVcardEnabled;
         
         /**
          * VCard: Filename for attached vcard-file
          * @var string 
          */
-        public $vcardFilename;
+        public $notificationVcardFilename;
         
         /**
          * VCard: Configuration subset with vcard fieldmapping
          * @var array
          */
-        public $vcardFieldmapping = array();
+        public $notificationVcardFieldmapping = array();
         
 	/* =========================================================================
 	 * Constructor and static getInstance method
@@ -365,13 +365,13 @@ class tx_register4cal_settings implements t3lib_Singleton {
 		
 		$this->forms = $tsconf['forms.'];
                 
-                $temp = $tsconf['vcard.']['attachToNotification'];                
-                $this->vcardAttachToNotification = $this->validateFlag($temp, 0);
+                $temp = $tsconf['notificationVcard.']['enable'];                
+                $this->notificationVcardEnabled = $this->validateFlag($temp, 0);
                 
-                $temp = $tsconf['vcard.']['filename'];
-                $this->vcardFilename = $temp ? $temp : 'vcard.vcf';
+                $temp = $tsconf['notificationVcard.']['filename'];
+                $this->notificationVcardFilename = $temp ? $temp : 'vcard.vcf';
                 
-                $this->vcardFieldmapping = $tsconf['vcard.']['fieldmapping.'];
+                $this->notificationVcardFieldmapping = $tsconf['notificationVcard.']['fieldmapping.'];
 	}
 
 	/**

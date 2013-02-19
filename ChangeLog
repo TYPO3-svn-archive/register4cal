@@ -1,3 +1,11 @@
+2013-02-19 Thomas Ernst <typo3@thernst.de>
+                * [Feature #45412] Usage of userdefined fields in vcard is possible
+                * vcard settings renamed
+                * Updated documentation
+                
+2013-02-18 Thomas Ernst <typo3@thernst.de>
+                * [Feature #45412] Attach vcard containing details of participant to notification email
+
 2013-02-17 Thomas Ernst <typo3@thernst.de>
                 * Compatiblilty to Typo3 4.7 and cal 1.5.2
                 * [Bug #45354] htmlmail deprecated in Typo3 4.7

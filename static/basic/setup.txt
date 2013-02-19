@@ -40,8 +40,8 @@ plugin.tx_register4cal_pi1{
 		senderAddress = 
 		adminAddress =
 	}
-        vcard {
-            attachToNotification = 1
+        vcardToNotification {
+            enable = 1
             filename = attendee.vcf            
             fieldmapping {
                 # Simple fields
