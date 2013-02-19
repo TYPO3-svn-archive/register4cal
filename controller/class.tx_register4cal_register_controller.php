@@ -89,7 +89,7 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
             return;
         if (!$registration->getUserField('email'))
             return;
-        
+
         require_once(t3lib_extMgm::extPath('register4cal') . 'view/class.tx_register4cal_register_view.php');
         $view = tx_register4cal_register_view::getInstance(TRUE);
         $view->setRegistration($registration);
@@ -125,7 +125,9 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
         }
 
         $view->load($confName);
-        $view->sendMail($registration->getUserField('email'));
+        $subparts = Array();
+        $this->prepareSubparts_OtherUsers($view, $registration, $subparts);        
+        $view->sendMail($registration->getUserField('email'),$subparts);
         $view = null;
     }
 
@@ -146,7 +148,7 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
 
         if (count($recipients) == 0)
             return;
-        
+
         require_once(t3lib_extMgm::extPath('register4cal') . 'view/class.tx_register4cal_register_view.php');
         $view = tx_register4cal_register_view::getInstance(TRUE);
         $view->setRegistration($registration);
@@ -180,21 +182,61 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
             if (isset($rfuConf))
                 $confName .= '_rfu';
         }
-        
+
         $attachments = array();
         if ($this->settings->notificationVcardEnabled) {
-            $vcardController = tx_register4cal_vcard_controller::getInstance();            
+            $vcardController = tx_register4cal_vcard_controller::getInstance();
             $attachments[] = array(
                 'content' => $vcardController->createVcard($registration),
                 'filename' => $this->settings->NotificationVcardFilename,
                 'content_type' => 'text/vcard'
             );
         }
-        
+
         $view->load($confName);
-        $view->sendMail($recipients, array(), array(), $attachments);
+        $subparts = Array();
+        $this->prepareSubparts_OtherUsers($view, $registration, $subparts);               
+        $view->sendMail($recipients, $subparts, array(), $attachments);
         $view = null;
     }
+
+    /**
+     * Bereitet die Subparts zur Anzeige anderer Benutzer vor
+     * @param tx_register4cal_register_view $view Instanz der View-Klasse zum Rendering
+     * @param tx_register4cal_registration_model $registration Instanz der Regstration-Klasse
+     * @param Array $subparts Array mit allen vorbereiteten Subparts
+     */
+    protected function prepareSubparts_OtherUsers($view, $registration, &$subparts) {
+        // Clear subparts
+        $subparts['OTHER_USERS_VISIBLE_QUESTION'] = '';
+        $subparts['OTHER_USERS_LIST'] = '';
+
+        // Leave if display of other registered users is disabled
+        if (!$this->settings->showOtherRegisteredUsers_Enable)
+            return;
+
+        // Render checkbox for registration forms
+        $subparts['OTHER_USERS_VISIBLE_QUESTION'] = $view->renderSubpart('OTHER_USERS_VISIBLE_QUESTION');
+
+        if ($this->settings->showOtherRegisteredUsers_onlyAfterRegistration && $registration->getStatus() <= 4 && !$registration->userIsOrganizer())
+            return;
+
+        // Render list of other users
+        $otherUsers = '';
+        $otherUserRegistrations = $registration->getRegistrationsFromOtherUsers();
+        if (count($otherUserRegistrations) != 0) {
+            $view->setRenderDisplayOnly(TRUE);
+            foreach ($otherUserRegistrations as $otherUserRegistration) {
+                $view->setRegistration($otherUserRegistration);
+                $otherUsers .= $view->renderSubpart('OTHER_USER');
+            }
+            $view->setRegistration($registration);
+            $view->setRenderDisplayOnly();
+            $view->replaceSubpart('OTHER_USER', $otherUsers);
+            unset($subparts['OTHER_USERS_LIST']);
+        }
+    }
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/controller/class.tx_register4cal_register_controller.php']) {

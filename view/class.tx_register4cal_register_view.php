@@ -179,8 +179,8 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 				$value = '<input type="checkbox" name="' . $this->prefixId . '[' . $this->registration->getEventField('uid') . '][' . $this->registration->getEventDate() . '][' . $cmd . ']" value="1" />';
 				$marker = $this->applyWrap('eventcheckbox', $value);
 				break;
-			case 'CHECKBOX_VISIBLE_FOR_OTHER_USERS':
-				if ($this->registration->getStatus() == 3 || $this->registration->getStatus() == 4) {
+			case 'CHECKBOX_VISIBLE_FOR_OTHER_USERS':                                
+				if (!$this->renderDisplayOnly && ($this->registration->getStatus() == 3 || $this->registration->getStatus() == 4)) {
 					$checked = $this->registration->getVisibleForOtherUsers() ? ' CHECKED' : '';
 					$value = '<input type="checkbox" name="' . $this->prefixId . '[' . $this->registration->getEventField('uid') . '][' . $this->registration->getEventDate() . '][visible_for_other_users]" value="1" ' . $checked . '/>';
 				} else {
@@ -188,7 +188,6 @@ class tx_register4cal_register_view extends tx_register4cal_base_view {
 					$value = $this->pi_getLL($value);
 				}
 				$marker = $this->applyWrap('checkbox_visible_for_other_users', $value);
-
 				break;
 			case 'ONETIMEACCOUNTLINK' :
 				// Link to the onetime account display

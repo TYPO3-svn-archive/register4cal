@@ -222,7 +222,7 @@ class tx_register4cal_base_view extends tslib_pibase {
             foreach ($allSubparts as $singleSubpart) {
                 $subpartContent = $this->cObj->getSubpart($content, '###' . $singleSubpart . '###');
                 $subpartContent = $this->applyWrap(strtolower($singleSubpart), $subpartContent);
-                $content = $this->cObj->substituteSubpart($content, '###' . $singleSubpart . '###', $subpartContent, 0);                
+                $content = $this->cObj->substituteSubpart($content, '###' . $singleSubpart . '###', $subpartContent, 0);
             }
             $count = preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $content, $match);
         }
@@ -292,7 +292,7 @@ class tx_register4cal_base_view extends tslib_pibase {
     public function sendMail($recipientAddresses, $presetSubpartMarker = Array(), $predefinedMarkers = Array(), $attachments = Array()) {
         $subject = $this->applyWrap('subject');
         $content = $this->render($presetSubpartMarker, $predefinedMarkers);
-      
+
         //send email
         if (tx_register4cal_static::getTypo3IntVersion() < 4005000) {
             // Before Typo3 4.5: Use htmlmail
@@ -304,26 +304,26 @@ class tx_register4cal_base_view extends tslib_pibase {
             $htmlmail->from_name = $this->settings->mailSenderName;
             $htmlmail->replyto_email = $htmlmail->from_email;
             $htmlmail->replyto_name = $htmlmail->from_name;
-                        
+
             /* For unknown reasons, attaching files is not working in t3lib_htmlmail
              * The following coding has been commented out therefore. 
              * Attaching files is not working below Typo3 4.5.
-             
-            foreach ($attachments as $attachment) {
-                if (is_array($attachment)) {
-                    $htmlmail->theParts['attach'][] = $attachment;
-                } else {                                        
-                    $htmlmail->addAttachment($attachment);
-                }                                                   
-                t3lib_div::debug($htmlmail->theParts['attach']);
-            }       
-            */
-            
+
+              foreach ($attachments as $attachment) {
+              if (is_array($attachment)) {
+              $htmlmail->theParts['attach'][] = $attachment;
+              } else {
+              $htmlmail->addAttachment($attachment);
+              }
+              t3lib_div::debug($htmlmail->theParts['attach']);
+              }
+             */
+
             $htmlmail->setPlain($this->html2text($content));
-            $htmlmail->setHtml($content);            
-            $htmlmail->setHeaders();            
-            $htmlmail->setContent();            
-            $htmlmail->setRecipient($recipientAddresses);            
+            $htmlmail->setHtml($content);
+            $htmlmail->setHeaders();
+            $htmlmail->setContent();
+            $htmlmail->setRecipient($recipientAddresses);
             $htmlmail->sendTheMail();
         } else {
             // From Typo3 4.5 on: Use swiftmailer
@@ -333,16 +333,16 @@ class tx_register4cal_base_view extends tslib_pibase {
             $mail->setSubject($subject);
             $mail->setBody($content, 'text/html');
             $mail->addPart($this->html2text($content), 'text/plain');
-            
+
             foreach ($attachments as $attachment) {
                 if (is_array($attachment)) {
-                    $obj = Swift_Attachment::newInstance($attachment['content'], $attachment['filename'], $attachment['content_type']); 
+                    $obj = Swift_Attachment::newInstance($attachment['content'], $attachment['filename'], $attachment['content_type']);
                 } else {
-                    $obj = Swift_Attachment::fromPath($attachment);                     
+                    $obj = Swift_Attachment::fromPath($attachment);
                 }
                 $mail->attach($obj);
-            }            
-            
+            }
+
             $mail->send();
         }
     }
@@ -420,16 +420,18 @@ class tx_register4cal_base_view extends tslib_pibase {
                     // Insert an user field. Special fields have been set during loading the user in tx__register4cal_registration
                     $field = substr($singleMarker, 5);
                     $value = $this->registration->getUserField($field);
-                } elseif (preg_match('/UDEF_([A-Z0-9_-])*/', $content)) {
-                    // Insert a field from the user defined fields
-                    $field = substr($content, 5);
-                    $array = $registration->getUserdefinedField($field);
-                    $value = is_array($array) ? $array['value'] : '';   
-                } elseif (preg_match('/LABEL_UDEF_([A-Z0-9_-])*/', $content)) {
-                    // Insert a field from the user defined fields
-                    $field = substr($content, 11);
-                    $array = $registration->getUserdefinedField($field);
-                    $value = is_array($array) ? $array['conf']['caption'] : '';  
+                } elseif (preg_match('/UDEF_([A-Z0-9_-])*/', $singleMarker)) {
+                    if (preg_match('/LABEL_UDEF_([A-Z0-9_-])*/', $singleMarker)) {
+                        // Insert a label from the user defined fields
+                        $field = substr($singleMarker, 11);
+                        $array = $this->registration->getUserdefinedField($field);
+                        $value = is_array($array) ? $array['conf']['caption'] : '';
+                    } else {
+                        // Insert a field from the user defined fields
+                        $field = substr($singleMarker, 5);
+                        $array = $this->registration->getUserdefinedField($field);
+                        $value = is_array($array) ? $array['value'] : '';
+                    }
                 } elseif (preg_match('/LABEL_([A-Z0-9_-])*/', $singleMarker)) {
                     // Insert a label field. 
                     $fieldname = 'label_' . substr($singleMarker, 6);
@@ -478,7 +480,7 @@ class tx_register4cal_base_view extends tslib_pibase {
         }
         return $calParams;
     }
-    
+
     // strip javascript, styles, html tags, normalize entities and spaces
     // based on http://www.php.net/manual/en/function.strip-tags.php#68757
     // ThER170213: Coding from http://snipplr.com/view.php?codeview&id=57982
@@ -563,6 +565,7 @@ class tx_register4cal_base_view extends tslib_pibase {
         } // end first time build
         return preg_replace($find, $repl, $text);
     }
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/view/class.tx_register4cal_base_view.php']) {
