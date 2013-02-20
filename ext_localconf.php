@@ -15,7 +15,7 @@ function user_register4calDisableCalCaching() {
     $postVars = t3lib_div::_GP('tx_cal_controller');
     $view = $postVars['view'];    
     if ($view == 'event') return true;    
-    return false;
+    return user_isCalNotAllowedToBeCached();
 }
 
 t3lib_extMgm::addPItoST43($_EXTKEY, 'pi1/class.tx_register4cal_pi1.php', '_pi1', 'list_type', 0);
