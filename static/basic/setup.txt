@@ -40,9 +40,10 @@ plugin.tx_register4cal_pi1{
 		senderAddress = 
 		adminAddress =
 	}
-        vcardToNotification {
+        vcardParticipant {
             enable = 1
-            filename = attendee.vcf            
+            typeNum = {$plugin.tx_register4cal_pi1.vcardParticipant.typeNum}
+            filename = participant.vcf            
             fieldmapping {
                 # Simple fields
                 uid = USER_uid
@@ -492,5 +493,16 @@ plugin.tx_register4cal_pi1{
 	}
 }
 
-
+vcard = PAGE
+vcard {
+    typeNum = {$plugin.tx_register4cal_pi1.notificationVcard.typeNum}
+    10 = USER
+    10.userFunc = tx_register4cal_pi1->vcard
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:text/vcard|Content-Disposition: attachment; filename="vcard.vcf"
+        xhtml_cleaning = 0
+        admPanel = 0
+    }
+}
 

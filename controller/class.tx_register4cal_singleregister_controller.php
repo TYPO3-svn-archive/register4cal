@@ -70,6 +70,38 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_register
      * Public methods
      * ========================================================================= */
 
+    public function SingleVcardDownload() {
+        global $TSFE;
+        require_once(t3lib_extMgm::extPath('register4cal') . 'view/class.tx_register4cal_register_view.php');
+        require_once(t3lib_extMgm::extPath('register4cal') . 'model/class.tx_register4cal_registration_model.php');
+                           
+        // get piVars from cal and register4cal
+        $calPiVars = t3lib_div::_GPmerged('tx_cal_controller');
+        $r4cPiVars = t3lib_div::_GPmerged($this->prefixId);
+
+        // extract required variables
+        $eventId = intval($calPiVars['uid']);
+        if (!isset($calPiVars['getdate']) && isset($calPiVars['year'])) {
+            // Compatibility to cal 1.3: instead of getdate now year, month and day are supplied
+            $eventDate = intval($calPiVars['year'] . $calPiVars['month'] . $calPiVars['day']);
+        } else {
+            $eventDate = intval($calPiVars['getdate']);
+        }        
+        $userId = intval($r4cPiVars['userid']);
+        
+        // get registration
+        $registration = tx_register4cal_registration_model::getInstance($eventId, $eventDate, $userId);
+        $status = $registration->getStatus();
+        
+        // Is vcard allowed?
+        if (!$registration->IsVcardAllowed()) return false;
+                
+        // create vcard
+        require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_vcard_controller.php');
+        $controller = tx_register4cal_vcard_controller::getInstance();
+        return $controller->createVcard($registration);
+    }
+
     /**
      * Handle complete registration from single event view
      * @global tslib_fe $TSFE
@@ -207,6 +239,7 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_register
         }
         return $content;
     }
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/controller/class.tx_register4cal_singleregister_controller.php']) {

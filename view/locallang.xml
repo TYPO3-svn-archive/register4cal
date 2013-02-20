@@ -242,7 +242,8 @@
 			<label index="label_unlimited">Unlimited</label>
 			<label index="label_question_visible_for_other_users">Other users may see that I have registered for this event</label>
 			<label index="label_other_users_list">Other users which have registered for this event</label>
-			
+			<label index="label_vcarddownload">Download vcard file</label>
+                        
 			<label index="label_submit_register_normal">Register for this event</label>
 			<label index="label_submit_register_waitlist">Enlist to waitlist for this event</label>
 			<label index="label_submit_unregister_normal">Unregister from this event</label>
@@ -505,7 +506,8 @@
 			<label index="label_unlimited">Unbegrenzt</label>
 			<label index="label_question_visible_for_other_users">Andere Benutzer dürfen sehen, dass ich mich für diese Veranstaltung angemeldet habe</label>
 			<label index="label_other_users_list">Andere Benutzer, die sich für diesen Termin angemeldet haben</label>
-			
+			<label index="label_vcarddownload">VCard-Datei herunterladen</label>
+                        
 			<label index="label_submit_register_normal">Für diese Veranstaltung anmelden</label>
 			<label index="label_submit_register_waitlist">Für diese Veranstaltung in die Warteliste eintragen</label>
 			<label index="label_submit_unregister_normal">Von dieser Veranstaltung wieder abmelden</label>

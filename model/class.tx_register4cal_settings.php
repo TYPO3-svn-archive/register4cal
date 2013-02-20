@@ -207,22 +207,28 @@ class tx_register4cal_settings implements t3lib_Singleton {
 	private $forms = array();
 
         /**
-         * VCard: Attach vcard to notification email
+         * VCard: VCard for participant enabled
          * @var integer [0|1]
          */
-        public $notificationVcardEnabled;
+        public $vcardParticipantEnabled;
         
         /**
          * VCard: Filename for attached vcard-file
          * @var string 
          */
-        public $notificationVcardFilename;
+        public $vcardParticipantFilename;
         
         /**
          * VCard: Configuration subset with vcard fieldmapping
          * @var array
          */
-        public $notificationVcardFieldmapping = array();
+        public $vcardParticipantFieldmapping = array();
+        
+        /**
+         * TypeNum for vcard download page
+         * @var type 
+         */
+        public $vcardParticipantPageTypeNum = 0;
         
 	/* =========================================================================
 	 * Constructor and static getInstance method
@@ -365,13 +371,16 @@ class tx_register4cal_settings implements t3lib_Singleton {
 		
 		$this->forms = $tsconf['forms.'];
                 
-                $temp = $tsconf['notificationVcard.']['enable'];                
-                $this->notificationVcardEnabled = $this->validateFlag($temp, 0);
+                $temp = $tsconf['vcardParticipant.']['enable'];                
+                $this->$vcardParticipantEnabled = $this->validateFlag($temp, 0);
                 
-                $temp = $tsconf['notificationVcard.']['filename'];
-                $this->notificationVcardFilename = $temp ? $temp : 'vcard.vcf';
+                $temp = $tsconf['vcardParticipant.']['filename'];
+                $this->$vcardParticipantFilename = $temp ? $temp : 'participant.vcf';
                 
-                $this->notificationVcardFieldmapping = $tsconf['notificationVcard.']['fieldmapping.'];
+                $temp = $tsconf['vcardParticipant.']['typeNum'];
+                $this->$vcardParticipantPageTypeNum = intval($temp);
+                
+                $this->vcardParticipantFieldmapping = $tsconf['vcardParticipant.']['fieldmapping.'];
 	}
 
 	/**

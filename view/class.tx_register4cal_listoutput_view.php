@@ -142,6 +142,13 @@ class tx_register4cal_listoutput_view extends tx_register4cal_base_view {
 				$marker = $this->applyWrap('waitlistcheckbutton', $value);
 				break;
 			// End of compatiblilty code =======================================
+                        case 'VCARDLINK':
+                            if (!$this->registration->IsVcardAllowed()) {
+                                $marker = '';
+                            } else {
+                                $label = $this->pi_getLL('label_vcarddownload');
+                                return $this->registration->getVcardLink($label);
+                            }
 			default :
 				$marker = parent::renderSingleMarker($singleMarker);
 				break;

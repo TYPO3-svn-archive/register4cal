@@ -72,8 +72,8 @@ class tx_register4cal_vcard_controller extends tx_register4cal_base_controller {
      */
     public function createVcard($registration) {
         $vcard = tx_register4cal_zendvcard_data::getInstance();
-
-        foreach ($this->settings->notificationVcardFieldmapping as $field => $value) {
+        
+        foreach ($this->settings->vcardParticipantFieldmapping as $field => $value) {
             switch ($field) {
                 case 'uid':
                     break;

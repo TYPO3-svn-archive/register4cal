@@ -184,11 +184,11 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
         }
 
         $attachments = array();
-        if ($this->settings->notificationVcardEnabled) {
+        if ($this->settings->$vcardParticipantEnabled) {
             $vcardController = tx_register4cal_vcard_controller::getInstance();
             $attachments[] = array(
                 'content' => $vcardController->createVcard($registration),
-                'filename' => $this->settings->NotificationVcardFilename,
+                'filename' => $this->settings->vcardParticipantFilename,
                 'content_type' => 'text/vcard'
             );
         }
