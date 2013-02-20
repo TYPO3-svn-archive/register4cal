@@ -1,3 +1,9 @@
+#Disable caching of extension cal if required
+[userFunc = user_register4calDisableCalCaching()]
+    plugin.tx_cal_controller = USER_INT
+    plugin.tx_cal_controller.isUserInt = 1
+[global]
+
 #Setup
 plugin.tx_register4cal_pi1{
 	templateFile = EXT:register4cal/templates/register.tmpl
