@@ -51,6 +51,7 @@
  * @subpackage 	tx_register4cal
  */
 class tx_register4cal_frontend_hooks {
+
 	/* =========================================================================
 	 * Hook from extension cal to add the registration form to single event view
 	 * ========================================================================= */
@@ -58,13 +59,13 @@ class tx_register4cal_frontend_hooks {
 
 	}
 
-	function postSearchForObjectMarker($parent, &$content) {
+	function postSearchForObjectMarker($parent, &$content) {                            
 		//Conditions to display the registration form (first step)
 		if ($parent->conf['view'] == 'event' && $parent->cachedValueArray['tx_register4cal_activate']) { /* Single event view and registration enabled... */
 			// get piVars from tx_cal_controler
 			$data = t3lib_div::_GPmerged('tx_cal_controller');
 			if ($data['uid'] != 0) { /* ...displaying an event ... */
-				if (strpos($content, 'phpicalendar_event')) { /* ... with event template (not location or organizer ...) */
+				if (strpos($content, 'phpicalendar_event')) { /* ... with event template (not location or organizer ...) */                                        
 					try {
 						require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_singleregister_controller.php');
 						$controller = tx_register4cal_singleregister_controller::getInstance();

@@ -372,13 +372,13 @@ class tx_register4cal_settings implements t3lib_Singleton {
 		$this->forms = $tsconf['forms.'];
                 
                 $temp = $tsconf['vcardParticipant.']['enable'];                
-                $this->$vcardParticipantEnabled = $this->validateFlag($temp, 0);
+                $this->vcardParticipantEnabled = $this->validateFlag($temp, 0);
                 
                 $temp = $tsconf['vcardParticipant.']['filename'];
-                $this->$vcardParticipantFilename = $temp ? $temp : 'participant.vcf';
+                $this->vcardParticipantFilename = $temp ? $temp : 'participant.vcf';
                 
                 $temp = $tsconf['vcardParticipant.']['typeNum'];
-                $this->$vcardParticipantPageTypeNum = intval($temp);
+                $this->vcardParticipantPageTypeNum = intval($temp);
                 
                 $this->vcardParticipantFieldmapping = $tsconf['vcardParticipant.']['fieldmapping.'];
 	}
