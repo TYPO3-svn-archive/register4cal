@@ -78,7 +78,7 @@ class tx_register4cal_backend_hooks {
 	public function processDatamap_postProcessFieldArray($status, &$table, $id, &$fieldArray, $parent) {
 		if ($table == 'tx_cal_event' && $status == 'update') {
 			require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_validation_controller.php');
-			if (!tx_register4cal_validation_controller::onBackendEventUpdate($id, $fieldArray, &$error)) {
+			if (!tx_register4cal_validation_controller::onBackendEventUpdate($id, $fieldArray, $error)) {
 				$parent->log($table, $id, 5, 0, 1, $error);
 				$table = '';
 			}

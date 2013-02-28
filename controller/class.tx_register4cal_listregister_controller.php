@@ -232,7 +232,7 @@ class tx_register4cal_listregister_controller extends tx_register4cal_register_c
 	 * @param tx_register4cal_registration_model $registration Instanz der Regstration-Klasse
 	 * @param Array $subparts Array mit allen vorbereiteten Subparts
 	 */
-	private function prepareSubparts_OtherUsers($view, $registration, &$subparts) {
+	protected function prepareSubparts_OtherUsers($view, $registration, &$subparts) {
 		// Clear subparts
 		$subparts['OTHER_USERS_VISIBLE_QUESTION'] = '';
 		$subparts['OTHER_USERS_LIST'] = ''; // Not supported in List-View
