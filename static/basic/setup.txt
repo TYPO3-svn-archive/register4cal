@@ -48,7 +48,7 @@ plugin.tx_register4cal_pi1{
 	}
         vcardParticipant {
             enable = 1
-            typeNum = {$plugin.tx_register4cal_pi1.vcardParticipant.typeNum}
+            typeNum = {$plugin.tx_register4cal_pi1.vcard.typeNum}
             filename = participant.vcf            
             fieldmapping {
                 # Simple fields
@@ -123,6 +123,95 @@ plugin.tx_register4cal_pi1{
                         city = USER_city
                         zip = USER_zip
                         country = USER_country
+                        type {
+                            DOM = 0
+                            INTL = 0
+                            POSTAL = 0
+                            PARCEL = 0
+                            HOME = 1
+                            WORK = 0
+                        }
+                    }
+                }
+            }
+        }
+        vcardOrganizer {
+            enable = 1
+            typeNum = {$plugin.tx_register4cal_pi1.vcard.typeNum}
+            filename = organizer.vcf            
+            fieldmapping {
+                # Simple fields
+                uid = ORGANIZER_uid
+                fullname = EVENT_organizer_name 
+                title = 
+                firstname = 
+                lastname = EVENT_organizer_name
+                additionalnames = 
+                nameprefix =
+                namesuffix =
+                nickname = 
+                birthday =
+                organization = 
+                department =
+                subdepartment =
+                role =
+                revision =
+                geolocation =
+                mailer =
+                timezone =
+                phonenumbers {
+                    0 = ORGANIZER_phone
+                    0 {
+                        PREF = 0
+                        WORK = 0
+                        HOME = 1
+                        OTHER = 0
+                        VOICE = 1
+                        FAX = 0
+                        MSG = 0
+                        CELL = 0
+                        CAR = 0
+                    }
+                    1 = ORGANIZER_fax
+                    1 {
+                        PREF = 0
+                        WORK = 0
+                        HOME = 1
+                        OTHER = 0
+                        VOICE = 0
+                        FAX = 1
+                        MSG = 0
+                        CELL = 0
+                        CAR = 0                       
+                    }
+                }
+                emails {
+                    0 = EVENT_organizer_email 
+                    0 {
+                        INTERNET = 0
+                        HOME = 1
+                        WORK = 0
+                        OTHER = 0
+                        PREF = 0
+                    }                    
+                }
+                urls {
+                    0 = ORGANIZER_link
+                    0 {
+                        WORK = 0
+                        HOME = 1
+                        OTHER = 0
+                        PREF = 0
+                    }
+                }
+                addresses {
+                    0 {
+                        postofficeaddress =
+                        extendedaddress =
+                        street = ORGANIZER_street
+                        city = ORGANIZER_city
+                        zip = ORGANZIER_zip
+                        country = ORGANIZER_country
                         type {
                             DOM = 0
                             INTL = 0
@@ -501,14 +590,14 @@ plugin.tx_register4cal_pi1{
 
 vcard = PAGE
 vcard {
-    typeNum = {$plugin.tx_register4cal_pi1.notificationVcard.typeNum}
+    typeNum = {$plugin.tx_register4cal_pi1.vcard.typeNum}
     10 = USER
     10.userFunc = tx_register4cal_pi1->vcard
     config {
         disableAllHeaderCode = 1
-        additionalHeaders = Content-type:text/vcard|Content-Disposition: attachment; filename="vcard.vcf"
+        additionalHeaders = Content-type:text/vcard|Content-Disposition: attachment; filename="vCard.vcf"
         xhtml_cleaning = 0
         admPanel = 0
+        no_cache = 1
     }
 }
-

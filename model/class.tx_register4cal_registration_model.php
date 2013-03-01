@@ -719,24 +719,46 @@ class tx_register4cal_registration_model {
      * @global tslib_fe $TSFE
      * @return boolean
      */
-    public function IsVcardAllowed() {
+    public function IsParticipantVcardAllowed() {
         global $TSFE;
-        
+
         // VCards need to be activated and properly configured
-        if ($this->settings->$vcardParticipantEnabled != 1) return false;
-        if ($this->settings->$vcardParticipantPageTypeNum == 0) return false;
-        
+        if ($this->settings->vcardParticipantEnabled != 1) return false;
+        if ($this->settings->vcardParticipantPageTypeNum == 0) return false;
+
         // Authorized FE-User is required
         if (intval($TSFE->fe_user->user['uid']) == 0) return false;
-        
+
         // Vcard-Display is only possible for the organizer of the event
         if (!$this->userIsOrganizer()) return false;
         
         // Vcard-Display is only possible if the user has registered for the event
         if ($this->status < 5) return false;
-        
+
         return true;
     }
+    
+    /**
+     * Indicates if the current user can display the participant details as vcard
+     * @global tslib_fe $TSFE
+     * @return boolean
+     */
+    public function IsOrganizerVcardAllowed() {
+        global $TSFE;
+
+        // VCards need to be activated and properly configured
+        if ($this->settings->vcardOrganizerEnabled != 1) return false;
+        if ($this->settings->vcardOrganizerPageTypeNum == 0) return false;
+
+        // Authorized FE-User is required
+        if (intval($TSFE->fe_user->user['uid']) == 0) return false;
+        
+        // Vcard-Display is only possible if the user has registered for the event
+        if ($this->status < 5) return false;
+
+        return true;
+    }
+    
     
     /**
      * Create link to vcard
@@ -744,15 +766,17 @@ class tx_register4cal_registration_model {
      * @param string $label Label for link
      * @return string A-tag for vcard link
      */
-    public function getVcardLink($label) {
+    public function getVcardLink($label, $type) {
         global $TSFE;
+        if ($type != 'P' && $type != 'O') return '';
         $vars = array(
-            'type' => $this->settings->$vcardParticipantPageTypeNum,
+            'type' => $this->settings->vcardParticipantPageTypeNum,
             'tx_cal_controller[view]' => 'event',
             'tx_cal_controller[type]' => 'tx_cal_phpicalendar',
             'tx_cal_controller[getdate]' => $this->event['get_date'],
             'tx_cal_controller[uid]' => $this->event['uid'],
-            'tx_register4cal_vies[userId]' => $this->user['uid'],
+            'tx_register4cal_view[userid]' => $this->user['uid'],
+            'tx_register4cal_view[type]' => $type,
         );
         return $TSFE->cObj->getTypoLink($label,$this->settings->singleEventPid, $vars);
     }

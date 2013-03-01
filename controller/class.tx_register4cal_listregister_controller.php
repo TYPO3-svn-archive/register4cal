@@ -80,7 +80,7 @@ class tx_register4cal_listregister_controller extends tx_register4cal_register_c
 
 		// get data and leave if nothing needs to be processed
 		$data = t3lib_div::_GPmerged($this->prefixId);
-		if (!is_array($data))
+                if (!is_array($data))
 			return;
 		if (count($data) == 0)
 			return;

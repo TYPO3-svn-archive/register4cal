@@ -14,7 +14,7 @@ if (!defined('TYPO3_MODE')) {
 function user_register4calDisableCalCaching() {
     $postVars = t3lib_div::_GP('tx_cal_controller');
     $view = $postVars['view'];    
-    if ($view == 'event') return true;    
+    if ($view == 'event') return true;     
     return user_isCalNotAllowedToBeCached();
 }
 

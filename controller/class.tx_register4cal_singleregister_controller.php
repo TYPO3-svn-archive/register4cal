@@ -78,7 +78,7 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_register
         // get piVars from cal and register4cal
         $calPiVars = t3lib_div::_GPmerged('tx_cal_controller');
         $r4cPiVars = t3lib_div::_GPmerged($this->prefixId);
-
+       
         // extract required variables
         $eventId = intval($calPiVars['uid']);
         if (!isset($calPiVars['getdate']) && isset($calPiVars['year'])) {
@@ -94,12 +94,12 @@ class tx_register4cal_singleregister_controller extends tx_register4cal_register
         $status = $registration->getStatus();
         
         // Is vcard allowed?
-        if (!$registration->IsVcardAllowed()) return false;
-                
+        if (!$registration->IsParticipantVcardAllowed()) return false;                
+        
         // create vcard
         require_once(t3lib_extMgm::extPath('register4cal') . 'controller/class.tx_register4cal_vcard_controller.php');
         $controller = tx_register4cal_vcard_controller::getInstance();
-        return $controller->createVcard($registration);
+        return $controller->createVcard($registration,$this->settings->vcardParticipantFieldmapping);
     }
 
     /**

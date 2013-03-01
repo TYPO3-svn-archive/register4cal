@@ -1,17 +1,21 @@
+2013-03-01 Thomas Ernst <typo3@thernst.de>
+                * [Bug #45931] vCard class includes fields which have only types assigned but no values
+                * [Feature #45930] vCard containing contact details of organizers
+
 2013-02-28 Thomas Ernst <typo3@thernst.de>
                 * fixed call-time pass-by-reference in class.tx_register4cal_backend_hooks.php on line 81
                 * fixed access level of tx_register4cal_listregister_controller::prepareSubparts_OtherUsers() 
                 * corrections and clarifications in documentation
 
 2013-02-20 Thomas Ernst <typo3@thernst.de>
-                * [Feature #45412] vcard link in list of participants for event organizer
-                * vcard settings renamed again
+                * [Feature #45412] vCard link in list of participants for event organizer
+                * vCard settings renamed again
                 * Updated documentation
                 * [Bug #36667] User data mixed up
 
 2013-02-19 Thomas Ernst <typo3@thernst.de>
-                * [Feature #45412] Usage of userdefined fields in vcard is possible
-                * vcard settings renamed
+                * [Feature #45412] Usage of userdefined fields in vCard is possible
+                * vCard settings renamed
                 * Updated documentation
                 * [Bug #45590] Confirmation mail shows information for deactivated functions
                 

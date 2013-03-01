@@ -118,8 +118,8 @@ class tx_register4cal_pi1 extends tslib_pibase {
         $vcard = $controller->SingleVcardDownload();
         if (!$vcard)
             throw new Exception('Function not supported.');
+        return $vcard;
     }
-
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/register4cal/pi1/class.tx_register4cal_pi1.php']) {

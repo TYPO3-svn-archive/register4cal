@@ -124,10 +124,20 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
                 $confName .= '_rfu';
         }
 
+        $attachments = array();
+        if ($this->settings->vcardOrganizerEnabled) {
+            $vcardController = tx_register4cal_vcard_controller::getInstance();
+            $attachments[] = array(
+                'content' => $vcardController->createVcard($registration, $this->settings->vcardOrganizerFieldmapping),
+                'filename' => $this->settings->vcardOrganizerFilename,
+                'content_type' => 'text/vcard'
+            );
+        }
+        
         $view->load($confName);
         $subparts = Array();
         $this->prepareSubparts_OtherUsers($view, $registration, $subparts);        
-        $view->sendMail($registration->getUserField('email'),$subparts);
+        $view->sendMail($registration->getUserField('email'),$subparts, array(), $attachments);
         $view = null;
     }
 
@@ -187,7 +197,7 @@ class tx_register4cal_register_controller extends tx_register4cal_base_controlle
         if ($this->settings->vcardParticipantEnabled) {
             $vcardController = tx_register4cal_vcard_controller::getInstance();
             $attachments[] = array(
-                'content' => $vcardController->createVcard($registration),
+                'content' => $vcardController->createVcard($registration, $this->settings->vcardParticipantFieldmapping),
                 'filename' => $this->settings->vcardParticipantFilename,
                 'content_type' => 'text/vcard'
             );

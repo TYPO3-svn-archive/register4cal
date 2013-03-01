@@ -68,12 +68,13 @@ class tx_register4cal_vcard_controller extends tx_register4cal_base_controller {
     /**
      * Create vcard 
      * @param tx_register4cal_registration $registration Registration
+     * @param array $fieldmapping Array containing fieldmapping information(field => configuration)
      * @return string
      */
-    public function createVcard($registration) {
+    public function createVcard($registration, $fieldmapping) {
         $vcard = tx_register4cal_zendvcard_data::getInstance();
         
-        foreach ($this->settings->vcardParticipantFieldmapping as $field => $value) {
+        foreach ($fieldmapping as $field => $value) {
             switch ($field) {
                 case 'uid':
                     break;
@@ -134,6 +135,7 @@ class tx_register4cal_vcard_controller extends tx_register4cal_base_controller {
                             if (substr($phonefield, -1) === '.')
                                 continue;
                             $phonenumber = $this->getSingleValue($phonevalue, $registration);
+                            if (!$phonenumber) continue;
                             $phonetypes = $this->getTypes($value[$phonefield . '.']);
                             $vcard->addPhonenumber($phonenumber, $phonetypes);
                         }
@@ -145,6 +147,7 @@ class tx_register4cal_vcard_controller extends tx_register4cal_base_controller {
                             if (substr($emailfield, -1) === '.')
                                 continue;
                             $emailaddress = $this->getSingleValue($emailvalue, $registration);
+                            if (!$emailaddress) continue;
                             $emailtypes = $this->getTypes($value[$emailfield . '.']);
                             $vcard->addEmail($emailaddress, $emailtypes);
                         }
@@ -156,6 +159,7 @@ class tx_register4cal_vcard_controller extends tx_register4cal_base_controller {
                             if (substr($urlfield, -1) === '.')
                                 continue;
                             $urladdress = $this->getSingleValue($urlvalue, $registration);
+                            if (!$urladdress) continue;
                             $urltypes = $this->getTypes($value[$urlfield . '.']);
                             $vcard->addUrl($urladdress, $urltypes);
                         }
@@ -173,6 +177,13 @@ class tx_register4cal_vcard_controller extends tx_register4cal_base_controller {
                                 'zip' => $this->getSingleValue($addressvalue['zip'], $registration),
                                 'country' => $this->getSingleValue($addressvalue['country'], $registration),
                                 'type' => $this->getTypes($addressvalue['type.']));
+                            if (!$address['postofficeaddress'] &&
+                                !$address['extendedaddress'] &&
+                                !$address['street'] &&
+                                !$address['city'] &&
+                                !$address['state'] &&
+                                !$address['zip'] &&
+                                !$address['country'] ) continue;
                             $vcard->addAddress($address);
                         }
                     }

@@ -207,28 +207,53 @@ class tx_register4cal_settings implements t3lib_Singleton {
 	private $forms = array();
 
         /**
-         * VCard: VCard for participant enabled
+         * VCard with participant data: VCard enabled
          * @var integer [0|1]
          */
         public $vcardParticipantEnabled;
         
         /**
-         * VCard: Filename for attached vcard-file
+         * VCard with participant data: Filename for attached vcard-file
          * @var string 
          */
         public $vcardParticipantFilename;
         
         /**
-         * VCard: Configuration subset with vcard fieldmapping
+         * VCard with participant data: Configuration subset with vcard fieldmapping         
          * @var array
          */
         public $vcardParticipantFieldmapping = array();
         
         /**
-         * TypeNum for vcard download page
+         * TypeNum for vcard download page (Vcard with participant data)
          * @var type 
          */
         public $vcardParticipantPageTypeNum = 0;
+        
+        
+        /**
+         * VCard with organizer data: VCard enabled
+         * @var integer [0|1]
+         */
+        public $vcardOrganizerEnabled;
+        
+        /**
+         * VCard with organizer data: Filename for attached vcard-file
+         * @var string 
+         */
+        public $vcardOrganizerFilename;
+        
+        /**
+         * VCard with organizer data: Configuration subset with vcard fieldmapping
+         * @var array
+         */
+        public $vcardOrganizerFieldmapping = array();
+        
+        /**
+         * TypeNum for vcard download page (VCard with organizer data)
+         * @var type 
+         */
+        public $vcardOrganizerPageTypeNum = 0;
         
 	/* =========================================================================
 	 * Constructor and static getInstance method
@@ -381,6 +406,17 @@ class tx_register4cal_settings implements t3lib_Singleton {
                 $this->vcardParticipantPageTypeNum = intval($temp);
                 
                 $this->vcardParticipantFieldmapping = $tsconf['vcardParticipant.']['fieldmapping.'];
+                
+                $temp = $tsconf['vcardOrganizer.']['enable'];                
+                $this->vcardOrganizerEnabled = $this->validateFlag($temp, 0);
+                
+                $temp = $tsconf['vcardOrganizer.']['filename'];
+                $this->vcardOrganizerFilename = $temp ? $temp : 'participant.vcf';
+                
+                $temp = $tsconf['vcardOrganizer.']['typeNum'];
+                $this->vcardOrganizerPageTypeNum = intval($temp);
+                
+                $this->vcardOrganizerFieldmapping = $tsconf['vcardOrganizer.']['fieldmapping.'];
 	}
 
 	/**

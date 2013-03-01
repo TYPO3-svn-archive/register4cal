@@ -1,5 +1,5 @@
 plugin.tx_register4cal_pi1{
-    vcardParticipant {
+    vcard {
         # @description  Pagetype to use for vcard view
         typeNum = 159
     }
