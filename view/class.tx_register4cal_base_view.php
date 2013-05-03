@@ -136,8 +136,13 @@ class tx_register4cal_base_view extends tslib_pibase {
      */
     public function __construct() {
         global $TSFE;
-
-        parent::tslib_pibase();
+        
+        if (tx_register4cal_static::getTypo3IntVersion()>=4006000) {
+            parent::__construct();
+        } else {
+          parent::tslib_pibase();  // Deprecated since Typo3 4.6
+        }        
+        
         $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_register4cal_pi1.'];
         $this->pi_loadLL();
         $this->cObj = $TSFE->cObj;
@@ -158,7 +163,7 @@ class tx_register4cal_base_view extends tslib_pibase {
     public function setRegistration($registration) {
         $this->registration = $registration;
     }
-
+ 
     /* =========================================================================
      * Public methods
      * ========================================================================= */

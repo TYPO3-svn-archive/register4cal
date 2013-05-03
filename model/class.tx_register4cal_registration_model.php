@@ -377,12 +377,15 @@ class tx_register4cal_registration_model {
      * @global tslib_fe $TSFE
      * @global t3lib_DB $TYPO3_DB
      * @param string $pidlist List of pid's to check for registrations
+     * @param tx_register4cal_settings Settings
      * @return Array Array of tx_register4cal_registration_model objects:
      * 				Array(eventDate=>Array(eventId=>Array(tx_register4cal_registration_model))
      */
     public static function getRegistrationsForOrganizer($pidlist) {
         global $TSFE, $TYPO3_DB;
 
+        $settings = tx_register4cal_settings::getInstance();
+        
         //select events with registrations
         $processedEventArray = Array();
         $select = 'uid';
@@ -404,14 +407,17 @@ class tx_register4cal_registration_model {
 
         //add events without registrations
         $processedEventList = (count($processedEventArray) == 0) ? '0' : implode(',', $processedEventArray);
-        $select = 'tx_cal_event.*, tx_cal_organizer.tx_register4cal_feUserId';
-        $table = 'tx_cal_event, tx_cal_organizer';
-        $where = ' tx_cal_event.organizer_id = tx_cal_organizer.uid AND' . /* Join event and organizer */
-                ' tx_cal_event.uid NOT IN (' . $processedEventList . ') AND' . /* Select events */
-                ' tx_cal_event.start_date>=' . date('Ymd') . ' AND' . /* Event in the future */
-                ' tx_cal_event.tx_register4cal_activate = 1' . /* Registration activated */
-                $TSFE->cObj->enableFields('tx_cal_event');  /* Take sysfields into account */
+
+        $select = 'tx_cal_event.*, ' . $settings->calOrganizerStructure . '.uid';
+        $table = 'tx_cal_event, ' . $settings->calOrganizerStructure;
+        $where = 'tx_cal_event.organizer_id = ' . $settings->calOrganizerStructure . '.uid' .
+                ' AND tx_cal_event.uid NOT IN (' . $processedEventList . ') AND' . // Select events 
+                ' tx_cal_event.start_date>=' . date('Ymd') . ' AND' . // Event in the future
+                ' tx_cal_event.tx_register4cal_activate = 1' . // Registration activated
+                $TSFE->cObj->enableFields('tx_cal_event') . // Take sysfields into account
+                $TSFE->cObj->enableFields($settings->calOrganizerStructure);
         $orderBy = 'start_date ASC';
+
         $result = $TYPO3_DB->exec_SELECTquery($select, $table, $where, '', $orderBy);
         while (($row = $TYPO3_DB->sql_fetch_assoc($result))) {
             $registration = tx_register4cal_registration_model::getInstance($row['uid'], $row['start_date']);
@@ -636,16 +642,31 @@ class tx_register4cal_registration_model {
         if (t3lib_div::inList($this->settings->adminUsers, $feUserId))
             return true;
 
-        // is user selected in organizer feUserId field
-        if (t3lib_div::inList($this->organizer['tx_register4cal_feUserId'], 'fe_users_' . $feUserId))
-            return true;
+        switch ($this->settings->calOrganizerStructure) {
+            case 'tt_address':
+                // Not yet implemented
+                break;
+            case 'tx_partner_main':
+                // Not yet implemented
+                break;
+            case 'fe_users':
+                if ($this->organizer['uid'] == $feUserId)
+                    return true;
+                break;
+            default:
+                // is user selected in organizer feUserId field
+                if (t3lib_div::inList($this->organizer['tx_register4cal_feUserId'], 'fe_users_' . $feUserId))
+                    return true;
 
-        // is usergroup selected in organizer feUserId field
-        $feGroupIds = explode(',', $TSFE->fe_user->user['usergroup']);
-        foreach ($feGroupIds as $feGroupId) {
-            if (t3lib_div::inList($this->organizer['tx_register4cal_feUserId'], 'fe_groups_' . $feGroupId))
-                return true;
+                // is usergroup selected in organizer feUserId field
+                $feGroupIds = explode(',', $TSFE->fe_user->user['usergroup']);
+                foreach ($feGroupIds as $feGroupId) {
+                    if (t3lib_div::inList($this->organizer['tx_register4cal_feUserId'], 'fe_groups_' . $feGroupId))
+                        return true;
+                }
+                break;
         }
+
         return false;
     }
 
@@ -723,21 +744,26 @@ class tx_register4cal_registration_model {
         global $TSFE;
 
         // VCards need to be activated and properly configured
-        if ($this->settings->vcardParticipantEnabled != 1) return false;
-        if ($this->settings->vcardParticipantPageTypeNum == 0) return false;
+        if ($this->settings->vcardParticipantEnabled != 1)
+            return false;
+        if ($this->settings->vcardParticipantPageTypeNum == 0)
+            return false;
 
         // Authorized FE-User is required
-        if (intval($TSFE->fe_user->user['uid']) == 0) return false;
+        if (intval($TSFE->fe_user->user['uid']) == 0)
+            return false;
 
         // Vcard-Display is only possible for the organizer of the event
-        if (!$this->userIsOrganizer()) return false;
-        
+        if (!$this->userIsOrganizer())
+            return false;
+
         // Vcard-Display is only possible if the user has registered for the event
-        if ($this->status < 5) return false;
+        if ($this->status < 5)
+            return false;
 
         return true;
     }
-    
+
     /**
      * Indicates if the current user can display the participant details as vcard
      * @global tslib_fe $TSFE
@@ -747,19 +773,22 @@ class tx_register4cal_registration_model {
         global $TSFE;
 
         // VCards need to be activated and properly configured
-        if ($this->settings->vcardOrganizerEnabled != 1) return false;
-        if ($this->settings->vcardOrganizerPageTypeNum == 0) return false;
+        if ($this->settings->vcardOrganizerEnabled != 1)
+            return false;
+        if ($this->settings->vcardOrganizerPageTypeNum == 0)
+            return false;
 
         // Authorized FE-User is required
-        if (intval($TSFE->fe_user->user['uid']) == 0) return false;
-        
+        if (intval($TSFE->fe_user->user['uid']) == 0)
+            return false;
+
         // Vcard-Display is only possible if the user has registered for the event
-        if ($this->status < 5) return false;
+        if ($this->status < 5)
+            return false;
 
         return true;
     }
-    
-    
+
     /**
      * Create link to vcard
      * @global tslib_fe $TSFE
@@ -768,7 +797,8 @@ class tx_register4cal_registration_model {
      */
     public function getVcardLink($label, $type) {
         global $TSFE;
-        if ($type != 'P' && $type != 'O') return '';
+        if ($type != 'P' && $type != 'O')
+            return '';
         $vars = array(
             'type' => $this->settings->vcardParticipantPageTypeNum,
             'tx_cal_controller[view]' => 'event',
@@ -778,7 +808,7 @@ class tx_register4cal_registration_model {
             'tx_register4cal_view[userid]' => $this->user['uid'],
             'tx_register4cal_view[type]' => $type,
         );
-        return $TSFE->cObj->getTypoLink($label,$this->settings->singleEventPid, $vars);
+        return $TSFE->cObj->getTypoLink($label, $this->settings->singleEventPid, $vars);
     }
 
     /* =========================================================================
@@ -1041,25 +1071,8 @@ class tx_register4cal_registration_model {
     private function readOrganizerRecord() {
         global $TYPO3_DB, $TSFE;
 
-        // which table to use?
-        $calConfArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
-        $useOrganizerStructure = ($calConfArr['useOrganizerStructure'] ? $calConfArr['useOrganizerStructure'] : 'tx_cal_organizer');
-        switch ($useOrganizerStructure) {
-            case 'tx_tt_address':
-                $table = 'tt_address';
-                break;
-            case 'tx_partner_main':
-                $table = 'tx_partner_main';
-                break;
-            case 'tx_feuser':
-                $table = 'fe_users';
-                break;
-            default:
-                $table = 'tx_cal_organizer';
-                break;
-        }
-
         $select = '*';
+        $table = $this->settings->calOrganizerStructure;
         $where = 'uid=' . intval($this->event['organizer_id']) . $TSFE->cObj->enableFields($table);
         $result = $TYPO3_DB->exec_SELECTquery($select, $table, $where);
         if ($TYPO3_DB->sql_num_rows($result) == 0) {

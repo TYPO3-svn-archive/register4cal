@@ -1,3 +1,7 @@
+2013-05-03 Thomas Ernst <typo3@thernst.de>
+                * [Bug #47856] Usage of tslib_pibase::tslib_pibase which is deprecated since Typo3 4.6
+                * [Feature #47504] Enable participant view if cal uses frontend users as data structure for the event organizer
+
 2013-03-01 Thomas Ernst <typo3@thernst.de>
                 * [Bug #45931] vCard class includes fields which have only types assigned but no values
                 * [Feature #45930] vCard containing contact details of organizers
