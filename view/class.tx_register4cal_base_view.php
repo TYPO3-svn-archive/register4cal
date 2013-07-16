@@ -400,8 +400,8 @@ class tx_register4cal_base_view extends tslib_pibase {
                 $marker = $this->applyWrap('numattendees', $value);
                 break;
             case 'NUMFREE':
-                $maxAttendees = $this->registration->getEventField('tx_register4cal_maxattendees');
-                $value = $maxAttendees == 0 ? $this->pi_getLL('label_unlimited') : $maxAttendees;
+                $numfree = $this->registration->getEventField('tx_register4cal_numfree');
+                $value = $numfree == 0 ? $this->pi_getLL('label_unlimited') : $numfree;
                 $marker = $this->applyWrap('numfree', $value);
                 break;
             case 'NUMWAITLIST':

@@ -1,3 +1,6 @@
+2013-07-16 Thomas Ernst <typo3@thernst.de>
+                * [Bug #50029] NUMFREE marker assigned wrong
+
 2013-05-05 Thomas Ernst <typo3@thernst.de>
                 * Compatiblilty to cal 1.5.3
                 * Published version 0.19.0
